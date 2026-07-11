@@ -4,6 +4,7 @@ import AnimatedSection from "./AnimatedSection";
 import FloatingCard from "./FloatingCard";
 import Reveal3D from "./Reveal3D";
 import ProjectLoopPreview from "./ProjectLoopPreview";
+import ProjectDemoVideo from "./ProjectDemoVideo";
 import { useLanguage } from "@/context/LanguageContext";
 
 function getStatusStyle(status: string) {
@@ -24,9 +25,10 @@ export default function Projects() {
         {t.projects.title}
       </h2>
 
-      <div className="mt-12 grid gap-8">
+      <div className="mt-12 grid gap-12">
         {t.projects.items.map((p, i) => (
-          <Reveal3D key={p.name} delay={(i % 3) * 0.12} className="h-full">
+          <div key={p.name} className="flex flex-col gap-4">
+          <Reveal3D delay={(i % 3) * 0.12} className="h-full">
             <FloatingCard maxTilt={2} className="h-full">
               <article className="card-surface grid h-full gap-6 rounded-xl p-6 transition-colors hover:border-accent/40 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr] md:p-8">
                 {/* Sol Taraf: Metin İçeriği */}
@@ -91,6 +93,10 @@ export default function Projects() {
               </article>
             </FloatingCard>
           </Reveal3D>
+          <Reveal3D delay={(i % 3) * 0.12 + 0.1}>
+            <ProjectDemoVideo type={p.previewType as "stockapp" | "auto-service" | "carpass" | "business-dashboard"} />
+          </Reveal3D>
+          </div>
         ))}
       </div>
       </div>

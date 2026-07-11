@@ -9,6 +9,7 @@ import { useLanguage, LanguageCode } from "@/context/LanguageContext";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
   const { t, language, setLanguage } = useLanguage();
 
   const links = [
@@ -20,31 +21,61 @@ export default function Navbar() {
 
   const availableLangs = (["tr", "en", "de"] as LanguageCode[]).filter((l) => l !== language);
 
+  const handleLangSelect = (lang: LanguageCode) => {
+    setLanguage(lang);
+    setLangOpen(false);
+  };
+
   const langSwitcherJSX = (
-    <div className="relative group">
-      <button className="flex items-center gap-1.5 text-xs font-medium bg-surface/50 px-3 py-1.5 rounded-md border border-line uppercase text-ink transition-colors hover:border-accent/40">
+    <div className="relative" data-lang-switcher>
+      <button
+        onClick={() => setLangOpen((o) => !o)}
+        className="flex items-center gap-1.5 text-xs font-medium bg-surface/50 px-3 py-1.5 rounded-md border border-line uppercase text-ink transition-colors hover:border-accent/40"
+      >
         {language}
-        <svg className="w-3 h-3 text-muted transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg
+          className={`w-3 h-3 text-muted transition-transform duration-200 ${langOpen ? "rotate-180" : ""}`}
+          fill="none" viewBox="0 0 24 24" stroke="currentColor"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      
-      {/* Dropdown Menu */}
-      <div className="absolute right-0 top-full pt-1 opacity-0 translate-y-1 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto z-50">
-        <div className="flex flex-col bg-bg border border-line rounded-md shadow-lg overflow-hidden min-w-[70px]">
-          {availableLangs.map((lang) => (
-            <button
-              key={lang}
-              onClick={() => setLanguage(lang)}
-              className="px-3 py-2 text-xs font-medium uppercase text-muted hover:bg-surface hover:text-accent transition-colors text-left"
-            >
-              {lang}
-            </button>
-          ))}
-        </div>
-      </div>
+
+      <AnimatePresence>
+        {langOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -4, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -4, scale: 0.96 }}
+            transition={{ duration: 0.15 }}
+            className="absolute right-0 top-full pt-1 z-50"
+          >
+            <div className="flex flex-col bg-bg border border-line rounded-md shadow-lg overflow-hidden min-w-[70px]">
+              {availableLangs.map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => handleLangSelect(lang)}
+                  className="px-3 py-2 text-xs font-medium uppercase text-muted hover:bg-surface hover:text-accent transition-colors text-left"
+                >
+                  {lang}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
+
+  useEffect(() => {
+    if (!langOpen) return;
+    const close = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest("[data-lang-switcher]")) setLangOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [langOpen]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
