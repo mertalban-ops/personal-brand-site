@@ -132,7 +132,7 @@ export default function Contact() {
         <div className="mx-auto max-w-6xl px-5">
           <div className="grid gap-12 md:grid-cols-4 mb-16">
             <div className="md:col-span-2">
-              <span className="display text-lg font-bold tracking-tight text-ink">
+              <span className="display text-lg font-bold tracking-tight text-ink uppercase">
                 {contact.name}
               </span>
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
