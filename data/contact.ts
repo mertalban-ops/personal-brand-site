@@ -4,7 +4,7 @@ export const contact = {
   email: "mertalbaan@gmail.com",
   location: "Izmir, Turkey",
   // Örn: "905xxxxxxxxx" (başında + veya 0 olmadan, uluslararası format)
-  whatsapp: "905379537",
+  whatsapp: "905379531547",
   // Örn: "https://www.linkedin.com/in/kullanici-adi"
   linkedin: "#",
   // Örn: "https://github.com/kullanici-adi"
