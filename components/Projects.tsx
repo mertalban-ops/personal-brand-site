@@ -1,10 +1,13 @@
 "use client";
 
+import { Suspense, lazy } from "react";
 import dynamic from "next/dynamic";
 import AnimatedSection from "./AnimatedSection";
 import FloatingCard from "./FloatingCard";
 import Reveal3D from "./Reveal3D";
 import { useLanguage } from "@/context/LanguageContext";
+
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const ProjectDemoVideo = dynamic(() => import("./ProjectDemoVideo"), {
   ssr: false,
@@ -26,12 +29,40 @@ export default function Projects() {
   return (
     <AnimatedSection id="projeler">
       <div className="mx-auto max-w-6xl px-5 py-20 md:py-28">
-      <p className="mono-label mb-3">{t.projects.label}</p>
-      <h2 className="display max-w-2xl text-3xl font-bold text-ink md:text-4xl">
-        {t.projects.title}
-      </h2>
+      {/* Compact Spline banner */}
+      <div
+        className="mb-14 flex overflow-hidden rounded-2xl"
+        style={{
+          background: "linear-gradient(135deg, rgba(11,31,51,0.8) 0%, rgba(7,18,28,0.9) 100%)",
+          border: "1px solid var(--line)",
+          minHeight: 220,
+        }}
+      >
+        {/* Left — label + heading */}
+        <div className="flex flex-col justify-center px-8 py-10 z-10 flex-1">
+          <p className="mono-label mb-3">{t.projects.label}</p>
+          <h2 className="display max-w-xs text-3xl font-bold text-ink md:text-4xl leading-[1.1]">
+            {t.projects.title}
+          </h2>
+        </div>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 md:gap-8">
+        {/* Right — robot (desktop only) */}
+        <div className="hidden lg:block relative w-[420px] shrink-0">
+          <Suspense fallback={null}>
+            <Spline
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              style={{ width: "100%", height: "100%" }}
+            />
+          </Suspense>
+          {/* fade left edge into card */}
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 w-20"
+            style={{ background: "linear-gradient(to right, rgba(11,31,51,0.8), transparent)" }}
+          />
+        </div>
+      </div>
+
+      <div className="grid gap-6 sm:grid-cols-2 md:gap-8">
         {t.projects.items.map((p, i) => (
           <Reveal3D key={p.name} delay={(i % 2) * 0.12} className="h-full">
             <FloatingCard maxTilt={2} className="h-full">
