@@ -9,7 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 const ProjectDemoVideo = dynamic(() => import("./ProjectDemoVideo"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[360px] rounded-2xl bg-bg-raised/30 border border-line animate-pulse" />
+    <div className="w-full h-[260px] rounded-2xl bg-bg-raised/30 border border-line animate-pulse" />
   ),
 });
 
@@ -31,11 +31,11 @@ export default function Projects() {
         {t.projects.title}
       </h2>
 
-      <div className="mt-12 grid gap-12">
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 md:gap-8">
         {t.projects.items.map((p, i) => (
-          <Reveal3D key={p.name} delay={(i % 3) * 0.12} className="h-full">
+          <Reveal3D key={p.name} delay={(i % 2) * 0.12} className="h-full">
             <FloatingCard maxTilt={2} className="h-full">
-              <article className="card-surface flex h-full flex-col gap-6 rounded-xl p-6 transition-colors hover:border-accent/40 md:p-8">
+              <article className="card-surface flex h-full flex-col gap-5 rounded-xl p-5 transition-colors hover:border-accent/40 md:p-6">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h3 className="display text-2xl font-bold text-ink">{p.name}</h3>

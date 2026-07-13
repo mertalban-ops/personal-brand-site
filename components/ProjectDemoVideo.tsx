@@ -658,7 +658,7 @@ export default function ProjectDemoVideo({ type }: { type: ProjectType }) {
       </div>
 
       {/* Screen area */}
-      <div style={{ position: "relative", height: 320, perspective: 1200, overflow: "hidden", background: "#060f1a" }}>
+      <div style={{ position: "relative", height: 240, perspective: 1200, overflow: "hidden", background: "#060f1a" }}>
         <AnimatePresence mode="popLayout">
           <motion.div
             key={idx}

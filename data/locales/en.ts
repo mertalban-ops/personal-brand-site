@@ -4,7 +4,7 @@ export const en: Dictionary = {
   nav: {
     studio: "Studio Approach",
     services: "System Solutions",
-    cases: "Case Studies",
+    cases: "Portfolio",
     process: "Delivery Process",
     contactBtn: "Discuss Project",
   },
@@ -117,7 +117,7 @@ export const en: Dictionary = {
     ],
   },
   projects: {
-    label: "04 — Project Showcase",
+    label: "04 — Portfolio",
     title: "Custom Digital Solutions We've Developed",
     problemLabel: "Problem",
     featuresLabel: "Business Benefit & Features",

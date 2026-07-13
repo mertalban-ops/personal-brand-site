@@ -4,7 +4,7 @@ export const tr: Dictionary = {
   nav: {
     studio: "Stüdyo Yaklaşımı",
     services: "Sistem Çözümleri",
-    cases: "Vaka Çalışmaları",
+    cases: "Referans Projeler",
     process: "Teslimat Süreci",
     contactBtn: "Projemi Konuşalım",
   },
@@ -117,7 +117,7 @@ export const tr: Dictionary = {
     ],
   },
   projects: {
-    label: "04 — Proje Vitrini",
+    label: "04 — Referans Projeler",
     title: "Geliştirdiğimiz Özel Dijital Çözümler",
     problemLabel: "Problem",
     featuresLabel: "İşletmeye Fayda & Özellikler",
