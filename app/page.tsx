@@ -1,10 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TrustStrip from "@/components/TrustStrip";
-import SplineSection from "@/components/SplineSection";
 import ProblemsSolutions from "@/components/ProblemsSolutions";
+import SystemNetwork from "@/components/SystemNetwork";
+import SplineSection from "@/components/SplineSection";
 import Testimonial from "@/components/Testimonial";
 import CtaStrip from "@/components/CtaStrip";
+import LazyVisible from "@/components/LazyVisible";
 
 export default function Home() {
   return (
@@ -13,7 +15,10 @@ export default function Home() {
       <Hero />
       <TrustStrip />
       <ProblemsSolutions />
-      <SplineSection />
+      <SystemNetwork />
+      <LazyVisible>
+        <SplineSection />
+      </LazyVisible>
       <Testimonial />
       <CtaStrip />
     </main>
