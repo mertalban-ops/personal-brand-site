@@ -3,7 +3,6 @@
 import AnimatedSection from "./AnimatedSection";
 import FloatingCard from "./FloatingCard";
 import Reveal3D from "./Reveal3D";
-import ProjectLoopPreview from "./ProjectLoopPreview";
 import ProjectDemoVideo from "./ProjectDemoVideo";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -11,7 +10,7 @@ function getStatusStyle(status: string) {
   const s = status.toLowerCase();
   if (s.includes("aktif") || s.includes("active") || s.includes("aktiv")) return "bg-accent/15 text-accent";
   if (s.includes("geliştirme") || s.includes("development") || s.includes("entwicklung")) return "bg-blue/15 text-blue";
-  return "bg-ink/10 text-muted"; // Planlanan / Planned / Geplant
+  return "bg-ink/10 text-muted";
 }
 
 export default function Projects() {
@@ -27,76 +26,66 @@ export default function Projects() {
 
       <div className="mt-12 grid gap-12">
         {t.projects.items.map((p, i) => (
-          <div key={p.name} className="flex flex-col gap-4">
-          <Reveal3D delay={(i % 3) * 0.12} className="h-full">
+          <Reveal3D key={p.name} delay={(i % 3) * 0.12} className="h-full">
             <FloatingCard maxTilt={2} className="h-full">
-              <article className="card-surface grid h-full gap-6 rounded-xl p-6 transition-colors hover:border-accent/40 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr] md:p-8">
-                {/* Sol Taraf: Metin İçeriği */}
-                <div className="flex flex-col">
-                  <div className="mb-4 flex items-start justify-between gap-3">
-                    <div>
-                      <h3 className="display text-2xl font-bold text-ink">{p.name}</h3>
-                      <p className="mt-1 text-sm text-muted">{p.tagline}</p>
-                    </div>
-                    <span
-                      className={`shrink-0 rounded-md px-2.5 py-1 text-xs font-semibold ${getStatusStyle(p.status)}`}
-                    >
-                      {p.status}
+              <article className="card-surface flex h-full flex-col gap-6 rounded-xl p-6 transition-colors hover:border-accent/40 md:p-8">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="display text-2xl font-bold text-ink">{p.name}</h3>
+                    <p className="mt-1 text-sm text-muted">{p.tagline}</p>
+                  </div>
+                  <span
+                    className={`shrink-0 rounded-md px-2.5 py-1 text-xs font-semibold ${getStatusStyle(p.status)}`}
+                  >
+                    {p.status}
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5">
+                  {p.tech.map((tech) => (
+                    <span key={tech} className="rounded border border-line bg-bg-raised/30 px-2 py-0.5 text-[0.65rem] font-medium text-muted">
+                      {tech}
                     </span>
-                  </div>
-
-                  <div className="mt-2 flex flex-wrap gap-1.5">
-                    {p.tech.map((tech) => (
-                      <span key={tech} className="rounded border border-line bg-bg-raised/30 px-2 py-0.5 text-[0.65rem] font-medium text-muted">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <dl className="mt-6 space-y-4 text-sm leading-relaxed flex-grow">
-                    <div>
-                      <dt className="mono-label" style={{ fontSize: "0.6rem", color: "var(--faint)" }}>
-                        {t.projects.problemLabel}
-                      </dt>
-                      <dd className="mt-0.5 text-muted">{p.solution}</dd>
-                    </div>
-                    <div>
-                      <dt className="mono-label" style={{ fontSize: "0.6rem", color: "var(--faint)" }}>
-                        {t.projects.featuresLabel}
-                      </dt>
-                      <dd className="mt-1 text-muted">
-                        <ul className="list-inside list-disc space-y-0.5 marker:text-accent/50 text-[0.8rem]">
-                          {p.features.map((f) => (
-                            <li key={f}>{f}</li>
-                          ))}
-                        </ul>
-                      </dd>
-                    </div>
-                  </dl>
-
-                  <div className="mt-6 border-t border-line pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <p className="text-sm font-medium text-ink">
-                      {p.benefit}
-                    </p>
-                    <a
-                      href="#iletisim"
-                      className="shrink-0 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent opacity-80 transition-opacity hover:opacity-100"
-                    >
-                      Benzerini İstiyorum <span className="transition-transform group-hover:translate-x-1">→</span>
-                    </a>
-                  </div>
+                  ))}
                 </div>
 
-                <div className="flex items-center justify-center min-h-[280px] md:min-h-0">
-                  <ProjectLoopPreview type={p.previewType as "stockapp" | "auto-service" | "carpass" | "business-dashboard"} />
+                <dl className="space-y-4 text-sm leading-relaxed flex-grow">
+                  <div>
+                    <dt className="mono-label" style={{ fontSize: "0.6rem", color: "var(--faint)" }}>
+                      {t.projects.problemLabel}
+                    </dt>
+                    <dd className="mt-0.5 text-muted">{p.solution}</dd>
+                  </div>
+                  <div>
+                    <dt className="mono-label" style={{ fontSize: "0.6rem", color: "var(--faint)" }}>
+                      {t.projects.featuresLabel}
+                    </dt>
+                    <dd className="mt-1 text-muted">
+                      <ul className="list-inside list-disc space-y-0.5 marker:text-accent/50 text-[0.8rem]">
+                        {p.features.map((f) => (
+                          <li key={f}>{f}</li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                </dl>
+
+                <div className="border-t border-line pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <p className="text-sm font-medium text-ink">
+                    {p.benefit}
+                  </p>
+                  <a
+                    href="#iletisim"
+                    className="shrink-0 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent opacity-80 transition-opacity hover:opacity-100"
+                  >
+                    Benzerini İstiyorum <span className="transition-transform group-hover:translate-x-1">→</span>
+                  </a>
                 </div>
+
+                <ProjectDemoVideo type={p.previewType as "stockapp" | "auto-service" | "carpass" | "business-dashboard"} />
               </article>
             </FloatingCard>
           </Reveal3D>
-          <Reveal3D delay={(i % 3) * 0.12 + 0.1}>
-            <ProjectDemoVideo type={p.previewType as "stockapp" | "auto-service" | "carpass" | "business-dashboard"} />
-          </Reveal3D>
-          </div>
         ))}
       </div>
       </div>

@@ -33,7 +33,7 @@ export default function FloatingCard({ children, className = "", maxTilt = 12 }:
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       className={`transition-transform duration-300 will-change-transform ${className}`}
-      style={{ transform, transformStyle: "preserve-3d" }}
+      style={{ transform, transformStyle: "preserve-3d", touchAction: "pan-y" }}
     >
       {children}
     </div>

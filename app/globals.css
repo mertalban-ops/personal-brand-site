@@ -47,7 +47,7 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -55,10 +55,10 @@ body {
     radial-gradient(ellipse 80% 55% at 70% -5%, rgba(16, 185, 129, 0.1), transparent 60%),
     radial-gradient(ellipse 70% 50% at 5% 25%, rgba(56, 189, 248, 0.08), transparent 65%),
     linear-gradient(180deg, #07121c 0%, #040c14 100%);
-  background-attachment: fixed;
+  background-attachment: scroll;
   color: var(--ink);
   font-family: var(--font-body), system-ui, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 ::selection {
@@ -100,7 +100,15 @@ body {
     0 1px 2px rgba(0, 0, 0, 0.1),
     0 14px 34px -18px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(8px);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 768px) {
+  .card-surface {
+    backdrop-filter: none;
+    background: rgba(11, 31, 51, 0.92);
+  }
 }
 
 .card-surface:hover {

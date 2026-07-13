@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Package, Wallet, ShoppingCart, TrendingUp, Check,
@@ -610,16 +610,30 @@ const flipVariants = {
 export default function ProjectDemoVideo({ type }: { type: ProjectType }) {
   const { screens, title, accent } = config[type] ?? config.stockapp;
   const [idx, setIdx] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const total = screens.length;
   const DURATION = 4500;
 
   useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
     const t = setInterval(() => setIdx(i => (i + 1) % total), DURATION);
     return () => clearInterval(t);
-  }, [total]);
+  }, [total, isVisible]);
 
   return (
-    <div style={{
+    <div ref={containerRef} style={{
       background: "#040c14",
       border: `1px solid ${s.border}`,
       borderRadius: 16,
