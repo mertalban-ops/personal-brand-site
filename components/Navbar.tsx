@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -11,12 +13,13 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const { t, language, setLanguage } = useLanguage();
+  const pathname = usePathname();
 
   const links = [
-    { href: "#kimim", label: t.nav.studio },
-    { href: "#hizmetler", label: t.nav.services },
-    { href: "#projeler", label: t.nav.cases },
-    { href: "#surec", label: t.nav.process },
+    { href: "/surec#kimim", label: t.nav.studio },
+    { href: "/hizmetler", label: t.nav.services },
+    { href: "/projeler", label: t.nav.cases },
+    { href: "/surec", label: t.nav.process },
   ];
 
   const availableLangs = (["tr", "en", "de"] as LanguageCode[]).filter((l) => l !== language);
@@ -105,45 +108,49 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a href="#top" className="flex items-baseline gap-3" onClick={() => setIsOpen(false)}>
+        <Link href="/" className="flex items-baseline gap-3" onClick={() => setIsOpen(false)}>
           <span className="display text-sm font-bold tracking-tight text-ink">
             SOLVARIA
           </span>
           <span className="mono-label hidden text-faint sm:inline" style={{ color: "var(--faint)" }}>
             digital operation systems
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden items-center gap-7 md:flex">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm text-muted transition-colors hover:text-ink"
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            const base = l.href.split("#")[0];
+            const isActive = pathname === base;
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`text-sm transition-colors hover:text-ink ${isActive ? "text-ink font-medium" : "text-muted"}`}
+              >
+                {l.label}
+              </Link>
+            );
+          })}
           {langSwitcherJSX}
-          <a
-            href="#iletisim"
+          <Link
+            href="/iletisim"
             className="btn-shine rounded-lg border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-colors hover:bg-accent/20"
           >
             {t.nav.contactBtn}
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Nav Toggle */}
         <div className="flex items-center gap-3 md:hidden">
           {langSwitcherJSX}
-          <a
-            href="#iletisim"
+          <Link
+            href="/iletisim"
             className="rounded-lg bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent transition-colors hover:bg-accent/20"
             onClick={() => setIsOpen(false)}
           >
             {t.nav.contactBtn}
-          </a>
+          </Link>
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="text-ink p-1 transition-colors hover:text-accent"
@@ -166,14 +173,14 @@ export default function Navbar() {
           >
             <div className="flex flex-col px-5 py-6 space-y-5">
               {links.map((l) => (
-                <a
+                <Link
                   key={l.href}
                   href={l.href}
                   onClick={() => setIsOpen(false)}
                   className="text-lg font-medium text-ink transition-colors hover:text-accent"
                 >
                   {l.label}
-                </a>
+                </Link>
               ))}
             </div>
           </motion.div>

@@ -55,7 +55,7 @@ export default function Services() {
                   <p className="text-sm leading-relaxed text-muted mb-6 flex-grow">{s.text}</p>
                   
                   <a
-                    href="#iletisim"
+                    href="/iletisim"
                     className="mt-auto inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent opacity-70 transition-opacity group-hover:opacity-100"
                   >
                     Sistem İstiyorum <span className="transition-transform group-hover:translate-x-1">→</span>

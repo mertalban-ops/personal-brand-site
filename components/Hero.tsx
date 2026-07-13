@@ -123,13 +123,13 @@ export default function Hero() {
           </motion.p>
           <motion.div className="mt-9 flex flex-wrap gap-4" {...enter(0.45)}>
             <a
-              href="#iletisim"
+              href="/iletisim"
               className="btn-shine glow-accent rounded-lg bg-accent px-6 py-3 font-semibold text-[#000000] transition-transform hover:-translate-y-0.5"
             >
               {t.hero.primaryBtn}
             </a>
             <a
-              href="#hizmetler"
+              href="/hizmetler"
               className="rounded-lg border border-line px-6 py-3 font-medium text-ink transition-colors hover:border-accent/50 hover:text-accent"
             >
               {t.hero.secondaryBtn}

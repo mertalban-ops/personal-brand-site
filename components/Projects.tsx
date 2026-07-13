@@ -1,10 +1,17 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import AnimatedSection from "./AnimatedSection";
 import FloatingCard from "./FloatingCard";
 import Reveal3D from "./Reveal3D";
-import ProjectDemoVideo from "./ProjectDemoVideo";
 import { useLanguage } from "@/context/LanguageContext";
+
+const ProjectDemoVideo = dynamic(() => import("./ProjectDemoVideo"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[360px] rounded-2xl bg-bg-raised/30 border border-line animate-pulse" />
+  ),
+});
 
 function getStatusStyle(status: string) {
   const s = status.toLowerCase();
@@ -75,7 +82,7 @@ export default function Projects() {
                     {p.benefit}
                   </p>
                   <a
-                    href="#iletisim"
+                    href="/iletisim"
                     className="shrink-0 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent opacity-80 transition-opacity hover:opacity-100"
                   >
                     Benzerini İstiyorum <span className="transition-transform group-hover:translate-x-1">→</span>

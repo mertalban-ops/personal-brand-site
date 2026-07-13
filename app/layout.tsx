@@ -21,6 +21,7 @@ const mono = IBM_Plex_Mono({
 });
 
 import { LanguageProvider } from "@/context/LanguageContext";
+import SceneBackground from "@/components/SceneBackground";
 
 export const metadata: Metadata = {
   title: "Solvaria — İş Takip Sistemleri ve Dijital Operasyon Çözümleri",
@@ -47,6 +48,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <LanguageProvider>
+          <SceneBackground />
           {children}
         </LanguageProvider>
       </body>

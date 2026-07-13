@@ -152,10 +152,10 @@ export default function Contact() {
             <div>
               <h4 className="font-semibold text-ink mb-4">{t.contact.studioCol}</h4>
               <ul className="space-y-3 text-sm text-muted">
-                <li><a href="#kimim" className="hover:text-accent transition-colors">{t.nav.studio}</a></li>
-                <li><a href="#surec" className="hover:text-accent transition-colors">{t.nav.process}</a></li>
-                <li><a href="#projeler" className="hover:text-accent transition-colors">{t.nav.cases}</a></li>
-                <li><a href="#sss" className="hover:text-accent transition-colors">{t.faq.title}</a></li>
+                <li><a href="/surec#kimim" className="hover:text-accent transition-colors">{t.nav.studio}</a></li>
+                <li><a href="/surec" className="hover:text-accent transition-colors">{t.nav.process}</a></li>
+                <li><a href="/projeler" className="hover:text-accent transition-colors">{t.nav.cases}</a></li>
+                <li><a href="/iletisim#sss" className="hover:text-accent transition-colors">{t.faq.title}</a></li>
               </ul>
             </div>
           </div>
