@@ -3,6 +3,8 @@ import Hero from "@/components/Hero";
 import TrustStrip from "@/components/TrustStrip";
 import SplineSection from "@/components/SplineSection";
 import ProblemsSolutions from "@/components/ProblemsSolutions";
+import Testimonial from "@/components/Testimonial";
+import CtaStrip from "@/components/CtaStrip";
 
 export default function Home() {
   return (
@@ -10,8 +12,10 @@ export default function Home() {
       <Navbar />
       <Hero />
       <TrustStrip />
-      <SplineSection />
       <ProblemsSolutions />
+      <SplineSection />
+      <Testimonial />
+      <CtaStrip />
     </main>
   );
 }

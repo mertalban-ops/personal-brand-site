@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Process from "@/components/Process";
 import About from "@/components/About";
+import CtaStrip from "@/components/CtaStrip";
 
 export const metadata = {
   title: "Süreç & Hakkımda — Solvaria",
@@ -13,6 +14,7 @@ export default function SurecPage() {
       <Navbar />
       <Process />
       <About />
+      <CtaStrip />
     </main>
   );
 }

@@ -1,5 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Projects from "@/components/Projects";
+import Testimonial from "@/components/Testimonial";
+import CtaStrip from "@/components/CtaStrip";
 
 export const metadata = {
   title: "Projeler — Solvaria",
@@ -11,6 +13,8 @@ export default function ProjelerPage() {
     <main className="w-full" style={{ overflowX: "clip" }}>
       <Navbar />
       <Projects />
+      <Testimonial />
+      <CtaStrip />
     </main>
   );
 }

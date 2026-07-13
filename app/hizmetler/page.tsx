@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Services from "@/components/Services";
 import WhyMe from "@/components/WhyMe";
 import Strengths from "@/components/Strengths";
+import CtaStrip from "@/components/CtaStrip";
 
 export const metadata = {
   title: "Hizmetler — Solvaria",
@@ -15,6 +16,7 @@ export default function HizmetlerPage() {
       <Services />
       <WhyMe />
       <Strengths />
+      <CtaStrip />
     </main>
   );
 }

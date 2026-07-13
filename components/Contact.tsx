@@ -15,7 +15,6 @@ export default function Contact() {
   const locationLabel = isTr ? "Konum" : isDe ? "Standort" : "Location";
   const profileLabel = isTr ? "Profili görüntüle" : isDe ? "Profil ansehen" : "View profile";
   const projectsLabel = isTr ? "Projelere göz at" : isDe ? "Projekte ansehen" : "View projects";
-  const dosLabel = isTr ? "dijital operasyon sistemleri" : isDe ? "digitale Betriebssysteme" : "digital operation systems";
 
   return (
     <AnimatedSection id="iletisim" className="relative overflow-hidden border-t border-line">
@@ -128,48 +127,6 @@ export default function Contact() {
         </div>
       </div>
 
-      <footer className="border-t border-line mt-20 pt-16 pb-8 bg-bg">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="grid gap-12 md:grid-cols-4 mb-16">
-            <div className="md:col-span-2">
-              <span className="display text-lg font-bold tracking-tight text-ink">
-                SOLVARIA
-              </span>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-                {t.contact.footerText}
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-ink mb-4">{t.contact.servicesCol}</h4>
-              <ul className="space-y-3 text-sm text-muted">
-                {t.services.items.slice(0, 4).map(s => (
-                  <li key={s.title}>{s.title}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-ink mb-4">{t.contact.studioCol}</h4>
-              <ul className="space-y-3 text-sm text-muted">
-                <li><a href="/surec#kimim" className="hover:text-accent transition-colors">{t.nav.studio}</a></li>
-                <li><a href="/surec" className="hover:text-accent transition-colors">{t.nav.process}</a></li>
-                <li><a href="/projeler" className="hover:text-accent transition-colors">{t.nav.cases}</a></li>
-                <li><a href="/iletisim#sss" className="hover:text-accent transition-colors">{t.faq.title}</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-line">
-            <p className="text-xs text-muted">
-              © {new Date().getFullYear()} {contact.name}. {t.contact.rights}
-            </p>
-            <p className="font-mono text-[10px] uppercase tracking-wider" style={{ color: "var(--faint)" }}>
-              {dosLabel} · {contact.location}
-            </p>
-          </div>
-        </div>
-      </footer>
     </AnimatedSection>
   );
 }
