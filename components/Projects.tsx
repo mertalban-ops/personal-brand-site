@@ -31,32 +31,36 @@ export default function Projects() {
       <div className="mx-auto max-w-6xl px-5 py-20 md:py-28">
       {/* Compact Spline banner */}
       <div
-        className="mb-14 flex overflow-hidden rounded-2xl"
+        className="mb-14 flex flex-col overflow-hidden rounded-2xl lg:flex-row"
         style={{
           background: "linear-gradient(135deg, rgba(11,31,51,0.8) 0%, rgba(7,18,28,0.9) 100%)",
           border: "1px solid var(--line)",
-          minHeight: 220,
         }}
       >
-        {/* Left — label + heading */}
-        <div className="flex flex-col justify-center px-8 py-10 z-10 flex-1">
+        {/* Top / Left — label + heading */}
+        <div className="flex flex-col justify-center px-7 pt-8 pb-4 lg:px-10 lg:py-10 z-10 lg:flex-1">
           <p className="mono-label mb-3">{t.projects.label}</p>
-          <h2 className="display max-w-xs text-3xl font-bold text-ink md:text-4xl leading-[1.1]">
+          <h2 className="display text-3xl font-bold text-ink md:text-4xl leading-[1.1]">
             {t.projects.title}
           </h2>
         </div>
 
-        {/* Right — robot (desktop only) */}
-        <div className="hidden lg:block relative w-[420px] shrink-0">
+        {/* Bottom / Right — robot (all screens) */}
+        <div className="relative h-[300px] w-full lg:h-auto lg:w-[420px] lg:shrink-0">
           <Suspense fallback={null}>
             <Spline
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
               style={{ width: "100%", height: "100%" }}
             />
           </Suspense>
-          {/* fade left edge into card */}
+          {/* fade top edge on mobile */}
           <div
-            className="pointer-events-none absolute inset-y-0 left-0 w-20"
+            className="pointer-events-none absolute inset-x-0 top-0 h-16 lg:hidden"
+            style={{ background: "linear-gradient(to bottom, rgba(11,31,51,0.8), transparent)" }}
+          />
+          {/* fade left edge on desktop */}
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 w-20 hidden lg:block"
             style={{ background: "linear-gradient(to right, rgba(11,31,51,0.8), transparent)" }}
           />
         </div>
