@@ -13,9 +13,9 @@ export default function Footer() {
     <footer className="border-t mt-0 pt-14 pb-8" style={{ borderColor: "var(--line)", background: "var(--bg)" }}>
       <div className="mx-auto max-w-6xl px-5">
         {/* Top grid */}
-        <div className="grid gap-10 md:grid-cols-4 mb-12">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-10 mb-12">
           {/* Brand */}
-          <div className="md:col-span-2">
+          <div className="col-span-2 md:col-span-2">
             <Link href="/" className="display text-base font-bold tracking-tight text-ink">
               SOLVARIA
             </Link>

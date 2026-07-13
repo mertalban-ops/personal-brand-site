@@ -51,9 +51,9 @@ export default function SplineSection() {
             fill="rgba(16,185,129,0.28)"
           />
 
-          <div className="flex flex-col lg:flex-row min-h-[420px] lg:h-[500px]">
+          <div className="flex flex-col lg:flex-row lg:h-[500px]">
             {/* Left — copy */}
-            <div className="flex-1 flex flex-col justify-center p-8 md:p-12 relative z-10">
+            <div className="flex-1 flex flex-col justify-center p-6 md:p-10 lg:p-12 relative z-10">
               <motion.h2
                 className="display text-3xl md:text-[2.6rem] font-bold text-ink leading-[1.1]"
                 {...(reduce ? {} : reveal(0.1))}
@@ -97,18 +97,18 @@ export default function SplineSection() {
 
               {/* Stats row */}
               <motion.div
-                className="mt-10 grid grid-cols-3 gap-4 border-t pt-8"
+                className="mt-8 grid grid-cols-3 gap-3 border-t pt-6"
                 style={{ borderColor: "var(--line)" }}
                 {...(reduce ? {} : reveal(0.4))}
               >
                 {[
                   { value: "14+", label: "Teslim edilen sistem" },
                   { value: "%100", label: "Web tabanlı erişim" },
-                  { value: "7/24", label: "Gerçek zamanlı takip" },
+                  { value: "7/24", label: "Gerçek zamanlı" },
                 ].map((s) => (
                   <div key={s.label}>
-                    <p className="display text-xl font-bold text-accent">{s.value}</p>
-                    <p className="mt-0.5 text-xs leading-snug" style={{ color: "var(--faint)" }}>
+                    <p className="display text-lg font-bold text-accent">{s.value}</p>
+                    <p className="mt-0.5 text-[10px] leading-snug" style={{ color: "var(--faint)" }}>
                       {s.label}
                     </p>
                   </div>
@@ -116,8 +116,8 @@ export default function SplineSection() {
               </motion.div>
             </div>
 
-            {/* Right — Spline 3D scene */}
-            <div className="flex-1 relative min-h-[280px] lg:min-h-0">
+            {/* Right — Spline 3D scene (desktop only) */}
+            <div className="hidden lg:flex lg:flex-1 relative">
               {/* Gradient fade on left edge to blend into content */}
               <div
                 className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16"

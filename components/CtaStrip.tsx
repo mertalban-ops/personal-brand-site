@@ -55,8 +55,7 @@ export default function CtaStrip() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
         >
-          İşletmenizin ihtiyaçlarını 30 dakikada masaya yatıralım.
-          <br className="hidden md:block" />
+          İşletmenizin ihtiyaçlarını 30 dakikada masaya yatıralım.{" "}
           Ücretsiz, taahhütsüz ve sonuç odaklı bir görüşme.
         </motion.p>
 
