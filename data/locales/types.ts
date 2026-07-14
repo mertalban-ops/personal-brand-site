@@ -5,6 +5,8 @@ export type Dictionary = {
     cases: string;
     process: string;
     contactBtn: string;
+    solutions?: string;
+    studioLink?: string;
   };
   hero: {
     kicker: string;

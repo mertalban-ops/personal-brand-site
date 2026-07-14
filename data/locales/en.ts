@@ -2,10 +2,12 @@ import { Dictionary } from "./types";
 
 export const en: Dictionary = {
   nav: {
+    solutions: "Solutions",
+    studioLink: "Studio",
     studio: "Studio Approach",
     services: "System Solutions",
-    cases: "Portfolio",
-    process: "Delivery Process",
+    cases: "Projects",
+    process: "Process",
     contactBtn: "Discuss Project",
   },
   hero: {

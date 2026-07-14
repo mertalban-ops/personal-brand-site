@@ -2,10 +2,12 @@ import { Dictionary } from "./types";
 
 export const tr: Dictionary = {
   nav: {
+    solutions: "Çözümler",
+    studioLink: "Stüdyo",
     studio: "Stüdyo Yaklaşımı",
     services: "Sistem Çözümleri",
-    cases: "Referans Projeler",
-    process: "Teslimat Süreci",
+    cases: "Projeler",
+    process: "Süreç",
     contactBtn: "Projemi Konuşalım",
   },
   hero: {

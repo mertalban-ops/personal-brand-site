@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Mail, MessageCircle, MapPin } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { contact } from "@/data/contact";
+import { footerLinks } from "@/data/navigation";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -55,30 +56,31 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Services */}
+          {/* Solutions */}
           <div>
             <h4 className="mb-4 text-sm font-semibold text-ink">{t.contact.servicesCol}</h4>
             <ul className="space-y-2.5 text-sm" style={{ color: "var(--muted)" }}>
-              {t.services.items.slice(0, 5).map((s) => (
-                <li key={s.title}>
-                  <Link href="/hizmetler" className="transition-colors hover:text-accent">
-                    {s.title}
+              {footerLinks.solutions.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="transition-colors hover:text-accent">
+                    {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Links */}
+          {/* Studio */}
           <div>
             <h4 className="mb-4 text-sm font-semibold text-ink">{t.contact.studioCol}</h4>
             <ul className="space-y-2.5 text-sm" style={{ color: "var(--muted)" }}>
-              <li><Link href="/surec#kimim" className="transition-colors hover:text-accent">{t.nav.studio}</Link></li>
-              <li><Link href="/hizmetler" className="transition-colors hover:text-accent">{t.nav.services}</Link></li>
-              <li><Link href="/projeler" className="transition-colors hover:text-accent">{t.nav.cases}</Link></li>
-              <li><Link href="/surec" className="transition-colors hover:text-accent">{t.nav.process}</Link></li>
-              <li><Link href="/iletisim" className="transition-colors hover:text-accent">{t.nav.contactBtn}</Link></li>
-              <li><Link href="/iletisim#sss" className="transition-colors hover:text-accent">{t.faq.title}</Link></li>
+              {footerLinks.studio.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="transition-colors hover:text-accent">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -89,9 +91,13 @@ export default function Footer() {
           style={{ borderColor: "var(--line)", color: "var(--faint)" }}
         >
           <p>© {year} {contact.name}. {t.contact.rights}</p>
-          <p className="font-mono uppercase tracking-wider" style={{ fontSize: "0.65rem" }}>
-            Digital Operation Systems · {contact.location}
-          </p>
+          <div className="flex items-center gap-4">
+            <Link href="/gizlilik" className="transition-colors hover:text-ink">Gizlilik</Link>
+            <Link href="/kullanim-kosullari" className="transition-colors hover:text-ink">Kullanım Koşulları</Link>
+            <span className="font-mono uppercase tracking-wider hidden md:inline" style={{ fontSize: "0.65rem" }}>
+              Digital Operation Systems · {contact.location}
+            </span>
+          </div>
         </div>
       </div>
     </footer>
