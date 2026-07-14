@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import dynamic from "next/dynamic";
 import {
   motion,
   useScroll,
@@ -9,6 +10,11 @@ import {
 } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { SplineScene } from "@/components/ui/splite";
+
+const RobotPhoneShowcase = dynamic(
+  () => import("@/components/robot/RobotPhoneShowcase"),
+  { ssr: false }
+);
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -86,7 +92,7 @@ export default function Hero() {
           </motion.p>
         </motion.div>
 
-        {/* Sağ: 3D robot — mobil ve masaüstünde görünür */}
+        {/* Sağ: 3D robot + phone showcase */}
         <motion.div
           className="relative h-[340px] sm:h-[480px] lg:h-[560px]"
           {...enter(0.3)}
@@ -95,6 +101,15 @@ export default function Hero() {
             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
             className="h-full w-full"
           />
+
+          {/* Phone overlay — appears after Spline loads; hidden on mobile to preserve layout */}
+          <motion.div
+            className="absolute bottom-6 left-1/2 z-10 hidden sm:block"
+            style={{ x: "-38%" }}
+            {...enter(0.9)}
+          >
+            <RobotPhoneShowcase />
+          </motion.div>
         </motion.div>
       </div>
     </section>

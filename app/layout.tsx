@@ -21,6 +21,7 @@ const mono = IBM_Plex_Mono({
 });
 
 import { LanguageProvider } from "@/context/LanguageContext";
+import { ActiveProjectProvider } from "@/context/ActiveProjectContext";
 import SceneBackground from "@/components/SceneBackground";
 import Footer from "@/components/Footer";
 
@@ -49,9 +50,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <LanguageProvider>
-          <SceneBackground />
-          {children}
-          <Footer />
+          <ActiveProjectProvider>
+            <SceneBackground />
+            {children}
+            <Footer />
+          </ActiveProjectProvider>
         </LanguageProvider>
       </body>
     </html>

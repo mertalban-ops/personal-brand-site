@@ -6,6 +6,7 @@ import AnimatedSection from "./AnimatedSection";
 import FloatingCard from "./FloatingCard";
 import Reveal3D from "./Reveal3D";
 import { useLanguage } from "@/context/LanguageContext";
+import { useActiveProject, type RobotProjectType } from "@/context/ActiveProjectContext";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
@@ -25,6 +26,7 @@ function getStatusStyle(status: string) {
 
 export default function Projects() {
   const { t } = useLanguage();
+  const { setActiveType } = useActiveProject();
 
   return (
     <AnimatedSection id="projeler">
@@ -70,7 +72,11 @@ export default function Projects() {
         {t.projects.items.map((p, i) => (
           <Reveal3D key={p.name} delay={(i % 2) * 0.12} className="h-full">
             <FloatingCard maxTilt={2} className="h-full">
-              <article className="card-surface flex h-full flex-col gap-5 rounded-xl p-5 transition-colors hover:border-accent/40 md:p-6">
+              <article
+                className="card-surface flex h-full flex-col gap-5 rounded-xl p-5 transition-colors hover:border-accent/40 md:p-6"
+                onMouseEnter={() => setActiveType(p.previewType as RobotProjectType)}
+                onMouseLeave={() => setActiveType(null)}
+              >
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h3 className="display text-2xl font-bold text-ink">{p.name}</h3>

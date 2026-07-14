@@ -607,7 +607,13 @@ const flipVariants = {
 };
 
 // ── Main component ─────────────────────────────────────────────────────
-export default function ProjectDemoVideo({ type }: { type: ProjectType }) {
+export default function ProjectDemoVideo({
+  type,
+  hideChrome = false,
+}: {
+  type: ProjectType;
+  hideChrome?: boolean;
+}) {
   const { screens, title, accent } = config[type] ?? config.stockapp;
   const [idx, setIdx] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -635,30 +641,42 @@ export default function ProjectDemoVideo({ type }: { type: ProjectType }) {
   return (
     <div ref={containerRef} style={{
       background: "#040c14",
-      border: `1px solid ${s.border}`,
-      borderRadius: 16,
+      border: hideChrome ? "none" : `1px solid ${s.border}`,
+      borderRadius: hideChrome ? 0 : 16,
       overflow: "hidden",
       width: "100%",
+      height: hideChrome ? "100%" : undefined,
+      display: hideChrome ? "flex" : undefined,
+      flexDirection: hideChrome ? "column" as const : undefined,
     }}>
-      {/* Chrome bar */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 14px", borderBottom: `1px solid ${s.border}`, background: "rgba(255,255,255,0.02)" }}>
-        <div style={{ display: "flex", gap: 6 }}>
-          {["#ff5f57", "#febc2e", "#28c840"].map(c => (
-            <div key={c} style={{ width: 10, height: 10, borderRadius: "50%", background: c, opacity: 0.85 }} />
-          ))}
+      {/* Chrome bar — hidden in phone mode */}
+      {!hideChrome && (
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 14px", borderBottom: `1px solid ${s.border}`, background: "rgba(255,255,255,0.02)" }}>
+          <div style={{ display: "flex", gap: 6 }}>
+            {["#ff5f57", "#febc2e", "#28c840"].map(c => (
+              <div key={c} style={{ width: 10, height: 10, borderRadius: "50%", background: c, opacity: 0.85 }} />
+            ))}
+          </div>
+          <span style={{ color: s.faint, fontSize: "0.6rem", fontFamily: "monospace", letterSpacing: "0.04em" }}>{title}</span>
+          <motion.div
+            animate={{ opacity: [1, 0.3, 1] }} transition={{ repeat: Infinity, duration: 1.4 }}
+            style={{ display: "flex", alignItems: "center", gap: 4 }}
+          >
+            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#ef4444" }} />
+            <span style={{ color: "#ef4444", fontSize: "0.55rem", fontFamily: "monospace", fontWeight: 700 }}>DEMO</span>
+          </motion.div>
         </div>
-        <span style={{ color: s.faint, fontSize: "0.6rem", fontFamily: "monospace", letterSpacing: "0.04em" }}>{title}</span>
-        <motion.div
-          animate={{ opacity: [1, 0.3, 1] }} transition={{ repeat: Infinity, duration: 1.4 }}
-          style={{ display: "flex", alignItems: "center", gap: 4 }}
-        >
-          <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#ef4444" }} />
-          <span style={{ color: "#ef4444", fontSize: "0.55rem", fontFamily: "monospace", fontWeight: 700 }}>DEMO</span>
-        </motion.div>
-      </div>
+      )}
 
       {/* Screen area */}
-      <div style={{ position: "relative", height: 240, perspective: 1200, overflow: "hidden", background: "#060f1a" }}>
+      <div style={{
+        position: "relative",
+        height: hideChrome ? undefined : 240,
+        flex: hideChrome ? 1 : undefined,
+        perspective: 1200,
+        overflow: "hidden",
+        background: "#060f1a",
+      }}>
         <AnimatePresence mode="popLayout">
           <motion.div
             key={idx}
@@ -673,25 +691,27 @@ export default function ProjectDemoVideo({ type }: { type: ProjectType }) {
         </AnimatePresence>
       </div>
 
-      {/* Footer: dots + progress bar */}
-      <div style={{ padding: "8px 14px", borderTop: `1px solid ${s.border}`, display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(255,255,255,0.01)" }}>
-        <div style={{ display: "flex", gap: 5 }}>
-          {screens.map((_, i) => (
-            <button key={i} onClick={() => setIdx(i)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
-              <motion.div animate={{ width: i === idx ? 18 : 6, background: i === idx ? accent : s.border }}
-                style={{ height: 6, borderRadius: 4 }} transition={{ duration: 0.3 }} />
-            </button>
-          ))}
+      {/* Footer: dots + progress bar — hidden in phone mode */}
+      {!hideChrome && (
+        <div style={{ padding: "8px 14px", borderTop: `1px solid ${s.border}`, display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(255,255,255,0.01)" }}>
+          <div style={{ display: "flex", gap: 5 }}>
+            {screens.map((_, i) => (
+              <button key={i} onClick={() => setIdx(i)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+                <motion.div animate={{ width: i === idx ? 18 : 6, background: i === idx ? accent : s.border }}
+                  style={{ height: 6, borderRadius: 4 }} transition={{ duration: 0.3 }} />
+              </button>
+            ))}
+          </div>
+          <div style={{ flex: 1, margin: "0 12px", height: 2, background: s.border, borderRadius: 2, overflow: "hidden" }}>
+            <motion.div
+              key={idx}
+              initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: DURATION / 1000 - 0.5, ease: "linear" }}
+              style={{ height: "100%", background: accent, transformOrigin: "left", borderRadius: 2 }}
+            />
+          </div>
+          <span style={{ color: s.faint, fontSize: "0.55rem", fontFamily: "monospace" }}>{idx + 1}/{total}</span>
         </div>
-        <div style={{ flex: 1, margin: "0 12px", height: 2, background: s.border, borderRadius: 2, overflow: "hidden" }}>
-          <motion.div
-            key={idx}
-            initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: DURATION / 1000 - 0.5, ease: "linear" }}
-            style={{ height: "100%", background: accent, transformOrigin: "left", borderRadius: 2 }}
-          />
-        </div>
-        <span style={{ color: s.faint, fontSize: "0.55rem", fontFamily: "monospace" }}>{idx + 1}/{total}</span>
-      </div>
+      )}
     </div>
   );
 }
