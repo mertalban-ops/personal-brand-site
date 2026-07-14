@@ -11,7 +11,10 @@ export default function FounderTrust() {
           <div className="grid gap-10 md:grid-cols-[auto_1fr] items-start">
             {/* Monogram */}
             <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-accent/30 bg-accent/10 text-3xl font-bold text-accent display shrink-0">
-              MA
+              {studio.founder.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
             </div>
 
             <div>

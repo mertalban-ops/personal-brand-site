@@ -21,7 +21,7 @@ export default function FAQPreview() {
         </h2>
         <div className="space-y-3">
           {items.map((item, i) => (
-            <div key={i} className="card-surface rounded-xl overflow-hidden">
+            <div key={item.q} className="card-surface rounded-xl overflow-hidden">
               <button
                 onClick={() => setOpen(open === i ? null : i)}
                 className="flex w-full items-center justify-between gap-4 p-5 text-left"
