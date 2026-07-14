@@ -51,7 +51,7 @@ export const tr: Dictionary = {
       },
       {
         title: "Stok ve Ürün Yönetimi",
-        text: "Canlı giriş/çıkış takibi ve kritik stok uyarılarıyla sayım hatalarını sıfırlayıp maliyetleri kontrol altına alın.",
+        text: "Canlı giriş/çıkış takibi ve kritik stok uyarılarıyla sayım hatalarını azaltıp maliyetleri kontrol altına alın.",
         icon: "Boxes",
       },
       {
