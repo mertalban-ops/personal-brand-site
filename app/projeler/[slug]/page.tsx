@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight, ExternalLink } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import CtaStrip from "@/components/CtaStrip";
 import AnimatedSection from "@/components/AnimatedSection";
 import CaseStudyHero from "@/components/projects/CaseStudyHero";
 import CaseStudyNextStep from "@/components/projects/CaseStudyNextStep";
