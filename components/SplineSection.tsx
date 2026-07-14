@@ -80,7 +80,7 @@ export default function SplineSection() {
                 {...(reduce ? {} : reveal(0.3))}
               >
                 <a
-                  href="/hizmetler"
+                  href="/cozumler"
                   className="btn-shine glow-accent inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5"
                 >
                   Sistem Çözümlerini Gör
