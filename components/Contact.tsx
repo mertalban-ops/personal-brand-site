@@ -82,7 +82,7 @@ export default function Contact() {
                   <dd className="font-medium text-ink">{contact.location}</dd>
                 </div>
               </div>
-              {contact.linkedin && (
+              {contact.linkedin && contact.linkedin !== "#" && (
                 <div className="flex items-center gap-4">
                   <span className="rounded-lg bg-accent/10 p-2.5">
                     <ExternalLink className="h-5 w-5 text-accent" />
@@ -102,7 +102,7 @@ export default function Contact() {
                   </div>
                 </div>
               )}
-              {contact.github && (
+              {contact.github && contact.github !== "#" && (
                 <div className="flex items-center gap-4">
                   <span className="rounded-lg bg-accent/10 p-2.5">
                     <Code2 className="h-5 w-5 text-accent" />

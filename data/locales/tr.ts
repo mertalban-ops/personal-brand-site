@@ -2,11 +2,14 @@ import { Dictionary } from "./types";
 
 export const tr: Dictionary = {
   nav: {
-    studio: "Stüdyo Yaklaşımı",
+    solutions: "Çözümler",
+    studio: "Stüdyo",
     services: "Sistem Çözümleri",
-    cases: "Referans Projeler",
-    process: "Teslimat Süreci",
+    cases: "Projeler",
+    process: "Süreç",
     contactBtn: "Projemi Konuşalım",
+    privacy: "Gizlilik",
+    terms: "Kullanım Koşulları",
   },
   hero: {
     kicker: "Özel iş takip sistemleri · Stok ve cari hesap · Otomasyon · SaaS altyapıları",
@@ -51,7 +54,7 @@ export const tr: Dictionary = {
       },
       {
         title: "Stok ve Ürün Yönetimi",
-        text: "Canlı giriş/çıkış takibi ve kritik stok uyarılarıyla sayım hatalarını sıfırlayıp maliyetleri kontrol altına alın.",
+        text: "Canlı giriş/çıkış takibi ve kritik stok uyarılarıyla sayım hatalarını azaltıp maliyetleri kontrol altına alın.",
         icon: "Boxes",
       },
       {

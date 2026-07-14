@@ -16,10 +16,10 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const links = [
-    { href: "/surec#kimim", label: t.nav.studio },
-    { href: "/hizmetler", label: t.nav.services },
+    { href: "/cozumler", label: t.nav.solutions },
     { href: "/projeler", label: t.nav.cases },
     { href: "/surec", label: t.nav.process },
+    { href: "/studyo", label: t.nav.studio },
   ];
 
   const availableLangs = (["tr", "en", "de"] as LanguageCode[]).filter((l) => l !== language);

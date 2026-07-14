@@ -1,12 +1,20 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Solvaria — Dijital Operasyon Sistemleri",
+  description:
+    "Küçük ve orta ölçekli firmalar için stok, cari hesap, satış, tahsilat ve raporlama süreçlerini sade, ölçülebilir ve web tabanlı sistemlere dönüştürüyoruz.",
+};
+
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TrustStrip from "@/components/TrustStrip";
 import ProblemsSolutions from "@/components/ProblemsSolutions";
 import SystemNetwork from "@/components/SystemNetwork";
-import SplineSection from "@/components/SplineSection";
-import Testimonial from "@/components/Testimonial";
-import CtaStrip from "@/components/CtaStrip";
-import LazyVisible from "@/components/LazyVisible";
+import Projects from "@/components/Projects";
+import FounderTrust from "@/components/home/FounderTrust";
+import FAQPreview from "@/components/home/FAQPreview";
+import FinalCTA from "@/components/home/FinalCTA";
 
 export default function Home() {
   return (
@@ -16,11 +24,10 @@ export default function Home() {
       <TrustStrip />
       <ProblemsSolutions />
       <SystemNetwork />
-      <LazyVisible>
-        <SplineSection />
-      </LazyVisible>
-      <Testimonial />
-      <CtaStrip />
+      <Projects />
+      <FounderTrust />
+      <FAQPreview />
+      <FinalCTA />
     </main>
   );
 }
