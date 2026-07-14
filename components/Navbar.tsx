@@ -19,7 +19,7 @@ export default function Navbar() {
     { href: "/cozumler", label: t.nav.solutions ?? "Çözümler" },
     { href: "/projeler", label: t.nav.cases },
     { href: "/surec", label: t.nav.process },
-    { href: "/studyo", label: t.nav.studioLink ?? "Stüdyo" },
+    { href: "/studyo", label: t.nav.studio },
   ];
 
   const availableLangs = (["tr", "en", "de"] as LanguageCode[]).filter((l) => l !== language);

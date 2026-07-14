@@ -3,12 +3,13 @@ import { Dictionary } from "./types";
 export const en: Dictionary = {
   nav: {
     solutions: "Solutions",
-    studioLink: "Studio",
-    studio: "Studio Approach",
+    studio: "Studio",
     services: "System Solutions",
     cases: "Projects",
     process: "Process",
     contactBtn: "Discuss Project",
+    privacy: "Privacy",
+    terms: "Terms of Use",
   },
   hero: {
     kicker: "Custom Business Systems · Inventory & Finance · Automation · SaaS Infrastructure",

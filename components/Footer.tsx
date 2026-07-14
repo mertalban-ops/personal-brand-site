@@ -92,8 +92,8 @@ export default function Footer() {
         >
           <p>© {year} {contact.name}. {t.contact.rights}</p>
           <div className="flex items-center gap-4">
-            <Link href="/gizlilik" className="transition-colors hover:text-ink">Gizlilik</Link>
-            <Link href="/kullanim-kosullari" className="transition-colors hover:text-ink">Kullanım Koşulları</Link>
+            <Link href="/gizlilik" className="transition-colors hover:text-ink">{t.nav.privacy ?? "Gizlilik"}</Link>
+            <Link href="/kullanim-kosullari" className="transition-colors hover:text-ink">{t.nav.terms ?? "Kullanım Koşulları"}</Link>
             <span className="font-mono uppercase tracking-wider hidden md:inline" style={{ fontSize: "0.65rem" }}>
               Digital Operation Systems · {contact.location}
             </span>

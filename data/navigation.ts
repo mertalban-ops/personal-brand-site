@@ -24,7 +24,5 @@ export const footerLinks = {
     { href: "/projeler", label: "Projeler" },
     { href: "/surec", label: "Çalışma Süreci" },
     { href: "/iletisim", label: "İletişim" },
-    { href: "/gizlilik", label: "Gizlilik" },
-    { href: "/kullanim-kosullari", label: "Kullanım Koşulları" },
   ],
 };

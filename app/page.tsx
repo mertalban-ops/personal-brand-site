@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Solvaria — Dijital Operasyon Sistemleri",
+  description:
+    "Küçük ve orta ölçekli firmalar için stok, cari hesap, satış, tahsilat ve raporlama süreçlerini sade, ölçülebilir ve web tabanlı sistemlere dönüştürüyoruz.",
+};
+
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TrustStrip from "@/components/TrustStrip";

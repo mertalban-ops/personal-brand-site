@@ -3,12 +3,13 @@ import { Dictionary } from "./types";
 export const tr: Dictionary = {
   nav: {
     solutions: "Çözümler",
-    studioLink: "Stüdyo",
-    studio: "Stüdyo Yaklaşımı",
+    studio: "Stüdyo",
     services: "Sistem Çözümleri",
     cases: "Projeler",
     process: "Süreç",
     contactBtn: "Projemi Konuşalım",
+    privacy: "Gizlilik",
+    terms: "Kullanım Koşulları",
   },
   hero: {
     kicker: "Özel iş takip sistemleri · Stok ve cari hesap · Otomasyon · SaaS altyapıları",
