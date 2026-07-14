@@ -6,7 +6,10 @@ export default function FounderCard() {
     <div className="card-surface rounded-2xl p-8 md:p-10">
       <div className="grid gap-8 md:grid-cols-[auto_1fr]">
         <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-accent/30 bg-accent/10 text-3xl font-bold text-accent display shrink-0">
-          MA
+          {studio.founder.name
+            .split(" ")
+            .map((n) => n[0])
+            .join("")}
         </div>
         <div>
           <h3 className="display text-xl font-bold text-ink">

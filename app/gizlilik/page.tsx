@@ -23,7 +23,7 @@ export default function GizlilikPage() {
         <h1 className="display text-3xl font-bold text-ink mb-2">
           Gizlilik Politikası
         </h1>
-        <p className="text-xs text-faint mb-10">Yürürlük tarihi: 2025</p>
+        <p className="text-xs text-faint mb-10">Yürürlük tarihi: {new Date().getFullYear()}</p>
 
         <div className="space-y-8 text-muted leading-relaxed">
           <section>

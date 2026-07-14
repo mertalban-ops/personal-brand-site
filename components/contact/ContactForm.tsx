@@ -9,13 +9,11 @@ type FormState = {
   company: string;
   email: string;
   phone: string;
-  sector: string;
   needType: string;
   currentMethod: string;
   problem: string;
   expected: string;
   timeline: string;
-  note: string;
 };
 
 const NEED_TYPES = [
@@ -35,13 +33,11 @@ export default function ContactForm() {
     company: "",
     email: "",
     phone: "",
-    sector: "",
     needType: "",
     currentMethod: "",
     problem: "",
     expected: "",
     timeline: "",
-    note: "",
   });
   const [submitted, setSubmitted] = useState(false);
 
@@ -60,7 +56,7 @@ export default function ContactForm() {
       `Proje talebi — ${form.company || form.name}`
     );
     const body = encodeURIComponent(
-      `Ad Soyad: ${form.name}\nFirma: ${form.company}\nE-posta: ${form.email}\nTelefon: ${form.phone}\nSektör: ${form.sector}\nİhtiyaç: ${form.needType}\nMevcut yöntem: ${form.currentMethod}\nProblem: ${form.problem}\nBeklenti: ${form.expected}\nZamanlama: ${form.timeline}\nEk not: ${form.note}`
+      `Ad Soyad: ${form.name}\nFirma: ${form.company}\nE-posta: ${form.email}\nTelefon: ${form.phone}\nİhtiyaç: ${form.needType}\nMevcut yöntem: ${form.currentMethod}\nProblem: ${form.problem}\nBeklenti: ${form.expected}\nZamanlama: ${form.timeline}`
     );
     window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
     setSubmitted(true);
