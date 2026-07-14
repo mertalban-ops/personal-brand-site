@@ -16,7 +16,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const links = [
-    { href: "/cozumler", label: t.nav.solutions ?? "Çözümler" },
+    { href: "/cozumler", label: t.nav.solutions },
     { href: "/projeler", label: t.nav.cases },
     { href: "/surec", label: t.nav.process },
     { href: "/studyo", label: t.nav.studio },

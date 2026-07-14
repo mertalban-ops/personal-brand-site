@@ -4,7 +4,7 @@ export const studio = {
     tagline: "Dijital Çözüm Stüdyosu",
     description:
       "Solvaria, Mert Alban tarafından kurulan bağımsız bir dijital çözüm stüdyosudur. Küçük ve orta ölçekli işletmelerin manuel, dağınık ve zaman kaybettiren operasyon süreçlerini sade, ölçülebilir ve işletmeye özel dijital sistemlere dönüştürmeye odaklanıyoruz.",
-    founded: "İzmir, Türkiye",
+    location: "İzmir, Türkiye",
     whyBuilt:
       "Çoğu KOBİ, ya hantal ERP sistemlerine mahkum kalıyor ya da Excel ve WhatsApp arasında kaybolmuş süreçlerle çalışıyor. İkisi arasında doğru boyutta, gerçekten kullanılan sistemler kurmak için Solvaria kuruldu.",
   },

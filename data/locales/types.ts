@@ -5,7 +5,7 @@ export type Dictionary = {
     cases: string;
     process: string;
     contactBtn: string;
-    solutions?: string;
+    solutions: string;
     privacy: string;
     terms: string;
   };

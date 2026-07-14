@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import Process from "@/components/Process";
-import About from "@/components/About";
 import CtaStrip from "@/components/CtaStrip";
 import AnimatedSection from "@/components/AnimatedSection";
 import Breadcrumb from "@/components/layout/Breadcrumb";
@@ -158,9 +156,6 @@ export default function SurecPage() {
         </div>
       </AnimatedSection>
 
-      {/* Existing Process and About sections */}
-      <Process />
-      <About />
       <CtaStrip />
     </main>
   );

@@ -16,7 +16,7 @@ export default function FounderCard() {
             {studio.founder.name}
           </h3>
           <p className="text-muted text-sm mb-4">
-            {studio.founder.role} &middot; {studio.brand.founded}
+            {studio.founder.role} &middot; {studio.brand.location}
           </p>
           <ul className="space-y-2 mb-6">
             {studio.founder.focus.map((f) => (
