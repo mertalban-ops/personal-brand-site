@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
 import {
   motion,
@@ -21,7 +21,9 @@ const RobotPhoneShowcase = dynamic(
 export default function Hero() {
   const { t } = useLanguage();
   const reduce = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef    = useRef<HTMLElement>(null);
+  const robotColRef   = useRef<HTMLDivElement>(null);
+  const isHoveringRef = useRef(false);
 
   const { scrollYProgress: hp } = useScroll({
     target: sectionRef,
@@ -38,12 +40,40 @@ export default function Hero() {
   const tiltY   = useSpring(useTransform(hoverX, [-240, 240], [-5, 5]), spring);
 
   const onRobotMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    isHoveringRef.current = true;
     if (reduce) return;
     const r = e.currentTarget.getBoundingClientRect();
     hoverX.set(e.clientX - r.left  - r.width  / 2);
     hoverY.set(e.clientY - r.top   - r.height / 2);
   };
-  const onRobotMouseLeave = () => { hoverX.set(0); hoverY.set(0); };
+  const onRobotMouseLeave = () => {
+    isHoveringRef.current = false;
+    hoverX.set(0);
+    hoverY.set(0);
+  };
+
+  // Gaze simulation — make Spline robot look at phone when user is not hovering
+  useEffect(() => {
+    if (reduce) return;
+    const interval = setInterval(() => {
+      if (isHoveringRef.current) return;
+      const col = robotColRef.current;
+      if (!col) return;
+      const canvas = col.querySelector("canvas");
+      if (!canvas) return;
+      const r = canvas.getBoundingClientRect();
+      // Phone sits centered horizontally, ~58% from canvas top
+      canvas.dispatchEvent(
+        new MouseEvent("mousemove", {
+          bubbles: true,
+          cancelable: true,
+          clientX: r.left + r.width  * 0.50,
+          clientY: r.top  + r.height * 0.58,
+        })
+      );
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [reduce]);
 
   const enter = (delay: number) =>
     reduce
@@ -111,6 +141,7 @@ export default function Hero() {
 
         {/* Sağ: 3D robot + phone showcase */}
         <motion.div
+          ref={robotColRef}
           className="relative h-[340px] sm:h-[480px] lg:h-[560px]"
           onMouseMove={onRobotMouseMove}
           onMouseLeave={onRobotMouseLeave}
@@ -132,9 +163,9 @@ export default function Hero() {
 
           {/* Phone overlay — hidden on mobile, parallax tilt on desktop */}
           <motion.div
-            className="absolute bottom-6 left-1/2 z-10 hidden sm:block"
+            className="absolute bottom-8 left-1/2 z-10 hidden sm:block"
             style={{
-              x: "-38%",
+              x: "-50%",
               rotateX: reduce ? 0 : tiltX,
               rotateY: reduce ? 0 : tiltY,
               transformPerspective: 900,

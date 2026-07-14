@@ -157,9 +157,35 @@ export default function RobotPhoneShowcase() {
 
   const accent = ACCENT[currentType];
 
+  const PHONE_W = 188;
+
   return (
     <div ref={containerRef} className="relative select-none" aria-hidden="true">
-      <PhoneFrame width={188} accentColor={accent} successGlow={successGlow}>
+      {/* Screen-light glow — illuminates robot body above phone (simulates screen glow on robot) */}
+      {!reduce && (
+        <motion.div
+          animate={{
+            opacity: successGlow ? 0.5 : 0.09,
+            scaleX: successGlow ? 1.35 : 1,
+          }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          style={{
+            position: "absolute",
+            top: -56,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "88%",
+            height: 68,
+            borderRadius: "50%",
+            background: accent,
+            filter: "blur(30px)",
+            pointerEvents: "none",
+            zIndex: -1,
+          }}
+        />
+      )}
+
+      <PhoneFrame width={PHONE_W} accentColor={accent} successGlow={successGlow}>
         {/* App screen area — key forces remount on type change, resetting idx to 0 */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -234,6 +260,93 @@ export default function RobotPhoneShowcase() {
           )}
         </AnimatePresence>
       </PhoneFrame>
+
+      {/* Emotion particles — rise from phone during positive reaction */}
+      <AnimatePresence>
+        {robotState === "positive-reaction" && !reduce && (
+          <>
+            {[
+              { dx: -34, icon: "✓", delay: 0 },
+              { dx: 14,  icon: "✦", delay: 0.13 },
+              { dx: -56, icon: "✦", delay: 0.27 },
+              { dx: 38,  icon: "✓", delay: 0.07 },
+              { dx: -12, icon: "★", delay: 0.21 },
+            ].map(({ dx, icon, delay }, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 8, x: dx }}
+                animate={{ opacity: [0, 1, 0], y: -70 }}
+                exit={{}}
+                transition={{ duration: 1.4, delay, ease: "easeOut" }}
+                style={{
+                  position: "absolute",
+                  top: "22%",
+                  left: "50%",
+                  fontSize: "0.70rem",
+                  fontWeight: 700,
+                  color: accent,
+                  pointerEvents: "none",
+                  zIndex: 30,
+                  userSelect: "none",
+                }}
+              >
+                {icon}
+              </motion.span>
+            ))}
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Robotic hand — 4 fingers + palm holding phone from below */}
+      {!reduce && (
+        <div
+          style={{
+            position: "absolute",
+            bottom: -28,
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            pointerEvents: "none",
+          }}
+        >
+          <div style={{ display: "flex", gap: 5 }}>
+            {[20, 26, 26, 20].map((h, i) => (
+              <motion.div
+                key={i}
+                animate={{
+                  borderColor: successGlow ? accent : "rgba(56,189,248,0.22)",
+                  boxShadow: successGlow ? `0 0 10px ${accent}55` : "none",
+                }}
+                transition={{ duration: 0.5 }}
+                style={{
+                  width: 13,
+                  height: h,
+                  borderRadius: "3px 3px 0 0",
+                  background: "linear-gradient(to bottom, #1e4a6e, #0f2035)",
+                  border: "1px solid rgba(56,189,248,0.22)",
+                }}
+              />
+            ))}
+          </div>
+          <motion.div
+            animate={{
+              boxShadow: successGlow ? `0 2px 14px ${accent}44` : "none",
+              borderColor: successGlow ? `${accent}55` : "rgba(56,189,248,0.15)",
+            }}
+            transition={{ duration: 0.5 }}
+            style={{
+              width: 80,
+              height: 11,
+              background: "linear-gradient(to bottom, #1e4a6e, #0f2035)",
+              border: "1px solid rgba(56,189,248,0.15)",
+              borderTop: "none",
+              borderRadius: "0 0 4px 4px",
+            }}
+          />
+        </div>
+      )}
 
       {/* Ambient glow beneath phone */}
       {!reduce && (
