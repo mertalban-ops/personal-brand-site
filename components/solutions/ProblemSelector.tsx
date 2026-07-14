@@ -42,7 +42,7 @@ export default function ProblemSelector({ solutions }: { solutions: Solution[] }
       </div>
       {highlighted.length > 0 && (
         <div
-          className={`card-surface rounded-xl p-5 border-accent/30 ${
+          className={`card-surface rounded-xl p-5 border border-accent/30 ${
             reduce ? "" : "animate-[fadeIn_0.3s_ease]"
           }`}
         >

@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const solution = getSolutionBySlug(slug);
-  if (!solution) return {};
+  if (!solution) notFound();
   return {
     title: `${solution.title} — Solvaria`,
     description: solution.tagline,
