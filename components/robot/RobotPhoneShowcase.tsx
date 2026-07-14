@@ -6,6 +6,31 @@ import dynamic from "next/dynamic";
 import PhoneFrame from "./PhoneFrame";
 import { useActiveProject, type RobotProjectType } from "@/context/ActiveProjectContext";
 
+function useIsVisible(ref: React.RefObject<HTMLElement | null>) {
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [ref]);
+  return visible;
+}
+
+function usePageVisible() {
+  const [pageVisible, setPageVisible] = useState(true);
+  useEffect(() => {
+    const handler = () => setPageVisible(document.visibilityState === "visible");
+    document.addEventListener("visibilitychange", handler);
+    return () => document.removeEventListener("visibilitychange", handler);
+  }, []);
+  return pageVisible;
+}
+
 const ProjectDemoVideo = dynamic(() => import("@/components/ProjectDemoVideo"), {
   ssr: false,
   loading: () => <div style={{ width: "100%", height: "100%", background: "#040c14" }} />,
@@ -51,6 +76,11 @@ export default function RobotPhoneShowcase() {
   const reduce = useReducedMotion();
   const { activeType } = useActiveProject();
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isVisible    = useIsVisible(containerRef);
+  const pageVisible  = usePageVisible();
+  const active       = isVisible && pageVisible;
+
   const [currentType, setCurrentType] = useState<RobotProjectType>("stockapp");
   const [robotState, setRobotState]   = useState<RobotState>("checking-phone");
   const [successGlow, setSuccessGlow] = useState(false);
@@ -65,10 +95,10 @@ export default function RobotPhoneShowcase() {
     if (cycleTimerRef.current)   clearTimeout(cycleTimerRef.current);
   }, []);
 
-  // Start the per-project timer sequence
+  // Start the per-project timer sequence — only when visible and tab is active
   const startProjectCycle = useCallback(
     (type: RobotProjectType) => {
-      if (reduce) return;
+      if (reduce || !active) return;
       clearTimers();
 
       // Show success glow when success screen appears
@@ -96,7 +126,7 @@ export default function RobotPhoneShowcase() {
         }, 600);
       }, CYCLE_MS);
     },
-    [reduce, activeType, clearTimers],
+    [reduce, active, activeType, clearTimers],
   );
 
   // External override from project card hover
@@ -128,7 +158,7 @@ export default function RobotPhoneShowcase() {
   const accent = ACCENT[currentType];
 
   return (
-    <div className="relative select-none" aria-hidden="true">
+    <div ref={containerRef} className="relative select-none" aria-hidden="true">
       <PhoneFrame width={188} accentColor={accent} successGlow={successGlow}>
         {/* App screen area — key forces remount on type change, resetting idx to 0 */}
         <AnimatePresence mode="wait">
