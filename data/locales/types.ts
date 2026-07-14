@@ -6,8 +6,8 @@ export type Dictionary = {
     process: string;
     contactBtn: string;
     solutions?: string;
-    privacy?: string;
-    terms?: string;
+    privacy: string;
+    terms: string;
   };
   hero: {
     kicker: string;
