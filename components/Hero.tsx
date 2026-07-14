@@ -7,6 +7,8 @@ import {
   useScroll,
   useTransform,
   useReducedMotion,
+  useMotionValue,
+  useSpring,
 } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { SplineScene } from "@/components/ui/splite";
@@ -27,6 +29,21 @@ export default function Hero() {
   });
   const textY = useTransform(hp, [0, 1], [0, -90]);
   const textOpacity = useTransform(hp, [0, 0.85], [1, 0.25]);
+
+  // Mouse parallax for phone overlay
+  const hoverX = useMotionValue(0);
+  const hoverY = useMotionValue(0);
+  const spring  = { stiffness: 90, damping: 22 };
+  const tiltX   = useSpring(useTransform(hoverY, [-240, 240], [5, -5]),  spring);
+  const tiltY   = useSpring(useTransform(hoverX, [-240, 240], [-5, 5]), spring);
+
+  const onRobotMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (reduce) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    hoverX.set(e.clientX - r.left  - r.width  / 2);
+    hoverY.set(e.clientY - r.top   - r.height / 2);
+  };
+  const onRobotMouseLeave = () => { hoverX.set(0); hoverY.set(0); };
 
   const enter = (delay: number) =>
     reduce
@@ -95,6 +112,8 @@ export default function Hero() {
         {/* Sağ: 3D robot + phone showcase */}
         <motion.div
           className="relative h-[340px] sm:h-[480px] lg:h-[560px]"
+          onMouseMove={onRobotMouseMove}
+          onMouseLeave={onRobotMouseLeave}
           {...enter(0.3)}
         >
           <SplineScene
@@ -102,10 +121,24 @@ export default function Hero() {
             className="h-full w-full"
           />
 
-          {/* Phone overlay — appears after Spline loads; hidden on mobile to preserve layout */}
+          {/* Subtle Solvaria color grading — blends canvas tones toward brand palette */}
+          <div
+            className="pointer-events-none absolute inset-0 z-[1]"
+            style={{
+              background:
+                "linear-gradient(145deg, rgba(16,185,129,0.05) 0%, transparent 45%, rgba(56,189,248,0.04) 100%)",
+            }}
+          />
+
+          {/* Phone overlay — hidden on mobile, parallax tilt on desktop */}
           <motion.div
             className="absolute bottom-6 left-1/2 z-10 hidden sm:block"
-            style={{ x: "-38%" }}
+            style={{
+              x: "-38%",
+              rotateX: reduce ? 0 : tiltX,
+              rotateY: reduce ? 0 : tiltY,
+              transformPerspective: 900,
+            }}
             {...enter(0.9)}
           >
             <RobotPhoneShowcase />
