@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import dynamic from "next/dynamic";
 import {
   motion,
   useScroll,
@@ -12,11 +11,6 @@ import {
 } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { SplineScene } from "@/components/ui/splite";
-
-const RobotPhoneShowcase = dynamic(
-  () => import("@/components/robot/RobotPhoneShowcase"),
-  { ssr: false }
-);
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -161,18 +155,6 @@ export default function Hero() {
             }}
           />
 
-          {/* Phone overlay — bottom-left corner so robot stays visible above */}
-          <motion.div
-            className="absolute bottom-6 left-5 z-10 hidden sm:block"
-            style={{
-              rotateX: reduce ? 0 : tiltX,
-              rotateY: reduce ? 0 : tiltY,
-              transformPerspective: 900,
-            }}
-            {...enter(0.9)}
-          >
-            <RobotPhoneShowcase width={115} />
-          </motion.div>
         </motion.div>
       </div>
     </section>
