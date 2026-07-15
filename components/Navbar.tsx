@@ -113,7 +113,7 @@ export default function Navbar() {
             SOLVARIA
           </span>
           <span className="mono-label hidden text-faint sm:inline" style={{ color: "var(--faint)" }}>
-            digital operation systems
+            dijital çözümler & sistemler
           </span>
         </Link>
 

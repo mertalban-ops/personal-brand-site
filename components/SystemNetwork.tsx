@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Package, Wallet, ShoppingCart, TrendingUp, BarChart3, Zap } from "lucide-react";
+import { Globe, LayoutDashboard, Workflow, Layers, BarChart3, Zap } from "lucide-react";
 
 const tok = {
   ink: "#eef2f6",
@@ -15,11 +15,11 @@ const tok = {
 };
 
 const NODES = [
-  { id: "stok",   label: "Stok Takip",   Icon: Package,      cx: 50, cy: 11, color: tok.accent, dur: "1.8s", floatDur: 2.8 },
-  { id: "cari",   label: "Cari Hesap",   Icon: Wallet,       cx: 84, cy: 37, color: tok.blue,   dur: "2.3s", floatDur: 3.1 },
-  { id: "satis",  label: "Satış",        Icon: ShoppingCart, cx: 72, cy: 79, color: tok.amber,  dur: "1.6s", floatDur: 2.5 },
-  { id: "tahsil", label: "Tahsilat",     Icon: TrendingUp,   cx: 28, cy: 79, color: tok.accent, dur: "2.0s", floatDur: 3.0 },
-  { id: "rapor",  label: "Raporlama",    Icon: BarChart3,    cx: 16, cy: 37, color: tok.blue,   dur: "1.5s", floatDur: 2.6 },
+  { id: "website",  label: "Web Siteleri",    Icon: Globe,           cx: 50, cy: 11, color: tok.accent, dur: "1.8s", floatDur: 2.8 },
+  { id: "webapp",   label: "Web Uygulaması",  Icon: LayoutDashboard, cx: 84, cy: 37, color: tok.blue,   dur: "2.3s", floatDur: 3.1 },
+  { id: "saas",     label: "SaaS Ürünleri",   Icon: Layers,          cx: 72, cy: 79, color: tok.amber,  dur: "1.6s", floatDur: 2.5 },
+  { id: "otomasyon",label: "Otomasyon",        Icon: Workflow,        cx: 28, cy: 79, color: tok.accent, dur: "2.0s", floatDur: 3.0 },
+  { id: "rapor",    label: "Raporlama",        Icon: BarChart3,       cx: 16, cy: 37, color: tok.blue,   dur: "1.5s", floatDur: 2.6 },
 ];
 const CORE = { cx: 50, cy: 46 };
 
@@ -87,7 +87,7 @@ export default function SystemNetwork() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Dijital Operasyon · Bağlı Sistem Mimarisi
+          Dijital Çözümler · Entegre Sistem Mimarisi
         </motion.p>
         <motion.h2
           className="display text-center text-3xl font-bold text-ink md:text-4xl mb-10"
@@ -96,8 +96,8 @@ export default function SystemNetwork() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.07 }}
         >
-          Tüm modüller{" "}
-          <span style={{ color: tok.accent }}>birbirine bağlı.</span>
+          Web sitesinden iş takip sistemine,{" "}
+          <span style={{ color: tok.accent }}>tek çatı altında.</span>
         </motion.h2>
 
         {/* 3D tilt wrapper */}
@@ -229,10 +229,10 @@ export default function SystemNetwork() {
                         textTransform: "uppercase",
                       }}
                     >
-                      Operasyon Merkezi
+                      Dijital Çözüm
                     </p>
                     <p style={{ color: tok.faint, fontSize: "0.52rem", marginTop: 2 }}>
-                      SOLVARIA CORE
+                      SOLVARIA
                     </p>
                   </div>
                 </motion.div>

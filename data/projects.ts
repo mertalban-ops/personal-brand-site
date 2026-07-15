@@ -13,7 +13,7 @@ export type Project = {
   benefit: string;
   tech: string[];
   features: string[];
-  previewType: "stockapp" | "carpass" | "auto-service" | "business-dashboard";
+  previewType: "stockapp" | "carpass" | "auto-service" | "business-dashboard" | "personal-brand";
   slug: string;
   caseSummary: string;
   targetUser: string;
@@ -278,6 +278,70 @@ export const projects: Project[] = [
       "Beyaz etiket (white-label) tema desteği",
       "Kullanım bazlı fiyatlandırma (usage-based billing)",
       "Self-servis onboarding akışı",
+    ],
+  },
+  {
+    name: "Solvaria Personal Brand Site",
+    tagline: "Kişisel marka ve stüdyo konumlandırması için çok sayfalı web sitesi",
+    status: "Active",
+    problem:
+      "Mert Alban'ın geliştirdiği projeleri ve sunduğu hizmetleri net anlatan, müşteriyi ikna eden ve iletişime yönlendiren bir web varlığı yoktu.",
+    solution:
+      "Hizmet kategorileri, proje vaka çalışmaları, çalışma süreci ve iletişim akışını ayrı sayfalarda toplayan; 3D Spline robot ve Framer Motion animasyonlarıyla güçlendirilmiş çok sayfalı kişisel marka sitesi.",
+    approach: "Bilgi mimarisi müşteri karar yolculuğuna göre tasarlandı. Her sayfa tek bir amaca hizmet edecek şekilde ayrıştırıldı; ana sayfa özet ve yönlendirme merkezi olarak konumlandırıldı.",
+    benefit: "Ziyaretçi siteye girdiğinde kim olduğunu, hangi problemleri çözdüğünü ve nasıl çalışıldığını ilk birkaç saniyede anlayabiliyor.",
+    tech: ["Next.js 16", "TypeScript", "Tailwind CSS 4", "Framer Motion", "Spline 3D"],
+    features: [
+      "Çok sayfalı bilgi mimarisi ve navigasyon sistemi",
+      "Spline 3D robot ile interaktif hero deneyimi",
+      "Framer Motion scroll reveal ve parallax animasyonlar",
+      "Proje vaka çalışmaları (problem → çözüm → fayda yapısı)",
+      "Çözüm kategorileri ve hizmet sayfaları",
+      "TR / EN / DE çok dilli içerik desteği",
+      "Responsive tasarım ve mobil menü",
+      "SEO metadata, sitemap ve robots.txt",
+    ],
+    previewType: "personal-brand",
+    slug: "personal-brand-site",
+    caseSummary:
+      "Mert Alban'ın geliştirdiği dijital çözümleri ve sunduğu hizmetleri profesyonel biçimde anlatan, müşteriyi doğru hizmete yönlendiren kişisel marka ve stüdyo sitesi.",
+    targetUser: "Özel iş takip sistemi, web uygulaması, web sitesi veya SaaS ürünü yaptırmayı düşünen KOBİ sahipleri ve girişimciler",
+    caseModules: [
+      {
+        name: "Bilgi Mimarisi",
+        features: ["Müşteri yolculuğuna göre sayfa yapısı", "Çözüm kategorileri", "Proje vaka çalışmaları"],
+      },
+      {
+        name: "3D ve Animasyon",
+        features: ["Spline robot hero", "Scroll reveal animasyonlar", "Parallax efektleri"],
+      },
+      {
+        name: "İçerik Sistemi",
+        features: ["Locale tabanlı çok dilli içerik", "Data-driven proje sayfaları", "Çözüm detay sayfaları"],
+      },
+      {
+        name: "Teknik Altyapı",
+        features: ["Next.js App Router", "Tailwind CSS 4 design tokens", "Framer Motion animasyon sistemi"],
+      },
+    ],
+    userJourney: [
+      "Ziyaretçi Hero'da kim olduğumu ve ne yaptığımı görür",
+      "Problem/çözüm bölümünde kendi sorununu tanır",
+      "Çözümler sayfasında ilgili hizmet kategorisini inceler",
+      "Projeler bölümünde gerçek örnekleri vaka çalışması olarak okur",
+      "Süreç sayfasında nasıl çalışıldığını anlar",
+      "İletişim sayfasından proje görüşmesi başlatır",
+    ],
+    outcomes: [
+      "Hizmetlerin net ve ayrışık biçimde sunulması",
+      "Proje kanıtlarının vaka çalışması formatında sunulması",
+      "Müşterinin doğru hizmet kategorisini bulabilmesi",
+      "İletişim ve teklif taleplerinin artması",
+    ],
+    futureWork: [
+      "Blog ve içerik alanı",
+      "İletişim formu backend entegrasyonu",
+      "Hizmet bazlı landing page'ler",
     ],
   },
 ];

@@ -129,7 +129,7 @@ export default function Hero() {
             </a>
           </motion.div>
           <motion.p className="mt-6 text-xs text-faint" {...enter(0.6)}>
-            İşletmeye özel sistemler · Mobil uyumlu paneller · Ölçülebilir süreçler · Geliştirilebilir altyapı
+            Web siteleri · İş takip sistemleri · Web uygulamaları · SaaS ürünleri · Otomasyon
           </motion.p>
         </motion.div>
 

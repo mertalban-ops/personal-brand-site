@@ -12,12 +12,12 @@ export const tr: Dictionary = {
     terms: "Kullanım Koşulları",
   },
   hero: {
-    kicker: "Özel iş takip sistemleri · Stok ve cari hesap · Otomasyon · SaaS altyapıları",
-    title1: "İşletmenizin dağınık süreçlerini ",
-    titleHighlight: "dijital operasyon sistemlerine",
-    title2: " dönüştürüyoruz.",
+    kicker: "Web siteleri · İş takip sistemleri · Web uygulamaları · SaaS ürünleri · Otomasyon",
+    title1: "İşletmeniz için ",
+    titleHighlight: "çalışan dijital sistemler",
+    title2: " ve güven veren web deneyimleri geliştiriyoruz.",
     subtitle:
-      "Küçük ve orta ölçekli firmalar için stok, cari hesap, satış, tahsilat, müşteri takibi ve raporlama süreçlerini sade, ölçülebilir ve web tabanlı sistemlere dönüştürüyoruz.",
+      "İş takip sistemlerinden kurumsal web sitelerine, stok ve cari hesap çözümlerinden SaaS ürünlerine kadar işletmenize özel dijital yapılar tasarlıyoruz.",
     primaryBtn: "Projemi Konuşalım",
     secondaryBtn: "Proje Vitrinini Gör",
     cards: {
@@ -91,31 +91,23 @@ export const tr: Dictionary = {
   },
   problems: {
     label: "03 — Problem & Çözüm",
-    title: "Defter, Excel ve WhatsApp arasında dağılan işleri tek sisteme topluyoruz.",
+    title: "İşletmenizin dijital sorunlarına özel çözümler üretiyoruz.",
     items: [
       {
-        problem: "Stok karışıyor, ne kadar ürün kaldığı bilinmiyor",
-        solution: "Canlı ve uyarılı stok takip ekranı",
+        problem: "Web siteniz var ama iş getirmiyor; ziyaretçiler iletişime geçmiyor",
+        solution: "Dönüşüm odaklı, güven veren kurumsal web sitesi",
       },
       {
-        problem: "Borçlar belirsiz, tahsilatlar unutuluyor",
-        solution: "Müşteri bazlı cari hesap ve bakiye takibi",
+        problem: "Stok karışıyor, tahsilatlar ve borçlar takip edilemiyor",
+        solution: "Canlı stok, cari hesap ve tahsilat yönetim sistemi",
       },
       {
-        problem: "Raporlar ve hesap ekstreleri manuel hazırlanıyor",
-        solution: "Tek tıkla otomatik PDF rapor akışı",
+        problem: "İşler kişilerin hafızasında ilerliyor, süreç görünmüyor",
+        solution: "Merkezi ve standart dijital iş takip sistemi",
       },
       {
-        problem: "İşler şirket hafızasında değil, kişilerin hafızasında ilerliyor",
-        solution: "Merkezi ve standart dijital işleyiş süreci",
-      },
-      {
-        problem: "Klasik Excel tabloları operasyon hızına yetişemiyor",
-        solution: "İşletmeye özel, hızlı ve güvenli web uygulaması",
-      },
-      {
-        problem: "Birden fazla lokasyon ve personel takibi zorlaşıyor",
-        solution: "Rol bazlı erişim ve bulut tabanlı yönetim paneli",
+        problem: "Hazır yazılımlar işletmenizin özel ihtiyaçlarına uymuyor",
+        solution: "İşletmenize özel, sıfırdan tasarlanmış web uygulaması",
       },
     ],
   },
@@ -143,6 +135,7 @@ export const tr: Dictionary = {
           "Kritik stok seviye ve ödeme gecikme uyarıları",
         ],
         previewType: "stockapp",
+        slug: "stockapp",
       },
       {
         name: "Hezer Auto Service",
@@ -161,6 +154,7 @@ export const tr: Dictionary = {
           "Uçtan uca (E2E) test edilen güvenli altyapı",
         ],
         previewType: "auto-service",
+        slug: "hezer-auto-service",
       },
       {
         name: "CARPASS",
@@ -179,6 +173,7 @@ export const tr: Dictionary = {
           "n8n ile kurulan tam otomatik arka plan iş akışları",
         ],
         previewType: "carpass",
+        slug: "carpass",
       },
       {
         name: "İşletmeye Özel SaaS Altyapısı",
@@ -197,6 +192,7 @@ export const tr: Dictionary = {
           "Her işletme (tenant) için izole edilmiş güvenli veri",
         ],
         previewType: "business-dashboard",
+        slug: "saas-operasyon-altyapisi",
       },
     ],
   },
@@ -303,8 +299,8 @@ export const tr: Dictionary = {
         a: "Kesinlikle. İşleyen bir sistemin her zaman bakıma ve gelişime ihtiyacı vardır. Teslim sonrası aylık bakım anlaşmalarıyla sistemin güvenliğini sağlıyor ve yeni eklenti taleplerinizi karşılıyoruz.",
       },
       {
-        q: "Sadece web sitesi mi yapıyorsunuz, yoksa iş takip sistemi de kuruyor musunuz?",
-        a: "Biz kurumsal web siteleri yapmıyoruz. Uzmanlığımız tamamen işletmelerin arka plandaki yönetim ve operasyon panellerini (İş takip, stok, cari hesap, B2B portallar, SaaS altyapıları) kurmaktır.",
+        q: "Web sitesi mi, web uygulaması mı ihtiyacım var?",
+        a: "Web sitesi markanızı tanıtır, güven oluşturur ve müşteri iletişimini artırır. Web uygulaması ise kullanıcıların giriş yaptığı, veri eklediği ve süreç yönettiği çalışan bir sistemdir. Her ikisini de geliştiriyoruz — hangisinin size uygun olduğunu kısa bir görüşmeyle belirleyebiliriz.",
       },
     ],
   },
@@ -316,7 +312,7 @@ export const tr: Dictionary = {
     emailBtn: "E-posta Gönder",
     whatsappBtn: "WhatsApp'tan Yaz",
     footerText:
-      "Defter, Excel ve WhatsApp arasında dağılan iş süreçlerini tek bir merkezde toplayan, kuruma özel premium dijital operasyon sistemleri ve SaaS altyapıları geliştiriyoruz.",
+      "İşletmeler için kurumsal web siteleri, özel iş takip sistemleri, web uygulamaları, SaaS ürünleri ve otomasyon çözümleri geliştiriyoruz.",
     rights: "Tüm hakları saklıdır.",
     servicesCol: "Sistem Çözümleri",
     studioCol: "Stüdyo",

@@ -26,13 +26,13 @@ import SceneBackground from "@/components/SceneBackground";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Solvaria — İş Takip Sistemleri ve Dijital Operasyon Çözümleri",
+  title: "Solvaria — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
   description:
-    "Küçük ve orta ölçekli firmalar için stok, cari hesap, satış, tahsilat, raporlama ve otomasyon odaklı web tabanlı iş takip sistemleri geliştiriyoruz.",
+    "Mert Alban / Solvaria: KOBİ'ler için kurumsal web siteleri, özel iş takip sistemleri, web uygulamaları, SaaS ürünleri ve otomasyon çözümleri.",
   openGraph: {
-    title: "Solvaria — İş Takip Sistemleri ve Dijital Operasyon Çözümleri",
+    title: "Solvaria — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
     description:
-      "Dağınık iş süreçlerini sade, ölçülebilir ve dijital sistemlere dönüştürüyoruz. Stok, cari hesap, satış, tahsilat ve raporlama için firmalara özel çözümler.",
+      "Kurumsal web sitelerinden iş takip sistemlerine, web uygulamalarından SaaS altyapısına kadar işletmenize özel dijital çözümler geliştiriyoruz.",
     locale: "tr_TR",
     type: "website",
   },

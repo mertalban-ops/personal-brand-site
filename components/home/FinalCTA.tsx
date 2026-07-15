@@ -23,12 +23,12 @@ export default function FinalCTA() {
       >
         <p className="mono-label mb-4">Hazır mısınız?</p>
         <h2 className="display text-balance text-4xl font-bold text-ink md:text-5xl">
-          Dağınık operasyonunuzu birlikte{" "}
-          <span className="text-accent">yönetilebilir hale getirelim.</span>
+          Web siteniz, sisteminiz veya uygulamanız —{" "}
+          <span className="text-accent">birlikte inşa edelim.</span>
         </h2>
         <p className="mt-6 text-lg leading-relaxed text-muted max-w-xl mx-auto">
-          İhtiyacınızı kısa bir ön görüşmede değerlendirelim; hangi sistemin gerçekten
-          gerekli olduğunu birlikte netleştirelim.
+          İhtiyacınızı kısa bir ön görüşmede değerlendirelim; hangi çözümün gerçekten
+          gerekli olduğunu birlikte netleştirelim. İlk görüşme ücretsiz.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link

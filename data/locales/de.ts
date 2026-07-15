@@ -143,6 +143,7 @@ export const de: Dictionary = {
           "Kritische Lagerbestands- und Zahlungsverzugsalarme",
         ],
         previewType: "stockapp",
+        slug: "stockapp",
       },
       {
         name: "Hezer Auto Service",
@@ -161,6 +162,7 @@ export const de: Dictionary = {
           "Sichere Infrastruktur mit End-to-End-Tests (E2E)",
         ],
         previewType: "auto-service",
+        slug: "hezer-auto-service",
       },
       {
         name: "CARPASS",
@@ -179,6 +181,7 @@ export const de: Dictionary = {
           "Vollautomatische Hintergrund-Workflows, erstellt mit n8n",
         ],
         previewType: "carpass",
+        slug: "carpass",
       },
       {
         name: "Custom Enterprise SaaS Infra",
@@ -197,6 +200,7 @@ export const de: Dictionary = {
           "Sichere, isolierte Daten für jedes Unternehmen (Mandant)",
         ],
         previewType: "business-dashboard",
+        slug: "saas-operasyon-altyapisi",
       },
     ],
   },

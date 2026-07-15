@@ -2,6 +2,7 @@
 
 import { Suspense, lazy } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import AnimatedSection from "./AnimatedSection";
 import FloatingCard from "./FloatingCard";
 import Reveal3D from "./Reveal3D";
@@ -118,16 +119,24 @@ export default function Projects() {
                   </div>
                 </dl>
 
-                <div className="border-t border-line pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="border-t border-line pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <p className="text-sm font-medium text-ink">
                     {p.benefit}
                   </p>
-                  <a
-                    href="/iletisim"
-                    className="shrink-0 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent opacity-80 transition-opacity hover:opacity-100"
-                  >
-                    Benzerini İstiyorum <span className="transition-transform group-hover:translate-x-1">→</span>
-                  </a>
+                  <div className="flex items-center gap-4 shrink-0">
+                    <Link
+                      href={`/projeler/${p.slug}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-muted transition-colors hover:text-ink"
+                    >
+                      Vaka Çalışması <span>→</span>
+                    </Link>
+                    <a
+                      href="/iletisim"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-accent opacity-80 transition-opacity hover:opacity-100"
+                    >
+                      Benzerini İstiyorum
+                    </a>
+                  </div>
                 </div>
 
                 <ProjectDemoVideo type={p.previewType as "stockapp" | "auto-service" | "carpass" | "business-dashboard"} />

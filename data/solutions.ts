@@ -4,7 +4,7 @@ export type SolutionModule = {
 };
 
 export type Solution = {
-  slug: "is-takip-sistemleri" | "stok-cari-tahsilat" | "operasyon-otomasyonlari" | "saas-urun-altyapisi";
+  slug: "is-takip-sistemleri" | "stok-cari-tahsilat" | "operasyon-otomasyonlari" | "saas-urun-altyapisi" | "web-siteleri" | "web-uygulamalari";
   title: string;
   tagline: string;
   problemStatement: string;
@@ -140,6 +140,69 @@ export const solutions: Solution[] = [
     ],
     relatedProjectSlug: "saas-operasyon-altyapisi",
     cta: "SaaS Ürünü Konuşalım",
+  },
+  {
+    slug: "web-siteleri",
+    title: "Kurumsal Web Siteleri",
+    tagline: "Markanızı profesyonel, güvenilir ve ikna edici gösteren web siteleri",
+    problemStatement: "Mevcut site eski veya amatör görünüyor, hizmetler net anlaşılmıyor, ziyaretçiler iletişime geçmiyor.",
+    forWhom: [
+      "Profesyonel bir dijital varlık oluşturmak isteyen KOBİ'ler",
+      "Kişisel marka veya portfolyo sitesi arayan uzmanlar",
+      "SaaS ürünü için tanıtım sayfası ihtiyacı olan girişimler",
+      "Mevcut sitesini yenilemek isteyen işletmeler",
+    ],
+    commonProblems: [
+      "Site eski veya amatör görünüyor, güven vermiyor",
+      "Hizmetler ve ürünler net anlaşılmıyor",
+      "Mobil deneyim zayıf, kullanışsız",
+      "Ziyaretçiler iletişime geçmiyor, dönüşüm yok",
+      "Sayfa yavaş açılıyor, SEO temeli zayıf",
+    ],
+    modules: [
+      { title: "Tasarım ve Geliştirme", items: ["Profesyonel görsel tasarım", "Çok sayfalı yapı", "Özel animasyon ve geçişler"] },
+      { title: "Mobil ve Performans", items: ["Responsive tasarım", "Hız optimizasyonu", "Core Web Vitals"] },
+      { title: "İçerik ve SEO", items: ["Net sayfa akışı", "SEO temeli", "Structured data"] },
+      { title: "İletişim ve CTA", items: ["İletişim formu", "Teklif akışı", "WhatsApp entegrasyonu"] },
+    ],
+    outcomes: [
+      "Ziyaretçinin markayı güvenilir bulması",
+      "Hizmetlerin ve teklifin net anlaşılması",
+      "İletişim ve teklif taleplerinin artması",
+    ],
+    relatedProjectSlug: "personal-brand-site",
+    cta: "Web Sitesi Konuşalım",
+  },
+  {
+    slug: "web-uygulamalari",
+    title: "İşletmeye Özel Web Uygulamaları",
+    tagline: "Kullanıcıların giriş yaptığı, veri yönettiği ve süreç izlediği web sistemleri",
+    problemStatement: "Hazır yazılımlar işletmenizin özel süreçlerine uymuyor; Excel ve WhatsApp ile yönetim artık yetmiyor.",
+    forWhom: [
+      "Ekibinin günlük kullandığı özel bir panel isteyen işletmeler",
+      "Müşteri veya bayi portalı kurmak isteyenler",
+      "B2B operasyon yönetim sistemi ihtiyacı olanlar",
+      "Mevcut süreçlerini web tabanlı yapıya taşımak isteyenler",
+    ],
+    commonProblems: [
+      "Hazır yazılımlar işletmenin terminolojisine ve iş akışına uymuyor",
+      "Excel ve WhatsApp ile süreç yönetimi hataları artırıyor",
+      "Rol bazlı erişim ve yetkilendirme yok",
+      "Anlık raporlama ve dashboard ihtiyacı karşılanamıyor",
+    ],
+    modules: [
+      { title: "Kullanıcı Yönetimi", items: ["Giriş ve kimlik doğrulama", "Rol bazlı erişim", "Ekip yönetimi"] },
+      { title: "Veri ve İş Akışı", items: ["Özel form ve ekranlar", "Durum takibi", "İş emri yönetimi"] },
+      { title: "Raporlama", items: ["Dashboard ve analitik", "PDF raporlar", "Veri dışa aktarma"] },
+      { title: "Entegrasyon", items: ["API bağlantıları", "n8n otomasyon", "Bildirim sistemi"] },
+    ],
+    outcomes: [
+      "İşlerin kişilere değil sisteme bağlı olması",
+      "Anlık veri görünürlüğü ve raporlama",
+      "Ekibin benimsediği kullanışlı arayüz",
+    ],
+    relatedProjectSlug: "stockapp",
+    cta: "Web Uygulaması Konuşalım",
   },
 ];
 

@@ -61,6 +61,7 @@ export type Dictionary = {
       tech: string[];
       features: string[];
       previewType: "stockapp" | "carpass" | "auto-service" | "business-dashboard";
+      slug: string;
     }[];
   };
   process: {

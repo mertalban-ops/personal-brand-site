@@ -36,8 +36,8 @@ export const faqs: FAQ[] = [
     category: "genel",
   },
   {
-    q: "Sadece web sitesi mi yapıyorsunuz?",
-    a: "Hayır. Kurumsal web siteleri yapmıyoruz. Uzmanlığımız tamamen işletmelerin arka plandaki yönetim ve operasyon panellerini (iş takip, stok, cari hesap, B2B portallar, SaaS altyapıları) kurmaktır.",
+    q: "Web sitesi mi, web uygulaması mı ihtiyacım var?",
+    a: "Web sitesi, markanızı ve hizmetlerinizi tanıtır; müşterilerinizin güvenini kazanır. Web uygulaması ise kullanıcıların giriş yaptığı, veri girdiği, işlem yaptığı ve rapor aldığı çalışan sistemdir. Her ikisini de geliştiriyoruz — hangisinin size uyduğunu kısa bir görüşmeyle netleştirebiliriz.",
     category: "genel",
   },
   {
@@ -49,7 +49,7 @@ export const faqs: FAQ[] = [
 
 export function getHomepageFAQs(): FAQ[] {
   return faqs.filter((f) =>
-    ["Hazır paket", "mobilde", "Süreç nasıl", "Fiyat nasıl"].some((keyword) =>
+    ["Web sitesi mi", "Hazır paket", "mobilde", "Fiyat nasıl"].some((keyword) =>
       f.q.includes(keyword)
     )
   );

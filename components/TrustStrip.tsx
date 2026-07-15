@@ -1,20 +1,19 @@
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
-import { Settings, Smartphone, BarChart3, Layers, LayoutTemplate } from "lucide-react";
+import { Settings, Smartphone, Globe, Layers, LayoutTemplate } from "lucide-react";
 import { useReducedMotion, motion } from "framer-motion";
 
 export default function TrustStrip() {
   const { t } = useLanguage();
   const reduce = useReducedMotion();
 
-  // Sabit güven şeridi maddeleri
   const items = [
-    { text: "İşletmeye Özel Sistem", icon: Settings },
-    { text: "Mobil Uyumlu Panel", icon: Smartphone },
-    { text: "Raporlanabilir Süreçler", icon: BarChart3 },
+    { text: "İşletmeye Özel Geliştirme", icon: Settings },
+    { text: "Mobil Uyumlu Tasarım", icon: Smartphone },
+    { text: "Web Sitesi & Web Uygulaması", icon: Globe },
     { text: "Geliştirilebilir Altyapı", icon: Layers },
-    { text: "Sade Arayüz", icon: LayoutTemplate },
+    { text: "Sade ve İkna Edici Arayüz", icon: LayoutTemplate },
   ];
 
   return (

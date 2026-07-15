@@ -3,22 +3,22 @@ export const studio = {
     name: "Solvaria",
     tagline: "Dijital Çözüm Stüdyosu",
     description:
-      "Solvaria, Mert Alban tarafından kurulan bağımsız bir dijital çözüm stüdyosudur. Küçük ve orta ölçekli işletmelerin manuel, dağınık ve zaman kaybettiren operasyon süreçlerini sade, ölçülebilir ve işletmeye özel dijital sistemlere dönüştürmeye odaklanıyoruz.",
+      "Solvaria, Mert Alban tarafından kurulan bağımsız bir dijital çözüm stüdyosudur. Küçük ve orta ölçekli işletmeler için kurumsal web siteleri, iş takip sistemleri, web uygulamaları ve SaaS ürün altyapıları geliştiriyoruz.",
     location: "İzmir, Türkiye",
     whyBuilt:
-      "Çoğu KOBİ, ya hantal ERP sistemlerine mahkum kalıyor ya da Excel ve WhatsApp arasında kaybolmuş süreçlerle çalışıyor. İkisi arasında doğru boyutta, gerçekten kullanılan sistemler kurmak için Solvaria kuruldu.",
+      "Çoğu KOBİ ya hantal ERP sistemlerine mahkum kalıyor ya da Excel ve WhatsApp arasında kaybolmuş süreçlerle çalışıyor. Bir kısmının güçlü bir web varlığı dahi yok. Doğru boyutta, gerçekten kullanılan sistemler ve müşteri kazandıran web siteleri kurmak için Solvaria kuruldu.",
   },
   founder: {
     name: "Mert Alban",
     role: "Kurucu",
     focus: [
-      "İşletme süreçleri analizi ve darboğaz tespiti",
-      "Web tabanlı operasyon paneli geliştirme",
+      "Kurumsal web siteleri ve kişisel marka siteleri tasarlama",
+      "İşletmeye özel web uygulamaları ve operasyon panelleri",
       "Stok, cari hesap ve tahsilat sistemleri",
       "SaaS ürün mimarisi tasarımı",
       "n8n ile iş akışı otomasyonları",
     ],
-    note: "Müşterilerle birebir çalışıyor; her projenin analiz, tasarım ve geliştirme sürecine doğrudan dahil oluyorum.",
+    note: "Müşterilerle birebir çalışıyorum; analiz, tasarım ve geliştirme sürecinin her aşamasında doğrudan dahil oluyorum.",
   },
   principles: [
     {

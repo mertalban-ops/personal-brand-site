@@ -25,12 +25,13 @@ export default function CozumlerPage() {
         <div className="mx-auto max-w-6xl px-5">
           <p className="mono-label mb-4">Çözümler</p>
           <h1 className="display text-4xl font-bold text-ink md:text-5xl text-balance max-w-3xl">
-            İşletmenizin ihtiyacına göre{" "}
-            <span className="text-accent">özel sistem çözümleri</span>
+            Web sitesinden iş takip sistemine,{" "}
+            <span className="text-accent">işletmenize özel çözümler</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-            Hazır yazılımlara uyum sağlamanızı istemiyoruz. İşletmenizin gerçek çalışma
-            biçimine uyum sağlayan sistemler tasarlıyoruz.
+            Kurumsal web siteleri, web uygulamaları, iş takip sistemleri, SaaS altyapıları
+            ve otomasyon çözümleri — işletmenizin gerçek ihtiyacına göre tasarlanmış,
+            sıfırdan geliştirilen dijital yapılar.
           </p>
         </div>
       </section>

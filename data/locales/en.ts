@@ -143,6 +143,7 @@ export const en: Dictionary = {
           "Critical stock level and payment delay alerts",
         ],
         previewType: "stockapp",
+        slug: "stockapp",
       },
       {
         name: "Hezer Auto Service",
@@ -161,6 +162,7 @@ export const en: Dictionary = {
           "Secure infrastructure with end-to-end (E2E) testing",
         ],
         previewType: "auto-service",
+        slug: "hezer-auto-service",
       },
       {
         name: "CARPASS",
@@ -179,6 +181,7 @@ export const en: Dictionary = {
           "Fully automated background workflows built with n8n",
         ],
         previewType: "carpass",
+        slug: "carpass",
       },
       {
         name: "Custom Enterprise SaaS Infra",
@@ -197,6 +200,7 @@ export const en: Dictionary = {
           "Secure, isolated data for every business (tenant)",
         ],
         previewType: "business-dashboard",
+        slug: "saas-operasyon-altyapisi",
       },
     ],
   },

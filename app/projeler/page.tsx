@@ -11,7 +11,7 @@ import { projects } from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Projeler — Solvaria",
-  description: "Gerçek firmalar için geliştirdiğimiz iş takip ve otomasyon sistemleri.",
+  description: "Gerçek firmalar için geliştirdiğimiz web siteleri, iş takip sistemleri, web uygulamaları ve otomasyon çözümleri.",
 };
 
 export default function ProjelerPage() {

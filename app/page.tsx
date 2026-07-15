@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Solvaria — Dijital Operasyon Sistemleri",
+  title: "Solvaria — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
   description:
-    "Küçük ve orta ölçekli firmalar için stok, cari hesap, satış, tahsilat ve raporlama süreçlerini sade, ölçülebilir ve web tabanlı sistemlere dönüştürüyoruz.",
+    "Mert Alban / Solvaria: KOBİ'ler için kurumsal web siteleri, özel iş takip sistemleri, web uygulamaları, SaaS ürünleri ve otomasyon çözümleri.",
 };
 
 import Navbar from "@/components/Navbar";
@@ -12,6 +12,7 @@ import TrustStrip from "@/components/TrustStrip";
 import ProblemsSolutions from "@/components/ProblemsSolutions";
 import SystemNetwork from "@/components/SystemNetwork";
 import Projects from "@/components/Projects";
+import WebSiteVitrin from "@/components/home/WebSiteVitrin";
 import FounderTrust from "@/components/home/FounderTrust";
 import FAQPreview from "@/components/home/FAQPreview";
 import FinalCTA from "@/components/home/FinalCTA";
@@ -25,6 +26,7 @@ export default function Home() {
       <ProblemsSolutions />
       <SystemNetwork />
       <Projects />
+      <WebSiteVitrin />
       <FounderTrust />
       <FAQPreview />
       <FinalCTA />
