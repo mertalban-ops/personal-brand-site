@@ -5,7 +5,7 @@ import { Settings, Smartphone, Globe, Layers, LayoutTemplate } from "lucide-reac
 import { useReducedMotion, motion } from "framer-motion";
 
 export default function TrustStrip() {
-  const { t } = useLanguage();
+  useLanguage();
   const reduce = useReducedMotion();
 
   const items = [

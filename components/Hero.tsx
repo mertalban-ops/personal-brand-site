@@ -7,10 +7,10 @@ import {
   useTransform,
   useReducedMotion,
   useMotionValue,
-  useSpring,
 } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { SplineScene } from "@/components/ui/splite";
+import Link from "next/link";
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -29,9 +29,6 @@ export default function Hero() {
   // Mouse parallax for phone overlay
   const hoverX = useMotionValue(0);
   const hoverY = useMotionValue(0);
-  const spring  = { stiffness: 90, damping: 22 };
-  const tiltX   = useSpring(useTransform(hoverY, [-240, 240], [5, -5]),  spring);
-  const tiltY   = useSpring(useTransform(hoverX, [-240, 240], [-5, 5]), spring);
 
   const onRobotMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     isHoveringRef.current = true;
@@ -115,18 +112,18 @@ export default function Hero() {
             {t.hero.subtitle}
           </motion.p>
           <motion.div className="mt-9 flex flex-wrap gap-4" {...enter(0.45)}>
-            <a
+            <Link
               href="/iletisim"
               className="btn-shine glow-accent rounded-lg bg-accent px-6 py-3 font-semibold text-[#000000] transition-transform hover:-translate-y-0.5"
             >
               {t.hero.primaryBtn}
-            </a>
-            <a
+            </Link>
+            <Link
               href="/projeler"
               className="rounded-lg border border-line px-6 py-3 font-medium text-ink transition-colors hover:border-accent/50 hover:text-accent"
             >
               {t.hero.secondaryBtn}
-            </a>
+            </Link>
           </motion.div>
           <motion.p className="mt-6 text-xs text-faint" {...enter(0.6)}>
             Web siteleri · İş takip sistemleri · Web uygulamaları · SaaS ürünleri · Otomasyon

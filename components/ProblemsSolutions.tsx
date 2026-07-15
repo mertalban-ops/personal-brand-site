@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, XCircle, CheckCircle2 } from "lucide-react";
+import { XCircle, CheckCircle2 } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import Reveal3D from "./Reveal3D";
 import FloatingCard from "./FloatingCard";

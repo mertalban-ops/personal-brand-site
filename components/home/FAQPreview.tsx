@@ -6,8 +6,10 @@ import { motion, useReducedMotion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 import { getHomepageFAQs } from "@/data/faqs";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function FAQPreview() {
+  const { t } = useLanguage();
   const reduce = useReducedMotion();
   const items = getHomepageFAQs();
   const [open, setOpen] = useState<number | null>(null);
@@ -15,7 +17,7 @@ export default function FAQPreview() {
   return (
     <AnimatedSection>
       <div className="mx-auto max-w-3xl px-5 py-16 md:py-20">
-        <p className="mono-label mb-3 text-center">Sık Sorulan Sorular</p>
+        <p className="mono-label mb-3 text-center">{t.faq.label}</p>
         <h2 className="display text-center text-3xl font-bold text-ink mb-10">
           Merak ettikleriniz
         </h2>

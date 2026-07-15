@@ -33,7 +33,7 @@ export const de: Dictionary = {
     },
   },
   about: {
-    label: "01 — Studio-Ansatz",
+    label: "05 — Studio-Ansatz",
     title: "Ein digitales Geschäftssystem besteht nicht nur aus Bildschirmen.",
     paragraphs: [
       "Ein großartiges Geschäftsverfolgungssystem schafft Wert durch genauen Datenfluss, klare Benutzererfahrung, zuverlässige Berichterstattung und ein Design, das zu den täglichen Gewohnheiten des Unternehmens passt.",
@@ -42,7 +42,7 @@ export const de: Dictionary = {
     ],
   },
   services: {
-    label: "02 — Hochwertige Lösungen",
+    label: "02 — Digitale Systemlösungen",
     title: "Systempakete, die Ihr Unternehmen beschleunigen",
     subtitle:
       "Versuchen Sie nicht mehr, sich an Standardsoftware anzupassen. Arbeiten Sie mit vollständig maßgeschneiderten Systemen, die speziell für Ihre betrieblichen Anforderungen entwickelt wurden.",
@@ -90,7 +90,7 @@ export const de: Dictionary = {
     ],
   },
   problems: {
-    label: "03 — Problem & Lösung",
+    label: "01 — Engpässe & Lösungen",
     title: "Wir konsolidieren Aufgaben, die über Notizbücher, Excel und WhatsApp verstreut sind, in einem System.",
     items: [
       {
@@ -120,7 +120,7 @@ export const de: Dictionary = {
     ],
   },
   projects: {
-    label: "04 — Portfolio",
+    label: "03 — Fallstudien & Referenzen",
     title: "Von uns entwickelte maßgeschneiderte digitale Lösungen",
     problemLabel: "Problem",
     featuresLabel: "Geschäftsvorteil & Funktionen",
@@ -205,7 +205,7 @@ export const de: Dictionary = {
     ],
   },
   process: {
-    label: "05 — Unser Signatur-Prozess",
+    label: "04 — Unser Arbeitsprozess",
     title: "Wir konzentrieren uns auf die Bereitstellung funktionierender Systeme, nicht nur auf Ideen.",
     items: [
       {
@@ -282,7 +282,7 @@ export const de: Dictionary = {
       "Die Qualität eines digitalen Systems misst sich nicht an der Länge des geschriebenen Codes; sie misst sich an dem Gefühl 'Ich habe die Kontrolle und alles ist sicher', das der Geschäftsinhaber hat, wenn er es am Ende des Tages betrachtet. Unser Ziel ist es, zuverlässige operative Strukturen aufzubauen, die genau dieses Gefühl vermitteln.",
   },
   faq: {
-    label: "08 — Häufig gefragt",
+    label: "06 — Häufig gestellte Fragen",
     title: "Häufig gestellte Fragen",
     subtitle: "Wichtige Details über die Qualität der von uns entwickelten Systeme und unseren Arbeitsprozess.",
     items: [
@@ -313,7 +313,7 @@ export const de: Dictionary = {
     ],
   },
   contact: {
-    label: "09 — Kontakt",
+    label: "07 — Kontakt",
     title: "Lassen Sie uns Ihr Tracking-Chaos in ein professionelles System verwandeln.",
     subtitle:
       "Wenn Ihre Lager-, Finanz-, Verkaufs-, Inkasso- oder Berichterstattungsprozesse verstreut sind, können wir dies mit einem für Ihr Unternehmen maßgeschneiderten digitalen Premium-System handhabbar machen. Lassen Sie uns in 15 Minuten über Ihr Projekt sprechen.",

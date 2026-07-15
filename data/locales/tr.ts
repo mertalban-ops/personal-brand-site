@@ -33,7 +33,7 @@ export const tr: Dictionary = {
     },
   },
   about: {
-    label: "01 — Stüdyo Yaklaşımı",
+    label: "05 — Stüdyo Yaklaşımı",
     title: "Bir işletmenin dijital sistemi, sadece ekranlardan oluşmaz.",
     paragraphs: [
       "İyi bir iş takip sistemi; doğru veri akışı, net kullanıcı deneyimi, güvenilir raporlama ve işletmenin günlük alışkanlıklarına uygun tasarımla değer üretir.",
@@ -42,7 +42,7 @@ export const tr: Dictionary = {
     ],
   },
   services: {
-    label: "02 — Yüksek Değerli Çözümler",
+    label: "02 — Dijital Sistem Çözümleri",
     title: "İşletmenizi Hızlandıran Sistem Paketleri",
     subtitle:
       "Hazır yazılımlara uymaya çalışmayın. İşletmenizin operasyonel ihtiyacına göre tasarlanmış, tamamen size özel kurulan sistemlerle çalışın.",
@@ -90,7 +90,7 @@ export const tr: Dictionary = {
     ],
   },
   problems: {
-    label: "03 — Problem & Çözüm",
+    label: "01 — Darboğazlar & Çözümler",
     title: "İşletmenizin dijital sorunlarına özel çözümler üretiyoruz.",
     items: [
       {
@@ -112,7 +112,7 @@ export const tr: Dictionary = {
     ],
   },
   projects: {
-    label: "04 — Referans Projeler",
+    label: "03 — Vaka Çalışmaları & Referanslar",
     title: "Geliştirdiğimiz Özel Dijital Çözümler",
     problemLabel: "Problem",
     featuresLabel: "İşletmeye Fayda & Özellikler",
@@ -197,7 +197,7 @@ export const tr: Dictionary = {
     ],
   },
   process: {
-    label: "05 — İmza Niteliğindeki Sürecimiz",
+    label: "04 — Çalışma Sürecimiz",
     title: "Fikri değil, çalışan sistemi teslim etmeye odaklanıyoruz.",
     items: [
       {
@@ -274,7 +274,7 @@ export const tr: Dictionary = {
       "Bir dijital sistemin kalitesi, yazılan kodun uzunluğuyla değil; işletme sahibinin gün sonunda o sisteme bakıp hissettiği 'kontrol bende ve her şey güvende' duygusuyla ölçülür. Amacımız işletmelere tam olarak bu hissi veren güvenilir operasyon yapıları kurmaktır.",
   },
   faq: {
-    label: "08 — Merak Edilenler",
+    label: "06 — Sıkça Sorulan Sorular",
     title: "Sıkça Sorulan Sorular",
     subtitle: "Kurduğumuz sistemlerin niteliği ve işleyiş süreci hakkındaki temel detaylar.",
     items: [
@@ -305,7 +305,7 @@ export const tr: Dictionary = {
     ],
   },
   contact: {
-    label: "09 — İletişim",
+    label: "07 — Projenizi Konuşalım",
     title: "İşletmenizdeki takip karmaşasını profesyonel bir sisteme dönüştürelim.",
     subtitle:
       "Stok, cari hesap, satış, tahsilat veya raporlama süreçleriniz dağınıksa, işletmenize özel premium bir dijital sistemle bunu yönetilebilir hale getirebiliriz. Projenizi 15 dakikada konuşalım.",

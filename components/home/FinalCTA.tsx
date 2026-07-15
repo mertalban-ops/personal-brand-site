@@ -4,8 +4,10 @@ import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import { contact } from "@/data/contact";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function FinalCTA() {
+  const { t } = useLanguage();
   const reduce = useReducedMotion();
 
   return (
@@ -21,7 +23,7 @@ export default function FinalCTA() {
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        <p className="mono-label mb-4">Hazır mısınız?</p>
+        <p className="mono-label mb-4">{t.contact.label}</p>
         <h2 className="display text-balance text-4xl font-bold text-ink md:text-5xl">
           Web siteniz, sisteminiz veya uygulamanız —{" "}
           <span className="text-accent">birlikte inşa edelim.</span>

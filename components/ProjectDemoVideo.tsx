@@ -4,9 +4,9 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Package, Wallet, ShoppingCart, TrendingUp, Check,
-  Wrench, Car, CheckCircle2, Clock, AlertCircle,
-  Shield, Search, BarChart3, Users, Download,
-  Bell, FileText, ChevronRight, Zap,
+  Wrench, CheckCircle2, Clock, AlertCircle,
+  Shield, Search, BarChart3, Download,
+  FileText,
 } from "lucide-react";
 
 type ProjectType = "stockapp" | "auto-service" | "carpass" | "business-dashboard";
@@ -15,7 +15,6 @@ type ProjectType = "stockapp" | "auto-service" | "carpass" | "business-dashboard
 function Typewriter({ text, speed = 52 }: { text: string; speed?: number }) {
   const [out, setOut] = useState("");
   useEffect(() => {
-    setOut("");
     let i = 0;
     const t = setInterval(() => {
       i++;
@@ -86,7 +85,7 @@ function FormField({ label, value, typing, active }: { label: string; value: str
     <div style={{ marginBottom: 7 }}>
       <p style={{ color: s.faint, fontSize: "0.55rem", fontFamily: "monospace", textTransform: "uppercase" as const, letterSpacing: "0.09em", marginBottom: 3 }}>{label}</p>
       <div style={{ background: s.bg, border: `1px solid ${active ? s.accent : s.border}`, borderRadius: 6, padding: "5px 9px", fontSize: "0.68rem", color: value ? s.ink : s.faint, minHeight: 26, boxShadow: active ? `0 0 0 2px rgba(16,185,129,0.12)` : "none" }}>
-        {typing && active ? <Typewriter text={value} /> : value}
+        {typing && active ? <Typewriter key={value} text={value} /> : value}
       </div>
     </div>
   );
@@ -225,7 +224,7 @@ const stockScreens = [
         style={{ marginTop: 9, display: "flex", alignItems: "center", gap: 6, background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", borderRadius: 7, padding: "7px 10px" }}
       >
         <CheckCircle2 size={13} color={s.accent} />
-        <span style={{ color: s.accent, fontSize: "0.62rem", fontWeight: 600 }}>Stok başarıyla eklendi — Samsung 55''</span>
+        <span style={{ color: s.accent, fontSize: "0.62rem", fontWeight: 600 }}>{"Stok başarıyla eklendi — Samsung 55''"}</span>
       </motion.div>
     </div>
   ),
@@ -319,7 +318,7 @@ const autoScreens = [
           { label: "Fren & Süspansiyon Kontrolü", done: false, active: true, delay: 0.36 },
           { label: "Kalite Kontrol & Test", done: false, delay: 0.48 },
           { label: "Müşteriye Teslim", done: false, delay: 0.6 },
-        ].map((step, i) => (
+        ].map((step) => (
           <motion.div key={step.label} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: step.delay }}
             style={{ display: "flex", alignItems: "center", gap: 9, padding: "6px 10px", borderRadius: 7,
               background: step.active ? "rgba(56,189,248,0.08)" : "transparent",
@@ -550,7 +549,7 @@ const dashScreens = [
       <FormField label="Format" value="PDF + Excel (.xlsx)" />
       <div style={{ marginBottom: 8 }}>
         <p style={{ color: s.faint, fontSize: "0.55rem", fontFamily: "monospace", textTransform: "uppercase" as const, letterSpacing: "0.09em", marginBottom: 5 }}>Dahil Et</p>
-        {["MRR Grafiği", "Müşteri Segmentleri", "Churn Analizi"].map((opt, i) => (
+        {["MRR Grafiği", "Müşteri Segmentleri", "Churn Analizi"].map((opt) => (
           <div key={opt} style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
             <div style={{ width: 12, height: 12, borderRadius: 3, background: s.accent, display: "flex", alignItems: "center", justifyContent: "center" }}>
               <Check size={7} color="#000" strokeWidth={3} />
@@ -610,13 +609,22 @@ const flipVariants = {
 export default function ProjectDemoVideo({
   type,
   hideChrome = false,
+  play = true,
 }: {
   type: ProjectType;
   hideChrome?: boolean;
+  play?: boolean;
 }) {
   const { screens, title, accent } = config[type] ?? config.stockapp;
   const [idx, setIdx] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [prevPlay, setPrevPlay] = useState(play);
+  if (play !== prevPlay) {
+    setPrevPlay(play);
+    if (!play) {
+      setIdx(0);
+    }
+  }
   const containerRef = useRef<HTMLDivElement>(null);
   const total = screens.length;
   const DURATION = 4500;
@@ -632,11 +640,13 @@ export default function ProjectDemoVideo({
     return () => obs.disconnect();
   }, []);
 
+
+
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || !play) return;
     const t = setInterval(() => setIdx(i => (i + 1) % total), DURATION);
     return () => clearInterval(t);
-  }, [total, isVisible]);
+  }, [total, isVisible, play]);
 
   return (
     <div ref={containerRef} style={{

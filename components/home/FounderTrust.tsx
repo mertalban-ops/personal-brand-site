@@ -2,8 +2,11 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import { studio } from "@/data/studio";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function FounderTrust() {
+  const { t } = useLanguage();
+
   return (
     <AnimatedSection>
       <div className="mx-auto max-w-6xl px-5 py-16 md:py-20">
@@ -18,7 +21,7 @@ export default function FounderTrust() {
             </div>
 
             <div>
-              <p className="mono-label mb-2">Solvaria&apos;nın Arkasında Kim Var?</p>
+              <p className="mono-label mb-2">{t.about.label}</p>
               <h2 className="display text-2xl font-bold text-ink md:text-3xl mb-4">
                 {studio.founder.name} — {studio.founder.role}
               </h2>

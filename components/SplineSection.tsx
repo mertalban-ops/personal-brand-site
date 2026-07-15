@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
 import { SplineScene } from "@/components/ui/splite";
 import { Spotlight } from "@/components/ui/spotlight";
 import { ArrowRight } from "lucide-react";
@@ -79,20 +80,20 @@ export default function SplineSection() {
                 className="mt-8 flex flex-wrap gap-3"
                 {...(reduce ? {} : reveal(0.3))}
               >
-                <a
+                <Link
                   href="/cozumler"
                   className="btn-shine glow-accent inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5"
                 >
                   Sistem Çözümlerini Gör
                   <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/projeler"
                   className="inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent/40 hover:text-accent"
                   style={{ borderColor: "var(--line)", color: "var(--muted)" }}
                 >
                   Projeleri İncele
-                </a>
+                </Link>
               </motion.div>
 
               {/* Stats row */}

@@ -33,7 +33,7 @@ export const en: Dictionary = {
     },
   },
   about: {
-    label: "01 — Studio Approach",
+    label: "05 — Studio Approach",
     title: "A business digital system isn't just made of screens.",
     paragraphs: [
       "A great business tracking system creates value through accurate data flow, clear user experience, reliable reporting, and a design that fits the company's daily habits.",
@@ -42,7 +42,7 @@ export const en: Dictionary = {
     ],
   },
   services: {
-    label: "02 — High-Value Solutions",
+    label: "02 — Digital System Solutions",
     title: "System Packages That Accelerate Your Business",
     subtitle:
       "Stop trying to adapt to off-the-shelf software. Work with completely custom systems designed specifically for your operational needs.",
@@ -90,7 +90,7 @@ export const en: Dictionary = {
     ],
   },
   problems: {
-    label: "03 — Problem & Solution",
+    label: "01 — Bottlenecks & Solutions",
     title: "We consolidate tasks scattered across Notebooks, Excel, and WhatsApp into one system.",
     items: [
       {
@@ -120,7 +120,7 @@ export const en: Dictionary = {
     ],
   },
   projects: {
-    label: "04 — Portfolio",
+    label: "03 — Case Studies & References",
     title: "Custom Digital Solutions We've Developed",
     problemLabel: "Problem",
     featuresLabel: "Business Benefit & Features",
@@ -205,7 +205,7 @@ export const en: Dictionary = {
     ],
   },
   process: {
-    label: "05 — Our Signature Process",
+    label: "04 — Our Work Process",
     title: "We focus on delivering working systems, not just ideas.",
     items: [
       {
@@ -282,7 +282,7 @@ export const en: Dictionary = {
       "The quality of a digital system isn't measured by the length of code written; it's measured by the 'I'm in control and everything is secure' feeling the business owner gets when looking at it at the end of the day. Our goal is to build reliable operational structures that provide exactly this feeling to businesses.",
   },
   faq: {
-    label: "08 — Frequently Asked",
+    label: "06 — Frequently Asked Questions",
     title: "Frequently Asked Questions",
     subtitle: "Key details about the quality of the systems we build and our working process.",
     items: [
@@ -313,7 +313,7 @@ export const en: Dictionary = {
     ],
   },
   contact: {
-    label: "09 — Contact",
+    label: "07 — Let's Talk",
     title: "Let's transform your tracking chaos into a professional system.",
     subtitle:
       "If your inventory, finance, sales, collection, or reporting processes are scattered, we can make it manageable with a premium digital system tailored for your business. Let's discuss your project in 15 minutes.",

@@ -95,9 +95,8 @@ export default function RobotPhoneShowcase({ width: phoneW = 188 }: { width?: nu
     if (cycleTimerRef.current)   clearTimeout(cycleTimerRef.current);
   }, []);
 
-  // Start the per-project timer sequence — only when visible and tab is active
   const startProjectCycle = useCallback(
-    (type: RobotProjectType) => {
+    () => {
       if (reduce || !active) return;
       clearTimers();
 
@@ -129,31 +128,33 @@ export default function RobotPhoneShowcase({ width: phoneW = 188 }: { width?: nu
     [reduce, active, activeType, clearTimers],
   );
 
-  // External override from project card hover
   useEffect(() => {
     if (!activeType) return;
     if (activeType === currentType) return;
     clearTimers();
-    setRobotState("switching-app");
-    setShowLabel(true);
+    const tStart = setTimeout(() => {
+      setRobotState("switching-app");
+      setShowLabel(true);
+    }, 0);
     const t = setTimeout(() => {
       setCurrentType(activeType);
       setShowLabel(false);
       setRobotState("checking-phone");
     }, 400);
-    return () => clearTimeout(t);
+    return () => {
+      clearTimeout(tStart);
+      clearTimeout(t);
+    };
   }, [activeType, currentType, clearTimers]);
 
-  // Re-start cycle when type changes or external hover ends
   useEffect(() => {
-    startProjectCycle(currentType);
+    startProjectCycle();
     return clearTimers;
-  }, [currentType, startProjectCycle, clearTimers]);
+  }, [startProjectCycle, clearTimers]);
 
-  // Resume auto-rotation when user stops hovering project cards
   useEffect(() => {
-    if (activeType === null) startProjectCycle(currentType);
-  }, [activeType, currentType, startProjectCycle]);
+    if (activeType === null) startProjectCycle();
+  }, [activeType, startProjectCycle]);
 
   const accent = ACCENT[currentType];
 
