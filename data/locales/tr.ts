@@ -94,20 +94,28 @@ export const tr: Dictionary = {
     title: "İşletmenizin dijital sorunlarına özel çözümler üretiyoruz.",
     items: [
       {
-        problem: "Web siteniz var ama iş getirmiyor; ziyaretçiler iletişime geçmiyor",
-        solution: "Dönüşüm odaklı, güven veren kurumsal web sitesi",
+        problem: "Web siteniz var ama iş getirmiyor; ziyaretçiler güven duyup iletişime geçmiyor",
+        solution: "Dönüşüm odaklı, modern ve güven veren kurumsal web sitesi",
       },
       {
-        problem: "Stok karışıyor, tahsilatlar ve borçlar takip edilemiyor",
-        solution: "Canlı stok, cari hesap ve tahsilat yönetim sistemi",
+        problem: "Stoklar karışıyor, anlık depo miktarları ve kritik seviyeler takip edilemiyor",
+        solution: "Canlı stok izleme ekranı, alarm seviyeleri ve hızlı depo giriş-çıkışı",
       },
       {
-        problem: "İşler kişilerin hafızasında ilerliyor, süreç görünmüyor",
-        solution: "Merkezi ve standart dijital iş takip sistemi",
+        problem: "Müşteri borçları netleşmiyor, vadesi gelen tahsilatlar unutuluyor ve nakit akışı aksıyor",
+        solution: "Cari hesap takibi, otomatik ödeme hatırlatma ve tahsilat yönetimi",
       },
       {
-        problem: "Hazır yazılımlar işletmenizin özel ihtiyaçlarına uymuyor",
-        solution: "İşletmenize özel, sıfırdan tasarlanmış web uygulaması",
+        problem: "Raporlar ve hesap ekstreleri hazırlamak saatler sürüyor, genel durum anlık görülemiyor",
+        solution: "Tek tuşla otomatik PDF rapor oluşturma ve canlı yönetici paneli (dashboard)",
+      },
+      {
+        problem: "İşler kişilerin hafızasında veya WhatsApp'ta ilerliyor, süreçler takip edilemiyor",
+        solution: "Merkezi, standart ve herkesin kolayca kullandığı dijital iş takip sistemi",
+      },
+      {
+        problem: "Hazır yazılımlar işletmenizin özel operasyonel ihtiyaçlarına uymuyor, Excel ise yavaş kalıyor",
+        solution: "İşletmenizin DNA'sına göre sıfırdan tasarlanmış hızlı ve güvenli web uygulaması",
       },
     ],
   },
