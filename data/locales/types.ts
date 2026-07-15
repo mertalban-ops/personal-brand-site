@@ -8,6 +8,7 @@ export type Dictionary = {
     solutions: string;
     privacy: string;
     terms: string;
+    cooperation: string;
   };
   hero: {
     kicker: string;

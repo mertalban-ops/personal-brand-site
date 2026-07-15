@@ -4,6 +4,12 @@ export type ProjectCategory =
   | "internal-project"    // İç Projeler
   | "concept-work";       // Çözüm Yetkinliği / Konsept Mimari
 
+export type ProjectStatus =
+  | "liveClientProject"
+  | "inDevelopmentProduct"
+  | "conceptArchitecture"
+  | "internalProject";
+
 export type CaseStudyModule = {
   name: string;
   features: string[];
@@ -14,6 +20,7 @@ export type Project = {
   tagline: string;
   status: "Active" | "In Development" | "Planned";
   category: ProjectCategory;
+  projectStatus?: ProjectStatus;
   problem: string;
   solution: string;
   approach: string;
@@ -30,6 +37,10 @@ export type Project = {
   lessons?: string[];
   futureWork?: string[];
   liveUrl?: string;
+  industry?: string;
+  role?: string;
+  previousWorkflow?: string;
+  clientTestimonial?: { author: string; role: string; text: string };
 };
 
 export const projectsTr: Project[] = [
@@ -53,6 +64,14 @@ export const projectsTr: Project[] = [
     slug: "stockapp",
     caseSummary: "Stok ve cari hesap verisi defter ile Excel'de dağınık olan bir işletme için stok hareketleri, müşteri bakiyeleri ve tahsilat takibini tek arayüzde toplayan özel bir web uygulaması geliştirildi.",
     targetUser: "Toptan veya perakende satış yapan, müşterilerine vadeli satış sunan KOBİ sahipleri ve yöneticileri",
+    industry: "Toptan & Perakende Ticaret",
+    role: "Kurucu & Baş Geliştirici",
+    previousWorkflow: "Cari kayıtlar el yazısıyla defterde tutuluyor, tahsilat vadeleri takvimden manuel takip ediliyordu. Stok sayımları ise haftalık Excel tablolarıyla yapılıyordu.",
+    clientTestimonial: {
+      author: "StockApp Yöneticisi",
+      role: "Kurucu",
+      text: "Müşteri görüşü eklenecek."
+    },
     caseModules: [
       {
         name: "Stok Yönetimi",
@@ -83,7 +102,7 @@ export const projectsTr: Project[] = [
       "Stok görünürlüğünün anlık hale gelmesi",
       "Müşteri bakiyelerine her an erişilebilmesi",
       "Tahsilat takibinin sistem üzerinden yürütülmesi",
-      "Hesap ekstresi hazırlama süresinin dakikadan saniyelere inmesi",
+      "Tek tıkla PDF hesap ekstresi oluşturma akışı",
     ],
     lessons: [
       "PDF oluşturma akışının mobil tarayıcıda da sorunsuz çalışması için ekstra test gerekti",
@@ -115,6 +134,14 @@ export const projectsTr: Project[] = [
     slug: "hezer-auto-service",
     caseSummary: "Araç kabul, onarım takibi ve müşteri geçmişi kağıt ve sözlü iletişime dayanan bir oto servis işletmesi için araç kabulünden teslimata kadar tüm süreç adımlarını kayıt altına alan mobil uyumlu bir operasyon sistemi geliştirildi.",
     targetUser: "Servis danışmanları ve yöneticileri; müşteri kabulünden fatura kesimine kadar tüm servis sürecini takip eden personel",
+    industry: "Otomotiv & Servis Hizmetleri",
+    role: "Süreç Analisti & Geliştirici",
+    previousWorkflow: "Müşteri kabul işlemleri kağıt formlarla yapılıyor, onarım durumları atölyedeki ustalarla sözlü olarak koordine ediliyordu. Müşteri geçmişi ancak eski fatura dosyalarından bulunabiliordu.",
+    clientTestimonial: {
+      author: "Hezer Oto Servis Müdürü",
+      role: "Servis Müdürü",
+      text: "Müşteri görüşü eklenecek."
+    },
     caseModules: [
       {
         name: "Araç Kabul",
@@ -144,7 +171,7 @@ export const projectsTr: Project[] = [
     outcomes: [
       "Araç ve onarım geçmişinin kağıtsız ve merkezi olarak tutulması",
       "İş emrinin kim tarafından, hangi aşamada olduğunun her an görülebilmesi",
-      "Müşteri güveninin servis şeffaflığıyla artması",
+      "Süreç durumlarının müşteri ve ekip için daha görünür hale gelmesini destekleyen yapı",
     ],
     lessons: [
       "Saha personelinin tablet ile hızlı veri girişi yapabilmesi için form tasarımı sadeleştirildi",
@@ -367,6 +394,14 @@ export const projectsEn: Project[] = [
     slug: "stockapp",
     caseSummary: "A custom web application was developed for a business with scattered inventory and current account data in notebooks and Excel, bringing stock movements, client balances, and collection tracking into a single interface.",
     targetUser: "SME owners and managers selling wholesale or retail and offering vadeli (deferred) sales to clients",
+    industry: "Wholesale & Retail Trade",
+    role: "Founder & Lead Developer",
+    previousWorkflow: "Current accounts were kept by hand in notebooks, and collections were tracked manually on calendars. Stock counts were updated weekly using Excel sheets.",
+    clientTestimonial: {
+      author: "StockApp Manager",
+      role: "Founder",
+      text: "Customer testimonial to be added."
+    },
     caseModules: [
       {
         name: "Inventory Management",
@@ -397,7 +432,7 @@ export const projectsEn: Project[] = [
       "Instant stock level visibility",
       "Client balances accessible from any device at any time",
       "Collection tracking managed systematically",
-      "Account statement preparation time cut from minutes to seconds",
+      "One-click PDF account statement generation workflow",
     ],
     lessons: [
       "PDF generation workflow required extra testing to work flawlessly on mobile browsers",
@@ -429,6 +464,14 @@ export const projectsEn: Project[] = [
     slug: "hezer-auto-service",
     caseSummary: "A mobile-friendly operations system was developed to record all process steps from vehicle intake to delivery for an auto service business where vehicle intake, repair tracking, and customer history relied on paper and oral communication.",
     targetUser: "Service advisors and managers tracking the entire service flow from intake to invoicing",
+    industry: "Automotive & Service Industry",
+    role: "Process Analyst & Developer",
+    previousWorkflow: "Vehicle intake was done using paper forms, and repair status was coordinated verbally with technicians. Service histories could only be found by digging through physical invoice folders.",
+    clientTestimonial: {
+      author: "Hezer Auto Service Manager",
+      role: "Service Manager",
+      text: "Customer testimonial to be added."
+    },
     caseModules: [
       {
         name: "Vehicle Intake",
@@ -458,7 +501,7 @@ export const projectsEn: Project[] = [
     outcomes: [
       "Vehicle and repair history kept paperless and centralized",
       "Work order status and assignment visible at any moment",
-      "Client trust increased through service transparency",
+      "Improved visibility of process stages for both the team and customers",
     ],
     lessons: [
       "Form design was simplified to allow fast data entry by field technicians on tablets",
@@ -681,6 +724,14 @@ export const projectsDe: Project[] = [
     slug: "stockapp",
     caseSummary: "Für ein Unternehmen mit verstreuten Lager- und Kontokorrentdaten in Notizbüchern und Excel wurde eine Webanwendung entwickelt, die alle Bewegungen in einer einzigen Oberfläche zusammenführt.",
     targetUser: "KMU-Inhaber und Manager, die Groß- oder Einzelhandel betreiben und ihren Kunden Zahlungsziele anbieten",
+    industry: "Groß- & Einzelhandel",
+    role: "Gründer & Hauptentwickler",
+    previousWorkflow: "Cari-Konten wurden handschriftlich in Heften geführt, Zahlungsfristen manuell im Kalender überwacht. Bestände wurden wöchentlich mit Excel erfasst.",
+    clientTestimonial: {
+      author: "StockApp-Manager",
+      role: "Gründer",
+      text: "Kundenbewertung wird hinzugefügt."
+    },
     caseModules: [
       {
         name: "Lagerverwaltung",
@@ -711,7 +762,7 @@ export const projectsDe: Project[] = [
       "Sofortige Bestandsprüfung",
       "Kundensalden jederzeit abrufbar",
       "Einnahmenverfolgung über das System abgewickelt",
-      "Die Erstellungszeit für Kontoauszüge wurde von Minuten auf Sekunden verkürzt",
+      "PDF-Kontoauszugserstellung per Mausklick",
     ],
     lessons: [
       "Der PDF-Erstellungs-Workflow erforderte zusätzliche Tests, um auf mobilen Browsern einwandfrei zu funktionieren",
@@ -743,6 +794,14 @@ export const projectsDe: Project[] = [
     slug: "hezer-auto-service",
     caseSummary: "Ein mobiles Betriebssystem wurde entwickelt, um alle Prozessschritte von der Fahrzeugannahme bis zur Auslieferung für ein Autoservice-Unternehmen aufzuzeichnen, bei dem alles auf Papier basierte.",
     targetUser: "Serviceberater und Manager, die den gesamten Servicefluss von der Annahme bis zur Rechnungsstellung verfolgen",
+    industry: "Automobil- & Servicedienstleistungen",
+    role: "Prozessanalyst & Entwickler",
+    previousWorkflow: "Die Fahrzeugaufnahme erfolgte über Papierformulare, Reparaturschritte wurden mündlich mit den Mechanikern abgestimmt. Historische Daten waren nur über alte Rechnungsordner abrufbar.",
+    clientTestimonial: {
+      author: "Hezer Autoservice-Manager",
+      role: "Serviceleiter",
+      text: "Kundenbewertung wird hinzugefügt."
+    },
     caseModules: [
       {
         name: "Fahrzeugannahme",
@@ -772,7 +831,7 @@ export const projectsDe: Project[] = [
     outcomes: [
       "Fahrzeug- und Reparaturschritte papierlos und zentralisiert",
       "Status des Arbeitsauftrags und Zuweisung jederzeit sichtbar",
-      "Kundenvertrauen durch Servicetransparenz erhöht",
+      "Verbesserte Sichtbarkeit der Prozessschritte für das Team und die Kunden",
     ],
     lessons: [
       "Das Formulardesign wurde vereinfacht, um eine schnelle Dateneingabe durch Techniker auf Tablets zu ermöglichen",
@@ -977,9 +1036,18 @@ export const projectsDe: Project[] = [
 export const projects = projectsTr;
 
 export function getProjects(lang: string = "tr"): Project[] {
-  if (lang === "en") return projectsEn;
-  if (lang === "de") return projectsDe;
-  return projectsTr;
+  const getStatus = (cat: ProjectCategory): ProjectStatus => {
+    if (cat === "customer-project") return "liveClientProject";
+    if (cat === "product-lab") return "inDevelopmentProduct";
+    if (cat === "concept-work") return "conceptArchitecture";
+    return "internalProject";
+  };
+
+  const rawList = lang === "en" ? projectsEn : lang === "de" ? projectsDe : projectsTr;
+  return rawList.map((p) => ({
+    ...p,
+    projectStatus: getStatus(p.category),
+  }));
 }
 
 export function getProjectBySlug(slug: string, lang: string = "tr"): Project | undefined {

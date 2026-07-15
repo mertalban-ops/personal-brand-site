@@ -10,9 +10,10 @@ export const tr: Dictionary = {
     contactBtn: "Projemi Konuşalım",
     privacy: "Gizlilik",
     terms: "Kullanım Koşulları",
+    cooperation: "İş Birliği",
   },
   hero: {
-    kicker: "Web siteleri · İş takip sistemleri · Web uygulamaları · SaaS ürünleri · Otomasyon",
+    kicker: "Özel Yazılım & Dijital Operasyon Sistemleri",
     title1: "İşletmeniz için ",
     titleHighlight: "çalışan dijital sistemler",
     title2: " ve güven veren web deneyimleri geliştiriyoruz.",

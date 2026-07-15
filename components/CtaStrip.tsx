@@ -2,16 +2,82 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Mail, MessageCircle, ArrowRight, Clock, Shield, Star } from "lucide-react";
-import { contact } from "@/data/contact";
+import { siteConfig } from "@/data/config";
+import { useLanguage } from "@/context/LanguageContext";
+import { track } from "@vercel/analytics";
 
-const TRUST_SIGNALS = [
-  { icon: Clock, label: "30 dk ücretsiz keşif" },
-  { icon: Shield, label: "Taahhütsüz ilk görüşme" },
-  { icon: Star, label: "14+ teslim edilen sistem" },
-];
+interface CtaStripProps {
+  title?: string;
+  desc?: string;
+}
 
-export default function CtaStrip() {
+export default function CtaStrip({ title, desc }: CtaStripProps) {
+  const { language } = useLanguage();
   const reduce = useReducedMotion();
+
+  // Localized default texts
+  const trDefault = {
+    kicker: "Bir adım kaldı",
+    title: "İhtiyacınızı birlikte netleştirelim.",
+    desc: "İşletmenizin ihtiyaçlarını 30 dakikalık ücretsiz ihtiyaç analiziyle masaya yatıralım. Ücretsiz, taahhütsüz ve sonuç odaklı bir görüşme.",
+    emailBtn: "E-posta Gönder",
+    whatsappBtn: "WhatsApp'tan Yaz",
+    subject: "Proje talebi — Ücretsiz keşif görüşmesi",
+    waMsg: "Merhaba, proje görüşmesi yapmak istiyorum."
+  };
+
+  const enDefault = {
+    kicker: "One step left",
+    title: "Let's clarify your needs together.",
+    desc: "Let's discuss your business needs in a 30-minute free needs analysis. A free, non-binding, and result-oriented call.",
+    emailBtn: "Send Email",
+    whatsappBtn: "Chat on WhatsApp",
+    subject: "Project inquiry — Free discovery call",
+    waMsg: "Hello, I would like to schedule a project call."
+  };
+
+  const deDefault = {
+    kicker: "Ein Schritt übrig",
+    title: "Lassen Sie uns Ihren Bedarf gemeinsam klären.",
+    desc: "Lassen Sie uns Ihre Geschäftsanforderungen in einer 30-minütigen kostenlosen Analyse besprechen. Ein kostenloses, unverbindliches und ergebnisorientiertes Gespräch.",
+    emailBtn: "E-Mail senden",
+    whatsappBtn: "Per WhatsApp schreiben",
+    subject: "Projektanfrage — Kostenlose Beratung",
+    waMsg: "Hallo, ich möchte ein Projektgespräch vereinbaren."
+  };
+
+  const d = language === "en" ? enDefault : language === "de" ? deDefault : trDefault;
+
+  // Real, dürüst / verified trust signals
+  const trustSignals = [
+    {
+      icon: Clock,
+      label:
+        language === "tr"
+          ? "30 dk ücretsiz keşif"
+          : language === "de"
+          ? "30 Min. kostenlose Analyse"
+          : "30 min free discovery",
+    },
+    {
+      icon: Shield,
+      label:
+        language === "tr"
+          ? "Taahhütsüz ilk görüşme"
+          : language === "de"
+          ? "Unverbindliches Gespräch"
+          : "Non-binding consultation",
+    },
+    {
+      icon: Star,
+      label:
+        language === "tr"
+          ? "2 aktif müşteri projesi & 3 ürün çalışması"
+          : language === "de"
+          ? "2 aktive Kundenprojekte & 3 Produktstudien"
+          : "2 active client projects & 3 product works",
+    },
+  ];
 
   return (
     <section
@@ -33,7 +99,7 @@ export default function CtaStrip() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          Bir adım kaldı
+          {d.kicker}
         </motion.p>
 
         <motion.h2
@@ -43,8 +109,7 @@ export default function CtaStrip() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
         >
-          Projenizi birlikte{" "}
-          <span className="text-accent">hayata geçirelim.</span>
+          {title ? title : d.title}
         </motion.h2>
 
         <motion.p
@@ -55,8 +120,7 @@ export default function CtaStrip() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
         >
-          İşletmenizin ihtiyaçlarını 30 dakikada masaya yatıralım.{" "}
-          Ücretsiz, taahhütsüz ve sonuç odaklı bir görüşme.
+          {desc ? desc : d.desc}
         </motion.p>
 
         {/* CTA buttons */}
@@ -68,24 +132,30 @@ export default function CtaStrip() {
           transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <a
-            href={`mailto:${contact.email}?subject=${encodeURIComponent("Proje talebi — Ücretsiz keşif görüşmesi")}`}
+            href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(d.subject)}`}
+            onClick={() => {
+              try { track("email_click", { location: "cta_strip" }); } catch (err) {}
+            }}
             className="btn-shine glow-accent inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3.5 font-semibold text-black transition-transform hover:-translate-y-0.5"
           >
             <Mail className="h-4 w-4" />
-            E-posta Gönder
+            {d.emailBtn}
             <ArrowRight className="h-4 w-4" />
           </a>
 
-          {contact.whatsapp && (
+          {siteConfig.whatsappEnabled && (
             <a
-              href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent("Merhaba, proje görüşmesi yapmak istiyorum.")}`}
+              href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(d.waMsg)}`}
+              onClick={() => {
+                try { track("whatsapp_click", { location: "cta_strip" }); } catch (err) {}
+              }}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border px-6 py-3.5 font-medium transition-colors hover:border-accent/50 hover:text-accent"
               style={{ borderColor: "var(--line)", color: "var(--muted)" }}
             >
               <MessageCircle className="h-4 w-4" />
-              WhatsApp&apos;tan Yaz
+              {d.whatsappBtn}
             </a>
           )}
         </motion.div>
@@ -98,7 +168,7 @@ export default function CtaStrip() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          {TRUST_SIGNALS.map(({ icon: Icon, label }) => (
+          {trustSignals.map(({ icon: Icon, label }) => (
             <div key={label} className="flex items-center gap-2 text-sm" style={{ color: "var(--faint)" }}>
               <Icon className="h-4 w-4 flex-shrink-0" style={{ color: "var(--accent)" }} />
               {label}

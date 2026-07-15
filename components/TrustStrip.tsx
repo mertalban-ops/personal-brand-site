@@ -5,16 +5,34 @@ import { Settings, Smartphone, Globe, Layers, LayoutTemplate } from "lucide-reac
 import { useReducedMotion, motion } from "framer-motion";
 
 export default function TrustStrip() {
-  useLanguage();
+  const { language } = useLanguage();
   const reduce = useReducedMotion();
 
-  const items = [
+  const trItems = [
     { text: "İşletmeye Özel Geliştirme", icon: Settings },
     { text: "Mobil Uyumlu Tasarım", icon: Smartphone },
     { text: "Web Sitesi & Web Uygulaması", icon: Globe },
     { text: "Geliştirilebilir Altyapı", icon: Layers },
     { text: "Sade ve İkna Edici Arayüz", icon: LayoutTemplate },
   ];
+
+  const enItems = [
+    { text: "Bespoke Development", icon: Settings },
+    { text: "Mobile-First Design", icon: Smartphone },
+    { text: "Websites & Web Apps", icon: Globe },
+    { text: "Extensible Infrastructure", icon: Layers },
+    { text: "Clean & High-Converting UI", icon: LayoutTemplate },
+  ];
+
+  const deItems = [
+    { text: "Maßgeschneiderte Entwicklung", icon: Settings },
+    { text: "Mobiloptimiertes Design", icon: Smartphone },
+    { text: "Websites & Webanwendungen", icon: Globe },
+    { text: "Erweiterbare Infrastruktur", icon: Layers },
+    { text: "Übersichtliche Benutzeroberfläche", icon: LayoutTemplate },
+  ];
+
+  const items = language === "en" ? enItems : language === "de" ? deItems : trItems;
 
   return (
     <section className="relative z-10 border-y border-line bg-bg/80 py-4 backdrop-blur-md sm:py-6">

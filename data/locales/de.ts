@@ -10,9 +10,10 @@ export const de: Dictionary = {
     contactBtn: "Projekt besprechen",
     privacy: "Datenschutz",
     terms: "Nutzungsbedingungen",
+    cooperation: "Partnerschaft",
   },
   hero: {
-    kicker: "Maßgeschneiderte Geschäftssysteme · Lager & Finanzen · Automatisierung · SaaS",
+    kicker: "Maßgeschneiderte Software & Digitale Operative Systeme",
     title1: "Wir verwandeln Ihre chaotischen Geschäftsprozesse in ",
     titleHighlight: "digitale operative Systeme.",
     title2: "",

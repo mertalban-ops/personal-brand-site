@@ -66,6 +66,11 @@ body {
   color: #000000;
 }
 
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
 /* Subte Grid Background */
 .bg-grid {
   background-image:

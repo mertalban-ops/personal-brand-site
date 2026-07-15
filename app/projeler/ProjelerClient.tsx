@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import AnimatedSection from "@/components/AnimatedSection";
 import Reveal3D from "@/components/Reveal3D";
@@ -13,12 +14,42 @@ import { useLanguage } from "@/context/LanguageContext";
 export default function ProjelerClient() {
   const { language, t } = useLanguage();
   const allProjects = getProjects(language);
+  const [activeFilter, setActiveFilter] = useState("all");
 
-  // Group definitions
+  // Sync state with URL parameter on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get("cat");
+    const validCats = ["customer-project", "product-lab", "concept-work", "internal-project"];
+    if (cat && validCats.includes(cat)) {
+      setActiveFilter(cat);
+    }
+  }, []);
+
+  const handleFilterChange = (filter: string) => {
+    setActiveFilter(filter);
+    const url = new URL(window.location.href);
+    if (filter === "all") {
+      url.searchParams.delete("cat");
+    } else {
+      url.searchParams.set("cat", filter);
+    }
+    window.history.pushState(null, "", url.pathname + url.search);
+  };
+
+  const filterTabs = [
+    { id: "all", label: language === "tr" ? "Tümü" : language === "de" ? "Alle" : "All" },
+    { id: "customer-project", label: language === "tr" ? "Müşteri Projeleri" : language === "de" ? "Kundenprojekte" : "Customer Projects" },
+    { id: "product-lab", label: language === "tr" ? "Ürünler" : language === "de" ? "Produkte" : "Products" },
+    { id: "concept-work", label: language === "tr" ? "Konseptler" : language === "de" ? "Konzepte" : "Concepts" },
+    { id: "internal-project", label: language === "tr" ? "İç Projeler" : language === "de" ? "Interne Projekte" : "Internal Projects" },
+  ];
+
+  // Group definitions matching exact B2B requirement headings
   const categories = [
     {
       id: "customer-project" as ProjectCategory,
-      title: language === "tr" ? "Müşteri Projeleri" : language === "de" ? "Kundenprojekte" : "Customer Projects",
+      title: language === "tr" ? "Gerçek işletmeler için geliştirilen sistemler" : language === "de" ? "Für echte Unternehmen entwickelte Systeme" : "Systems developed for real businesses",
       desc:
         language === "tr"
           ? "İşletmelerin operasyonel darboğazlarını çözmek için özel geliştirilmiş ve canlıda çalışan aktif sistemler."
@@ -30,10 +61,10 @@ export default function ProjelerClient() {
       id: "product-lab" as ProjectCategory,
       title:
         language === "tr"
-          ? "Solvaria Ürün Laboratuvarı"
+          ? "Geliştirdiğimiz dijital ürünler"
           : language === "de"
-          ? "Solvaria Produktlabor"
-          : "Solvaria Product Lab",
+          ? "Von uns entwickelte digitale Produkte"
+          : "Digital products we develop",
       desc:
         language === "tr"
           ? "Geleceğin SaaS fikirlerini, yapay zekâ entegrasyonlarını ve otomasyon yaklaşımlarını geliştirdiğimiz laboratuvarımız."
@@ -42,23 +73,13 @@ export default function ProjelerClient() {
           : "Our lab where we test and build future SaaS ideas, AI integrations, and automation approaches.",
     },
     {
-      id: "internal-project" as ProjectCategory,
-      title: language === "tr" ? "İç Projeler" : language === "de" ? "Interne Projekte" : "Internal Projects",
-      desc:
-        language === "tr"
-          ? "Kendi stüdyomuzun dijital varlığını ve işleyişini yönetmek için sıfırdan inşa ettiğimiz çözümler."
-          : language === "de"
-          ? "Lösungen, die wir von Grund auf neu entwickelt haben, um die digitale Präsenz unseres eigenen Studios zu verwalten."
-          : "Bespoke solutions we built from scratch to manage our own studio's digital presence and operations.",
-    },
-    {
       id: "concept-work" as ProjectCategory,
       title:
         language === "tr"
-          ? "Çözüm Yetkinlikleri & Konsept Mimari"
+          ? "Konsept ve teknik çözüm çalışmaları"
           : language === "de"
-          ? "Lösungskompetenzen & Konzeptarchitektur"
-          : "Solution Capabilities & Concept Architecture",
+          ? "Konzept- und technische Lösungstudien"
+          : "Concept and technical solution works",
       desc:
         language === "tr"
           ? "Teknik mimari yetkinliklerimizi, çok-kiracılı (multi-tenant) sistem tasarımlarımızı gösteren referans modeller."
@@ -66,14 +87,31 @@ export default function ProjelerClient() {
           ? "Referenzmodelle, die unsere technischen Architekturkompetenzen und Mandantensystemdesigns demonstrieren."
           : "Reference models demonstrating our technical architectural capabilities and multi-tenant system designs.",
     },
+    {
+      id: "internal-project" as ProjectCategory,
+      title:
+        language === "tr"
+          ? "Solvaria için geliştirdiğimiz sistemler"
+          : language === "de"
+          ? "Für Solvaria entwickelte Systeme"
+          : "Systems we develop for Solvaria",
+      desc:
+        language === "tr"
+          ? "Kendi stüdyomuzun dijital varlığını ve işleyişini yönetmek için sıfırdan inşa ettiğimiz çözümler."
+          : language === "de"
+          ? "Lösungen, die wir von Grund auf neu entwickelt haben, um die digitale Präsenz unseres eigenen Studios zu verwalten."
+          : "Bespoke solutions we built from scratch to manage our own studio's digital presence and operations.",
+    },
   ];
+
+  const visibleCategories = categories.filter((cat) => activeFilter === "all" || cat.id === activeFilter);
 
   return (
     <main className="w-full" style={{ overflowX: "clip" }}>
       <Navbar />
 
       {/* Hero */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-20">
+      <section className="relative pt-32 pb-8 md:pt-40 md:pb-12">
         <div className="bg-grid absolute inset-0 -z-10" />
         <div className="mx-auto max-w-6xl px-5">
           <p className="mono-label mb-4">{t.projects.label}</p>
@@ -94,9 +132,35 @@ export default function ProjelerClient() {
         </div>
       </section>
 
+      {/* Filter Tabs */}
+      <section className="relative z-20 mb-12">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="flex flex-wrap items-center gap-2 border-b border-line pb-4" role="tablist" aria-label="Project filter">
+            {filterTabs.map((tab) => {
+              const isActive = activeFilter === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => handleFilterChange(tab.id)}
+                  className={`rounded-lg px-4 py-2 text-xs font-semibold tracking-wide transition-all ${
+                    isActive
+                      ? "bg-accent text-[#000000] font-bold shadow-sm"
+                      : "border border-line hover:border-accent/40 text-muted hover:text-ink"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Categories sections */}
       <div className="space-y-16 pb-20 md:pb-28">
-        {categories.map((cat) => {
+        {visibleCategories.map((cat) => {
           const list = allProjects.filter((p) => p.category === cat.id);
           if (list.length === 0) return null;
 

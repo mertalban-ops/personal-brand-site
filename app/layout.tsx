@@ -22,20 +22,26 @@ const mono = IBM_Plex_Mono({
 
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ActiveProjectProvider } from "@/context/ActiveProjectContext";
-import SceneBackground from "@/components/SceneBackground";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/react";
+import { siteConfig } from "@/data/config";
+import ClientSceneBackground from "@/components/ClientSceneBackground";
 
 export const metadata: Metadata = {
   title: "Solvaria — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
   description:
     "Mert Alban / Solvaria: KOBİ'ler için kurumsal web siteleri, özel iş takip sistemleri, web uygulamaları, SaaS ürünleri ve otomasyon çözümleri.",
+  metadataBase: new URL(siteConfig.baseUrl),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Solvaria — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
     description:
       "Kurumsal web sitelerinden iş takip sistemlerine, web uygulamalarından SaaS altyapısına kadar işletmenize özel dijital çözümler geliştiriyoruz.",
     locale: "tr_TR",
     type: "website",
+    url: siteConfig.baseUrl,
   },
 };
 
@@ -51,30 +57,30 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://personal-brand-site-azure.vercel.app/#organization",
-        "name": "Solvaria",
-        "url": "https://personal-brand-site-azure.vercel.app",
-        "logo": "https://personal-brand-site-azure.vercel.app/logo.png",
-        "sameAs": ["https://github.com/mertalban"]
+        "@id": `${siteConfig.baseUrl}/#organization`,
+        "name": siteConfig.brandName,
+        "url": siteConfig.baseUrl,
+        "logo": `${siteConfig.baseUrl}/logo.png`,
+        "sameAs": [siteConfig.github, siteConfig.linkedin].filter(Boolean)
       },
       {
         "@type": "Person",
-        "@id": "https://personal-brand-site-azure.vercel.app/#person",
+        "@id": `${siteConfig.baseUrl}/#person`,
         "name": "Mert Alban",
         "jobTitle": "Founder & Lead Software Engineer",
         "worksFor": {
-          "@id": "https://personal-brand-site-azure.vercel.app/#organization"
+          "@id": `${siteConfig.baseUrl}/#organization`
         },
-        "url": "https://personal-brand-site-azure.vercel.app",
-        "sameAs": ["https://github.com/mertalban"]
+        "url": siteConfig.baseUrl,
+        "sameAs": [siteConfig.github, siteConfig.linkedin].filter(Boolean)
       },
       {
         "@type": "WebSite",
-        "@id": "https://personal-brand-site-azure.vercel.app/#website",
-        "url": "https://personal-brand-site-azure.vercel.app",
-        "name": "Solvaria",
+        "@id": `${siteConfig.baseUrl}/#website`,
+        "url": siteConfig.baseUrl,
+        "name": siteConfig.brandName,
         "publisher": {
-          "@id": "https://personal-brand-site-azure.vercel.app/#organization"
+          "@id": `${siteConfig.baseUrl}/#organization`
         }
       }
     ]
@@ -94,7 +100,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <LanguageProvider>
           <ActiveProjectProvider>
-            <SceneBackground />
+            <ClientSceneBackground />
             {children}
             <Footer />
             <Analytics />

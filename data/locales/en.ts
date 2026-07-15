@@ -10,9 +10,10 @@ export const en: Dictionary = {
     contactBtn: "Discuss Project",
     privacy: "Privacy",
     terms: "Terms of Use",
+    cooperation: "Partnership",
   },
   hero: {
-    kicker: "Custom Business Systems · Inventory & Finance · Automation · SaaS Infrastructure",
+    kicker: "Bespoke Software & Digital Operations Systems",
     title1: "We transform your messy business processes into ",
     titleHighlight: "digital operation systems.",
     title2: "",

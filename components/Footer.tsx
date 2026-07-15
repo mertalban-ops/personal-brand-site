@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Mail, MessageCircle, MapPin } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { contact } from "@/data/contact";
+import { siteConfig } from "@/data/config";
 import { footerLinks, NavLink } from "@/data/navigation";
 
 export default function Footer() {
@@ -22,6 +22,8 @@ export default function Footer() {
     return "WhatsApp'tan yaz";
   };
 
+  const location = language === "en" ? siteConfig.locationEn : language === "de" ? siteConfig.locationDe : siteConfig.locationTr;
+
   return (
     <footer className="border-t mt-0 pt-14 pb-8" style={{ borderColor: "var(--line)", background: "var(--bg)" }}>
       <div className="mx-auto max-w-6xl px-5">
@@ -30,7 +32,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-2">
             <Link href="/" className="display text-base font-bold tracking-tight text-ink">
-              SOLVARIA
+              {siteConfig.brandName.toUpperCase()}
             </Link>
             <p className="mt-3 max-w-sm text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
               {t.contact.footerText}
@@ -39,16 +41,16 @@ export default function Footer() {
             {/* Always-visible contact */}
             <div className="mt-6 flex flex-col gap-3">
               <a
-                href={`mailto:${contact.email}?subject=${encodeURIComponent("Proje talebi")}`}
+                href={`mailto:${siteConfig.email}?subject=${encodeURIComponent("Proje talebi")}`}
                 className="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-accent"
                 style={{ color: "var(--muted)" }}
               >
                 <Mail className="h-4 w-4 flex-shrink-0" style={{ color: "var(--accent)" }} />
-                {contact.email}
+                {siteConfig.email}
               </a>
-              {contact.whatsapp && (
+              {siteConfig.whatsappEnabled && (
                 <a
-                  href={`https://wa.me/${contact.whatsapp}`}
+                  href={`https://wa.me/${siteConfig.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-accent"
@@ -63,7 +65,7 @@ export default function Footer() {
                 style={{ color: "var(--faint)" }}
               >
                 <MapPin className="h-4 w-4 flex-shrink-0" />
-                {contact.location}
+                {location}
               </span>
             </div>
           </div>
@@ -102,12 +104,12 @@ export default function Footer() {
           className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t text-xs"
           style={{ borderColor: "var(--line)", color: "var(--faint)" }}
         >
-          <p>© {year} {contact.name}. {t.contact.rights}</p>
+          <p>© {year} {siteConfig.brandName}. {t.contact.rights}</p>
           <div className="flex items-center gap-4">
             <Link href="/gizlilik" className="transition-colors hover:text-ink">{t.nav.privacy ?? "Gizlilik"}</Link>
             <Link href="/kullanim-kosullari" className="transition-colors hover:text-ink">{t.nav.terms ?? "Kullanım Koşulları"}</Link>
             <span className="font-mono uppercase tracking-wider hidden md:inline" style={{ fontSize: "0.65rem" }}>
-              Digital Operation Systems · {contact.location}
+              Digital Operation Systems · {location}
             </span>
           </div>
         </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getSolutionBySlug, solutionsTr } from "@/data/solutions";
 import CozumlerDetailClient from "./CozumlerDetailClient";
+import { siteConfig } from "@/data/config";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -17,6 +18,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${solution.title} — Solvaria`,
     description: solution.tagline,
+    alternates: {
+      canonical: `${siteConfig.baseUrl}/cozumler/${slug}`,
+    },
   };
 }
 
@@ -26,5 +30,52 @@ export default async function SolutionDetailPage({ params }: Props) {
   const solution = getSolutionBySlug(slug, "tr");
   if (!solution) notFound();
 
-  return <CozumlerDetailClient slug={slug} />;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Ana Sayfa",
+            "item": siteConfig.baseUrl
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Çözümler",
+            "item": `${siteConfig.baseUrl}/cozumler`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": solution.title,
+            "item": `${siteConfig.baseUrl}/cozumler/${slug}`
+          }
+        ]
+      },
+      {
+        "@type": "Service",
+        "name": solution.title,
+        "description": solution.tagline,
+        "provider": {
+          "@type": "Organization",
+          "name": siteConfig.brandName,
+          "url": siteConfig.baseUrl
+        }
+      }
+    ]
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <CozumlerDetailClient slug={slug} />
+    </>
+  );
 }

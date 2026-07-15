@@ -9,11 +9,23 @@ import {
   useMotionValue,
 } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
-import { SplineScene } from "@/components/ui/splite";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const SplineScene = dynamic(() => import("@/components/ui/splite").then((m) => m.SplineScene), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center">
+      <div
+        className="h-8 w-8 rounded-full border-2 border-t-transparent animate-spin"
+        style={{ borderColor: "var(--accent)", borderTopColor: "transparent" }}
+      />
+    </div>
+  ),
+});
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const reduce = useReducedMotion();
   const sectionRef    = useRef<HTMLElement>(null);
   const robotColRef   = useRef<HTMLDivElement>(null);
@@ -126,7 +138,11 @@ export default function Hero() {
             </Link>
           </motion.div>
           <motion.p className="mt-6 text-xs text-faint" {...enter(0.6)}>
-            Web siteleri · İş takip sistemleri · Web uygulamaları · SaaS ürünleri · Otomasyon
+            {language === "tr"
+              ? "Web Siteleri · İş Takip Sistemleri · SaaS & Otomasyon"
+              : language === "de"
+              ? "Websites · Arbeitsverfolgungssysteme · SaaS & Automatisierung"
+              : "Websites · Work Tracking Systems · SaaS & Automation"}
           </motion.p>
         </motion.div>
 

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import ProjelerClient from "./ProjelerClient";
 
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function ProjelerPage() {
-  return <ProjelerClient />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-bg flex items-center justify-center text-muted">Loading...</div>}>
+      <ProjelerClient />
+    </Suspense>
+  );
 }

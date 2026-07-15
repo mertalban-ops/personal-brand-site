@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useRef } from "react";
 import { ArrowRight, ArrowLeft, CheckCircle2, AlertCircle } from "lucide-react";
 import { submitContactForm } from "@/app/actions/contact";
 import { useLanguage } from "@/context/LanguageContext";
+import { siteConfig } from "@/data/config";
+import { track } from "@vercel/analytics";
 
 type FormState = {
   name: string;
@@ -11,25 +13,32 @@ type FormState = {
   email: string;
   phone: string;
   needType: string;
+  message: string;
   currentMethod: string;
   problem: string;
-  expected: string;
+  userCount: string;
   timeline: string;
+  budget: string;
+  additionalInfo: string;
 };
 
 export default function ContactForm() {
   const { language } = useLanguage();
   const [stage, setStage] = useState<1 | 2>(1);
+  const hasTrackedStart = useRef(false);
   const [form, setForm] = useState<FormState>({
     name: "",
     company: "",
     email: "",
     phone: "",
     needType: "",
+    message: "",
     currentMethod: "",
     problem: "",
-    expected: "",
+    userCount: "",
     timeline: "",
+    budget: "",
+    additionalInfo: "",
   });
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
@@ -49,22 +58,22 @@ export default function ContactForm() {
     phonePlaceholder: "İletişim numarası (isteğe bağlı)",
     needType: "Çözüm Türü *",
     needPlaceholder: "Seçin...",
-    needTypes: [
-      "KOBİ Operasyon Sistemleri (Stok, Cari, Tahsilat)",
-      "Kurumsal Web ve Dijital Marka",
-      "SaaS ve Otomasyon Altyapıları",
-      "Diğer Özel Yazılımlar",
-    ],
+    message: "Kısa Mesaj",
+    messagePlaceholder: "Varsa proje hakkında kısa bir not",
     next: "Sonraki Adım",
     back: "Geri",
     currentMethod: "Şu an süreçlerinizi nasıl takip ediyorsunuz?",
     currentPlaceholder: "Excel, defter, WhatsApp, hazır programlar...",
     problem: "İşletmenizde çözmek istediğiniz en büyük darboğaz nedir? *",
     problemPlaceholder: "Örn: Stok sayımları tutarsız, tahsilatlar unutuluyor...",
-    expected: "Bu sistemden temel beklentiniz nedir?",
-    expectedPlaceholder: "Hangi işlemlerin otomatikleşmesini istersiniz?",
-    timeline: "Zamanlama ve bütçe beklentiniz",
-    timelinePlaceholder: "Örn: 1-2 ay içinde canlıya geçmeli...",
+    userCount: "Sistemi kullanacak kişi sayısı",
+    userCountPlaceholder: "Örn: 5, 20, 100...",
+    timeline: "Beklenen teslim zamanlaması",
+    timelinePlaceholder: "Örn: 1-2 ay içinde, acil, esnek...",
+    budget: "Tahmini bütçe aralığı",
+    budgetPlaceholder: "Bütçe seçin...",
+    additionalInfo: "Ek bilgi veya eklemek istedikleriniz",
+    additionalInfoPlaceholder: "Sistem entegrasyonları, özel güvenlik talepleri vb.",
     privacyNote: "Talebinizi göndererek Gizlilik Sözleşmesini okuduğunuzu onaylarsınız.",
     submit: "Talebi Gönder",
     submitting: "Gönderiliyor...",
@@ -84,22 +93,22 @@ export default function ContactForm() {
     phonePlaceholder: "Phone number (optional)",
     needType: "Solution Type *",
     needPlaceholder: "Select...",
-    needTypes: [
-      "SME Operational Systems (Inventory, Accounts, Finance)",
-      "Corporate Web & Digital Brand",
-      "SaaS & Automation Infrastructures",
-      "Other Custom Software",
-    ],
+    message: "Short Message",
+    messagePlaceholder: "A quick note about your project",
     next: "Next Step",
     back: "Back",
     currentMethod: "How do you currently track your workflows?",
     currentPlaceholder: "Excel, notebooks, WhatsApp, off-the-shelf software...",
     problem: "What is the biggest operational bottleneck you want to solve? *",
     problemPlaceholder: "E.g. inventory mismatch, collections are forgotten...",
-    expected: "What is your main expectation from this system?",
-    expectedPlaceholder: "Which manual tasks do you want to automate?",
-    timeline: "Expected timeline and budget",
-    timelinePlaceholder: "E.g. launch within 1-2 months...",
+    userCount: "Number of system users",
+    userCountPlaceholder: "E.g. 5, 20, 100...",
+    timeline: "Expected timeline",
+    timelinePlaceholder: "E.g. within 1-2 months, urgent, flexible...",
+    budget: "Estimated budget range",
+    budgetPlaceholder: "Select budget...",
+    additionalInfo: "Additional details or requirements",
+    additionalInfoPlaceholder: "API integrations, specific security needs, etc.",
     privacyNote: "By submitting, you agree that you have read our Privacy Policy.",
     submit: "Submit Proposal",
     submitting: "Submitting...",
@@ -119,22 +128,22 @@ export default function ContactForm() {
     phonePlaceholder: "Telefonnummer (optional)",
     needType: "Lösungstyp *",
     needPlaceholder: "Wählen...",
-    needTypes: [
-      "KMU-Betriebssysteme (Lager, Konten, Finanzen)",
-      "Unternehmensweb & Digitale Marke",
-      "SaaS- & Automatisierungs-Infrastrukturen",
-      "Andere maßgeschneiderte Software",
-    ],
+    message: "Kurze Nachricht",
+    messagePlaceholder: "Eine kurze Notiz zu Ihrem Projekt",
     next: "Nächster Schritt",
     back: "Zurück",
     currentMethod: "Wie verfolgen Sie Ihre Workflows derzeit?",
     currentPlaceholder: "Excel, Notizbücher, WhatsApp, Standardsoftware...",
     problem: "Was ist der größte operative Engpass, den Sie lösen möchten? *",
     problemPlaceholder: "Z.B. Lagerbestände ungenau, Einnahmen werden vergessen...",
-    expected: "Was ist Ihre Haupterwartung an dieses System?",
-    expectedPlaceholder: "Welche manuellen Aufgaben möchten Sie automatisieren?",
-    timeline: "Gewünschter Zeitrahmen und Budget",
-    timelinePlaceholder: "Z.B. Live-Schaltung in 1-2 Monaten...",
+    userCount: "Anzahl der Systembenutzer",
+    userCountPlaceholder: "Z.B. 5, 20, 100...",
+    timeline: "Gewünschter Zeitrahmen",
+    timelinePlaceholder: "Z.B. in 1-2 Monaten, dringend, flexibel...",
+    budget: "Geschätztes Budget",
+    budgetPlaceholder: "Budget wählen...",
+    additionalInfo: "Zusätzliche Details oder Anforderungen",
+    additionalInfoPlaceholder: "API-Integrationen, spezifische Sicherheitsanforderungen etc.",
     privacyNote: "Mit der Einsendung erklären Sie sich mit unserer Datenschutzerklärung einverstanden.",
     submit: "Anfrage senden",
     submitting: "Wird gesendet...",
@@ -143,9 +152,58 @@ export default function ContactForm() {
 
   const c = language === "en" ? en : language === "de" ? de : tr;
 
+  const needTypesTr = [
+    "Kurumsal web sitesi",
+    "Kişisel marka / portföy sitesi",
+    "Landing page",
+    "İş takip sistemi",
+    "Stok ve cari hesap sistemi",
+    "Servis / operasyon paneli",
+    "Web uygulaması",
+    "SaaS ürünü",
+    "Otomasyon",
+    "İş birliği",
+    "Henüz emin değilim",
+    "Diğer",
+  ];
+  const needTypesEn = [
+    "Corporate website",
+    "Personal brand / portfolio site",
+    "Landing page",
+    "Work tracking system",
+    "Inventory & accounts system",
+    "Service / operations panel",
+    "Web application",
+    "SaaS product",
+    "Automation",
+    "Partnership / Cooperation",
+    "Not sure yet",
+    "Other",
+  ];
+  const needTypesDe = [
+    "Unternehmenswebsite",
+    "Persönliche Marken- oder Portfolioseite",
+    "Landingpage",
+    "Arbeitsverfolgungssystem",
+    "Lager- und Kontokorrentsystem",
+    "Service- / Betriebspanel",
+    "Webanwendung",
+    "SaaS-Produkt",
+    "Automatisierung",
+    "Kooperation",
+    "Noch nicht sicher",
+    "Andere",
+  ];
+
+  const needTypes = language === "en" ? needTypesEn : language === "de" ? needTypesDe : needTypesTr;
+
   const set = (field: keyof FormState) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
+    if (!hasTrackedStart.current) {
+      hasTrackedStart.current = true;
+      try { track("contact_form_start"); } catch (err) {}
+    }
     setForm((prev) => ({ ...prev, [field]: e.target.value }));
     setErrorMsg(null);
   };
@@ -165,6 +223,7 @@ export default function ContactForm() {
 
   const handleNext = () => {
     if (validateStage1()) {
+      try { track("contact_form_step1_complete", { needType: form.needType }); } catch (err) {}
       setStage(2);
     }
   };
@@ -188,6 +247,7 @@ export default function ContactForm() {
 
       const result = await submitContactForm(null, formData);
       if (result.success) {
+        try { track("contact_form_submitted", { needType: form.needType, company: !!form.company }); } catch (err) {}
         setSuccessMsg(result.message);
         setErrorMsg(null);
       } else {
@@ -220,6 +280,7 @@ export default function ContactForm() {
   const inputClass =
     "w-full rounded-lg border border-line bg-bg-raised/30 px-4 py-2.5 text-sm text-ink placeholder:text-faint focus:border-accent/60 focus:outline-none focus:ring-1 focus:ring-accent/30 transition-colors";
   const labelClass = "block text-xs font-semibold text-muted mb-1.5";
+  const showBudget = siteConfig.budgetRanges && siteConfig.budgetRanges.length > 0;
 
   return (
     <div className="card-surface rounded-2xl p-6 md:p-8 border border-line bg-surface/30">
@@ -318,28 +379,45 @@ export default function ContactForm() {
               </div>
             </div>
 
+            <div className="grid gap-4 sm:grid-cols-1">
+              <div>
+                <label className={labelClass} htmlFor="cf-needType">
+                  {c.needType}
+                </label>
+                <select
+                  id="cf-needType"
+                  required
+                  value={form.needType}
+                  onChange={set("needType")}
+                  className={inputClass}
+                >
+                  <option value="">{c.needPlaceholder}</option>
+                  {needTypes.map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
             <div>
-              <label className={labelClass} htmlFor="cf-needType">
-                {c.needType}
+              <label className={labelClass} htmlFor="cf-message">
+                {c.message}
               </label>
-              <select
-                id="cf-needType"
-                required
-                value={form.needType}
-                onChange={set("needType")}
+              <textarea
+                id="cf-message"
+                value={form.message}
+                onChange={set("message")}
+                rows={2}
                 className={inputClass}
-              >
-                <option value="">{c.needPlaceholder}</option>
-                {c.needTypes.map((n) => (
-                  <option key={n} value={n}>
-                    {n}
-                  </option>
-                ))}
-              </select>
+                placeholder={c.messagePlaceholder}
+              />
             </div>
 
             <div className="pt-2">
               <button
+                id="cf-next-btn"
                 type="button"
                 onClick={handleNext}
                 className="btn-shine glow-accent flex w-full items-center justify-center gap-2 rounded-lg bg-accent py-3 font-semibold text-black"
@@ -380,30 +458,74 @@ export default function ContactForm() {
               />
             </div>
 
-            <div>
-              <label className={labelClass} htmlFor="cf-expected">
-                {c.expected}
-              </label>
-              <textarea
-                id="cf-expected"
-                value={form.expected}
-                onChange={set("expected")}
-                rows={2}
-                className={inputClass}
-                placeholder={c.expectedPlaceholder}
-              />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label className={labelClass} htmlFor="cf-userCount">
+                  {c.userCount}
+                </label>
+                <input
+                  id="cf-userCount"
+                  value={form.userCount}
+                  onChange={set("userCount")}
+                  className={inputClass}
+                  placeholder={c.userCountPlaceholder}
+                />
+              </div>
+
+              <div>
+                <label className={labelClass} htmlFor="cf-timeline">
+                  {c.timeline}
+                </label>
+                <input
+                  id="cf-timeline"
+                  value={form.timeline}
+                  onChange={set("timeline")}
+                  className={inputClass}
+                  placeholder={c.timelinePlaceholder}
+                />
+              </div>
             </div>
 
+            {showBudget && (
+              <div>
+                <label className={labelClass} htmlFor="cf-budget">
+                  {c.budget}
+                </label>
+                <select
+                  id="cf-budget"
+                  value={form.budget}
+                  onChange={set("budget")}
+                  className={inputClass}
+                >
+                  <option value="">{c.budgetPlaceholder}</option>
+                  {siteConfig.budgetRanges.map((range) => {
+                    const label =
+                      language === "en"
+                        ? range.labelEn
+                        : language === "de"
+                        ? range.labelDe
+                        : range.labelTr;
+                    return (
+                      <option key={range.value} value={range.value}>
+                        {label}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            )}
+
             <div>
-              <label className={labelClass} htmlFor="cf-timeline">
-                {c.timeline}
+              <label className={labelClass} htmlFor="cf-additionalInfo">
+                {c.additionalInfo}
               </label>
-              <input
-                id="cf-timeline"
-                value={form.timeline}
-                onChange={set("timeline")}
+              <textarea
+                id="cf-additionalInfo"
+                value={form.additionalInfo}
+                onChange={set("additionalInfo")}
+                rows={2}
                 className={inputClass}
-                placeholder={c.timelinePlaceholder}
+                placeholder={c.additionalInfoPlaceholder}
               />
             </div>
 

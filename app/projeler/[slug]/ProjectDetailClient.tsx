@@ -10,11 +10,64 @@ import { getProjectBySlug, getProjects } from "@/data/projects";
 import { useLanguage } from "@/context/LanguageContext";
 import { notFound } from "next/navigation";
 
+// Dynamic lazy import of visual preview mockups
+import dynamic from "next/dynamic";
+
+const StockAppPreview = dynamic(() => import("@/components/previews/StockAppPreview"), {
+  ssr: false,
+  loading: () => <div className="animate-pulse bg-bg-raised w-full h-full rounded-xl" />,
+});
+const AutoServicePreview = dynamic(() => import("@/components/previews/AutoServicePreview"), {
+  ssr: false,
+  loading: () => <div className="animate-pulse bg-bg-raised w-full h-full rounded-xl" />,
+});
+const CarpassPreview = dynamic(() => import("@/components/previews/CarpassPreview"), {
+  ssr: false,
+  loading: () => <div className="animate-pulse bg-bg-raised w-full h-full rounded-xl" />,
+});
+
 export default function ProjectDetailClient({ slug }: { slug: string }) {
   const { language, t } = useLanguage();
   const project = getProjectBySlug(slug, language);
 
   if (!project) notFound();
+
+  const isConcept = project.category === "concept-work";
+
+  const sectionLabels: Record<string, Record<string, string>> = {
+    tr: {
+      summary: isConcept ? "Çözülmek İstenen Problem" : "Proje Özeti",
+      target: isConcept ? "Hedeflenen Kullanıcı Kitlesi" : "Hedef Kullanıcı",
+      solution: isConcept ? "Mimari Yaklaşım ve Hedefler" : "Çözüm Yaklaşımı",
+      modules: isConcept ? "Önerilen Sistem Bileşenleri" : "Sistem Modülleri",
+      journey: isConcept ? "Örnek Ürünleştirme Akışı" : "Kullanıcı Yolculuğu",
+      outcomes: isConcept ? "Mimari Hedefler & Faydalar" : "Sağlanan Çıktılar",
+      lessons: isConcept ? "Teknik Kararlar" : "Öğrenimler",
+      future: isConcept ? "Genişletilebilir Modüller" : "Gelecek Planlar",
+    },
+    en: {
+      summary: isConcept ? "Problem to Solve" : "Project Summary",
+      target: isConcept ? "Target User Group" : "Target User",
+      solution: isConcept ? "Architectural Approach & Goals" : "Solution Approach",
+      modules: isConcept ? "Proposed System Components" : "System Modules",
+      journey: isConcept ? "Example Product Flow" : "User Journey",
+      outcomes: isConcept ? "Architectural Targets & Benefits" : "Outcomes",
+      lessons: isConcept ? "Technical Decisions" : "Lessons Learned",
+      future: isConcept ? "Extensible Modules" : "Future Plans",
+    },
+    de: {
+      summary: isConcept ? "Zu lösendes Problem" : "Projektübersicht",
+      target: isConcept ? "Zielgruppe" : "Zielgruppe",
+      solution: isConcept ? "Architekturansatz & Ziele" : "Lösungsansatz",
+      modules: isConcept ? "Vorgeschlagene Systemkomponenten" : "Systemmodule",
+      journey: isConcept ? "Beispielhafter Produktfluss" : "Benutzerreise",
+      outcomes: isConcept ? "Architektonische Ziele & Vorteile" : "Ergebnisse",
+      lessons: isConcept ? "Technische Entscheidungen" : "Erkenntnisse",
+      future: isConcept ? "Erweiterbare Module" : "Zukunftspläne",
+    }
+  };
+
+  const l = sectionLabels[language] || sectionLabels.tr;
 
   // Filter other projects to display in local language
   const otherProjects = getProjects(language).filter((p) => p.slug !== project.slug);
@@ -29,7 +82,41 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
         status={project.status}
         problem={project.problem}
         tech={project.tech}
+        category={project.category}
       />
+
+      {/* Visual Prototype / Interactive Mockup */}
+      {(project.slug === "stockapp" || project.slug === "hezer-auto-service" || project.slug === "carpass") && (
+        <AnimatedSection className="border-t border-line">
+          <div className="mx-auto max-w-6xl px-5 py-16">
+            <div className="grid gap-10 lg:grid-cols-5 items-center">
+              <div className="lg:col-span-2">
+                <span className="mono-label mb-2 block">
+                  {language === "tr" ? "GÖRSEL PROTOTİP" : language === "de" ? "VISUELLER PROTOTYP" : "VISUAL PROTOTYPE"}
+                </span>
+                <h2 className="display text-3xl font-bold text-ink mb-4">
+                  {language === "tr" ? "Sistem Arayüzü ve Akış Tasarımı" : language === "de" ? "Systemoberfläche & Ablaufdesign" : "System Interface & Flow Design"}
+                </h2>
+                <p className="text-muted leading-relaxed">
+                  {language === "tr"
+                    ? "İşletmenin ihtiyaçlarına göre sıfırdan kurgulanan ve canlıya alınan operasyonel arayüz yapısının çalışan prototipi."
+                    : language === "de"
+                    ? "Ein funktionierender Prototyp der operativen Schnittstellenstruktur, die basierend auf den Anforderungen des Unternehmens von Grund auf neu aufgebaut und in Betrieb genommen wurde."
+                    : "A working prototype of the operational interface structure built from scratch and put into production based on the company's needs."}
+                </p>
+              </div>
+              <div className="lg:col-span-3 card-surface p-6 rounded-2xl border border-line relative overflow-hidden bg-bg-raised/10">
+                <span className="absolute top-3 right-3 text-[10px] font-mono text-faint uppercase z-30">Mockup Grid</span>
+                <div className="w-full h-80 rounded-xl overflow-hidden bg-bg">
+                  {project.slug === "stockapp" && <StockAppPreview reduce={false} />}
+                  {project.slug === "hezer-auto-service" && <AutoServicePreview reduce={false} />}
+                  {project.slug === "carpass" && <CarpassPreview reduce={false} />}
+                </div>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+      )}
 
       {/* Summary and Target User */}
       <AnimatedSection className="band-petrol border-y border-line">
@@ -37,13 +124,13 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
           <div className="grid gap-10 md:grid-cols-2">
             <div>
               <h2 className="display text-2xl font-bold text-ink mb-4">
-                {language === "tr" ? "Proje Özeti" : language === "de" ? "Projektübersicht" : "Project Summary"}
+                {l.summary}
               </h2>
               <p className="text-muted leading-relaxed">{project.caseSummary}</p>
             </div>
             <div>
               <h2 className="display text-2xl font-bold text-ink mb-4">
-                {language === "tr" ? "Hedef Kullanıcı" : language === "de" ? "Zielgruppe" : "Target User"}
+                {l.target}
               </h2>
               <p className="text-muted leading-relaxed">{project.targetUser}</p>
             </div>
@@ -55,7 +142,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
       <AnimatedSection>
         <div className="mx-auto max-w-6xl px-5 py-16">
           <h2 className="display text-2xl font-bold text-ink mb-4">
-            {language === "tr" ? "Çözüm Yaklaşımı" : language === "de" ? "Lösungsansatz" : "Solution Approach"}
+            {l.solution}
           </h2>
           <p className="text-muted leading-relaxed max-w-2xl text-lg">{project.solution}</p>
         </div>
@@ -65,7 +152,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
       <AnimatedSection className="band-petrol border-y border-line">
         <div className="mx-auto max-w-6xl px-5 py-16">
           <h2 className="display text-2xl font-bold text-ink mb-8">
-            {language === "tr" ? "Sistem Modülleri" : language === "de" ? "Systemmodule" : "System Modules"}
+            {l.modules}
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {project.caseModules.map((mod) => (
@@ -89,7 +176,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
       <AnimatedSection>
         <div className="mx-auto max-w-6xl px-5 py-16">
           <h2 className="display text-2xl font-bold text-ink mb-8">
-            {language === "tr" ? "Kullanıcı Yolculuğu" : language === "de" ? "Benutzerreise" : "User Journey"}
+            {l.journey}
           </h2>
           <ol className="space-y-4">
             {project.userJourney.map((step, i) => (
@@ -108,7 +195,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
       <AnimatedSection className="band-petrol border-y border-line">
         <div className="mx-auto max-w-6xl px-5 py-16">
           <h2 className="display text-2xl font-bold text-ink mb-6">
-            {language === "tr" ? "Sağlanan Çıktılar" : language === "de" ? "Ergebnisse" : "Outcomes"}
+            {l.outcomes}
           </h2>
           <div className="space-y-3">
             {project.outcomes.map((o) => (
@@ -129,7 +216,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
         <AnimatedSection>
           <div className="mx-auto max-w-6xl px-5 py-16">
             <h2 className="display text-2xl font-bold text-ink mb-6">
-              {language === "tr" ? "Öğrenimler" : language === "de" ? "Erkenntnisse" : "Lessons Learned"}
+              {l.lessons}
             </h2>
             <ul className="space-y-3">
               {project.lessons.map((lesson) => (
@@ -148,7 +235,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
         <AnimatedSection className="band-petrol border-y border-line">
           <div className="mx-auto max-w-6xl px-5 py-16">
             <h2 className="display text-2xl font-bold text-ink mb-6">
-              {language === "tr" ? "Gelecek Planlar" : language === "de" ? "Zukunftspläne" : "Future Plans"}
+              {l.future}
             </h2>
             <div className="flex flex-wrap gap-3">
               {project.futureWork.map((item) => (
@@ -208,7 +295,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
         </div>
       </AnimatedSection>
 
-      <CaseStudyNextStep />
+      <CaseStudyNextStep projectSlug={project.slug} projectName={project.name} />
     </main>
   );
 }

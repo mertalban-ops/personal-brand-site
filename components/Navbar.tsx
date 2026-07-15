@@ -18,7 +18,7 @@ export default function Navbar() {
   const links = [
     { href: "/cozumler", label: t.nav.solutions },
     { href: "/projeler", label: t.nav.cases },
-    { href: "/surec", label: t.nav.process },
+    { href: "/is-birligi", label: t.nav.cooperation },
     { href: "/studyo", label: t.nav.studio },
   ];
 

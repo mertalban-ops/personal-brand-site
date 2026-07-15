@@ -7,7 +7,7 @@ type ContactSubmitResult = {
   message: string;
 };
 
-// In-memory rate limiting map for basic protection (runs per instance)
+// In-memory rate limiting map for basic protection
 const rateLimitMap = new Map<string, number[]>();
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
 const MAX_REQUESTS_PER_WINDOW = 3; // Max 3 submissions per minute
@@ -39,17 +39,20 @@ export async function submitContactForm(prevState: any, formData: FormData): Pro
     validTimestamps.push(now);
     rateLimitMap.set(clientIp, validTimestamps);
 
-    // 3. Extract and validate fields
+    // 3. Extract and validate fields (Faz 10)
     const name = formData.get("name")?.toString().trim() || "";
     const email = formData.get("email")?.toString().trim() || "";
     const company = formData.get("company")?.toString().trim() || "";
     const phone = formData.get("phone")?.toString().trim() || "";
     const needType = formData.get("needType")?.toString().trim() || "";
+    const message = formData.get("message")?.toString().trim() || "";
     
     const currentMethod = formData.get("currentMethod")?.toString().trim() || "";
     const problem = formData.get("problem")?.toString().trim() || "";
-    const expected = formData.get("expected")?.toString().trim() || "";
+    const userCount = formData.get("userCount")?.toString().trim() || "";
     const timeline = formData.get("timeline")?.toString().trim() || "";
+    const budget = formData.get("budget")?.toString().trim() || "";
+    const additionalInfo = formData.get("additionalInfo")?.toString().trim() || "";
 
     // Server-side validation
     if (!name || name.length < 2) {
@@ -73,15 +76,18 @@ export async function submitContactForm(prevState: any, formData: FormData): Pro
       company,
       phone,
       needType,
+      message,
       currentMethod,
       problem,
-      expected,
+      userCount,
       timeline,
+      budget,
+      additionalInfo,
       timestamp: new Date().toISOString(),
       clientIp
     });
 
-    // In a real application, you would connect to Supabase or send an email here:
+    // In a real application, connect to database or send an email:
     // await supabase.from('leads').insert([{ name, email, ... }])
 
     return {
