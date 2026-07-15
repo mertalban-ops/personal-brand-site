@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useSpring, useReducedMotion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { useLanguage } from "@/context/LanguageContext";
@@ -8,12 +8,23 @@ import { useLanguage } from "@/context/LanguageContext";
 export default function Process() {
   const reduce = useReducedMotion();
   const trackRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: trackRef,
     offset: ["start 75%", "end 55%"],
   });
   const progress = useSpring(scrollYProgress, { stiffness: 70, damping: 22 });
   const { t } = useLanguage();
+
+  const disableAnim = reduce || isMobile;
 
   return (
     <AnimatedSection id="surec">
@@ -31,20 +42,21 @@ export default function Process() {
           className="absolute left-[11px] top-2 w-px origin-top bg-accent md:hidden"
           style={{
             height: "calc(100% - 1rem)",
-            scaleY: reduce ? 1 : progress,
+            scaleY: disableAnim ? 1 : progress,
           }}
         />
         <motion.div
           className="absolute left-0 right-0 top-[11px] hidden h-px origin-left bg-accent md:block"
-          style={{ scaleX: reduce ? 1 : progress }}
+          style={{ scaleX: disableAnim ? 1 : progress }}
         />
 
         <div className="grid gap-10 md:grid-cols-4 md:gap-6">
           {t.process.items.map((step, i) => (
             <motion.div
               key={step.step}
-              initial={reduce ? false : { opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={disableAnim ? false : { opacity: 0, y: 24 }}
+              animate={disableAnim ? { opacity: 1, y: 0 } : undefined}
+              whileInView={disableAnim ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
               className="relative"

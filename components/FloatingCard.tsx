@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type ReactNode } from "react";
+import { useRef, useState, useEffect, type ReactNode } from "react";
 import { useReducedMotion } from "framer-motion";
 
 type Props = {
@@ -14,9 +14,17 @@ export default function FloatingCard({ children, className = "", maxTilt = 12 }:
   const ref = useRef<HTMLDivElement>(null);
   const [transform, setTransform] = useState("");
   const reduce = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const onMove = (e: React.MouseEvent) => {
-    if (reduce || !ref.current) return;
+    if (reduce || isMobile || !ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width - 0.5;
     const py = (e.clientY - rect.top) / rect.height - 0.5;

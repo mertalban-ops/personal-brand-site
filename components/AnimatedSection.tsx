@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 
 type Props = {
   children: ReactNode;
@@ -12,8 +12,16 @@ type Props = {
 
 export default function AnimatedSection({ children, className, delay, id }: Props) {
   const reduce = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(true);
 
-  if (reduce) {
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  if (reduce || isMobile) {
     return (
       <section id={id} className={className}>
         {children}
