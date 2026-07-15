@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import {
   motion,
   useScroll,
@@ -31,6 +31,15 @@ export default function Hero() {
   const robotColRef   = useRef<HTMLDivElement>(null);
   const isHoveringRef = useRef(false);
 
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   const { scrollYProgress: hp } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -57,7 +66,7 @@ export default function Hero() {
 
   // Gaze simulation — make Spline robot look at phone when user is not hovering
   useEffect(() => {
-    if (reduce) return;
+    if (reduce || isMobile) return;
     const interval = setInterval(() => {
       if (isHoveringRef.current) return;
       const col = robotColRef.current;
@@ -76,7 +85,7 @@ export default function Hero() {
       );
     }, 3500);
     return () => clearInterval(interval);
-  }, [reduce]);
+  }, [reduce, isMobile]);
 
   const enter = (delay: number) =>
     reduce
@@ -154,10 +163,35 @@ export default function Hero() {
           onMouseLeave={onRobotMouseLeave}
           {...enter(0.3)}
         >
-          <SplineScene
-            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-            className="h-full w-full"
-          />
+          {isMobile ? (
+            <div className="w-full h-full flex items-center justify-center relative bg-bg-raised/20 rounded-2xl border border-line/50 overflow-hidden">
+              <div className="absolute inset-0 bg-grid opacity-[0.08]" />
+              <div className="text-center p-6 z-10">
+                <div className="relative inline-block mb-4">
+                  <div className="h-16 w-16 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mx-auto animate-pulse">
+                    <svg className="w-8 h-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="text-ink font-semibold text-base mb-1">
+                  {language === "tr" ? "Güvenli B2B Dijital Çözümler" : language === "de" ? "Sichere B2B-Digitallösungen" : "Secure B2B Digital Solutions"}
+                </h3>
+                <p className="text-muted text-xs max-w-xs mx-auto">
+                  {language === "tr"
+                    ? "Solvaria ile iş süreçlerinizi otomatikleştirin ve ölçeklenebilir altyapılar kurun."
+                    : language === "de"
+                    ? "Automatisieren Sie Ihre Geschäftsprozesse und bauen Sie skalierbare Infrastrukturen mit Solvaria auf."
+                    : "Automate your business processes and build scalable infrastructures with Solvaria."}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="h-full w-full"
+            />
+          )}
 
           {/* Subtle Solvaria color grading — blends canvas tones toward brand palette */}
           <div
