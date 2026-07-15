@@ -62,13 +62,13 @@ export default function Hero() {
       const canvas = col.querySelector("canvas");
       if (!canvas) return;
       const r = canvas.getBoundingClientRect();
-      // Phone sits centered horizontally, ~58% from canvas top
+      // Phone is at left-5 corner, ~70% from top → robot looks down-left at phone
       canvas.dispatchEvent(
         new MouseEvent("mousemove", {
           bubbles: true,
           cancelable: true,
-          clientX: r.left + r.width  * 0.50,
-          clientY: r.top  + r.height * 0.58,
+          clientX: r.left + r.width  * 0.18,
+          clientY: r.top  + r.height * 0.70,
         })
       );
     }, 3500);
@@ -161,18 +161,17 @@ export default function Hero() {
             }}
           />
 
-          {/* Phone overlay — hidden on mobile, parallax tilt on desktop */}
+          {/* Phone overlay — bottom-left corner so robot stays visible above */}
           <motion.div
-            className="absolute bottom-8 left-1/2 z-10 hidden sm:block"
+            className="absolute bottom-6 left-5 z-10 hidden sm:block"
             style={{
-              x: "-50%",
               rotateX: reduce ? 0 : tiltX,
               rotateY: reduce ? 0 : tiltY,
               transformPerspective: 900,
             }}
             {...enter(0.9)}
           >
-            <RobotPhoneShowcase />
+            <RobotPhoneShowcase width={115} />
           </motion.div>
         </motion.div>
       </div>

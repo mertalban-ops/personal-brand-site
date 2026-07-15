@@ -72,7 +72,7 @@ const CYCLE_MS = 18_000;
 const SUCCESS_DELAY_MS = 13_500;
 const SUCCESS_GLOW_MS  = 2_200;
 
-export default function RobotPhoneShowcase() {
+export default function RobotPhoneShowcase({ width: phoneW = 188 }: { width?: number }) {
   const reduce = useReducedMotion();
   const { activeType } = useActiveProject();
 
@@ -157,11 +157,18 @@ export default function RobotPhoneShowcase() {
 
   const accent = ACCENT[currentType];
 
-  const PHONE_W = 188;
+  // All dimensions scale proportionally with phoneW
+  const SC          = phoneW / 188;
+  const glowTop     = -Math.round(56 * SC);
+  const fingerW     = Math.max(6,  Math.round(13 * SC));
+  const fingerGap   = Math.max(3,  Math.round(5  * SC));
+  const palmW       = Math.max(38, Math.round(80 * SC));
+  const palmH       = Math.max(7,  Math.round(11 * SC));
+  const handBelow   = Math.round(28 * SC);
 
   return (
     <div ref={containerRef} className="relative select-none" aria-hidden="true">
-      {/* Screen-light glow — illuminates robot body above phone (simulates screen glow on robot) */}
+      {/* Screen-light glow — illuminates robot body above phone */}
       {!reduce && (
         <motion.div
           animate={{
@@ -171,7 +178,7 @@ export default function RobotPhoneShowcase() {
           transition={{ duration: 0.9, ease: "easeOut" }}
           style={{
             position: "absolute",
-            top: -56,
+            top: glowTop,
             left: "50%",
             transform: "translateX(-50%)",
             width: "88%",
@@ -185,7 +192,7 @@ export default function RobotPhoneShowcase() {
         />
       )}
 
-      <PhoneFrame width={PHONE_W} accentColor={accent} successGlow={successGlow}>
+      <PhoneFrame width={phoneW} accentColor={accent} successGlow={successGlow}>
         {/* App screen area — key forces remount on type change, resetting idx to 0 */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -297,12 +304,12 @@ export default function RobotPhoneShowcase() {
         )}
       </AnimatePresence>
 
-      {/* Robotic hand — 4 fingers + palm holding phone from below */}
+      {/* Robotic hand — 4 fingers + palm holding phone from below (scales with phoneW) */}
       {!reduce && (
         <div
           style={{
             position: "absolute",
-            bottom: -28,
+            bottom: -handBelow,
             left: "50%",
             transform: "translateX(-50%)",
             display: "flex",
@@ -311,7 +318,7 @@ export default function RobotPhoneShowcase() {
             pointerEvents: "none",
           }}
         >
-          <div style={{ display: "flex", gap: 5 }}>
+          <div style={{ display: "flex", gap: fingerGap }}>
             {[20, 26, 26, 20].map((h, i) => (
               <motion.div
                 key={i}
@@ -321,8 +328,8 @@ export default function RobotPhoneShowcase() {
                 }}
                 transition={{ duration: 0.5 }}
                 style={{
-                  width: 13,
-                  height: h,
+                  width: fingerW,
+                  height: Math.round(h * SC),
                   borderRadius: "3px 3px 0 0",
                   background: "linear-gradient(to bottom, #1e4a6e, #0f2035)",
                   border: "1px solid rgba(56,189,248,0.22)",
@@ -337,8 +344,8 @@ export default function RobotPhoneShowcase() {
             }}
             transition={{ duration: 0.5 }}
             style={{
-              width: 80,
-              height: 11,
+              width: palmW,
+              height: palmH,
               background: "linear-gradient(to bottom, #1e4a6e, #0f2035)",
               border: "1px solid rgba(56,189,248,0.15)",
               borderTop: "none",
