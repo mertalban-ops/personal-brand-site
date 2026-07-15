@@ -1,3 +1,9 @@
+export type ProjectCategory = 
+  | "customer-project"     // Müşteri Projeleri
+  | "product-lab"         // Solvaria Ürün Laboratuvarı — Geliştirme Aşamasında
+  | "internal-project"    // İç Projeler
+  | "concept-work";       // Çözüm Yetkinliği / Konsept Mimari
+
 export type CaseStudyModule = {
   name: string;
   features: string[];
@@ -7,6 +13,7 @@ export type Project = {
   name: string;
   tagline: string;
   status: "Active" | "In Development" | "Planned";
+  category: ProjectCategory;
   problem: string;
   solution: string;
   approach: string;
@@ -25,29 +32,26 @@ export type Project = {
   liveUrl?: string;
 };
 
-export const projects: Project[] = [
+export const projectsTr: Project[] = [
   {
     name: "StockApp",
-    tagline: "Inventory, finance, and receivables tracking",
+    tagline: "Stok, cari hesap ve tahsilat takip sistemi",
     status: "Active",
-    problem:
-      "Inventory and customer debts are scattered across notebooks and Excel, leading to missed collections.",
-    solution:
-      "A centralized web application combining inventory movements, current accounts, and collections.",
-    approach: "Built with modern web tech for real-time, data-driven management.",
-    benefit:
-      "Who owes what, what's in stock, what was collected this month—answered at a single glance.",
+    category: "customer-project",
+    problem: "İşletmenin stok ve borç verisinin defter ile Excel arasında kaybolması, yöneticinin genel durumu görememesi.",
+    solution: "Stok hareketleri, müşteri bakiyeleri ve tahsilat takibini tek arayüzde toplayan özel bir web uygulaması.",
+    approach: "Next.js ve Supabase ile gerçek zamanlı veri yönetimi altyapısı kuruldu.",
+    benefit: "Kimin ne kadar borcu var, depoda ne kaldı, bu ay ne toplandı sorularına tek ekrandan anlık cevap.",
     tech: ["Next.js", "Supabase", "TypeScript", "Tailwind CSS"],
     features: [
-      "Sales, collections, and debt dashboard",
-      "One-click PDF account statements",
-      "Quick sharing via WhatsApp",
-      "Critical low-stock alerts",
+      "Satış, tahsilat ve borç yönetim paneli",
+      "Tek tıkla otomatik PDF hesap ekstresi üretimi",
+      "WhatsApp üzerinden hızlı bakiye paylaşım akışı",
+      "Kritik seviye uyarılı canlı stok takip ekranı",
     ],
     previewType: "stockapp",
     slug: "stockapp",
-    caseSummary:
-      "Stok ve cari hesap verisi defter ile Excel'de dağınık olan bir işletme için stok hareketleri, müşteri bakiyeleri ve tahsilat takibini tek arayüzde toplayan özel bir web uygulaması geliştirildi.",
+    caseSummary: "Stok ve cari hesap verisi defter ile Excel'de dağınık olan bir işletme için stok hareketleri, müşteri bakiyeleri ve tahsilat takibini tek arayüzde toplayan özel bir web uygulaması geliştirildi.",
     targetUser: "Toptan veya perakende satış yapan, müşterilerine vadeli satış sunan KOBİ sahipleri ve yöneticileri",
     caseModules: [
       {
@@ -93,25 +97,23 @@ export const projects: Project[] = [
   },
   {
     name: "Hezer Auto Service",
-    tagline: "Auto service operations and job tracking",
+    tagline: "Araç kabul, onarım ve oto servis operasyon sistemi",
     status: "Active",
-    problem:
-      "Tracking serviced vehicles, pending jobs, and customer history relies entirely on memory and paper.",
-    solution:
-      "A mobile-friendly system logging the entire service lifecycle from vehicle intake to delivery.",
-    approach: "Mobile-first design and cloud infrastructure optimized for field and shop use.",
-    benefit: "Vehicle history and job statuses are instantly visible to the entire team.",
+    category: "customer-project",
+    problem: "Servise gelen araçların, yapılan işlemlerin ve müşteri geçmişinin tamamen kağıt ve sözlü takibe dayanması.",
+    solution: "Araç kabulünden teslime kadar tüm servis yaşam döngüsünü kayıt altına alan mobil uyumlu operasyon sistemi.",
+    approach: "Atölye ve saha kullanımına uygun, hızlı ve mobil öncelikli Supabase entegrasyonu.",
+    benefit: "Hangi aracın hangi aşamada olduğu, geçmişte ne yapıldığı tüm ekip tarafından anlık görülebilir.",
     tech: ["React Native", "Expo", "Supabase", "Playwright"],
     features: [
-      "Vehicle intake and service workflow",
-      "Comprehensive customer job history",
-      "Custom UI component library",
-      "End-to-end (E2E) testing pipeline",
+      "Adım adım araç kabul ve servis iş akışı",
+      "Plaka bazlı kalıcı müşteri onarım geçmişi",
+      "Saha personelinin kullanımı için özel mobil arayüzler",
+      "Playwright ile uçtan uca (E2E) otomatik test akışları",
     ],
     previewType: "auto-service",
     slug: "hezer-auto-service",
-    caseSummary:
-      "Araç kabul, onarım takibi ve müşteri geçmişi kağıt ve sözlü iletişime dayanan bir oto servis işletmesi için araç kabulünden teslimata kadar tüm süreç adımlarını kayıt altına alan mobil uyumlu bir operasyon sistemi geliştirildi.",
+    caseSummary: "Araç kabul, onarım takibi ve müşteri geçmişi kağıt ve sözlü iletişime dayanan bir oto servis işletmesi için araç kabulünden teslimata kadar tüm süreç adımlarını kayıt altına alan mobil uyumlu bir operasyon sistemi geliştirildi.",
     targetUser: "Servis danışmanları ve yöneticileri; müşteri kabulünden fatura kesimine kadar tüm servis sürecini takip eden personel",
     caseModules: [
       {
@@ -156,25 +158,23 @@ export const projects: Project[] = [
   },
   {
     name: "CARPASS",
-    tagline: "Vehicle history and risk analysis platform",
+    tagline: "Araç geçmişi ve yapay zekâ destekli risk analiz platformu",
     status: "In Development",
-    problem:
-      "Lack of a reliable, single-source history for used vehicles, leading to buyer hesitation.",
-    solution:
-      "A scalable platform that aggregates vehicle history and transforms it into actionable risk analysis.",
-    approach: "Designed as a SaaS model with an AI-supported backbone.",
-    benefit: "Transparency for the buyer, trust for the seller; a scalable product foundation.",
+    category: "product-lab",
+    problem: "İkinci el araç alımında güvenilir, tek merkezden yönetilen şeffaf bir geçmiş bilgisinin olmaması.",
+    solution: "Araç verilerini toplayıp analiz eden ve yapay zekâ ile risk skoruna dönüştüren SaaS platformu.",
+    approach: "Multi-tenant mimaride n8n otomasyonları ve yapay zekâ ajanları entegre edildi.",
+    benefit: "Alıcı için şeffaflık, satıcı için güvenilir belge; ölçeklenebilir bir abonelik ürünü.",
     tech: ["React Native", "Supabase", "n8n", "AI Agents"],
     features: [
-      "AI-driven Trust Report and Risk Score",
-      "Freemium billing infrastructure",
-      "Automated n8n workflows",
-      "Advanced mobile and web interfaces",
+      "Yapay zekâ destekli Güven Raporu ve Risk Skoru",
+      "Freemium abonelik ve faturalandırma altyapısı",
+      "n8n ile otomatik veri toplama iş akışları",
+      "Modern mobil arayüzler ve responsive web portalı",
     ],
     previewType: "carpass",
     slug: "carpass",
-    caseSummary:
-      "İkinci el araç alımında güvenilir bir kaynak eksikliğini gidermek için araç geçmişini toplayıp yapay zeka ile yorumlayan ve kullanıcıya risk skoru ile Trust Report sunan SaaS platform mimarisi tasarlandı ve geliştirme süreci devam ediyor.",
+    caseSummary: "İkinci el araç alımında güvenilir bir kaynak eksikliğini gidermek için araç geçmişini toplayıp yapay zeka ile yorumlayan ve kullanıcıya risk skoru ile Trust Report sunan SaaS platform mimarisi tasarlandı ve geliştirme süreci devam ediyor.",
     targetUser: "İkinci el araç alıcıları ve bayiler; güvenilir araç geçmişine ihtiyaç duyan bireyler ve kurumsal alıcılar",
     caseModules: [
       {
@@ -219,25 +219,23 @@ export const projects: Project[] = [
   },
   {
     name: "SaaS Infrastructures",
-    tagline: "Subscription-ready multi-tenant architectures",
+    tagline: "Aboneliğe hazır çok-kiracılı (multi-tenant) yazılım altyapısı",
     status: "Planned",
-    problem:
-      "Custom-built systems for a single company fail to scale to others with the exact same needs.",
-    solution:
-      "Transforming bespoke business tracking systems into multi-tenant, subscription-based products.",
-    approach: "Productizing the common core of existing systems using tenant-based architecture.",
-    benefit: "A solution built once can serve hundreds of businesses globally.",
+    category: "concept-work",
+    problem: "Tek bir şirket için kurulan iş takip sistemlerinin, aynı ihtiyacı olan diğer firmalara satılamaması.",
+    solution: "Özel sistemleri çok-kiracılı (multi-tenant) ve abonelik modeline hazır SaaS ürünlerine dönüştüren mimari.",
+    approach: "Var olan sistemlerin ortak çekirdeğini tenant yapısına uygun biçimde ürünleştirmek.",
+    benefit: "Bir kez kurulan sistemin, dünya genelinde yüzlerce işletmeye kiralanabilir hale gelmesi.",
     tech: ["Next.js", "Supabase", "Stripe", "Multi-tenant"],
     features: [
-      "Subscription and billing management",
-      "Role-based access control (RBAC)",
-      "Isolated data environments for tenants",
-      "Scalable cloud architecture",
+      "Abonelik planları ve Stripe faturalandırma yönetimi",
+      "Rol bazlı yetkilendirme ve kullanıcı yönetim yapısı",
+      "Kiracılar (tenants) arasında izole edilmiş güvenli veri havuzları",
+      "Geliştirilebilir ve ölçeklenebilir bulut mimarisi tasarımı",
     ],
     previewType: "business-dashboard",
     slug: "saas-operasyon-altyapisi",
-    caseSummary:
-      "Şirket içi çözülen bir operasyon problemini diğer firmalara satılabilir abonelik ürününe dönüştürmek isteyen işletmeler için multi-tenant SaaS mimari tasarımı ve altyapı kurulumu.",
+    caseSummary: "Şirket içi çözülen bir operasyon problemini diğer firmalara satılabilir abonelik ürüne dönüştürmek isteyen işletmeler için multi-tenant SaaS mimari tasarımı ve altyapı kurulum şeması.",
     targetUser: "Sektörel bir problemi çözen iç sistemi olan ve bunu abonelik modeline dönüştürmek isteyen KOBİ'ler ve girişimciler",
     caseModules: [
       {
@@ -284,10 +282,9 @@ export const projects: Project[] = [
     name: "Solvaria Personal Brand Site",
     tagline: "Kişisel marka ve stüdyo konumlandırması için çok sayfalı web sitesi",
     status: "Active",
-    problem:
-      "Mert Alban'ın geliştirdiği projeleri ve sunduğu hizmetleri net anlatan, müşteriyi ikna eden ve iletişime yönlendiren bir web varlığı yoktu.",
-    solution:
-      "Hizmet kategorileri, proje vaka çalışmaları, çalışma süreci ve iletişim akışını ayrı sayfalarda toplayan; 3D Spline robot ve Framer Motion animasyonlarıyla güçlendirilmiş çok sayfalı kişisel marka sitesi.",
+    category: "internal-project",
+    problem: "Mert Alban'ın geliştirdiği projeleri ve sunduğu hizmetleri net anlatan, müşteriyi ikna eden ve iletişime yönlendiren bir web varlığı yoktu.",
+    solution: "Hizmet kategorileri, proje vaka çalışmaları, çalışma süreci ve iletişim akışını ayrı sayfalarda toplayan; 3D Spline robot ve Framer Motion animasyonlarıyla güçlendirilmiş çok sayfalı kişisel marka sitesi.",
     approach: "Bilgi mimarisi müşteri karar yolculuğuna göre tasarlandı. Her sayfa tek bir amaca hizmet edecek şekilde ayrıştırıldı; ana sayfa özet ve yönlendirme merkezi olarak konumlandırıldı.",
     benefit: "Ziyaretçi siteye girdiğinde kim olduğunu, hangi problemleri çözdüğünü ve nasıl çalışıldığını ilk birkaç saniyede anlayabiliyor.",
     tech: ["Next.js 16", "TypeScript", "Tailwind CSS 4", "Framer Motion", "Spline 3D"],
@@ -303,8 +300,7 @@ export const projects: Project[] = [
     ],
     previewType: "personal-brand",
     slug: "personal-brand-site",
-    caseSummary:
-      "Mert Alban'ın geliştirdiği dijital çözümleri ve sunduğu hizmetleri profesyonel biçimde anlatan, müşteriyi doğru hizmete yönlendiren kişisel marka ve stüdyo sitesi.",
+    caseSummary: "Mert Alban'ın geliştirdiği dijital çözümleri ve sunduğu hizmetleri profesyonel biçimde anlatan, müşteriyi doğru hizmete yönlendiren kişisel marka ve stüdyo sitesi.",
     targetUser: "Özel iş takip sistemi, web uygulaması, web sitesi veya SaaS ürünü yaptırmayı düşünen KOBİ sahipleri ve girişimciler",
     caseModules: [
       {
@@ -338,6 +334,10 @@ export const projects: Project[] = [
       "Müşterinin doğru hizmet kategorisini bulabilmesi",
       "İletişim ve teklif taleplerinin artması",
     ],
+    lessons: [
+      "PDF oluşturma akışının mobil tarayıcıda da sorunsuz çalışması için ekstra test gerekti",
+      "Kritik stok eşiğinin kullanıcı tarafından ayarlanabilir olması talep edildi ve eklendi",
+    ],
     futureWork: [
       "Blog ve içerik alanı",
       "İletişim formu backend entegrasyonu",
@@ -345,3 +345,644 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+export const projectsEn: Project[] = [
+  {
+    name: "StockApp",
+    tagline: "Inventory, finance, and receivables tracking system",
+    status: "Active",
+    category: "customer-project",
+    problem: "Inventory and customer debt data is scattered between notebooks and Excel, leading to missed collections.",
+    solution: "A custom web application that combines stock movements, client balances, and collection tracking into a single interface.",
+    approach: "Built with Next.js and Supabase for a real-time data management infrastructure.",
+    benefit: "Instant answers on who owes what, what is in stock, and what was collected this month from a single screen.",
+    tech: ["Next.js", "Supabase", "TypeScript", "Tailwind CSS"],
+    features: [
+      "Sales, collection, and receivables dashboard",
+      "One-click automated PDF account statement generation",
+      "Quick balance sharing flow via WhatsApp",
+      "Live stock tracking screen with critical level warnings",
+    ],
+    previewType: "stockapp",
+    slug: "stockapp",
+    caseSummary: "A custom web application was developed for a business with scattered inventory and current account data in notebooks and Excel, bringing stock movements, client balances, and collection tracking into a single interface.",
+    targetUser: "SME owners and managers selling wholesale or retail and offering vadeli (deferred) sales to clients",
+    caseModules: [
+      {
+        name: "Inventory Management",
+        features: ["Product entry/exit records", "Critical stock level warnings", "Product historical movements"],
+      },
+      {
+        name: "Current Accounts",
+        features: ["Client-based balance tracking", "Sales and payment history", "Due date tracking"],
+      },
+      {
+        name: "Collections",
+        features: ["Payment record screen", "Overdue receivables notifications", "Monthly collection summary"],
+      },
+      {
+        name: "PDF Reporting",
+        features: ["One-click account statement", "Stock status report", "WhatsApp sharing workflow"],
+      },
+    ],
+    userJourney: [
+      "User logs into the manager panel",
+      "Records daily stock entries",
+      "Processes client sales, updating current account balance",
+      "Sees due collection notifications on the dashboard",
+      "Generates PDF account statement and sends it via WhatsApp",
+      "Reviews daily collections and stock status summary on dashboard",
+    ],
+    outcomes: [
+      "Instant stock level visibility",
+      "Client balances accessible from any device at any time",
+      "Collection tracking managed systematically",
+      "Account statement preparation time cut from minutes to seconds",
+    ],
+    lessons: [
+      "PDF generation workflow required extra testing to work flawlessly on mobile browsers",
+      "Critical stock threshold was requested to be user-adjustable and added accordingly",
+    ],
+    futureWork: [
+      "Supplier order tracking module",
+      "Barcode reader integration for stock entry",
+      "Multi-warehouse support",
+    ],
+  },
+  {
+    name: "Hezer Auto Service",
+    tagline: "Vehicle intake, repair, and auto service operations system",
+    status: "Active",
+    category: "customer-project",
+    problem: "Tracking serviced vehicles, repair processes, and client history relies entirely on paper and oral communication.",
+    solution: "A mobile-friendly operations system logging the entire service lifecycle from vehicle intake to delivery.",
+    approach: "Fast, mobile-first Supabase integration optimized for field and shop use.",
+    benefit: "Vehicle history and repair stages are instantly visible to the entire shop team.",
+    tech: ["React Native", "Expo", "Supabase", "Playwright"],
+    features: [
+      "Step-by-step vehicle intake and service workflow",
+      "Permanent license-plate based customer repair history",
+      "Custom mobile interfaces optimized for shop technicians",
+      "E2E automated testing pipeline with Playwright",
+    ],
+    previewType: "auto-service",
+    slug: "hezer-auto-service",
+    caseSummary: "A mobile-friendly operations system was developed to record all process steps from vehicle intake to delivery for an auto service business where vehicle intake, repair tracking, and customer history relied on paper and oral communication.",
+    targetUser: "Service advisors and managers tracking the entire service flow from intake to invoicing",
+    caseModules: [
+      {
+        name: "Vehicle Intake",
+        features: ["License plate and client registration", "Vehicle photo documentation", "Intake notes and complaint definition"],
+      },
+      {
+        name: "Work Order Tracking",
+        features: ["Step-by-step repair status", "Technician assignment", "Completion approval"],
+      },
+      {
+        name: "Client & Vehicle History",
+        features: ["License plate-based service history", "Previous repair notes", "Client contact information"],
+      },
+      {
+        name: "Testing Infrastructure",
+        features: ["E2E test suite with Playwright", "Critical flow automation", "Regression testing"],
+      },
+    ],
+    userJourney: [
+      "Service advisor registers the vehicle into the system",
+      "Enters complaints and request notes",
+      "Creates work order and assigns it to a technician",
+      "Technician updates repair steps as they complete them",
+      "Advisor signs off on completion and delivery",
+      "Vehicle history is stored permanently in the cloud",
+    ],
+    outcomes: [
+      "Vehicle and repair history kept paperless and centralized",
+      "Work order status and assignment visible at any moment",
+      "Client trust increased through service transparency",
+    ],
+    lessons: [
+      "Form design was simplified to allow fast data entry by field technicians on tablets",
+      "E2E test suite caught regressions early in critical flows",
+    ],
+    futureWork: [
+      "SMS notification system for clients",
+      "Parts and material cost tracking",
+      "Billing and invoicing module",
+    ],
+  },
+  {
+    name: "CARPASS",
+    tagline: "Vehicle history and AI-driven risk analysis platform",
+    status: "In Development",
+    category: "product-lab",
+    problem: "Lack of a reliable, centralized, and transparent history source for used vehicles.",
+    solution: "A SaaS platform aggregating vehicle data and converting it into a risk score via AI.",
+    approach: "Integrated n8n automations and AI agents on a multi-tenant architecture.",
+    benefit: "Transparency for the buyer, a reliable document for the seller; a scalable subscription product.",
+    tech: ["React Native", "Supabase", "n8n", "AI Agents"],
+    features: [
+      "AI-powered Trust Report and Risk Score",
+      "Freemium subscription and billing infrastructure",
+      "n8n workflows for automated data aggregation",
+      "Modern mobile UI and responsive web portal",
+    ],
+    previewType: "carpass",
+    slug: "carpass",
+    caseSummary: "To address the lack of a reliable source in used vehicle purchases, a SaaS platform architecture was designed to collect vehicle history, interpret it with AI, and present a Risk Score and Trust Report to the user.",
+    targetUser: "Used car buyers and dealers needing reliable vehicle history; individuals and corporate buyers",
+    caseModules: [
+      {
+        name: "Trust Report & Risk Score",
+        features: ["AI-backed risk analysis", "Damage and inspection data interpretation", "Clean report presentation to the user"],
+      },
+      {
+        name: "SaaS & Billing Infrastructure",
+        features: ["Freemium plan management", "Payment and invoicing system", "Usage limits tracking"],
+      },
+      {
+        name: "n8n Automation Flows",
+        features: ["Data aggregation automations", "Report generation triggers", "Error handling and logging"],
+      },
+      {
+        name: "Mobile & Web Interface",
+        features: ["React Native mobile app", "Responsive web portal", "User management panel"],
+      },
+    ],
+    userJourney: [
+      "User enters plate number to start query",
+      "n8n workflow aggregates vehicle data from sources",
+      "AI model calculates risk score",
+      "Trust Report is presented to the user",
+      "Premium user accesses full report details",
+      "Subscription management handled via user panel",
+    ],
+    outcomes: [
+      "Reliable risk analysis provided to used car buyers in seconds",
+      "Recurring subscription revenue model for the platform owner",
+      "Sustainable product built on a scalable SaaS infrastructure",
+    ],
+    lessons: [
+      "Iterative testing was crucial for consistent AI prompt outputs",
+      "Correct setup of multi-tenant data isolation early accelerated later development",
+    ],
+    futureWork: [
+      "Dealer API integration",
+      "Comparative vehicle analysis",
+      "White-label licensing models",
+    ],
+  },
+  {
+    name: "SaaS Infrastructures",
+    tagline: "Subscription-ready multi-tenant software architecture",
+    status: "Planned",
+    category: "concept-work",
+    problem: "Bespoke tracking systems built for a single company fail to scale to other businesses with similar needs.",
+    solution: "An architecture turning bespoke systems into multi-tenant, subscription-based SaaS products.",
+    approach: "Productizing the common core of existing systems using tenant-based cloud databases.",
+    benefit: "A system built once can serve hundreds of businesses globally as a subscription model.",
+    tech: ["Next.js", "Supabase", "Stripe", "Multi-tenant"],
+    features: [
+      "Subscription plans and Stripe billing management",
+      "Role-based access control and user authorization scheme",
+      "Isolated data environments for kiracılar (tenants)",
+      "Scalable and modular cloud database design",
+    ],
+    previewType: "business-dashboard",
+    slug: "saas-operasyon-altyapisi",
+    caseSummary: "Multi-tenant SaaS architecture design and infrastructure setup blueprint for businesses wanting to turn an in-house operations system into a salable subscription-based product.",
+    targetUser: "SMEs and entrepreneurs with an in-house tool solving a niche problem, wanting to productize it",
+    caseModules: [
+      {
+        name: "Multi-Tenant Architecture",
+        features: ["Tenant isolation and data security", "Shared infrastructure management", "Tenant admin dashboard"],
+      },
+      {
+        name: "Subscription & Billing",
+        features: ["Plan and limit management", "Stripe integration", "Invoice and payment history"],
+      },
+      {
+        name: "User & Role Management",
+        features: ["Role-based access control (RBAC)", "Team invitation system", "Super admin panel"],
+      },
+      {
+        name: "Product Backbone",
+        features: ["API design and webhook support", "Scalable database structure", "Audit log and monitoring"],
+      },
+    ],
+    userJourney: [
+      "Business owner shares SaaS product idea and current internal tool",
+      "Scope and architecture design are finalized",
+      "Multi-tenant infrastructure is set up",
+      "Subscription and billing module is integrated",
+      "First customer (tenant) onboarded to the system",
+      "New features and modules added as the product grows",
+    ],
+    outcomes: [
+      "Secure and isolated multi-tenant environment",
+      "Scalable SaaS billing model providing recurring revenue",
+      "Durable technical foundation built to scale",
+    ],
+    lessons: [
+      "Setting up tenant isolation at the database level early eliminates later data leak risks",
+      "Flexible subscription plans make it easier to address different client segments",
+    ],
+    futureWork: [
+      "White-label theme support",
+      "Usage-based billing",
+      "Self-service onboarding flow",
+    ],
+  },
+  {
+    name: "Solvaria Personal Brand Site",
+    tagline: "Multi-page website for personal branding and studio positioning",
+    status: "Active",
+    category: "internal-project",
+    problem: "Mert Alban lacked a web presence that clearly explained his developed projects, services, and converted visitors.",
+    solution: "A multi-page website separating services, case studies, process, and contact, powered by 3D Spline and Framer Motion.",
+    approach: "Information architecture mapped to client decision journey, separating pages for distinct focus with homepage as index.",
+    benefit: "Visitors instantly understand who he is, what problems he solves, and how he works within seconds.",
+    tech: ["Next.js 16", "TypeScript", "Tailwind CSS 4", "Framer Motion", "Spline 3D"],
+    features: [
+      "Multi-page information architecture and navigation",
+      "Interactive Spline 3D robot hero experience",
+      "Framer Motion scroll reveal and parallax animations",
+      "Project case studies (problem → solution → benefit structure)",
+      "Solution categories and distinct service pages",
+      "TR / EN / DE multi-lingual support",
+      "Responsive layout and mobile navigation menu",
+      "SEO metadata, sitemap, and robots.txt",
+    ],
+    previewType: "personal-brand",
+    slug: "personal-brand-site",
+    caseSummary: "A personal brand and studio website clearly explaining Mert Alban's digital solutions and services, directing clients to the correct service pipeline.",
+    targetUser: "SME owners and entrepreneurs considering custom workflow tools, web applications, or SaaS products",
+    caseModules: [
+      {
+        name: "Information Architecture",
+        features: ["Decision journey-based page structure", "Solution categories", "Project case studies"],
+      },
+      {
+        name: "3D & Animation",
+        features: ["Spline robot hero", "Scroll reveal animations", "Parallax effects"],
+      },
+      {
+        name: "Content System",
+        features: ["Locale-based multilingual content", "Data-driven project pages", "Service detail subpages"],
+      },
+      {
+        name: "Technical Stack",
+        features: ["Next.js App Router", "Tailwind CSS 4 design tokens", "Framer Motion animation system"],
+      },
+    ],
+    userJourney: [
+      "Visitor sees who I am and what I do in the Hero section",
+      "Identifies their own business issues in the bottlenecks area",
+      "Explores specific service category in solutions page",
+      "Reads real case studies in the portfolio section",
+      "Understands the engagement process in the timeline area",
+      "Starts a project conversation via the contact form",
+    ],
+    outcomes: [
+      "Services presented in a clean, distinct layout",
+      "Project proofs structured in a proper case-study format",
+      "Visitors easily finding their matching service category",
+      "Increase in booking and proposal inquiries",
+    ],
+    lessons: [
+      "Extra testing was needed for PDF generation workflows on mobile screens",
+      "Critical stock threshold was made user-configurable based on feedback",
+    ],
+    futureWork: [
+      "Blog and resources section",
+      "Contact form backend integrations",
+      "Service-specific landing pages",
+    ],
+  },
+];
+
+export const projectsDe: Project[] = [
+  {
+    name: "StockApp",
+    tagline: "System zur Verfolgung von Lagerbeständen, Finanzen und Einnahmen",
+    status: "Active",
+    category: "customer-project",
+    problem: "Lagerbestands- und Kundenschuldendaten sind über Notizbücher und Excel verstreut, was zu verpassten Einnahmen führt.",
+    solution: "Eine maßgeschneiderte Webanwendung, die Lagerbewegungen, Kundensalden und Einnahmenverfolgung zusammenführt.",
+    approach: "Aufgebaut mit Next.js und Supabase für eine Echtzeit-Datenverwaltung.",
+    benefit: "Sofortige Antworten darauf, wer was schuldet, was auf Lager ist und was diesen Monat eingenommen wurde, auf einem Bildschirm.",
+    tech: ["Next.js", "Supabase", "TypeScript", "Tailwind CSS"],
+    features: [
+      "Dashboard für Verkäufe, Einnahmen und Außenstände",
+      "Automatische PDF-Kontoauszugserstellung mit einem Klick",
+      "Schnelles Teilen von Kontoständen über WhatsApp",
+      "Live-Lagerüberwachungsbildschirm mit Warnungen bei kritischem Bestand",
+    ],
+    previewType: "stockapp",
+    slug: "stockapp",
+    caseSummary: "Für ein Unternehmen mit verstreuten Lager- und Kontokorrentdaten in Notizbüchern und Excel wurde eine Webanwendung entwickelt, die alle Bewegungen in einer einzigen Oberfläche zusammenführt.",
+    targetUser: "KMU-Inhaber und Manager, die Groß- oder Einzelhandel betreiben und ihren Kunden Zahlungsziele anbieten",
+    caseModules: [
+      {
+        name: "Lagerverwaltung",
+        features: ["Produkt-Ein-/Ausgangsprotokolle", "Kritische Bestandswarnungen", "Historische Produktbewegungen"],
+      },
+      {
+        name: "Kontoauszug",
+        features: ["Kundenbasierte Saldenverfolgung", "Verkaufs- und Zahlungsverlauf", "Fälligkeitsverfolgung"],
+      },
+      {
+        name: "Einnahmen",
+        features: ["Zahlungserfassungsbildschirm", "Benachrichtigungen über überfällige Forderungen", "Monatliche Einnahmenübersicht"],
+      },
+      {
+        name: "PDF-Berichte",
+        features: ["Kontoauszug mit einem Klick", "Bestandsstatusbericht", "WhatsApp-Freigabe-Workflow"],
+      },
+    ],
+    userJourney: [
+      "Benutzer meldet sich im Manager-Panel an",
+      "Erfasst tägliche Lagerbuchungen",
+      "Verarbeitet Kundenverkäufe und aktualisiert den Kontostand",
+      "Sieht fällige Zahlungsmeldungen auf dem Dashboard",
+      "Erstellt einen PDF-Kontoauszug und sendet ihn per WhatsApp",
+      "Überprüft die täglichen Einnahmen und die Lagerübersicht auf dem Dashboard",
+    ],
+    outcomes: [
+      "Sofortige Bestandsprüfung",
+      "Kundensalden jederzeit abrufbar",
+      "Einnahmenverfolgung über das System abgewickelt",
+      "Die Erstellungszeit für Kontoauszüge wurde von Minuten auf Sekunden verkürzt",
+    ],
+    lessons: [
+      "Der PDF-Erstellungs-Workflow erforderte zusätzliche Tests, um auf mobilen Browsern einwandfrei zu funktionieren",
+      "Der kritische Bestandsschwellenwert wurde als vom Benutzer anpassbar angefordert und hinzugefügt",
+    ],
+    futureWork: [
+      "Lieferantenbestellungsverfolgungsmodul",
+      "Bestandserfassung per Barcodeleser",
+      "Unterstützung für mehrere Lager",
+    ],
+  },
+  {
+    name: "Hezer Auto Service",
+    tagline: "Fahrzeugannahme, Reparatur und Autoservice-Betriebssystem",
+    status: "Active",
+    category: "customer-project",
+    problem: "Die Verfolgung von Servicefahrzeugen, Reparaturprozessen und Kundenhistorien beruht vollständig auf Papier und mündlicher Kommunikation.",
+    solution: "Ein mobiles Betriebssystem, das den gesamten Service-Lebenszyklus von der Fahrzeugannahme bis zur Auslieferung aufzeichnet.",
+    approach: "Schnelle, mobile-first Supabase-Integration, optimiert für den Einsatz in Werkstätten und vor Ort.",
+    benefit: "Fahrzeughistorie und Reparaturstatus sind sofort für das gesamte Team sichtbar.",
+    tech: ["React Native", "Expo", "Supabase", "Playwright"],
+    features: [
+      "Schritt-für-Schritt-Fahrzeugannahme und Service-Workflow",
+      "Dauerhafte, kennzeichenbasierte Reparaturhistorie",
+      "Eigene mobile Oberflächen, optimiert für Techniker",
+      "E2E-automatisierte Testpipeline mit Playwright",
+    ],
+    previewType: "auto-service",
+    slug: "hezer-auto-service",
+    caseSummary: "Ein mobiles Betriebssystem wurde entwickelt, um alle Prozessschritte von der Fahrzeugannahme bis zur Auslieferung für ein Autoservice-Unternehmen aufzuzeichnen, bei dem alles auf Papier basierte.",
+    targetUser: "Serviceberater und Manager, die den gesamten Servicefluss von der Annahme bis zur Rechnungsstellung verfolgen",
+    caseModules: [
+      {
+        name: "Fahrzeugannahme",
+        features: ["Kennzeichen- und Kundenregistrierung", "Fahrzeugfotodokumentation", "Annahmenotizen und Mängeldefinition"],
+      },
+      {
+        name: "Arbeitsauftragsverfolgung",
+        features: ["Schritt-für-Schritt-Reparaturstatus", "Technikerzuweisung", "Abschlussgenehmigung"],
+      },
+      {
+        name: "Kunde & Fahrzeughistorie",
+        features: ["Kennzeichenbasierte Servicehistorie", "Vorherige Reparaturnotizen", "Kundenkontaktinformationen"],
+      },
+      {
+        name: "Testinfrastruktur",
+        features: ["E2E-Testsuite mit Playwright", "Kritische Ablaufautomatisierung", "Regressionstests"],
+      },
+    ],
+    userJourney: [
+      "Serviceberater registriert das Fahrzeug im System",
+      "Erfasst Mängel und Wunschnotizen",
+      "Erstellt einen Arbeitsauftrag und weist ihn einem Techniker zu",
+      "Techniker aktualisiert die Reparaturschritte bei Fertigstellung",
+      "Berater genehmigt Fertigstellung und Auslieferung",
+      "Fahrzeughistorie wird dauerhaft in der Cloud gespeichert",
+    ],
+    outcomes: [
+      "Fahrzeug- und Reparaturschritte papierlos und zentralisiert",
+      "Status des Arbeitsauftrags und Zuweisung jederzeit sichtbar",
+      "Kundenvertrauen durch Servicetransparenz erhöht",
+    ],
+    lessons: [
+      "Das Formulardesign wurde vereinfacht, um eine schnelle Dateneingabe durch Techniker auf Tablets zu ermöglichen",
+      "Die E2E-Testsuite fängt Regressionen in kritischen Abläufen frühzeitig ab",
+    ],
+    futureWork: [
+      "SMS-Benachrichtigungssystem für Kunden",
+      "Teile- und Materialkostenverfolgung",
+      "Abrechnungs- und Rechnungsmodul",
+    ],
+  },
+  {
+    name: "CARPASS",
+    tagline: "Fahrzeughistorie und KI-gestützte Risikoanalyseplattform",
+    status: "In Development",
+    category: "product-lab",
+    problem: "Fehlen einer zuverlässigen, zentralisierten und transparenten Historienquelle für Gebrauchtfahrzeuge.",
+    solution: "Eine SaaS-Plattform, die Fahrzeugdaten aggregiert und über KI in einen Risikoscore umwandelt.",
+    approach: "Integrierte n8n-Automatisierungen und KI-Agenten auf einer Multi-Tenant-Architektur.",
+    benefit: "Transparenz für den Käufer, ein zuverlässiges Dokument für den Verkäufer; ein skalierbares Abonnementprodukt.",
+    tech: ["React Native", "Supabase", "n8n", "AI Agents"],
+    features: [
+      "KI-gestützter Vertrauensbericht und Risikoscore",
+      "Freemium-Abonnement- und Abrechnungsinfrastruktur",
+      "n8n-Workflows für automatisierte Datenaggregation",
+      "Moderne mobile Benutzeroberfläche und responsives Webportal",
+    ],
+    previewType: "carpass",
+    slug: "carpass",
+    caseSummary: "Um das Fehlen einer zuverlässigen Quelle beim Kauf von Gebrauchtwagen zu beheben, wurde eine SaaS-Plattformarchitektur entwickelt, die die Fahrzeughistorie sammelt und bewertet.",
+    targetUser: "Gebrauchtwagenkäufer und Händler, die eine zuverlässige Fahrzeughistorie benötigen; Privatpersonen und gewerbliche Käufer",
+    caseModules: [
+      {
+        name: "Vertrauensbericht & Risikoscore",
+        features: ["KI-gestützte Risikoanalyse", "Interpretation von Schadens- und Inspektionsdaten", "Saubere Berichtspräsentation für den Benutzer"],
+      },
+      {
+        name: "SaaS- & Abrechnungsinfrastruktur",
+        features: ["Freemium-Tarifverwaltung", "Zahlungs- und Rechnungssystem", "Nutzungslimits verfolgen"],
+      },
+      {
+        name: "n8n-Automatisierungsabläufe",
+        features: ["Datenaggregationsautomatisierungen", "Auslöser für die Berichterstellung", "Fehlerbehandlung und Protokollierung"],
+      },
+      {
+        name: "Mobile & Web-Schnittstelle",
+        features: ["React Native mobile App", "Responsives Webportal", "Benutzerverwaltungspanel"],
+      },
+    ],
+    userJourney: [
+      "Benutzer gibt das Kennzeichen ein, um die Abfrage zu starten",
+      "n8n-Workflow aggregiert Fahrzeugdaten aus Quellen",
+      "KI-Modell berechnet den Risikoscore",
+      "Vertrauensbericht wird dem Benutzer präsentiert",
+      "Premium-Benutzer greift auf vollständige Berichtsdetails zu",
+      "Abonnementverwaltung über das Benutzerpanel abgewickelt",
+    ],
+    outcomes: [
+      "Zuverlässige Risikoanalyse für Gebrauchtwagenkäufer in Sekunden",
+      "Wiederkehrendes Abonnement-Einnahmemodell für den Plattformbesitzer",
+      "Nachhaltiges Produkt auf einer skalierbaren SaaS-Infrastruktur",
+    ],
+    lessons: [
+      "Iterative Tests waren entscheidend für konsistente KI-Prompts",
+      "Die korrekte Einrichtung der Multi-Tenant-Datenisolation beschleunigte die spätere Entwicklung",
+    ],
+    futureWork: [
+      "Händler-API-Integration",
+      "Vergleichende Fahrzeuganalyse",
+      "White-Label-Lizenzierungsmodelle",
+    ],
+  },
+  {
+    name: "SaaS Infrastructures",
+    tagline: "Abonnementbereite Multi-Tenant-Softwarearchitektur",
+    status: "Planned",
+    category: "concept-work",
+    problem: "Maßgeschneiderte Verfolgungssysteme für ein einzelnes Unternehmen lassen sich nicht auf andere Unternehmen übertragen.",
+    solution: "Eine Architektur, die maßgeschneiderte Systeme in Multi-Tenant-SaaS-Produkte verwandelt.",
+    approach: "Produktisierung des gemeinsamen Kerns bestehender Systeme unter Verwendung von Tenant-Datenbanken.",
+    benefit: "Ein einmal erstelltes System kann Hunderten von Unternehmen weltweit als Abonnementmodell dienen.",
+    tech: ["Next.js", "Supabase", "Stripe", "Multi-tenant"],
+    features: [
+      "Abonnementtarife und Stripe-Abrechnungsverwaltung",
+      "Rollenbasierte Zugriffskontrolle und Benutzerautorisierung",
+      "Isolierte Datenumgebungen für Mandanten (Tenants)",
+      "Skalierbares und modulares Cloud-Datenbankdesign",
+    ],
+    previewType: "business-dashboard",
+    slug: "saas-operasyon-altyapisi",
+    caseSummary: "Konzept für Multi-Tenant-SaaS-Architektur und Infrastruktur-Setup für Unternehmen, die ein internes System vermarkten möchten.",
+    targetUser: "KMUs und Gründer mit einem internen Tool, das ein Nischenproblem löst und das sie vermarkten möchten",
+    caseModules: [
+      {
+        name: "Multi-Tenant-Architektur",
+        features: ["Tenant-Isolierung und Datensicherheit", "Gemeinsame Infrastrukturverwaltung", "Tenant-Admin-Dashboard"],
+      },
+      {
+        name: "Abonnement & Abrechnung",
+        features: ["Tarif- und Limitverwaltung", "Stripe-Integration", "Rechnungs- und Zahlungsverlauf"],
+      },
+      {
+        name: "Benutzer- & Rollenverwaltung",
+        features: ["Rollenbasierte Zugriffskontrolle (RBAC)", "Teameinladungssystem", "Super-Admin-Panel"],
+      },
+      {
+        name: "Produkt-Backbone",
+        features: ["API-Design und Webhook-Unterstützung", "Skalierbare Datenbankstruktur", "Audit-Log und Überwachung"],
+      },
+    ],
+    userJourney: [
+      "Unternehmer teilt SaaS-Produktidee und aktuelles internes Tool mit",
+      "Umfang und Architekturdesign werden finalisiert",
+      "Multi-Tenant-Infrastruktur wird eingerichtet",
+      "Abonnement- und Abrechnungsmodul wird integriert",
+      "Erster Kunde (Tenant) im System angemeldet",
+      "Neue Funktionen und Module werden hinzugefügt, wenn das Produkt wächst",
+    ],
+    outcomes: [
+      "Sichere und isolierte Multi-Tenant-Umgebung",
+      "Skalierbares SaaS-Abrechnungsmodell für wiederkehrende Einnahmen",
+      "Robuste technische Basis für Skalierung",
+    ],
+    lessons: [
+      "Die Einrichtung der Tenant-Isolierung auf Datenbankebene verhindert Datenlecks von Anfang an",
+      "Flexible Abonnementtarife erleichtern die Ansprache unterschiedlicher Kundensegmente",
+    ],
+    futureWork: [
+      "White-Label-Theme-Unterstützung",
+      "Nutzungsbasierte Abrechnung",
+      "Self-Service-Onboarding-Ablauf",
+    ],
+  },
+  {
+    name: "Solvaria Personal Brand Site",
+    tagline: "Mehrseitige Website für persönliches Branding und Studio-Positionierung",
+    status: "Active",
+    category: "internal-project",
+    problem: "Mert Alban fehlte eine Webpräsenz, die seine entwickelten Projekte und Dienstleistungen klar erklärte.",
+    solution: "Eine mehrseitige Website, die Dienstleistungen, Fallstudien, Prozesse und Kontakte trennt, powered by 3D Spline und Framer Motion.",
+    approach: "Die Informationsarchitektur wurde auf die Entscheidungsreise des Kunden abgestimmt.",
+    benefit: "Besucher verstehen innerhalb von Sekunden, wer er ist, welche Probleme er löst und wie er arbeitet.",
+    tech: ["Next.js 16", "TypeScript", "Tailwind CSS 4", "Framer Motion", "Spline 3D"],
+    features: [
+      "Mehrseitige Informationsarchitektur und Navigation",
+      "Interaktives Spline 3D-Roboter-Hero-Erlebnis",
+      "Framer Motion Scroll-Reveal und Parallax-Animationen",
+      "Projekt-Fallstudien (Problem → Lösung → Nutzen-Struktur)",
+      "Lösungskategorien und eigene Service-Unterseiten",
+      "Mehrsprachige Unterstützung in TR / EN / DE",
+      "Responsive Layout und mobile Navigation",
+      "SEO-Metadaten, Sitemap und robots.txt",
+    ],
+    previewType: "personal-brand",
+    slug: "personal-brand-site",
+    caseSummary: "Eine persönliche Marken- und Studio-Website, die Mert Albans digitale Lösungen und Dienstleistungen klar erklärt.",
+    targetUser: "KMU-Inhaber und Gründer, die maßgeschneiderte Workflows, Webanwendungen oder SaaS-Produkte in Erwägung ziehen",
+    caseModules: [
+      {
+        name: "Informationsarchitektur",
+        features: ["Entscheidungsreise-basierte Seitenstruktur", "Lösungskategorien", "Projekt-Fallstudien"],
+      },
+      {
+        name: "3D & Animation",
+        features: ["Spline-Roboter-Hero", "Scroll-Reveal-Animationen", "Parallax-Effekte"],
+      },
+      {
+        name: "Inhaltssystem",
+        features: ["Lokale-basierte mehrsprachige Inhalte", "Datengetriebene Projektseiten", "Service-Unterseiten"],
+      },
+      {
+        name: "Technischer Stack",
+        features: ["Next.js App Router", "Tailwind CSS 4 Design-Tokens", "Framer Motion Animationssystem"],
+      },
+    ],
+    userJourney: [
+      "Besucher sieht im Hero-Bereich, wer ich bin und was ich tue",
+      "Identifiziert eigene geschäftliche Probleme im Engpass-Bereich",
+      "Erkundet spezifische Dienstleistungen auf der Lösungsseite",
+      "Liest echte Fallstudien im Portfolio-Bereich",
+      "Versteht den Arbeitsprozess im Zeitachsen-Bereich",
+      "Startet ein Projektgespräch über das Kontaktformular",
+    ],
+    outcomes: [
+      "Dienstleistungen in einem sauberen, separaten Layout präsentiert",
+      "Projektnachweise im richtigen Fallstudienformat strukturiert",
+      "Besucher finden leicht ihre passende Servicekategorie",
+      "Anstieg von Buchungen und Projektanfragen",
+    ],
+    lessons: [
+      "Zusätzliche Tests waren für PDF-Generierungs-Workflows auf mobilen Bildschirmen erforderlich",
+      "Der kritische Bestandsschwellenwert wurde basierend auf Feedback anpassbar gemacht",
+    ],
+    futureWork: [
+      "Blog und Ressourcen-Bereich",
+      "Kontaktformular-Backend-Integrationen",
+      "Dienstleistungsspezifische Landingpages",
+    ],
+  },
+];
+
+export const projects = projectsTr;
+
+export function getProjects(lang: string = "tr"): Project[] {
+  if (lang === "en") return projectsEn;
+  if (lang === "de") return projectsDe;
+  return projectsTr;
+}
+
+export function getProjectBySlug(slug: string, lang: string = "tr"): Project | undefined {
+  const list = getProjects(lang);
+  return list.find((p) => p.slug === slug);
+}

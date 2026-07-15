@@ -4,11 +4,23 @@ import Link from "next/link";
 import { Mail, MessageCircle, MapPin } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { contact } from "@/data/contact";
-import { footerLinks } from "@/data/navigation";
+import { footerLinks, NavLink } from "@/data/navigation";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const year = new Date().getFullYear();
+
+  const getLocalizedLabel = (link: NavLink) => {
+    if (language === "en") return link.labelEn || link.label;
+    if (language === "de") return link.labelDe || link.label;
+    return link.label;
+  };
+
+  const getWhatsappText = () => {
+    if (language === "en") return "Chat on WhatsApp";
+    if (language === "de") return "Schreib uns auf WhatsApp";
+    return "WhatsApp'tan yaz";
+  };
 
   return (
     <footer className="border-t mt-0 pt-14 pb-8" style={{ borderColor: "var(--line)", background: "var(--bg)" }}>
@@ -43,7 +55,7 @@ export default function Footer() {
                   style={{ color: "var(--muted)" }}
                 >
                   <MessageCircle className="h-4 w-4 flex-shrink-0" style={{ color: "var(--accent)" }} />
-                  WhatsApp&apos;tan yaz
+                  {getWhatsappText()}
                 </a>
               )}
               <span
@@ -63,7 +75,7 @@ export default function Footer() {
               {footerLinks.solutions.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="transition-colors hover:text-accent">
-                    {link.label}
+                    {getLocalizedLabel(link)}
                   </Link>
                 </li>
               ))}
@@ -77,7 +89,7 @@ export default function Footer() {
               {footerLinks.studio.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="transition-colors hover:text-accent">
-                    {link.label}
+                    {getLocalizedLabel(link)}
                   </Link>
                 </li>
               ))}

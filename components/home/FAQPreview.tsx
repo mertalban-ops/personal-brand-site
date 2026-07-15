@@ -1,58 +1,74 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, Minus } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import { getHomepageFAQs } from "@/data/faqs";
-import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function FAQPreview() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   const { t } = useLanguage();
-  const reduce = useReducedMotion();
-  const items = getHomepageFAQs();
-  const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <AnimatedSection>
-      <div className="mx-auto max-w-3xl px-5 py-16 md:py-20">
-        <p className="mono-label mb-3 text-center">{t.faq.label}</p>
-        <h2 className="display text-center text-3xl font-bold text-ink mb-10">
-          Merak ettikleriniz
-        </h2>
-        <div className="space-y-3">
-          {items.map((item, i) => (
-            <div key={item.q} className="card-surface rounded-xl overflow-hidden">
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="flex w-full items-center justify-between gap-4 p-5 text-left"
-                aria-expanded={open === i}
-              >
-                <span className="font-medium text-ink">{item.q}</span>
-                <ChevronDown
-                  className={`h-4 w-4 shrink-0 text-muted transition-transform duration-300 ${open === i ? "rotate-180" : ""}`}
-                />
-              </button>
-              {open === i && (
-                <motion.div
-                  initial={reduce ? false : { opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                  className="border-t border-line px-5 pb-5 pt-4 text-sm leading-relaxed text-muted"
-                >
-                  {item.a}
-                </motion.div>
-              )}
-            </div>
-          ))}
+    <AnimatedSection id="sss">
+      <div className="mx-auto max-w-4xl px-5 py-20 md:py-28">
+        <div className="text-center mb-12">
+          <p className="mono-label mb-3">{t.faq.label}</p>
+          <h2 className="display text-3xl font-bold text-ink md:text-4xl">
+            {t.faq.title}
+          </h2>
+          <p className="mt-4 text-muted mx-auto max-w-lg">
+            {t.faq.subtitle}
+          </p>
         </div>
-        <p className="mt-8 text-center text-sm text-muted">
-          Daha fazla soru için{" "}
-          <Link href="/iletisim" className="text-accent hover:underline">
-            iletişime geçin
-          </Link>
-        </p>
+
+        <div className="space-y-4">
+          {t.faq.items.map((faq, i) => {
+            const isOpen = openIndex === i;
+
+            return (
+              <div
+                key={i}
+                className={`card-surface rounded-xl border transition-all duration-300 ${
+                  isOpen
+                    ? "border-accent/40 bg-accent/5 shadow-[0_0_20px_-10px_rgba(16,185,129,0.2)]"
+                    : "border-line bg-bg-raised/30 hover:border-accent/20"
+                }`}
+              >
+                <button
+                  className="flex w-full items-center justify-between p-5 text-left md:p-6"
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                >
+                  <span className="font-semibold text-ink md:text-lg">{faq.q}</span>
+                  <span
+                    className={`ml-4 flex-shrink-0 text-accent transition-transform duration-300 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  >
+                    {isOpen ? <Minus size={20} /> : <Plus size={20} />}
+                  </span>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 pb-5 text-muted md:px-6 md:pb-6 leading-relaxed text-sm">
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </AnimatedSection>
   );

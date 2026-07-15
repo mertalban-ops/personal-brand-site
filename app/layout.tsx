@@ -24,6 +24,7 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import { ActiveProjectProvider } from "@/context/ActiveProjectContext";
 import SceneBackground from "@/components/SceneBackground";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "Solvaria — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
@@ -40,20 +41,63 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Global structured data schema
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://personal-brand-site-azure.vercel.app/#organization",
+        "name": "Solvaria",
+        "url": "https://personal-brand-site-azure.vercel.app",
+        "logo": "https://personal-brand-site-azure.vercel.app/logo.png",
+        "sameAs": ["https://github.com/mertalban"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://personal-brand-site-azure.vercel.app/#person",
+        "name": "Mert Alban",
+        "jobTitle": "Founder & Lead Software Engineer",
+        "worksFor": {
+          "@id": "https://personal-brand-site-azure.vercel.app/#organization"
+        },
+        "url": "https://personal-brand-site-azure.vercel.app",
+        "sameAs": ["https://github.com/mertalban"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://personal-brand-site-azure.vercel.app/#website",
+        "url": "https://personal-brand-site-azure.vercel.app",
+        "name": "Solvaria",
+        "publisher": {
+          "@id": "https://personal-brand-site-azure.vercel.app/#organization"
+        }
+      }
+    ]
+  };
+
   return (
     <html
       lang="tr"
       className={`${display.variable} ${body.variable} ${mono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <LanguageProvider>
           <ActiveProjectProvider>
             <SceneBackground />
             {children}
             <Footer />
+            <Analytics />
           </ActiveProjectProvider>
         </LanguageProvider>
       </body>
