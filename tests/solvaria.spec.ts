@@ -66,7 +66,7 @@ test.describe("Solvaria B2B Transformation E2E Tests", () => {
     // Check B2B details
     const content = await page.textContent("body");
     expect(content).toContain("StockApp");
-    expect(content).toMatch(/Müşteri Projesi|Customer Project|Kundenprojekt/i);
+    expect(content).toMatch(/Referans Proje & Vaka Çalışması|Reference Project & Case Study|Referenzprojekt & Fallstudie/i);
     
     // Check mockup placeholders are visible
     await expect(page.locator("text=Mockup Grid").first()).toBeVisible();
@@ -78,7 +78,7 @@ test.describe("Solvaria B2B Transformation E2E Tests", () => {
     
     const content = await page.textContent("body");
     expect(content).toContain("CARPASS");
-    expect(content).toMatch(/Solvaria Ürün Laboratuvarı|Solvaria Product Lab|Solvaria Produktlabor/i);
+    expect(content).toMatch(/Ürün Geliştirme Laboratuvarı|Product Development Lab|Produktentwicklungs-Labor/i);
     
     // Check pipeline status
     expect(content).toMatch(/Geliştirme Aşamasında|In Development|Entwicklung/i);
@@ -135,9 +135,9 @@ test.describe("Solvaria B2B Transformation E2E Tests", () => {
 
     // Check that content language changed correctly
     if (targetLang === "en") {
-      await page.waitForSelector("text=Client Project", { state: "visible", timeout: 15000 });
+      await page.waitForSelector("text=Reference Project & Case Study", { state: "visible", timeout: 15000 });
     } else {
-      await page.waitForSelector("text=Müşteri Projesi", { state: "visible", timeout: 15000 });
+      await page.waitForSelector("text=Referans Proje & Vaka Çalışması", { state: "visible", timeout: 15000 });
     }
   });
 });
