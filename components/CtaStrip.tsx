@@ -72,10 +72,10 @@ export default function CtaStrip({ title, desc }: CtaStripProps) {
       icon: Star,
       label:
         language === "tr"
-          ? "2 aktif müşteri projesi & 3 ürün çalışması"
+          ? "Doğrudan kurucu iletişimi & Özel kapsam"
           : language === "de"
-          ? "2 aktive Kundenprojekte & 3 Produktstudien"
-          : "2 active client projects & 3 product works",
+          ? "Direkte Gründerkommunikation & Individueller Umfang"
+          : "Direct founder contact & Custom scope",
     },
   ];
 
@@ -132,7 +132,7 @@ export default function CtaStrip({ title, desc }: CtaStripProps) {
           transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <a
-            href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(d.subject)}`}
+            href={`mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent(d.subject)}`}
             onClick={() => {
               try { track("email_click", { location: "cta_strip" }); } catch (err) {}
             }}
@@ -143,9 +143,9 @@ export default function CtaStrip({ title, desc }: CtaStripProps) {
             <ArrowRight className="h-4 w-4" />
           </a>
 
-          {siteConfig.whatsappEnabled && (
+          {siteConfig.whatsappNumber && (
             <a
-              href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(d.waMsg)}`}
+              href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(d.waMsg)}`}
               onClick={() => {
                 try { track("whatsapp_click", { location: "cta_strip" }); } catch (err) {}
               }}

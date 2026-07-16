@@ -146,13 +146,6 @@ export default function Hero() {
               {t.hero.secondaryBtn}
             </Link>
           </motion.div>
-          <motion.p className="mt-6 text-xs text-faint" {...enter(0.6)}>
-            {language === "tr"
-              ? "Web Siteleri · İş Takip Sistemleri · SaaS & Otomasyon"
-              : language === "de"
-              ? "Websites · Arbeitsverfolgungssysteme · SaaS & Automatisierung"
-              : "Websites · Work Tracking Systems · SaaS & Automation"}
-          </motion.p>
         </motion.div>
 
         {/* Sağ: 3D robot + phone showcase */}

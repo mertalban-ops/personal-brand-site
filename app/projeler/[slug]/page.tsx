@@ -15,11 +15,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProjectBySlug(slug, "tr");
   if (!project) notFound();
   
+  let titleSuffix = "Vaka Çalışması";
+  const pStatus = project.projectStatus;
+  if (pStatus === "inDevelopmentProduct") {
+    titleSuffix = "Geliştirme Aşamasındaki Ürün";
+  } else if (pStatus === "conceptArchitecture") {
+    titleSuffix = "Konsept Mimari";
+  } else if (pStatus === "internalProject") {
+    titleSuffix = "İç Proje";
+  } else if (pStatus === "liveClientProject") {
+    titleSuffix = "Müşteri Projesi";
+  }
+  
   return {
-    title: `${project.name} — Vaka Çalışması | Solvaria`,
+    title: `${project.name} — ${titleSuffix} | Solvaria`,
     description: project.caseSummary,
     alternates: {
-      canonical: `${siteConfig.baseUrl}/projeler/${slug}`,
+      canonical: `${siteConfig.siteUrl}/projeler/${slug}`,
     },
   };
 }
@@ -39,19 +51,19 @@ export default async function ProjectDetailPage({ params }: Props) {
             "@type": "ListItem",
             "position": 1,
             "name": "Ana Sayfa",
-            "item": siteConfig.baseUrl
+            "item": siteConfig.siteUrl
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Projeler",
-            "item": `${siteConfig.baseUrl}/projeler`
+            "item": `${siteConfig.siteUrl}/projeler`
           },
           {
             "@type": "ListItem",
             "position": 3,
             "name": project.name,
-            "item": `${siteConfig.baseUrl}/projeler/${slug}`
+            "item": `${siteConfig.siteUrl}/projeler/${slug}`
           }
         ]
       },
@@ -64,7 +76,7 @@ export default async function ProjectDetailPage({ params }: Props) {
         "publisher": {
           "@type": "Organization",
           "name": siteConfig.brandName,
-          "url": siteConfig.baseUrl
+          "url": siteConfig.siteUrl
         }
       }
     ]

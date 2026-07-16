@@ -18,9 +18,9 @@ export const de: Dictionary = {
     titleHighlight: "digitale operative Systeme.",
     title2: "",
     subtitle:
-      "Wir konvertieren Lager-, Finanz-, Vertriebs-, Inkasso- und Berichtsprozesse für kleine und mittlere Unternehmen in übersichtliche, messbare und maßgeschneiderte webbasierte Systeme.",
-    primaryBtn: "Mein Projekt besprechen",
-    secondaryBtn: "Projekte ansehen",
+      "Ich konsolidiere Ihre Lager-, Kontokorrent-, Service- und Berichtsprozesse in maßgeschneiderte Systeme für Ihr Unternehmen und entwerfe Websites sowie erweiterbare digitale Produkte, die Vertrauen in Ihre Marke schaffen.",
+    primaryBtn: "Kostenlose Bedarfsanalyse",
+    secondaryBtn: "Echte Projekte erkunden",
     cards: {
       stock: "Lager",
       stockDesc: "aktive Artikel · 14 kritisch",
@@ -317,7 +317,7 @@ export const de: Dictionary = {
     label: "07 — Kontakt",
     title: "Lassen Sie uns Ihr Tracking-Chaos in ein professionelles System verwandeln.",
     subtitle:
-      "Wenn Ihre Lager-, Finanz-, Verkaufs-, Inkasso- oder Berichterstattungsprozesse verstreut sind, können wir dies mit einem für Ihr Unternehmen maßgeschneiderten digitalen Premium-System handhabbar machen. Lassen Sie uns in 15 Minuten über Ihr Projekt sprechen.",
+      "Wenn Ihre Lager-, Finanz-, Verkaufs-, Inkasso- oder Berichterstattungsprozesse verstreut sind, können wir dies mit einem für Ihr Unternehmen maßgeschneiderten digitalen Premium-System handhabbar machen. Lassen Sie uns Ihr Projekt in einer kostenlosen 30-minütigen Bedarfsanalyse besprechen.",
     emailBtn: "E-Mail senden",
     whatsappBtn: "Nachricht auf WhatsApp",
     footerText:

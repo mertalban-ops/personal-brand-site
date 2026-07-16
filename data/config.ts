@@ -1,32 +1,52 @@
-import { contact } from "./contact";
+export interface SiteConfig {
+  brandName: string;
+  founderName: string;
+  siteUrl: string;
+  productionDomain?: string;
+  temporaryDomain: string;
+  contactEmail: string;
+  projectEmail?: string;
+  whatsappNumber: string;
+  locationTr: string;
+  locationEn: string;
+  locationDe?: string;
+  discoveryCallMinutes: number;
+  discoveryCallLabelTr: string;
+  discoveryCallLabelEn: string;
+  discoveryCallLabelDe?: string;
+  socialLinks: {
+    linkedin?: string;
+    github?: string;
+    instagram?: string;
+  };
+  budgetRanges: {
+    value: string;
+    labelTr: string;
+    labelEn: string;
+    labelDe: string;
+  }[];
+}
 
-export const siteConfig = {
-  // Brand & Location
+export const siteConfig: SiteConfig = {
   brandName: "Solvaria",
-  tagline: "Dijital Çözüm Stüdyosu",
+  founderName: "Mert Alban",
+  siteUrl: "https://personal-brand-site-azure.vercel.app",
+  productionDomain: "solvaria.com.tr", // Real target domain (not yet active, placeholder for legal text domain fallback)
+  temporaryDomain: "https://personal-brand-site-azure.vercel.app",
+  contactEmail: "mertalbaan@gmail.com",
+  projectEmail: "mertalbaan@gmail.com",
+  whatsappNumber: "905379531547",
   locationTr: "İzmir, Türkiye · Türkiye geneline uzaktan hizmet",
-  locationEn: "Izmir, Turkey · Remote service globally",
-  locationDe: "Izmir, Germany · Remote service globally",
-
-  // Centralized Domain / URLs
-  productionDomain: "solvaria.com.tr", // Real target domain
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || "https://personal-brand-site-azure.vercel.app",
-  
-  // Real Emails / WhatsApp
-  email: contact.email || "mertalbaan@gmail.com",
-  whatsapp: contact.whatsapp || "905379531547",
-  whatsappEnabled: !!contact.whatsapp && contact.whatsapp !== "#",
-  linkedin: contact.linkedin !== "#" ? contact.linkedin : "https://linkedin.com/in/mertalban",
-  github: contact.github !== "#" ? contact.github : "https://github.com/mertalban",
-
-  // Corporate Emails Placeholders (Faz 13)
-  helloEmail: "hello@solvaria.com.tr",
-  projectEmail: "projects@solvaria.com.tr",
-  founderEmail: "mert@solvaria.com.tr",
-  corporateEmailEnabled: false, // Turn true only when real corporate email is active
-
-  // Budget Ranges (Faz 10)
-  // Set to empty array [] or empty value to hide budget selector in production
+  locationEn: "Izmir, Türkiye · Remote collaboration worldwide",
+  locationDe: "Izmir, Türkei · Weltweite Remote-Zusammenarbeit",
+  discoveryCallMinutes: 30,
+  discoveryCallLabelTr: "30 dakikalık ücretsiz ihtiyaç analizi",
+  discoveryCallLabelEn: "30-minute free discovery call",
+  discoveryCallLabelDe: "30-minütige kostenlose Bedarfsanalyse",
+  socialLinks: {
+    linkedin: "https://linkedin.com/in/mertalban",
+    github: "https://github.com/mertalban",
+  },
   budgetRanges: [
     { value: "50k-100k", labelTr: "50.000 TL - 100.000 TL", labelEn: "50k TRY - 100k TRY", labelDe: "50k TRY - 100k TRY" },
     { value: "100k-250k", labelTr: "100.000 TL - 250.000 TL", labelEn: "100k TRY - 250k TRY", labelDe: "100k TRY - 250k TRY" },
@@ -34,4 +54,3 @@ export const siteConfig = {
     { value: "500k+", labelTr: "500.000 TL+", labelEn: "500k TRY+", labelDe: "500k TRY+" },
   ],
 };
-export type SiteConfig = typeof siteConfig;

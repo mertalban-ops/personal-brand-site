@@ -20,7 +20,7 @@ export default function HomeSolutions() {
 
   const trOfferings = [
     {
-      title: "Operasyon Sistemleri",
+      title: "KOBİ Operasyon Sistemleri",
       desc: "İşletmenizin günlük işleyişini, siparişlerini, stoklarını ve ödemelerini dijitalleştiren özel yönetim panelleri.",
       features: [
         "İş takip sistemi",
@@ -30,7 +30,7 @@ export default function HomeSolutions() {
         "Yönetici dashboard'u",
         "PDF raporlama & Ekstre"
       ],
-      cta: "Operasyon sistemlerini incele",
+      cta: "KOBİ operasyon sistemlerini incele",
       href: "/cozumler",
       icon: ClipboardList
     },
@@ -68,7 +68,7 @@ export default function HomeSolutions() {
 
   const enOfferings = [
     {
-      title: "Operations Systems",
+      title: "SME Operations Systems",
       desc: "Bespoke dashboards and portals digitizing your daily workflows, order intake, stock levels, and collections.",
       features: [
         "Work tracking systems",
@@ -78,7 +78,7 @@ export default function HomeSolutions() {
         "Executive dashboards",
         "PDF invoicing & export"
       ],
-      cta: "Explore operations systems",
+      cta: "Explore SME operations systems",
       href: "/cozumler",
       icon: ClipboardList
     },
@@ -116,7 +116,7 @@ export default function HomeSolutions() {
 
   const deOfferings = [
     {
-      title: "Operative Systeme",
+      title: "KMU Operative Systeme",
       desc: "Maßgeschneiderte Dashboards und Portale zur Digitalisierung Ihrer täglichen Arbeitsabläufe, Bestellungen und Bestände.",
       features: [
         "Arbeitsverfolgungssysteme",
@@ -126,7 +126,7 @@ export default function HomeSolutions() {
         "Geschäftsführer-Dashboards",
         "PDF-Rechnungen & Berichte"
       ],
-      cta: "Operative Systeme erkunden",
+      cta: "KMU operative Systeme erkunden",
       href: "/cozumler",
       icon: ClipboardList
     },

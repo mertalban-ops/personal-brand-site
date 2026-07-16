@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Markanızı yalnızca görünür değil, ikna edici hale getiren hızlı, SEO uyumlu ve premium Next.js web siteleri.",
   alternates: {
-    canonical: `${siteConfig.baseUrl}/cozumler/web-siteleri`,
+    canonical: `${siteConfig.siteUrl}/cozumler/web-siteleri`,
   },
 };
 
@@ -22,19 +22,19 @@ export default function WebSiteleriPage() {
             "@type": "ListItem",
             "position": 1,
             "name": "Ana Sayfa",
-            "item": siteConfig.baseUrl
+            "item": siteConfig.siteUrl
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Çözümler",
-            "item": `${siteConfig.baseUrl}/cozumler`
+            "item": `${siteConfig.siteUrl}/cozumler`
           },
           {
             "@type": "ListItem",
             "position": 3,
             "name": "Web Siteleri",
-            "item": `${siteConfig.baseUrl}/cozumler/web-siteleri`
+            "item": `${siteConfig.siteUrl}/cozumler/web-siteleri`
           }
         ]
       },
@@ -45,7 +45,7 @@ export default function WebSiteleriPage() {
         "provider": {
           "@type": "Organization",
           "name": siteConfig.brandName,
-          "url": siteConfig.baseUrl
+          "url": siteConfig.siteUrl
         }
       }
     ]

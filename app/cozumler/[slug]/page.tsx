@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${solution.title} — Solvaria`,
     description: solution.tagline,
     alternates: {
-      canonical: `${siteConfig.baseUrl}/cozumler/${slug}`,
+      canonical: `${siteConfig.siteUrl}/cozumler/${slug}`,
     },
   };
 }
@@ -40,19 +40,19 @@ export default async function SolutionDetailPage({ params }: Props) {
             "@type": "ListItem",
             "position": 1,
             "name": "Ana Sayfa",
-            "item": siteConfig.baseUrl
+            "item": siteConfig.siteUrl
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Çözümler",
-            "item": `${siteConfig.baseUrl}/cozumler`
+            "item": `${siteConfig.siteUrl}/cozumler`
           },
           {
             "@type": "ListItem",
             "position": 3,
             "name": solution.title,
-            "item": `${siteConfig.baseUrl}/cozumler/${slug}`
+            "item": `${siteConfig.siteUrl}/cozumler/${slug}`
           }
         ]
       },
@@ -63,7 +63,7 @@ export default async function SolutionDetailPage({ params }: Props) {
         "provider": {
           "@type": "Organization",
           "name": siteConfig.brandName,
-          "url": siteConfig.baseUrl
+          "url": siteConfig.siteUrl
         }
       }
     ]

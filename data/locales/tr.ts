@@ -18,9 +18,9 @@ export const tr: Dictionary = {
     titleHighlight: "çalışan dijital sistemler",
     title2: " ve güven veren web deneyimleri geliştiriyoruz.",
     subtitle:
-      "İş takip sistemlerinden kurumsal web sitelerine, stok ve cari hesap çözümlerinden SaaS ürünlerine kadar işletmenize özel dijital yapılar tasarlıyoruz.",
-    primaryBtn: "Projemi Konuşalım",
-    secondaryBtn: "Proje Vitrinini Gör",
+      "Stok, cari hesap, servis ve raporlama süreçlerinizi işletmenize özel sistemlerde birleştiriyor; markanız için güven oluşturan web siteleri ve geliştirilebilir dijital ürünler tasarlıyorum.",
+    primaryBtn: "Ücretsiz İhtiyaç Analizi",
+    secondaryBtn: "Gerçek Projeleri İncele",
     cards: {
       stock: "Stok",
       stockDesc: "aktif ürün · 14 kritik",
@@ -131,7 +131,7 @@ export const tr: Dictionary = {
         tagline: "Stok, Cari Hesap ve Tahsilat Takip Sistemi",
         status: "Canlı",
         problem:
-          "İşletmenin stok ve borç verisinin defter ile Excel arasında kaybolması, yöneticinin genel durumu görememesi.",
+          "Stok, müşteri bakiyesi ve tahsilat bilgilerinin defter ile farklı Excel dosyalarında dağınık tutulması.",
         solution:
           "Tüm stok hareketlerini, müşteri bazlı cari hesapları ve tahsilat durumunu tek bir arayüzde toplayan özel bir dijital yönetim sistemi.",
         approach: "Yöneticinin karmaşık analizlerle uğraşmadan tek ekranda finansal özeti görebildiği minimalist yaklaşım.",
@@ -151,7 +151,7 @@ export const tr: Dictionary = {
         tagline: "Oto Servis Operasyon ve Müşteri Takip Platformu",
         status: "Canlı",
         problem:
-          "Servise giren araçların onarım durumunun, maliyetlerin ve müşteri geçmişinin not defterlerinde dağınık takip edilmesi.",
+          "Araç kabul, onarım aşamaları ve müşteri geçmişinin kağıt ile sözlü iletişime dayanması.",
         solution:
           "Araç kabulünden teslimata kadar tüm onarım aşamalarını, usta notlarını ve faturalandırmayı merkezi hale getiren mobil uyumlu sistem.",
         approach: "Servis ustalarının ve danışmanların sahada tabletle kolayca veri girebileceği hızlı bir UI mimarisi tasarlandı.",
@@ -317,7 +317,7 @@ export const tr: Dictionary = {
     label: "07 — Projenizi Konuşalım",
     title: "İşletmenizdeki takip karmaşasını profesyonel bir sisteme dönüştürelim.",
     subtitle:
-      "Stok, cari hesap, satış, tahsilat veya raporlama süreçleriniz dağınıksa, işletmenize özel premium bir dijital sistemle bunu yönetilebilir hale getirebiliriz. Projenizi 15 dakikada konuşalım.",
+      "Stok, cari hesap, satış, tahsilat veya raporlama süreçleriniz dağınıksa, işletmenize özel premium bir dijital sistemle bunu yönetilebilir hale getirebiliriz. Projenizi 30 dakikalık ücretsiz ihtiyaç analiziyle masaya yatıralım.",
     emailBtn: "E-posta Gönder",
     whatsappBtn: "WhatsApp'tan Yaz",
     footerText:

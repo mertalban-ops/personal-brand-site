@@ -40,6 +40,8 @@ export default function ContactForm() {
     budget: "",
     additionalInfo: "",
   });
+
+  const [fieldErrors, setFieldErrors] = useState<{ [key in keyof FormState]?: string }>({});
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -197,6 +199,29 @@ export default function ContactForm() {
 
   const needTypes = language === "en" ? needTypesEn : language === "de" ? needTypesDe : needTypesTr;
 
+  const validateField = (field: keyof FormState, value: string) => {
+    let err = "";
+    if (field === "name" && (!value.trim() || value.trim().length < 2)) {
+      err = language === "tr" ? "Lütfen geçerli bir isim girin." : language === "de" ? "Bitte geben Sie einen gültigen Namen ein." : "Please enter a valid name.";
+    }
+    if (field === "email") {
+      if (!value.trim()) {
+        err = language === "tr" ? "E-posta adresi gereklidir." : language === "de" ? "E-Mail-Adresse ist erforderlich." : "Email address is required.";
+      } else if (!value.includes("@") || !value.includes(".")) {
+        err = language === "tr" ? "Geçerli bir e-posta adresi girin." : language === "de" ? "Geben Sie eine gültige E-Mail-Adresse ein." : "Enter a valid email address.";
+      }
+    }
+    if (field === "needType" && !value) {
+      err = language === "tr" ? "Lütfen bir çözüm türü seçin." : language === "de" ? "Bitte wählen Sie einen Lösungstyp." : "Please select a solution type.";
+    }
+    if (field === "problem" && stage === 2 && (!value.trim() || value.trim().length < 10)) {
+      err = language === "tr" ? "Lütfen yaşadığınız problemi en az 10 karakterle açıklayın." : language === "de" ? "Bitte beschreiben Sie das Problem mit mindestens 10 Zeichen." : "Please describe the problem in at least 10 characters.";
+    }
+
+    setFieldErrors((prev) => ({ ...prev, [field]: err || undefined }));
+    return !err;
+  };
+
   const set = (field: keyof FormState) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -204,17 +229,19 @@ export default function ContactForm() {
       hasTrackedStart.current = true;
       try { track("contact_form_start"); } catch (err) {}
     }
-    setForm((prev) => ({ ...prev, [field]: e.target.value }));
+    const val = e.target.value;
+    setForm((prev) => ({ ...prev, [field]: val }));
+    validateField(field, val);
     setErrorMsg(null);
   };
 
   const validateStage1 = () => {
-    if (!form.name.trim() || !form.email.trim() || !form.needType) {
+    const isNameValid = validateField("name", form.name);
+    const isEmailValid = validateField("email", form.email);
+    const isNeedValid = validateField("needType", form.needType);
+
+    if (!isNameValid || !isEmailValid || !isNeedValid) {
       setErrorMsg(c.validationError);
-      return false;
-    }
-    if (!form.email.includes("@")) {
-      setErrorMsg(language === "tr" ? "Geçerli bir e-posta girin." : "Enter a valid email.");
       return false;
     }
     setErrorMsg(null);
@@ -230,7 +257,8 @@ export default function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.problem.trim()) {
+    const isProblemValid = validateField("problem", form.problem);
+    if (!isProblemValid) {
       setErrorMsg(c.validationError);
       return;
     }
@@ -277,8 +305,14 @@ export default function ContactForm() {
     );
   }
 
-  const inputClass =
-    "w-full rounded-lg border border-line bg-bg-raised/30 px-4 py-2.5 text-sm text-ink placeholder:text-faint focus:border-accent/60 focus:outline-none focus:ring-1 focus:ring-accent/30 transition-colors";
+  const inputClass = (field: keyof FormState) => {
+    const base = "w-full rounded-lg border bg-bg-raised/30 px-4 py-2.5 text-sm text-ink placeholder:text-faint focus:outline-none focus:ring-1 transition-colors";
+    if (fieldErrors[field]) {
+      return `${base} border-red-500/80 focus:border-red-500 focus:ring-red-500/20`;
+    }
+    return `${base} border-line focus:border-accent/60 focus:ring-accent/30`;
+  };
+
   const labelClass = "block text-xs font-semibold text-muted mb-1.5";
   const showBudget = siteConfig.budgetRanges && siteConfig.budgetRanges.length > 0;
 
@@ -332,9 +366,13 @@ export default function ContactForm() {
                   required
                   value={form.name}
                   onChange={set("name")}
-                  className={inputClass}
+                  onBlur={(e) => validateField("name", e.target.value)}
+                  className={inputClass("name")}
                   placeholder={c.namePlaceholder}
                 />
+                {fieldErrors.name && (
+                  <p className="text-[10px] text-red-400 mt-1">{fieldErrors.name}</p>
+                )}
               </div>
               <div>
                 <label className={labelClass} htmlFor="cf-company">
@@ -344,7 +382,7 @@ export default function ContactForm() {
                   id="cf-company"
                   value={form.company}
                   onChange={set("company")}
-                  className={inputClass}
+                  className={inputClass("company")}
                   placeholder={c.companyPlaceholder}
                 />
               </div>
@@ -361,9 +399,13 @@ export default function ContactForm() {
                   required
                   value={form.email}
                   onChange={set("email")}
-                  className={inputClass}
+                  onBlur={(e) => validateField("email", e.target.value)}
+                  className={inputClass("email")}
                   placeholder={c.emailPlaceholder}
                 />
+                {fieldErrors.email && (
+                  <p className="text-[10px] text-red-400 mt-1">{fieldErrors.email}</p>
+                )}
               </div>
               <div>
                 <label className={labelClass} htmlFor="cf-phone">
@@ -373,7 +415,7 @@ export default function ContactForm() {
                   id="cf-phone"
                   value={form.phone}
                   onChange={set("phone")}
-                  className={inputClass}
+                  className={inputClass("phone")}
                   placeholder={c.phonePlaceholder}
                 />
               </div>
@@ -389,7 +431,8 @@ export default function ContactForm() {
                   required
                   value={form.needType}
                   onChange={set("needType")}
-                  className={inputClass}
+                  onBlur={(e) => validateField("needType", e.target.value)}
+                  className={inputClass("needType")}
                 >
                   <option value="">{c.needPlaceholder}</option>
                   {needTypes.map((n) => (
@@ -398,6 +441,9 @@ export default function ContactForm() {
                     </option>
                   ))}
                 </select>
+                {fieldErrors.needType && (
+                  <p className="text-[10px] text-red-400 mt-1">{fieldErrors.needType}</p>
+                )}
               </div>
             </div>
 
@@ -410,7 +456,7 @@ export default function ContactForm() {
                 value={form.message}
                 onChange={set("message")}
                 rows={2}
-                className={inputClass}
+                className={inputClass("message")}
                 placeholder={c.messagePlaceholder}
               />
             </div>
@@ -438,7 +484,7 @@ export default function ContactForm() {
                 id="cf-currentMethod"
                 value={form.currentMethod}
                 onChange={set("currentMethod")}
-                className={inputClass}
+                className={inputClass("currentMethod")}
                 placeholder={c.currentPlaceholder}
               />
             </div>
@@ -452,10 +498,14 @@ export default function ContactForm() {
                 required
                 value={form.problem}
                 onChange={set("problem")}
+                onBlur={(e) => validateField("problem", e.target.value)}
                 rows={3}
-                className={inputClass}
+                className={inputClass("problem")}
                 placeholder={c.problemPlaceholder}
               />
+              {fieldErrors.problem && (
+                <p className="text-[10px] text-red-400 mt-1">{fieldErrors.problem}</p>
+              )}
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
@@ -467,7 +517,7 @@ export default function ContactForm() {
                   id="cf-userCount"
                   value={form.userCount}
                   onChange={set("userCount")}
-                  className={inputClass}
+                  className={inputClass("userCount")}
                   placeholder={c.userCountPlaceholder}
                 />
               </div>
@@ -480,7 +530,7 @@ export default function ContactForm() {
                   id="cf-timeline"
                   value={form.timeline}
                   onChange={set("timeline")}
-                  className={inputClass}
+                  className={inputClass("timeline")}
                   placeholder={c.timelinePlaceholder}
                 />
               </div>
@@ -495,7 +545,7 @@ export default function ContactForm() {
                   id="cf-budget"
                   value={form.budget}
                   onChange={set("budget")}
-                  className={inputClass}
+                  className={inputClass("budget")}
                 >
                   <option value="">{c.budgetPlaceholder}</option>
                   {siteConfig.budgetRanges.map((range) => {
@@ -524,7 +574,7 @@ export default function ContactForm() {
                 value={form.additionalInfo}
                 onChange={set("additionalInfo")}
                 rows={2}
-                className={inputClass}
+                className={inputClass("additionalInfo")}
                 placeholder={c.additionalInfoPlaceholder}
               />
             </div>

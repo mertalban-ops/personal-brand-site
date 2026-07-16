@@ -18,9 +18,9 @@ export const en: Dictionary = {
     titleHighlight: "digital operation systems.",
     title2: "",
     subtitle:
-      "We convert inventory, finance, sales, collection, and reporting processes for small and medium businesses into clean, measurable, and custom web-based systems.",
-    primaryBtn: "Discuss My Project",
-    secondaryBtn: "View Project Showcase",
+      "I consolidate your inventory, current accounts, service, and reporting processes into systems tailored to your business, and design websites and extensible digital products that inspire trust in your brand.",
+    primaryBtn: "Free Needs Analysis",
+    secondaryBtn: "Explore Real Projects",
     cards: {
       stock: "Inventory",
       stockDesc: "active items · 14 critical",
@@ -317,7 +317,7 @@ export const en: Dictionary = {
     label: "07 — Let's Talk",
     title: "Let's transform your tracking chaos into a professional system.",
     subtitle:
-      "If your inventory, finance, sales, collection, or reporting processes are scattered, we can make it manageable with a premium digital system tailored for your business. Let's discuss your project in 15 minutes.",
+      "If your inventory, finance, sales, collection, or reporting processes are scattered, we can make it manageable with a premium digital system tailored for your business. Let's discuss your project in a free 30-minute needs analysis call.",
     emailBtn: "Send E-mail",
     whatsappBtn: "Message on WhatsApp",
     footerText:

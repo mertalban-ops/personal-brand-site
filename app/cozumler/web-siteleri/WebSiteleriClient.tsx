@@ -32,8 +32,8 @@ export default function WebSiteleriClient() {
     vsRows: [
       ["Ana Amaç", "Marka tanıtımı, güven oluşturma, hizmet anlatımı ve lead (müşteri talebi) toplama.", "Kullanıcıların giriş yaptığı, veri eklediği/sildiği, süreç yönettiği ve rapor aldığı çalışan sistem."],
       ["Kullanıcı Etkileşimi", "İçerik okuma, form doldurma, proje inceleme, WhatsApp’tan doğrudan iletişim.", "Stok girişi, borç kaydı, iş emri atama, PDF hesap ekstresi paylaşma, dashboard izleme."],
-      ["Teknoloji Odağı", "Hızlı FCP (ilk açılış), kusursuz SEO, statik sayfalar (SSG), görsel geçişler ve responsive uyum.", "Güvenli veritabanı (Supabase), rol bazlı yetkilendirme (RBAC), API entegrasyonları, karmaşık formlar."],
-      ["Kimler İçin?", "Hizmetlerini internette profesyonelce sunup, yeni B2B müşteriler kazanmak isteyen her işlet.", "Operasyonlarını defter ve Excel’den kurtarıp dijital sisteme bağlamak isteyen KOBİ’ler."]
+      ["Teknoloji Odağı", "Hızlı FCP (ilk açılış), teknik SEO uyumu, statik sayfalar (SSG), görsel geçişler ve responsive uyum.", "Güvenli veritabanı (Supabase), rol bazlı yetkilendirme (RBAC), API entegrasyonları, karmaşık formlar."],
+      ["Kimler İçin?", "Hizmetlerini internette profesyonelce sunup, yeni B2B müşteriler kazanmak isteyen her işletme.", "Operasyonlarını defter ve Excel’den kurtarıp dijital sisteme bağlamak isteyen KOBİ’ler."]
     ],
     typesKicker: "Hizmet Alanları",
     typesTitle: "Hangi tür web siteleri geliştiriyoruz?",
@@ -72,7 +72,7 @@ export default function WebSiteleriClient() {
     processMore: "Çalışma Sürecimizin Tüm Aşamalarını Görün",
     finalKicker: "Hemen Başlayın",
     finalTitle: "Müşterilerinizin güvenle inceleyeceği dijital vitrininizi birlikte kuralım",
-    finalDesc: "Hizmet kapsamını belirlemek, işletmeniz için doğru sayfa yapısını çıkarmak ve fiyat teklifi almak için 15 dakikalık ücretsiz bir keşif görüşmesi planlayabilirsiniz.",
+    finalDesc: "Hizmet kapsamını belirlemek, işletmeniz için doğru sayfa yapısını çıkarmak ve fiyat teklifi almak için 30 dakikalık ücretsiz bir ihtiyaç analizi görüşmesi planlayabilirsiniz.",
     finalPrimary: "Projenizi Anlatın",
     finalSecondary: "WhatsApp'tan Yazın"
   };
@@ -99,7 +99,7 @@ export default function WebSiteleriClient() {
     vsRows: [
       ["Main Purpose", "Brand presentation, establishing trust, explaining services, and gathering leads.", "An active system where users log in, input/delete data, manage workflows, and receive reports."],
       ["User Interaction", "Reading content, filling out forms, examining case studies, direct WhatsApp contact.", "Stock entries, logging debts, assigning work orders, sharing PDF statements, viewing dashboards."],
-      ["Tech Focus", "Fast FCP (first paint), flawless SEO, static pages (SSG), visual transitions, and responsive fit.", "Secure database (Supabase), role-based access control (RBAC), API integrations, complex forms."],
+      ["Tech Focus", "Fast FCP (first paint), technical SEO alignment, static pages (SSG), visual transitions, and responsive fit.", "Secure database (Supabase), role-based access control (RBAC), API integrations, complex forms."],
       ["Who is it for?", "Any business looking to showcase services professionally and win new B2B clients.", "SMEs wanting to rid their operations of notebooks and Excel, connecting them to a digital tool."]
     ],
     typesKicker: "Service Focus",
@@ -139,7 +139,7 @@ export default function WebSiteleriClient() {
     processMore: "View All Steps of Our Engagement Workflow",
     finalKicker: "Start Now",
     finalTitle: "Let's build your digital vitrine that clients will inspect with confidence",
-    finalDesc: "You can book a free 15-minute discovery session to determine the scope of services, define page layouts, and receive a price proposal.",
+    finalDesc: "You can book a free 30-minute needs analysis session to determine the scope of services, define page layouts, and receive a price proposal.",
     finalPrimary: "Share Your Project",
     finalSecondary: "Chat on WhatsApp"
   };
@@ -166,7 +166,7 @@ export default function WebSiteleriClient() {
     vsRows: [
       ["Hauptzweck", "Markenpräsentation, Vertrauensaufbau, Erläuterung von Dienstleistungen und Lead-Generierung.", "Ein aktives System, in dem sich Benutzer anmelden, Daten eingeben/löschen, Arbeitsabläufe verwalten und Berichte erhalten."],
       ["Benutzerinteraktion", "Inhalte lesen, Formulare ausfüllen, Fallstudien prüfen, direkter WhatsApp-Kontakt.", "Lagerbuchungen, Erfassung von Schulden, Zuweisung von Arbeitsaufträgen, Weitergabe von PDF-Auszügen, Anzeige von Dashboards."],
-      ["Tech-Fokus", "Schnelles FCP (First Paint), fehlerfreies SEO, statische Seiten (SSG), visuelle Übergänge und responsive Passform.", "Sichere Datenbank (Supabase), rollenbasierte Zugriffskontrolle (RBAC), API-Integrationen, komplexe Formulare."],
+      ["Tech-Fokus", "Schnelles FCP (First Paint), technische SEO-Ausrichtung, statische Seiten (SSG), visuelle Übergänge und responsive Passform.", "Sichere Datenbank (Supabase), rollenbasierte Zugriffskontrolle (RBAC), API-Integrationen, komplexe Formulare."],
       ["Für wen?", "Jedes Unternehmen, das Dienstleistungen professionell präsentieren und neue B2B-Kunden gewinnen möchte.", "KMUs, die ihre Abläufe von Notizbüchern und Excel befreien und mit einem digitalen Tool verbinden möchten."]
     ],
     typesKicker: "Dienstleistungsfokus",
@@ -206,7 +206,7 @@ export default function WebSiteleriClient() {
     processMore: "Alle Schritte unseres Engagement-Workflows anzeigen",
     finalKicker: "Jetzt starten",
     finalTitle: "Lassen Sie uns Ihre digitale Vitrine bauen, die Kunden mit Vertrauen inspizieren",
-    finalDesc: "Sie können eine kostenlose 15-minütige Discovery-Session buchen, um den Leistungsumfang zu bestimmen, Seitenlayouts zu definieren und ein Preisangebot zu erhalten.",
+    finalDesc: "Sie können eine kostenlose 30-minütige Bedarfsanalyse buchen, um den Leistungsumfang zu bestimmen, Seitenlayouts zu definieren und ein Preisangebot zu erhalten.",
     finalPrimary: "Teilen Sie Ihr Projekt",
     finalSecondary: "Chat auf WhatsApp"
   };

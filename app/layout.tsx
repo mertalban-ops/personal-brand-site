@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   title: "Solvaria — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
   description:
     "Mert Alban / Solvaria: KOBİ'ler için kurumsal web siteleri, özel iş takip sistemleri, web uygulamaları, SaaS ürünleri ve otomasyon çözümleri.",
-  metadataBase: new URL(siteConfig.baseUrl),
+  metadataBase: new URL(siteConfig.siteUrl),
   alternates: {
     canonical: "/",
   },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
       "Kurumsal web sitelerinden iş takip sistemlerine, web uygulamalarından SaaS altyapısına kadar işletmenize özel dijital çözümler geliştiriyoruz.",
     locale: "tr_TR",
     type: "website",
-    url: siteConfig.baseUrl,
+    url: siteConfig.siteUrl,
   },
 };
 
@@ -57,30 +57,30 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Organization",
-        "@id": `${siteConfig.baseUrl}/#organization`,
+        "@id": `${siteConfig.siteUrl}/#organization`,
         "name": siteConfig.brandName,
-        "url": siteConfig.baseUrl,
-        "logo": `${siteConfig.baseUrl}/logo.png`,
-        "sameAs": [siteConfig.github, siteConfig.linkedin].filter(Boolean)
+        "url": siteConfig.siteUrl,
+        "logo": `${siteConfig.siteUrl}/logo.png`,
+        "sameAs": [siteConfig.socialLinks.github, siteConfig.socialLinks.linkedin].filter(Boolean)
       },
       {
         "@type": "Person",
-        "@id": `${siteConfig.baseUrl}/#person`,
-        "name": "Mert Alban",
+        "@id": `${siteConfig.siteUrl}/#person`,
+        "name": siteConfig.founderName,
         "jobTitle": "Founder & Lead Software Engineer",
         "worksFor": {
-          "@id": `${siteConfig.baseUrl}/#organization`
+          "@id": `${siteConfig.siteUrl}/#organization`
         },
-        "url": siteConfig.baseUrl,
-        "sameAs": [siteConfig.github, siteConfig.linkedin].filter(Boolean)
+        "url": siteConfig.siteUrl,
+        "sameAs": [siteConfig.socialLinks.github, siteConfig.socialLinks.linkedin].filter(Boolean)
       },
       {
         "@type": "WebSite",
-        "@id": `${siteConfig.baseUrl}/#website`,
-        "url": siteConfig.baseUrl,
+        "@id": `${siteConfig.siteUrl}/#website`,
+        "url": siteConfig.siteUrl,
         "name": siteConfig.brandName,
         "publisher": {
-          "@id": `${siteConfig.baseUrl}/#organization`
+          "@id": `${siteConfig.siteUrl}/#organization`
         }
       }
     ]

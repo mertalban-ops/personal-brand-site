@@ -41,16 +41,16 @@ export default function Footer() {
             {/* Always-visible contact */}
             <div className="mt-6 flex flex-col gap-3">
               <a
-                href={`mailto:${siteConfig.email}?subject=${encodeURIComponent("Proje talebi")}`}
+                href={`mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent("Proje talebi")}`}
                 className="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-accent"
                 style={{ color: "var(--muted)" }}
               >
                 <Mail className="h-4 w-4 flex-shrink-0" style={{ color: "var(--accent)" }} />
-                {siteConfig.email}
+                {siteConfig.contactEmail}
               </a>
-              {siteConfig.whatsappEnabled && (
+              {siteConfig.whatsappNumber && (
                 <a
-                  href={`https://wa.me/${siteConfig.whatsapp}`}
+                  href={`https://wa.me/${siteConfig.whatsappNumber}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-accent"
