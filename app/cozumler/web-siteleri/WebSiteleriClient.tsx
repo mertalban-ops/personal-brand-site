@@ -488,7 +488,7 @@ export default function WebSiteleriClient() {
               {c.finalPrimary}
             </Link>
             <a
-              href="https://wa.me/905000000000"
+              href="https://wa.me/905379531547"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-lg border border-line bg-surface/30 px-6 py-3 font-medium text-ink transition-colors hover:border-accent/40 hover:text-accent inline-block"

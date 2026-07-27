@@ -128,7 +128,7 @@ export default function IletisimClient() {
                         {c.whatsappLabel}
                       </p>
                       <p className="text-sm text-ink font-medium">
-                        +{contact.whatsapp}
+                        +90 537 953 15 47
                       </p>
                     </div>
                   </a>
