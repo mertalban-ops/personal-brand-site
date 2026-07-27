@@ -134,10 +134,10 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* 2. Solvaria Ürün Laboratuvarı */}
+        {/* 2. Albanexa Ürün Laboratuvarı */}
         <div className="mb-16">
           <h3 className="display text-lg font-bold text-ink mb-6 border-l-2 border-blue pl-3">
-            {language === "tr" ? "Solvaria Ürün Laboratuvarı" : language === "de" ? "Solvaria Produktlabor" : "Solvaria Product Lab"}
+            {language === "tr" ? "Albanexa Ürün Laboratuvarı" : language === "de" ? "Albanexa Produktlabor" : "Albanexa Product Lab"}
           </h3>
           <div className="grid gap-6 sm:grid-cols-2 md:gap-8">
             {productLabProjects.map((p, i) =>

@@ -10,7 +10,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 interface ModelDetail {
   forWhom: string;
-  solvariaResponsibility: string;
+  albanexaResponsibility: string;
   partnerResponsibility: string;
   commModel: string;
   delivery: string;
@@ -33,7 +33,7 @@ export default function IsBirligiClient() {
 
   const trLabels = {
     forWhom: "Kimler İçin Uygun?",
-    solvaria: "Solvaria Neyi Üstlenir?",
+    albanexa: "Albanexa Neyi Üstlenir?",
     partner: "İş Ortağı Neyi Üstlenir?",
     comm: "İletişim Modeli",
     delivery: "Teslim Biçimi",
@@ -46,7 +46,7 @@ export default function IsBirligiClient() {
 
   const enLabels = {
     forWhom: "Who Is It For?",
-    solvaria: "What Solvaria Handles",
+    albanexa: "What Albanexa Handles",
     partner: "What the Partner Handles",
     comm: "Communication Model",
     delivery: "Delivery Format",
@@ -59,7 +59,7 @@ export default function IsBirligiClient() {
 
   const deLabels = {
     forWhom: "Für wen ist das geeignet?",
-    solvaria: "Was Solvaria übernimmt",
+    albanexa: "Was Albanexa übernimmt",
     partner: "Was der Partner übernimmt",
     comm: "Kommunikationsmodell",
     delivery: "Lieferformat",
@@ -83,11 +83,11 @@ export default function IsBirligiClient() {
       {
         icon: Shield,
         title: "White-Label Yazılım Geliştirme",
-        desc: "Müşterilerinize kendi markanız adı altında premium Next.js web siteleri, CRM ve iş takip sistemleri sunun. Solvaria, arka planda tüm teknik tasarımı, kodlamayı ve desteği üstlensin.",
+        desc: "Müşterilerinize kendi markanız adı altında premium Next.js web siteleri, CRM ve iş takip sistemleri sunun. Albanexa, arka planda tüm teknik tasarımı, kodlamayı ve desteği üstlensin.",
         bullets: ["Müşteri ilişkileri tamamen sizdedir", "Fiyatlandırmayı siz belirlersiniz", "Belirlenen hizmet kapsamına göre teknik destek"],
         details: {
           forWhom: "Yazılım geliştirme ekibi olmayan ancak müşterilerine özel yazılım veya web çözümleri satmak isteyen dijital pazarlama ajansları, SEO uzmanları ve danışmanlar.",
-          solvariaResponsibility: "Tasarımın Next.js koduna dökülmesi, veritabanı kurulumu, entegrasyonlar, yayına alma ve SLA kapsamında bakım desteği.",
+          albanexaResponsibility: "Tasarımın Next.js koduna dökülmesi, veritabanı kurulumu, entegrasyonlar, yayına alma ve SLA kapsamında bakım desteği.",
           partnerResponsibility: "Müşteri ilişkilerinin yürütülmesi, proje kapsam analizi, UI/UX tasarımı ve faturalandırma.",
           commModel: "İş ortağı ile Slack veya E-posta üzerinden doğrudan iletişim. Son müşteri ile doğrudan temas kurulmaz.",
           delivery: "Kaynak kodlar iş ortağına teslim edilir, Vercel/Supabase projesi iş ortağının hesaplarına aktarılır.",
@@ -103,7 +103,7 @@ export default function IsBirligiClient() {
         bullets: ["Onaylı kapsam ve takvim doğrultusunda planlı teslim", "Temiz ve belgelenmiş kodlama", "Sorunsuz Git / Jira süreç entegrasyonu"],
         details: {
           forWhom: "İçeride yazılım ekibi olan ancak iş yükü kapasitesini aşan veya özel teknoloji odağına (n8n, Supabase, AI Ajanları) ihtiyaç duyan yazılım şirketleri ve stüdyolar.",
-          solvariaResponsibility: "Belirlenen teknik görevleri veya modülleri Jira/Git standartlarınıza uygun şekilde kodlayıp test etmek.",
+          albanexaResponsibility: "Belirlenen teknik görevleri veya modülleri Jira/Git standartlarınıza uygun şekilde kodlayıp test etmek.",
           partnerResponsibility: "Ürün yönetimi, genel mimari kararları, iş önceliklendirmesi ve kod incelemesi (Code Review).",
           commModel: "Ekibinizin kullandığı Slack, Jira, GitHub ortamlarına dahil olarak entegre çalışma.",
           delivery: "GitHub üzerinden belirlenen repo kollarına pull request (PR) olarak teslimat.",
@@ -119,7 +119,7 @@ export default function IsBirligiClient() {
         bullets: ["Core Web Vitals hedeflerine yönelik optimizasyon", "Özel API ve webhook entegrasyonları", "Ölçeklenebilir bulut mimarisi"],
         details: {
           forWhom: "Müşterilerine performanslı web siteleri ve iş otomasyonları sunarak SEO ve reklam dönüşümlerini artırmak isteyen kreatif ajanslar.",
-          solvariaResponsibility: "Modern Next.js web sitelerinin geliştirilmesi, hız optimizasyonları ve teknik SEO mimarisinin kurulması.",
+          albanexaResponsibility: "Modern Next.js web sitelerinin geliştirilmesi, hız optimizasyonları ve teknik SEO mimarisinin kurulması.",
           partnerResponsibility: "Kreatif konsept tasarımı, içeriklerin hazırlanması, marka konumlandırma ve müşteri yönetimi.",
           commModel: "İhtiyaca göre doğrudan müşteriyle ortak toplantılar veya arka planda sessiz ortaklık.",
           delivery: "Canlıya alınmış, test edilmiş ve tüm şema yapılandırması hazır web projesi.",
@@ -135,7 +135,7 @@ export default function IsBirligiClient() {
         bullets: ["Onaylanan tasarıma yüksek görsel sadakat", "Modern CSS ve animasyon kütüphaneleri", "Mobil ve tablet öncelikli kodlama"],
         details: {
           forWhom: "Görsel tasarımlarının kod tarafında bozulmadan, animasyonlu ve yüksek performanslı şekilde hayata geçmesini isteyen UI/UX tasarım stüdyoları.",
-          solvariaResponsibility: "Figma tasarımlarının piksel seviyesinde Next.js ve Tailwind CSS koduna dönüştürülmesi ve mikro etkileşimlerin eklenmesi.",
+          albanexaResponsibility: "Figma tasarımlarının piksel seviyesinde Next.js ve Tailwind CSS koduna dönüştürülmesi ve mikro etkileşimlerin eklenmesi.",
           partnerResponsibility: "Figma üzerinde responsive ve grid standartlarına uygun temiz tasarım teslimi.",
           commModel: "Tasarımcı ve geliştirici arasında Slack ve Figma yorumları üzerinden anlık senkronizasyon.",
           delivery: "Animasyonları tamamlanmış, Vercel üzerinde yayına hazır frontend kod tabanı.",
@@ -145,7 +145,7 @@ export default function IsBirligiClient() {
         }
       }
     ] as PartnershipModel[],
-    whyHeading: "Neden Solvaria?",
+    whyHeading: "Neden Albanexa?",
     whyDesc: "Bir teknoloji ortağından beklediğiniz güven ve profesyonelliği sunuyoruz.",
     whyPoints: [
       { title: "Teknik Olgunluk", desc: "Next.js 16, Tailwind v4 ve modern bulut altyapılarında yüksek mühendislik standartları." },
@@ -169,11 +169,11 @@ export default function IsBirligiClient() {
       {
         icon: Shield,
         title: "White-Label Development",
-        desc: "Offer premium Next.js websites, CRMs, and workflow systems to your clients under your own brand. Solvaria handles all design, coding, and backend operations in the background.",
+        desc: "Offer premium Next.js websites, CRMs, and workflow systems to your clients under your own brand. Albanexa handles all design, coding, and backend operations in the background.",
         bullets: ["You own the client relationship", "You control the pricing model", "Technical support based on defined service scope"],
         details: {
           forWhom: "Digital marketing agencies, SEO consultants, and business advisors without internal developers who want to sell custom code solutions.",
-          solvariaResponsibility: "Converting designs to Next.js code, database setup, integrations, production deployment, and SLA maintenance.",
+          albanexaResponsibility: "Converting designs to Next.js code, database setup, integrations, production deployment, and SLA maintenance.",
           partnerResponsibility: "Client relationship management, project scoping, UI/UX design deliverables, and billing.",
           commModel: "Direct communication with the partner via Slack or Email. No direct contact with end clients.",
           delivery: "Source code delivered to the partner, and the Vercel/Supabase environment transferred to partner accounts.",
@@ -189,7 +189,7 @@ export default function IsBirligiClient() {
         bullets: ["Planned delivery aligned with scope and schedule", "Clean, documented, and modular code", "Seamless Git and Jira workflow integration"],
         details: {
           forWhom: "Software companies and development studios that have internal teams but exceed capacity limits or need specific technology expertise (n8n, Supabase, AI Agents).",
-          solvariaResponsibility: "Coding and testing defined technical tasks or modules in alignment with your Git/Jira workflow standards.",
+          albanexaResponsibility: "Coding and testing defined technical tasks or modules in alignment with your Git/Jira workflow standards.",
           partnerResponsibility: "Product management, global architectural decisions, task prioritization, and code reviews.",
           commModel: "Integrated collaboration by joining your internal Slack, Jira, or GitHub workspaces.",
           delivery: "GitHub pull requests (PRs) submitted directly to the partner's repository branches.",
@@ -205,7 +205,7 @@ export default function IsBirligiClient() {
         bullets: ["Core Web Vitals optimization goals", "Bespoke API and webhook connections", "Scalable cloud database setups"],
         details: {
           forWhom: "Creative agencies wanting to increase SEO and advertising conversions by offering fast websites and workflow automations to their clients.",
-          solvariaResponsibility: "Developing modern Next.js websites, speed optimizations, and setting up technical SEO structures.",
+          albanexaResponsibility: "Developing modern Next.js websites, speed optimizations, and setting up technical SEO structures.",
           partnerResponsibility: "Creative concept design, copywriting, brand positioning, and client relationship management.",
           commModel: "Joint client meetings as partners or silent background white-label collaboration depending on your preference.",
           delivery: "A live, fully tested web application with configured schema structures.",
@@ -221,7 +221,7 @@ export default function IsBirligiClient() {
         bullets: ["High visual fidelity to approved designs", "Modern CSS and layout patterns", "Mobile & tablet first implementation"],
         details: {
           forWhom: "UI/UX design studios wanting their interface designs implemented cleanly, responsively, and with premium web animations.",
-          solvariaResponsibility: "Pixel-perfect conversion of Figma layouts to Next.js and Tailwind CSS code with micro-interactions.",
+          albanexaResponsibility: "Pixel-perfect conversion of Figma layouts to Next.js and Tailwind CSS code with micro-interactions.",
           partnerResponsibility: "Providing clean Figma files built on responsive grids and design tokens.",
           commModel: "Real-time sync between designer and developer via Slack and Figma comments.",
           delivery: "An animated, performance-optimized frontend codebase ready for production deployment.",
@@ -231,7 +231,7 @@ export default function IsBirligiClient() {
         }
       }
     ] as PartnershipModel[],
-    whyHeading: "Why Partner with Solvaria?",
+    whyHeading: "Why Partner with Albanexa?",
     whyDesc: "We deliver the reliability, performance, and communication you expect from a tech partner.",
     whyPoints: [
       { title: "Technical Excellence", desc: "High engineering standards using Next.js 16, Tailwind v4, and modern cloud infrastructures." },
@@ -255,11 +255,11 @@ export default function IsBirligiClient() {
       {
         icon: Shield,
         title: "White-Label-Softwareentwicklung",
-        desc: "Bieten Sie Ihren Kunden erstklassige Next.js-Websites, CRMs und Arbeitsabfolgesysteme unter Ihrer eigenen Marke an. Solvaria übernimmt das gesamte Design und Coding im Hintergrund.",
+        desc: "Bieten Sie Ihren Kunden erstklassige Next.js-Websites, CRMs und Arbeitsabfolgesysteme unter Ihrer eigenen Marke an. Albanexa übernimmt das gesamte Design und Coding im Hintergrund.",
         bullets: ["Kundenbeziehung liegt ganz bei Ihnen", "Sie kontrollieren das Preismodell", "Technischer Support basierend auf dem definierten Serviceumfang"],
         details: {
           forWhom: "Digitalmarketing-Agenturen, SEO-Berater und Unternehmensberater ohne interne Entwickler, die eigene Softwarelösungen verkaufen möchten.",
-          solvariaResponsibility: "Konvertierung von Designs in Next.js-Code, Datenbank-Setup, Integrationen, Produktionsbereitstellung und SLA-Wartung.",
+          albanexaResponsibility: "Konvertierung von Designs in Next.js-Code, Datenbank-Setup, Integrationen, Produktionsbereitstellung und SLA-Wartung.",
           partnerResponsibility: "Kundenbeziehungsmanagement, Projektumfangsanalyse, UI/UX-Designleistungen und Abrechnung.",
           commModel: "Direkte Kommunikation mit dem Partner per Slack oder E-Mail. Kein direkter Kontakt zu Endkunden.",
           delivery: "Quellcode an den Partner übergeben, Vercel/Supabase-Projekt auf Partnerkonten übertragen.",
@@ -275,7 +275,7 @@ export default function IsBirligiClient() {
         bullets: ["Planmäßige Lieferung gemäß Kapsel und Zeitplan", "Sauberer, dokumentierter Code", "Nahtlose Git- und Jira-Workflow-Integration"],
         details: {
           forWhom: "Softwareunternehmen und Entwicklungsstudios, die über interne Teams verfügen, aber Kapazitätsgrenzen überschreiten oder spezielles Fachwissen benötigen (n8n, Supabase, KI-Agenten).",
-          solvariaResponsibility: "Codierung und Testen definierter technischer Aufgaben oder Module gemäß Ihren Git/Jira-Workflow-Standards.",
+          albanexaResponsibility: "Codierung und Testen definierter technischer Aufgaben oder Module gemäß Ihren Git/Jira-Workflow-Standards.",
           partnerResponsibility: "Produktmanagement, globale Architekturentscheidungen, Aufgabenpriorisierung und Code-Reviews.",
           commModel: "Integrierte Zusammenarbeit durch Beitritt zu Ihren internen Slack-, Jira- oder GitHub-Workspaces.",
           delivery: "GitHub-Pull-Requests (PRs) direkt an die Repository-Branches des Partners gesendet.",
@@ -291,7 +291,7 @@ export default function IsBirligiClient() {
         bullets: ["Core Web Vitals Optimierungsziele", "Maßgeschneiderte API- und Webhook-Verbindungen", "Skalierbare Cloud-Datenbank-Setups"],
         details: {
           forWhom: "Kreativagenturen, die Conversions steigern möchten, indem sie schnelle Websites und Workflow-Automatisierungen anbieten.",
-          solvariaResponsibility: "Entwicklung moderner Next.js-Websites, Geschwindigkeitsoptimierungen und Einrichtung technischer SEO-Strukturen.",
+          albanexaResponsibility: "Entwicklung moderner Next.js-Websites, Geschwindigkeitsoptimierungen und Einrichtung technischer SEO-Strukturen.",
           partnerResponsibility: "Kreativkonzept-Design, Copywriting, Markenpositionierung und Kundenbeziehungsmanagement.",
           commModel: "Gemeinsame Kundentreffen als Partner oder stille White-Label-Zusammenarbeit im Hintergrund je nach Wunsch.",
           delivery: "Eine Live-Webanwendung, die vollständig getestet und mit konfigurierten Schemastrukturen versehen ist.",
@@ -307,7 +307,7 @@ export default function IsBirligiClient() {
         bullets: ["Hohe visuelle Wiedergabetreue zu freigegebenen Designs", "Moderne CSS- und Animationsbibliotheken", "Mobile-first Implementierung"],
         details: {
           forWhom: "UI/UX-Designstudios, die eine saubere, responsive und leistungsstarke Umsetzung ihrer Designs mit erstklassigen Webanimationen wünschen.",
-          solvariaResponsibility: "Pixelgenaue Konvertierung von Figma-Layouts in Next.js- und Tailwind-CSS-Code mit Mikrointeraktionen.",
+          albanexaResponsibility: "Pixelgenaue Konvertierung von Figma-Layouts in Next.js- und Tailwind-CSS-Code mit Mikrointeraktionen.",
           partnerResponsibility: "Bereitstellung sauberer Figma-Dateien basierend auf responsiven Grids und Design-Tokens.",
           commModel: "Echtzeit-Synchronisierung zwischen Designer und Entwickler per Slack und Figma-Kommentaren.",
           delivery: "Eine animierte, performanceoptimierte Frontend-Codebasis bereit für die Produktionsbereitstellung.",
@@ -317,7 +317,7 @@ export default function IsBirligiClient() {
         }
       }
     ] as PartnershipModel[],
-    whyHeading: "Warum Solvaria?",
+    whyHeading: "Warum Albanexa?",
     whyDesc: "Wir bieten die Zuverlässigkeit, Leistung und Kommunikation, die Sie von einem Technologiepartner erwarten.",
     whyPoints: [
       { title: "Technische Exzellenz", desc: "Hohe Engineering-Standards mit Next.js 16, Tailwind v4 und modernen Cloud-Infrastrukturen." },
@@ -412,8 +412,8 @@ export default function IsBirligiClient() {
                           <p>{model.details.forWhom}</p>
                         </div>
                         <div>
-                          <h4 className="font-bold text-ink text-xs uppercase tracking-wider mb-1">{l.solvaria}</h4>
-                          <p>{model.details.solvariaResponsibility}</p>
+                          <h4 className="font-bold text-ink text-xs uppercase tracking-wider mb-1">{l.albanexa}</h4>
+                          <p>{model.details.albanexaResponsibility}</p>
                         </div>
                         <div>
                           <h4 className="font-bold text-ink text-xs uppercase tracking-wider mb-1">{l.partner}</h4>
@@ -451,7 +451,7 @@ export default function IsBirligiClient() {
         </div>
       </AnimatedSection>
 
-      {/* Why Solvaria */}
+      {/* Why Albanexa */}
       <AnimatedSection>
         <div className="mx-auto max-w-6xl px-5 py-20">
           <div className="text-center mb-14">

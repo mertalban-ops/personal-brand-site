@@ -91,10 +91,10 @@ export default function ProjelerClient() {
       id: "internal-project" as ProjectCategory,
       title:
         language === "tr"
-          ? "Solvaria için geliştirdiğimiz sistemler"
+          ? "Albanexa için geliştirdiğimiz sistemler"
           : language === "de"
-          ? "Für Solvaria entwickelte Systeme"
-          : "Systems we develop for Solvaria",
+          ? "Für Albanexa entwickelte Systeme"
+          : "Systems we develop for Albanexa",
       desc:
         language === "tr"
           ? "Kendi stüdyomuzun dijital varlığını ve işleyişini yönetmek için sıfırdan inşa ettiğimiz çözümler."

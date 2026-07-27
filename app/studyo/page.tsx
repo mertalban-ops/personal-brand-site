@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import StudyoClient from "./StudyoClient";
 
 export const metadata: Metadata = {
-  title: "Stüdyo Hakkında — Solvaria",
-  description: "Solvaria nedir, kim tarafından kuruldu ve hangi ilkelerle çalışır.",
+  title: "Stüdyo Hakkında — Albanexa",
+  description: "Albanexa nedir, kim tarafından kuruldu ve hangi ilkelerle çalışır.",
 };
 
 export default function StudyoPage() {

@@ -23,7 +23,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("solvaria-lang") as LanguageCode;
+    const savedLang = localStorage.getItem("albanexa-lang") as LanguageCode;
     if (savedLang && dictionaries[savedLang]) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setLanguage(savedLang);
@@ -41,7 +41,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const handleSetLanguage = (lang: LanguageCode) => {
     setLanguage(lang);
-    localStorage.setItem("solvaria-lang", lang);
+    localStorage.setItem("albanexa-lang", lang);
     document.documentElement.lang = lang;
   };
 

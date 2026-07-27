@@ -50,7 +50,7 @@ const ROTATION: RobotProjectType[] = [
   "business-dashboard",
 ];
 
-// Per-project accent color from Solvaria design tokens
+// Per-project accent color from Albanexa design tokens
 const ACCENT: Record<RobotProjectType, string> = {
   "stockapp":            "#10b981",
   "auto-service":        "#38bdf8",

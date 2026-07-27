@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Solvaria B2B Transformation E2E Tests", () => {
+test.describe("Albanexa B2B Transformation E2E Tests", () => {
   
   test.beforeEach(async ({ page }) => {
     // Set a longer default navigation timeout for Next.js compilation
@@ -10,7 +10,7 @@ test.describe("Solvaria B2B Transformation E2E Tests", () => {
   test("Homepage loads successfully and contains correct branding", async ({ page }) => {
     await page.goto("/");
     // Wait for Next.js to finish compile & load, check page title
-    await expect(page).toHaveTitle(/Solvaria/, { timeout: 25000 });
+    await expect(page).toHaveTitle(/Albanexa/, { timeout: 25000 });
     
     // Verify 14+ is NOT in the text
     const content = await page.textContent("body");

@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   
   return {
-    title: `${project.name} — ${titleSuffix} | Solvaria`,
+    title: `${project.name} — ${titleSuffix} | Albanexa`,
     description: project.caseSummary,
     alternates: {
       canonical: `${siteConfig.siteUrl}/projeler/${slug}`,

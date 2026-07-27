@@ -113,7 +113,7 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
         <Link href="/" className="flex items-baseline gap-3" onClick={() => setIsOpen(false)}>
           <span className="display text-sm font-bold tracking-tight text-ink">
-            SOLVARIA
+            ALBANEXA
           </span>
           <span className="mono-label hidden text-faint sm:inline" style={{ color: "var(--faint)" }}>
             dijital çözümler & sistemler

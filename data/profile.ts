@@ -1,12 +1,12 @@
 export const profile = {
-  name: "Solvaria",
+  name: "Albanexa",
   role: "Digital Operation Systems",
   heroKicker: "Workflow Automation · Operational Dashboards · SaaS Architectures",
   heroTitle: "We transform your chaotic operations into measurable digital systems.",
   heroSubtitle:
     "We build custom, fast, and secure web applications for SMEs to streamline inventory, finance, sales, client tracking, and reporting.",
   about: [
-    "We are Solvaria. An independent digital partner that modernizes the daily operations of growing businesses.",
+    "We are Albanexa. An independent digital partner that modernizes the daily operations of growing businesses.",
     "We centralize scattered operations—previously lost in spreadsheets, notebooks, and messaging apps—into a single, unified dashboard. By digitizing inventory, finance, sales, and reporting, we create structured and manageable systems.",
     "Every system we build serves one core purpose: answering the business owner's critical questions—'Who owes us?', 'What's in stock?', 'What's our MRR?'—at a single glance.",
   ],

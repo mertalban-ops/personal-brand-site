@@ -4,9 +4,9 @@ import Breadcrumb from "@/components/layout/Breadcrumb";
 import { contact } from "@/data/contact";
 
 export const metadata: Metadata = {
-  title: "Gizlilik Politikası — Solvaria",
+  title: "Gizlilik Politikası — Albanexa",
   description:
-    "Solvaria gizlilik politikası ve kişisel veri işleme bilgilendirmesi.",
+    "Albanexa gizlilik politikası ve kişisel veri işleme bilgilendirmesi.",
 };
 
 export default function GizlilikPage() {
@@ -31,7 +31,7 @@ export default function GizlilikPage() {
               1. Kapsam
             </h2>
             <p>
-              Bu politika, Solvaria dijital çözüm stüdyosu bünyesinde yürütülen
+              Bu politika, Albanexa dijital çözüm stüdyosu bünyesinde yürütülen
               proje görüşmeleri ve iletişim süreçlerinde toplanan kişisel
               verilerin nasıl işlendiğini açıklar. Üçüncü taraf platformlar,
               eklentiler veya harici servisler bu politika kapsamında değildir.

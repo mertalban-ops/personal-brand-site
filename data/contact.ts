@@ -1,7 +1,7 @@
 // Placeholder değerler # bırakılırsa ilgili buton/link sitede gösterilir.
 export const contact = {
-  name: "Solvaria",
-  email: "mertalbaan@gmail.com",
+  name: "Albanexa",
+  email: "mert@albanexa.com",
   location: "Izmir, Turkey",
   // Örn: "905xxxxxxxxx" (başında + veya 0 olmadan, uluslararası format)
   whatsapp: "905379531547",

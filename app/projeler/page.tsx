@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import ProjelerClient from "./ProjelerClient";
 
 export const metadata: Metadata = {
-  title: "Projeler — Solvaria",
+  title: "Projeler — Albanexa",
   description: "Gerçek firmalar için geliştirdiğimiz web siteleri, iş takip sistemleri, web uygulamaları ve otomasyon çözümleri.",
 };
 

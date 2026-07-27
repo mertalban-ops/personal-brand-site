@@ -8,7 +8,7 @@ import { processSteps, pricingNote } from "@/data/process";
 import { CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Süreç — Solvaria",
+  title: "Süreç — Albanexa",
   description:
     "Keşif görüşmesinden teslime kadar 8 adımlı çalışma sürecimiz ve neleri birlikte yapacağımız.",
 };

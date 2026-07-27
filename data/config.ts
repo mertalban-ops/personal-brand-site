@@ -28,13 +28,13 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  brandName: "Solvaria",
+  brandName: "Albanexa",
   founderName: "Mert Alban",
-  siteUrl: "https://personal-brand-site-azure.vercel.app",
-  productionDomain: "solvaria.com.tr", // Real target domain (not yet active, placeholder for legal text domain fallback)
-  temporaryDomain: "https://personal-brand-site-azure.vercel.app",
-  contactEmail: "mertalbaan@gmail.com",
-  projectEmail: "mertalbaan@gmail.com",
+  siteUrl: "https://albanexa.com",
+  productionDomain: "albanexa.com",
+  temporaryDomain: "https://albanexa.com",
+  contactEmail: "mert@albanexa.com",
+  projectEmail: "mert@albanexa.com",
   whatsappNumber: "905379531547",
   locationTr: "İzmir, Türkiye · Türkiye geneline uzaktan hizmet",
   locationEn: "Izmir, Türkiye · Remote collaboration worldwide",

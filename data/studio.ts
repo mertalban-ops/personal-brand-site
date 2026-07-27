@@ -24,13 +24,13 @@ export interface StudioDetails {
 
 const studioTr: StudioDetails = {
   brand: {
-    name: "Solvaria",
+    name: "Albanexa",
     tagline: "Dijital Çözüm Stüdyosu",
     description:
-      "Solvaria, Mert Alban tarafından yönetilen bağımsız bir dijital çözüm stüdyosudur. Projenin ihtiyaç duyduğu özel uzmanlıklarda güvenilir çözüm ortaklarıyla çalışılır.",
+      "Albanexa, Mert Alban tarafından yönetilen bağımsız bir dijital çözüm stüdyosudur. Projenin ihtiyaç duyduğu özel uzmanlıklarda güvenilir çözüm ortaklarıyla çalışılır.",
     location: "İzmir, Türkiye · Türkiye geneline uzaktan hizmet",
     whyBuilt:
-      "Çoğu KOBİ ya hantal ERP sistemlerine mahkum kalıyor ya da Excel ve WhatsApp arasında kaybolmuş süreçlerle çalışıyor. Doğru boyutta, gerçekten kullanılan sistemler ve müşteri kazandıran web siteleri kurmak için Solvaria kuruldu.",
+      "Çoğu KOBİ ya hantal ERP sistemlerine mahkum kalıyor ya da Excel ve WhatsApp arasında kaybolmuş süreçlerle çalışıyor. Doğru boyutta, gerçekten kullanılan sistemler ve müşteri kazandıran web siteleri kurmak için Albanexa kuruldu.",
   },
   founder: {
     name: "Mert Alban",
@@ -68,13 +68,13 @@ const studioTr: StudioDetails = {
 
 const studioEn: StudioDetails = {
   brand: {
-    name: "Solvaria",
+    name: "Albanexa",
     tagline: "Digital Solution Studio",
     description:
-      "Solvaria is an independent digital solution studio managed by Mert Alban. We collaborate with trusted partners for specialized project requirements.",
+      "Albanexa is an independent digital solution studio managed by Mert Alban. We collaborate with trusted partners for specialized project requirements.",
     location: "Izmir, Turkey · Remote service globally",
     whyBuilt:
-      "Most SMBs either get trapped in bulky ERP systems or lose control of their data between Excel and messaging apps. Solvaria was established to build right-sized, genuinely used systems and high-converting websites.",
+      "Most SMBs either get trapped in bulky ERP systems or lose control of their data between Excel and messaging apps. Albanexa was established to build right-sized, genuinely used systems and high-converting websites.",
   },
   founder: {
     name: "Mert Alban",
@@ -112,13 +112,13 @@ const studioEn: StudioDetails = {
 
 const studioDe: StudioDetails = {
   brand: {
-    name: "Solvaria",
+    name: "Albanexa",
     tagline: "Studio für digitale Lösungen",
     description:
-      "Solvaria ist ein von Mert Alban geführtes unabhängiges Studio für digitale Lösungen. Bei Bedarf arbeiten wir mit vertrauenswürdigen Partnern zusammen.",
+      "Albanexa ist ein von Mert Alban geführtes unabhängiges Studio für digitale Lösungen. Bei Bedarf arbeiten wir mit vertrauenswürdigen Partnern zusammen.",
     location: "Izmir, Türkei · Weltweiter Remote-Service",
     whyBuilt:
-      "Viele KMU kämpfen entweder mit unhandlichen ERP-Systemen oder verlieren ihre Daten zwischen Excel und Messaging-Apps. Solvaria wurde gegründet, um maßgeschneiderte, wirklich genutzte Systeme und konversionsstarke Websites zu entwickeln.",
+      "Viele KMU kämpfen entweder mit unhandlichen ERP-Systemen oder verlieren ihre Daten zwischen Excel und Messaging-Apps. Albanexa wurde gegründet, um maßgeschneiderte, wirklich genutzte Systeme und konversionsstarke Websites zu entwickeln.",
   },
   founder: {
     name: "Mert Alban",

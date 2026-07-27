@@ -4,8 +4,8 @@ import Breadcrumb from "@/components/layout/Breadcrumb";
 import { contact } from "@/data/contact";
 
 export const metadata: Metadata = {
-  title: "Kullanım Koşulları — Solvaria",
-  description: "Solvaria web sitesi kullanım koşulları.",
+  title: "Kullanım Koşulları — Albanexa",
+  description: "Albanexa web sitesi kullanım koşulları.",
 };
 
 export default function KullanimKosullariPage() {
@@ -30,7 +30,7 @@ export default function KullanimKosullariPage() {
               1. Kapsam
             </h2>
             <p>
-              Bu koşullar, solvaria.com.tr alan adı altında yayınlanan web
+              Bu koşullar, albanexa.com alan adı altında yayınlanan web
               sitesini ziyaret eden ve kullanan kişiler için geçerlidir.
               Siteyi kullanarak bu koşulları kabul etmiş sayılırsınız.
             </p>
@@ -41,7 +41,7 @@ export default function KullanimKosullariPage() {
               2. Hizmet Kapsamı
             </h2>
             <p>
-              Bu site, Solvaria dijital çözüm stüdyosunu tanıtmak ve potansiyel
+              Bu site, Albanexa dijital çözüm stüdyosunu tanıtmak ve potansiyel
               müşterilerle iletişim kurmak amacıyla yayınlanmaktadır. Sitede
               sunulan bilgiler genel bilgilendirme amaçlıdır; hukuki, mali veya
               teknik danışmanlık niteliği taşımaz.
@@ -54,7 +54,7 @@ export default function KullanimKosullariPage() {
             </h2>
             <p>
               Sitedeki tüm içerik (metin, görsel, kod örnekleri, marka adı)
-              Solvaria&apos;ya aittir. İzin alınmaksızın kopyalanamaz,
+              Albanexa&apos;ya aittir. İzin alınmaksızın kopyalanamaz,
               çoğaltılamaz veya ticari amaçla kullanılamaz.
             </p>
           </section>
@@ -65,7 +65,7 @@ export default function KullanimKosullariPage() {
             </h2>
             <p>
               Sitedeki bilgilerin doğruluğu için azami özen gösterilmekle
-              birlikte, Solvaria sitedeki içerikten kaynaklanan doğrudan veya
+              birlikte, Albanexa sitedeki içerikten kaynaklanan doğrudan veya
               dolaylı zararlardan sorumlu tutulamaz. Proje anlaşmazlıkları,
               imzalanmış sözleşme hükümleri çerçevesinde değerlendirilir.
             </p>
@@ -77,7 +77,7 @@ export default function KullanimKosullariPage() {
             </h2>
             <p>
               Sitede yer alan üçüncü taraf bağlantıları yalnızca kolaylık
-              amacıyla sunulmuştur. Bu sitelerin içeriğinden Solvaria sorumlu
+              amacıyla sunulmuştur. Bu sitelerin içeriğinden Albanexa sorumlu
               değildir.
             </p>
           </section>

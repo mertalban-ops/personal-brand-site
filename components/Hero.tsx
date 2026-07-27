@@ -172,10 +172,10 @@ export default function Hero() {
                 </h3>
                 <p className="text-muted text-xs max-w-xs mx-auto">
                   {language === "tr"
-                    ? "Solvaria ile iş süreçlerinizi otomatikleştirin ve ölçeklenebilir altyapılar kurun."
+                    ? "Albanexa ile iş süreçlerinizi otomatikleştirin ve ölçeklenebilir altyapılar kurun."
                     : language === "de"
-                    ? "Automatisieren Sie Ihre Geschäftsprozesse und bauen Sie skalierbare Infrastrukturen mit Solvaria auf."
-                    : "Automate your business processes and build scalable infrastructures with Solvaria."}
+                    ? "Automatisieren Sie Ihre Geschäftsprozesse und bauen Sie skalierbare Infrastrukturen mit Albanexa auf."
+                    : "Automate your business processes and build scalable infrastructures with Albanexa."}
                 </p>
               </div>
             </div>
@@ -186,7 +186,7 @@ export default function Hero() {
             />
           )}
 
-          {/* Subtle Solvaria color grading — blends canvas tones toward brand palette */}
+          {/* Subtle Albanexa color grading — blends canvas tones toward brand palette */}
           <div
             className="pointer-events-none absolute inset-0 z-[1]"
             style={{

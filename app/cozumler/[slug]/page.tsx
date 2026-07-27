@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const solution = getSolutionBySlug(slug, "tr");
   if (!solution) notFound();
   return {
-    title: `${solution.title} — Solvaria`,
+    title: `${solution.title} — Albanexa`,
     description: solution.tagline,
     alternates: {
       canonical: `${siteConfig.siteUrl}/cozumler/${slug}`,

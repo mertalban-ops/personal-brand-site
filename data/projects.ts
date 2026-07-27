@@ -1,6 +1,6 @@
 export type ProjectCategory = 
   | "customer-project"     // Müşteri Projeleri
-  | "product-lab"         // Solvaria Ürün Laboratuvarı — Geliştirme Aşamasında
+  | "product-lab"         // Albanexa Ürün Laboratuvarı — Geliştirme Aşamasında
   | "internal-project"    // İç Projeler
   | "concept-work";       // Çözüm Yetkinliği / Konsept Mimari
 
@@ -306,7 +306,7 @@ export const projectsTr: Project[] = [
     ],
   },
   {
-    name: "Solvaria Personal Brand Site",
+    name: "Albanexa Personal Brand Site",
     tagline: "Kişisel marka ve stüdyo konumlandırması için çok sayfalı web sitesi",
     status: "Active",
     category: "internal-project",
@@ -636,7 +636,7 @@ export const projectsEn: Project[] = [
     ],
   },
   {
-    name: "Solvaria Personal Brand Site",
+    name: "Albanexa Personal Brand Site",
     tagline: "Multi-page website for personal branding and studio positioning",
     status: "Active",
     category: "internal-project",
@@ -966,7 +966,7 @@ export const projectsDe: Project[] = [
     ],
   },
   {
-    name: "Solvaria Personal Brand Site",
+    name: "Albanexa Personal Brand Site",
     tagline: "Mehrseitige Website für persönliches Branding und Studio-Positionierung",
     status: "Active",
     category: "internal-project",

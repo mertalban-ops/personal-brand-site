@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Solvaria — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
+  title: "Albanexa — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
   description:
-    "Mert Alban / Solvaria: KOBİ'ler için kurumsal web siteleri, özel iş takip sistemleri, web uygulamaları, SaaS ürünleri ve otomasyon çözümleri.",
+    "Mert Alban / Albanexa: KOBİ'ler için kurumsal web siteleri, özel iş takip sistemleri, web uygulamaları, SaaS ürünleri ve otomasyon çözümleri.",
 };
 
 import Navbar from "@/components/Navbar";

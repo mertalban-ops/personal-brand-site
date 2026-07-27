@@ -3,7 +3,7 @@ import WebSiteleriClient from "./WebSiteleriClient";
 import { siteConfig } from "@/data/config";
 
 export const metadata: Metadata = {
-  title: "Kurumsal Web Siteleri — Solvaria",
+  title: "Kurumsal Web Siteleri — Albanexa",
   description:
     "Markanızı yalnızca görünür değil, ikna edici hale getiren hızlı, SEO uyumlu ve premium Next.js web siteleri.",
   alternates: {
