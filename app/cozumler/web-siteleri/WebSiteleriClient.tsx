@@ -23,7 +23,8 @@ export default function WebSiteleriClient() {
       { p: "Site eski veya amatör görünüyor, markanıza olan güveni zedeliyor.", s: "Kurumsal kimliğinizi yansıtan, modern ve kurumsal tasarım dili." },
       { p: "Ziyaretçiler sitenizi inceliyor ancak iletişime geçmeden çıkıyor.", s: "Müşterinin karar yolculuğuna uygun net sayfa akışı ve CTA yerleşimi." },
       { p: "Siteniz yavaş yükleniyor, mobil kullanıcılar beklemekten sıkılıyor.", s: "Next.js statik site üretimi (SSG) ve Core Web Vitals optimizasyonu." },
-      { p: "Google ve arama motorlarında hizmetleriniz bulunamıyor.", s: "Teknik SEO standartları, sitemap, meta yapılandırması ve structured data." }
+      { p: "Google ve arama motorlarında hizmetleriniz bulunamıyor.", s: "Teknik SEO standartları, sitemap, meta yapılandırması ve structured data." },
+      { p: "ChatGPT, Perplexity gibi yapay zeka arama motorları işletmenizi hiç önermiyor.", s: "AEO ve GEO optimizasyonu ile yapay zeka tarafından oluşturulan yanıtlarda yer ediniyoruz." }
     ],
     vsKicker: "Temel Farklar",
     vsTitle: "Web Sitesi ile Web Uygulaması arasındaki fark nedir?",
@@ -41,7 +42,9 @@ export default function WebSiteleriClient() {
       { title: "Kurumsal Web Sitesi", desc: "Şirketinizin vizyonunu, referanslarını ve hizmetlerini müşterilerinize en güvenilir şekilde sunan kurumsal dijital kimlik." },
       { title: "Kişisel Marka & Portfolyo", desc: "Uzmanlığınızı, projelerinizi ve iş yapış şeklinizi öne çıkararak B2B müşterilerin doğrudan sizinle bağ kurmasını sağlayan kişisel marka alanı." },
       { title: "SaaS Tanıtım & Landing Page", desc: "Yazılım veya dijital ürününüzün değer önerisini, fiyatlandırma planlarını ve özelliklerini sunarak ziyaretçileri aboneliğe dönüştüren tek sayfa vitrin." },
-      { title: "3D & İnteraktif Deneyimler", desc: "Ürünlerinizi veya hizmet süreçlerinizi tarayıcı üzerinde 3D modeller, etkileşimli grafikler ve akıcı animasyonlarla anlatan premium yapılar." }
+      { title: "3D & İnteraktif Deneyimler", desc: "Ürünlerinizi veya hizmet süreçlerinizi tarayıcı üzerinde 3D modeller, etkileşimli grafikler ve akıcı animasyonlarla anlatan premium yapılar." },
+      { title: "Logo & Marka Kimliği Tasarımı", desc: "İşletmenizin karakterini ve değerlerini yansıtan, dijital ve basılı her ortamda kusursuz çalışan profesyonel logo ve görsel kimlik çalışmaları." },
+      { title: "Dijital Görünürlük: SEO, AEO & GEO", desc: "Google sıralamalarından ChatGPT, Perplexity ve yapay zeka arama motorlarına kadar her platformda markanızın bulunmasını ve önerilmesini sağlıyoruz." }
     ],
     techKicker: "Tasarım & Mühendislik",
     techTitle: "Sıfırdan yazılan kod, işletmenize tam uyum sağlayan yapı",
@@ -49,7 +52,9 @@ export default function WebSiteleriClient() {
     techFeatures: [
       { title: "Core Web Vitals Standartları", desc: "Açılış hızı Google sıralama kriterleri için en kritik etkendir. Saniyeler içinde açılan sayfalar üretiyoruz." },
       { title: "Klavye ve Ekran Okuyucu Uyumu (A11y)", desc: "Web sitenizin herkes tarafından kullanılabilir olması için semantik etiketleme ve odak yönetimini önemsiyoruz." },
-      { title: "Structured Data Entegrasyonu", desc: "Arama motorlarının işletmenizi, projelerinizi ve sunduğunuz çözümleri doğru tanıması için arka plana şema yapıları kuruyoruz." }
+      { title: "Structured Data Entegrasyonu", desc: "Arama motorlarının işletmenizi, projelerinizi ve sunduğunuz çözümleri doğru tanıması için arka plana şema yapıları kuruyoruz." },
+      { title: "AEO — Yapay Zeka Arama Optimizasyonu", desc: "ChatGPT, Perplexity ve Claude gibi AI asistanların kullanıcı sorularını yanıtlarken işletmenizi önermeye başlaması için içerik ve yapı optimizasyonu yapıyoruz." },
+      { title: "GEO — Üretken Arama Optimizasyonu", desc: "Google AI Overviews, Bing Copilot ve benzeri platformlarda markanızın kaynak olarak gösterilmesi için içerik otoritesi ve atıf stratejisi geliştiriyoruz." }
     ],
     caseTitle: "Personal Brand Site Örneği",
     caseBadge: "Aktif Vaka",
@@ -90,7 +95,8 @@ export default function WebSiteleriClient() {
       { p: "Website looks old or amateur, harming trust in your brand.", s: "A modern design language reflecting your corporate identity." },
       { p: "Visitors explore your site but leave without contacting you.", s: "Clear page flow and CTA placement tailored to decision journeys." },
       { p: "Your site loads slowly, frustrating mobile visitors.", s: "Next.js Static Site Generation (SSG) and Core Web Vitals optimization." },
-      { p: "Your services cannot be found on Google and search engines.", s: "Technical SEO standards, sitemap, meta setup, and structured data." }
+      { p: "Your services cannot be found on Google and search engines.", s: "Technical SEO standards, sitemap, meta setup, and structured data." },
+      { p: "AI search engines like ChatGPT and Perplexity never recommend your business.", s: "AEO and GEO optimization to earn placement in AI-generated answers and overviews." }
     ],
     vsKicker: "Key Differences",
     vsTitle: "What is the difference between a Website and a Web App?",
@@ -108,7 +114,9 @@ export default function WebSiteleriClient() {
       { title: "Corporate Website", desc: "A corporate digital identity presenting your company's vision, references, and services in the most reliable way." },
       { title: "Personal Brand & Portfolio", desc: "A personal brand space showcasing your expertise, projects, and work methods to help B2B clients connect directly with you." },
       { title: "SaaS Presentation & Landing Page", desc: "A single-page showcase presenting your software or digital product's value proposition, plans, and features to convert users." },
-      { title: "3D & Interactive Experiences", desc: "Premium layouts explaining your products or services using 3D models, interactive graphics, and fluid browser animations." }
+      { title: "3D & Interactive Experiences", desc: "Premium layouts explaining your products or services using 3D models, interactive graphics, and fluid browser animations." },
+      { title: "Logo & Brand Identity Design", desc: "Professional logo and visual identity work that reflects your business personality and performs flawlessly across digital and print media." },
+      { title: "Digital Visibility: SEO, AEO & GEO", desc: "From Google rankings to ChatGPT, Perplexity, and AI overviews — we ensure your brand is found and recommended on every platform." }
     ],
     techKicker: "Design & Engineering",
     techTitle: "Bespoke code, a structure fully tailored to your business",
@@ -116,7 +124,9 @@ export default function WebSiteleriClient() {
     techFeatures: [
       { title: "Core Web Vitals Standards", desc: "Initial load speed is the most critical factor for Google ranking. We build pages that open in seconds." },
       { title: "Keyboard & Screen Reader Compatibility (A11y)", desc: "We prioritize semantic markup and focus management so your website is accessible to everyone." },
-      { title: "Structured Data Integration", desc: "We set up schema structures in the backend to help search engines correctly identify your business, projects, and solutions." }
+      { title: "Structured Data Integration", desc: "We set up schema structures in the backend to help search engines correctly identify your business, projects, and solutions." },
+      { title: "AEO — Answer Engine Optimization", desc: "We restructure content and markup so AI assistants like ChatGPT, Perplexity, and Claude start recommending your business when answering user queries." },
+      { title: "GEO — Generative Engine Optimization", desc: "We build content authority and citation strategies so your brand appears as a source in Google AI Overviews, Bing Copilot, and similar platforms." }
     ],
     caseTitle: "Personal Brand Site Example",
     caseBadge: "Active Case",
@@ -157,7 +167,8 @@ export default function WebSiteleriClient() {
       { p: "Die Website sieht alt oder amateurhaft aus und schadet dem Vertrauen in Ihre Marke.", s: "Eine moderne Designsprache, die Ihre Corporate Identity widerspiegelt." },
       { p: "Besucher erkunden Ihre Website, gehen aber wieder, ohne Sie zu kontaktieren.", s: "Klarer Seitenfluss und Platzierung von CTAs, die auf die Entscheidungsreise abgestimmt sind." },
       { p: "Ihre Website lädt langsam, was mobile Besucher frustriert.", s: "Next.js Static Site Generation (SSG) und Core Web Vitals Optimierung." },
-      { p: "Ihre Dienstleistungen können bei Google und Suchmaschinen nicht gefunden werden.", s: "Technische SEO-Standards, Sitemap, Meta-Setup und strukturierte Daten." }
+      { p: "Ihre Dienstleistungen können bei Google und Suchmaschinen nicht gefunden werden.", s: "Technische SEO-Standards, Sitemap, Meta-Setup und strukturierte Daten." },
+      { p: "KI-Suchmaschinen wie ChatGPT und Perplexity empfehlen Ihr Unternehmen nie.", s: "AEO und GEO-Optimierung für Platzierungen in KI-generierten Antworten und Übersichten." }
     ],
     vsKicker: "Hauptunterschiede",
     vsTitle: "Was ist der Unterschied zwischen einer Website und einer Web-App?",
@@ -175,7 +186,9 @@ export default function WebSiteleriClient() {
       { title: "Unternehmenswebsite", desc: "Eine digitale Identität eines Unternehmens, die die Vision, Referenzen und Dienstleistungen Ihres Unternehmens auf zuverlässigste Weise präsentiert." },
       { title: "Persönliche Marke & Portfolio", desc: "Ein persönlicher Markenbereich, der Ihr Fachwissen, Ihre Projekte und Arbeitsmethoden präsentiert, um B2B-Kunden zu helfen, sich direkt mit Ihnen zu verbinden." },
       { title: "SaaS-Präsentation & Landingpage", desc: "Ein einseitiges Showcase, das das Wertversprechen, die Pläne und die Funktionen Ihres Software- oder Digitalprodukts präsentiert, um Benutzer zu konvertieren." },
-      { title: "3D & Interaktive Erlebnisse", desc: "Premium-Layouts, die Ihre Produkte oder Dienstleistungen mithilfe von 3D-Modellen, interaktiven Grafiken und flüssigen Browser-Animationen erklären." }
+      { title: "3D & Interaktive Erlebnisse", desc: "Premium-Layouts, die Ihre Produkte oder Dienstleistungen mithilfe von 3D-Modellen, interaktiven Grafiken und flüssigen Browser-Animationen erklären." },
+      { title: "Logo & Markenidentitäts-Design", desc: "Professionelle Logo- und visuelle Identitätsarbeit, die Ihre Unternehmerpersönlichkeit widerspiegelt und über digitale und Druckmedien tadellos funktioniert." },
+      { title: "Digitale Sichtbarkeit: SEO, AEO & GEO", desc: "Von Google-Rankings bis ChatGPT, Perplexity und KI-Übersichten — wir sorgen dafür, dass Ihre Marke auf jeder Plattform gefunden und empfohlen wird." }
     ],
     techKicker: "Design & Engineering",
     techTitle: "Maßgeschneiderter Code, eine Struktur, die vollständig auf Ihr Unternehmen zugeschnitten ist",
@@ -183,7 +196,9 @@ export default function WebSiteleriClient() {
     techFeatures: [
       { title: "Core Web Vitals Standards", desc: "Die anfängliche Ladegeschwindigkeit ist der wichtigste Faktor für das Google-Ranking. Wir bauen Seiten, die sich in Sekunden öffnen." },
       { title: "Tastatur- und Bildschirmleser-Kompatibilität (A11y)", desc: "Wir legen Wert auf semantisches Markup und Fokusverwaltung, damit Ihre Website für jeden zugänglich ist." },
-      { title: "Integration strukturierter Daten", desc: "Wir richten Schema-Strukturen im Backend ein, damit Suchmaschinen Ihr Unternehmen, Ihre Projekte und Ihre Lösungen korrekt identifizieren können." }
+      { title: "Integration strukturierter Daten", desc: "Wir richten Schema-Strukturen im Backend ein, damit Suchmaschinen Ihr Unternehmen, Ihre Projekte und Ihre Lösungen korrekt identifizieren können." },
+      { title: "AEO — Answer Engine Optimization", desc: "Wir optimieren Inhalte und Markup, damit KI-Assistenten wie ChatGPT, Perplexity und Claude Ihr Unternehmen bei Nutzeranfragen empfehlen." },
+      { title: "GEO — Generative Engine Optimization", desc: "Wir entwickeln Content-Autorität und Zitierstrategien, damit Ihre Marke in Google AI Overviews, Bing Copilot und ähnlichen Plattformen als Quelle erscheint." }
     ],
     caseTitle: "Beispiel für eine persönliche Marken-Website",
     caseBadge: "Aktiver Fall",
@@ -267,7 +282,7 @@ export default function WebSiteleriClient() {
               {c.problemsTitle}
             </h2>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {c.problems.map((item, i) => (
               <div
                 key={i}
@@ -342,7 +357,7 @@ export default function WebSiteleriClient() {
               {c.typesTitle}
             </h2>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {c.types.map((type, i) => (
               <div
                 key={i}
