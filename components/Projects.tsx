@@ -15,6 +15,11 @@ const ProjectDemoVideo = dynamic(() => import("./ProjectDemoVideo"), {
   ),
 });
 
+const RobotPhoneShowcase = dynamic(() => import("./robot/RobotPhoneShowcase"), {
+  ssr: false,
+  loading: () => <div className="h-[420px] w-full" />,
+});
+
 function getStatusStyle(s: string) {
   s = s.toLowerCase();
   if (s.includes("aktif") || s.includes("active") || s.includes("aktiv") || s.includes("canlı") || s.includes("live")) return "bg-accent/15 text-accent";
@@ -115,6 +120,11 @@ export default function Projects() {
           <h2 className="display text-3xl font-bold text-ink md:text-4xl text-balance max-w-2xl mx-auto">
             {t.projects.title}
           </h2>
+        </div>
+
+        {/* Robot showcase — reacts to card hovers */}
+        <div className="flex justify-center mb-16">
+          <RobotPhoneShowcase width={188} />
         </div>
 
         {/* 1. Canlı Müşteri Projeleri */}
