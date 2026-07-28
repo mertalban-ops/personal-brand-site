@@ -48,9 +48,11 @@ export const siteConfig: SiteConfig = {
     github: "https://github.com/mertalban",
   },
   budgetRanges: [
-    { value: "50k-100k", labelTr: "50.000 TL - 100.000 TL", labelEn: "50k TRY - 100k TRY", labelDe: "50k TRY - 100k TRY" },
-    { value: "100k-250k", labelTr: "100.000 TL - 250.000 TL", labelEn: "100k TRY - 250k TRY", labelDe: "100k TRY - 250k TRY" },
-    { value: "250k-500k", labelTr: "250.000 TL - 500.000 TL", labelEn: "250k TRY - 500k TRY", labelDe: "250k TRY - 500k TRY" },
-    { value: "500k+", labelTr: "500.000 TL+", labelEn: "500k TRY+", labelDe: "500k TRY+" },
+    { value: "monthly-2k-5k", labelTr: "Aylık 2.000 - 5.000 TL (abonelik)", labelEn: "Monthly 2k-5k TRY (subscription)", labelDe: "Monatlich 2k-5k TRY (Abo)" },
+    { value: "monthly-5k-10k", labelTr: "Aylık 5.000 - 10.000 TL (abonelik)", labelEn: "Monthly 5k-10k TRY (subscription)", labelDe: "Monatlich 5k-10k TRY (Abo)" },
+    { value: "5k-15k", labelTr: "5.000 - 15.000 TL (tek seferlik)", labelEn: "5k-15k TRY (one-time)", labelDe: "5k-15k TRY (einmalig)" },
+    { value: "15k-50k", labelTr: "15.000 - 50.000 TL (tek seferlik)", labelEn: "15k-50k TRY (one-time)", labelDe: "15k-50k TRY (einmalig)" },
+    { value: "50k+", labelTr: "50.000 TL+ (kurumsal proje)", labelEn: "50k TRY+ (enterprise)", labelDe: "50k TRY+ (Enterprise)" },
+    { value: "not-sure", labelTr: "Henüz bilmiyorum / Teklif bekliyorum", labelEn: "Not sure yet / Need a quote", labelDe: "Noch unklar / Angebot erwünscht" },
   ],
 };
