@@ -43,6 +43,11 @@ export default function CozumlerDetailClient({ slug }: { slug: string }) {
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
             {solution.tagline}
           </p>
+          {solution.seoSummary && (
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted/70">
+              {solution.seoSummary}
+            </p>
+          )}
           <div className="mt-8">
             <Link
               href="/iletisim"
@@ -137,6 +142,32 @@ export default function CozumlerDetailClient({ slug }: { slug: string }) {
           </div>
         </div>
       </AnimatedSection>
+
+      {/* Page-specific FAQ */}
+      {solution.pageFaqs && solution.pageFaqs.length > 0 && (
+        <AnimatedSection>
+          <div className="mx-auto max-w-6xl px-5 py-16">
+            <p className="mono-label mb-3">
+              {language === "tr" ? "Sıkça Sorulan Sorular" : language === "de" ? "Häufige Fragen" : "FAQ"}
+            </p>
+            <h2 className="display text-2xl font-bold text-ink mb-8">
+              {language === "tr"
+                ? `${solution.title} hakkında sık sorulanlar`
+                : language === "de"
+                ? `Häufige Fragen zu ${solution.title}`
+                : `Common questions about ${solution.title}`}
+            </h2>
+            <div className="space-y-4">
+              {solution.pageFaqs.map((faq) => (
+                <div key={faq.q} className="rounded-xl border border-line bg-bg-raised/20 p-6">
+                  <h3 className="font-semibold text-ink mb-2 text-base">{faq.q}</h3>
+                  <p className="text-muted leading-relaxed text-sm">{faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </AnimatedSection>
+      )}
 
       {/* Other solutions */}
       <AnimatedSection className="band-petrol border-y border-line">

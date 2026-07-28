@@ -18,9 +18,9 @@ Kalite yönetimi ve süreç analizi geçmişini yazılım geliştirmeyle birleş
 
 ## Referans Projeler
 
-- **StokApp**: Toptan tekstil işletmesi için stok, cari hesap ve tahsilat yönetim sistemi. Ekstre hazırlama süresi 2 saatten 30 saniyeye düştü.
-- **Hezer Auto Service**: Araç servis işletmesi için iş emri takip ve müşteri yönetim sistemi. Saha ekibi WhatsApp'tan sisteme geçti.
-- **CARPASS**: Araç geçmiş raporlama SaaS uygulaması. Mobil ve web üzerinden çalışan çok-kiracılı altyapı.
+- **StokApp**: Toptan ticaret işletmesi için stok, cari hesap ve tahsilat yönetim sistemi. Hesap ekstresi hazırlama süresi 2 saatten 30 saniyeye indi; müşteri bakiyeleri ve stok durumu anlık takip edilebilir hale geldi.
+- **Hezer Auto Service**: Araç servis işletmesi için iş emri takip ve operasyon sistemi. Tüm servis süreci kağıt ve WhatsApp koordinasyonundan sisteme taşındı; araç geçmişine plaka ile saniyeler içinde ulaşılabilmektedir.
+- **CARPASS**: Araç geçmiş raporlama SaaS uygulaması. Yapay zeka destekli risk skoru ve Trust Report sunan çok-kiracılı altyapı.
 
 ## Teknoloji Yetkinlikleri
 
@@ -45,3 +45,4 @@ Next.js, React, TypeScript, Supabase, PostgreSQL, n8n, Expo (React Native), Node
 - /surec — 8 adımlı çalışma süreci
 - /studyo — Stüdyo ve kurucu hakkında
 - /iletisim — İletişim ve ücretsiz keşif görüşmesi
+- /rehber — KOBİ'ler için dijital operasyon rehberleri (stok takibi, cari hesap, özel yazılım)

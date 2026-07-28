@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/studyo",                                 priority: 0.7, freq: "monthly" },
     { path: "/is-birligi",                             priority: 0.6, freq: "monthly" },
     { path: "/iletisim",                               priority: 0.8, freq: "monthly" },
+    { path: "/rehber",                                 priority: 0.7, freq: "weekly" },
     { path: "/gizlilik",                               priority: 0.3, freq: "yearly" },
     { path: "/kullanim-kosullari",                     priority: 0.3, freq: "yearly" },
   ];
