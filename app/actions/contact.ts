@@ -172,7 +172,7 @@ export async function submitContactForm(prevState: any, formData: FormData): Pro
 
     return {
       success: true,
-      message: "Talebiniz başarıyla alındı! Mert Alban en kısa sürede sizinle iletişime geçecek.",
+      message: "Talebiniz alındı. En kısa sürede değerlendirilerek dönüş yapılacaktır.",
     };
   } catch (error) {
     console.error("Error submitting contact form:", error);

@@ -18,7 +18,7 @@ export const tr: Dictionary = {
     titleHighlight: "çalışan dijital sistemler",
     title2: " ve güven veren web deneyimleri geliştiriyoruz.",
     subtitle:
-      "Stok, cari hesap, servis ve raporlama süreçlerinizi işletmenize özel sistemlerde birleştiriyor; markanız için güven oluşturan web siteleri ve geliştirilebilir dijital ürünler tasarlıyorum.",
+      "Stok, cari hesap, servis ve raporlama süreçlerinizi işletmenize özel sistemlerde birleştiriyor; markanız için güven oluşturan web siteleri ve geliştirilebilir dijital ürünler tasarlıyoruz.",
     primaryBtn: "Ücretsiz İhtiyaç Analizi",
     secondaryBtn: "Gerçek Projeleri İncele",
     cards: {
@@ -293,7 +293,7 @@ export const tr: Dictionary = {
       },
       {
         q: "Hazır paket mi satıyorsunuz, özel sistem mi geliştiriyorsunuz?",
-        a: "Tamamen sizin işletmenizin işleyişine, terminolojisine ve ihtiyaçlarına göre özel sistemler geliştiriyoruz. Satın alınan değil, sizinle birlikte terzi usulü tasarlanan bir sisteme sahip oluyorsunuz.",
+        a: "Satın alınan hazır paket değil, tamamen işletmenin işleyişine, terminolojisine ve ihtiyaçlarına göre terzi usulü tasarlanan özel bir sistemdir. Her proje sıfırdan başlar ve o işletmenin dışında başka hiçbir yerde kullanılmaz.",
       },
       {
         q: "Geliştirdiğiniz sistemler mobilde de kullanılabiliyor mu?",

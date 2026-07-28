@@ -7,7 +7,7 @@ export type FAQ = {
 export const faqs: FAQ[] = [
   {
     q: "Hazır paket mi satıyorsunuz, özel sistem mi geliştiriyorsunuz?",
-    a: "Tamamen sizin işletmenizin işleyişine, terminolojisine ve ihtiyaçlarına göre özel sistemler geliştiriyoruz. Satın alınan değil, sizinle birlikte terzi usulü tasarlanan bir sisteme sahip oluyorsunuz.",
+    a: "Satın alınan hazır paket değil, tamamen işletmenin işleyişine, terminolojisine ve ihtiyaçlarına göre terzi usulü tasarlanan özel bir sistemdir. Her proje sıfırdan başlar ve o işletmenin dışında başka hiçbir yerde kullanılmaz.",
     category: "genel",
   },
   {
