@@ -86,6 +86,15 @@ test.describe("Albanexa B2B Master Optimization E2E Tests", () => {
     expect(content).toMatch(/Sıkça Sorulan Sorular|FAQ|Häufige Fragen/i);
   });
 
+  test("Custom 404 page renders properly with recovery actions", async ({ page }) => {
+    await page.goto("/non-existent-page-url");
+    await page.waitForSelector("h1", { state: "visible", timeout: 25000 });
+    const content = await page.textContent("body");
+    expect(content).toMatch(/Sayfa Bulunamadı|Page Not Found|404/i);
+    await expect(page.locator("a[href='/']").first()).toBeVisible();
+    await expect(page.locator("a[href='/cozumler']").first()).toBeVisible();
+  });
+
   test("Contact form multi-stage wizard works", async ({ page }) => {
     await page.goto("/iletisim");
     await page.waitForSelector("#cf-needType", { state: "visible", timeout: 25000 });
