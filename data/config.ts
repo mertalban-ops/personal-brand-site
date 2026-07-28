@@ -30,9 +30,9 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   brandName: "Albanexa",
   founderName: "Mert Alban",
-  siteUrl: "https://albanexa.com",
-  productionDomain: "albanexa.com",
-  temporaryDomain: "https://albanexa.com",
+  siteUrl: "https://www.albanexa.com",
+  productionDomain: "www.albanexa.com",
+  temporaryDomain: "https://www.albanexa.com",
   contactEmail: "mert@albanexa.com",
   projectEmail: "mert@albanexa.com",
   whatsappNumber: "905379531547",

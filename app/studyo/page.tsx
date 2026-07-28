@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/metadata";
 import { Suspense } from "react";
 import StudyoClient from "./StudyoClient";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Stüdyo Hakkında — Albanexa",
   description: "Albanexa nedir, kim tarafından kuruldu ve hangi ilkelerle çalışır.",
-};
+  path: "/studyo",
+});
 
 export default function StudyoPage() {
   return (

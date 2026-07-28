@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Albanexa — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
   description:
     "Mert Alban / Albanexa: KOBİ'ler için kurumsal web siteleri, özel iş takip sistemleri, web uygulamaları, SaaS ürünleri ve otomasyon çözümleri.",
-};
+  path: "/",
+});
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";

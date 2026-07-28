@@ -72,7 +72,7 @@ const studioEn: StudioDetails = {
     tagline: "Digital Solution Studio",
     description:
       "Albanexa is an independent digital solution studio managed by Mert Alban. We collaborate with trusted partners for specialized project requirements.",
-    location: "Izmir, Turkey · Remote service globally",
+    location: "İzmir, Türkiye · Remote service globally",
     whyBuilt:
       "Most SMBs either get trapped in bulky ERP systems or lose control of their data between Excel and messaging apps. Albanexa was established to build right-sized, genuinely used systems and high-converting websites.",
   },

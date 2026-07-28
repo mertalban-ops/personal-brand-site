@@ -15,11 +15,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (slug === "web-siteleri") notFound();
   const solution = getSolutionBySlug(slug, "tr");
   if (!solution) notFound();
+  const title = `${solution.title} — Albanexa`;
+  const description = solution.tagline;
+  const url = `${siteConfig.siteUrl}/cozumler/${slug}`;
   return {
-    title: `${solution.title} — Albanexa`,
-    description: solution.tagline,
-    alternates: {
-      canonical: `${siteConfig.siteUrl}/cozumler/${slug}`,
+    title,
+    description,
+    alternates: { canonical: `/cozumler/${slug}` },
+    openGraph: {
+      title,
+      description,
+      url,
+      locale: "tr_TR",
+      type: "website",
+      images: [{ url: `/cozumler/${slug}/opengraph-image`, width: 1200, height: 630, alt: solution.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`/cozumler/${slug}/opengraph-image`],
     },
   };
 }

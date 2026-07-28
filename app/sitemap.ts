@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/data/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://personal-brand-site-azure.vercel.app";
+  const base = siteConfig.siteUrl;
   const routes = [
     "",
     "/cozumler",

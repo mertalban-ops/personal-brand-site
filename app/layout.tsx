@@ -28,21 +28,7 @@ import { siteConfig } from "@/data/config";
 import ClientSceneBackground from "@/components/ClientSceneBackground";
 
 export const metadata: Metadata = {
-  title: "Albanexa — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
-  description:
-    "Mert Alban / Albanexa: KOBİ'ler için kurumsal web siteleri, özel iş takip sistemleri, web uygulamaları, SaaS ürünleri ve otomasyon çözümleri.",
   metadataBase: new URL(siteConfig.siteUrl),
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "Albanexa — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
-    description:
-      "Kurumsal web sitelerinden iş takip sistemlerine, web uygulamalarından SaaS altyapısına kadar işletmenize özel dijital çözümler geliştiriyoruz.",
-    locale: "tr_TR",
-    type: "website",
-    url: siteConfig.siteUrl,
-  },
 };
 
 export default function RootLayout({

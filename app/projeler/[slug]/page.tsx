@@ -27,11 +27,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     titleSuffix = "Müşteri Projesi";
   }
   
+  const title = `${project.name} — ${titleSuffix} | Albanexa`;
+  const description = project.caseSummary;
+  const url = `${siteConfig.siteUrl}/projeler/${slug}`;
   return {
-    title: `${project.name} — ${titleSuffix} | Albanexa`,
-    description: project.caseSummary,
-    alternates: {
-      canonical: `${siteConfig.siteUrl}/projeler/${slug}`,
+    title,
+    description,
+    alternates: { canonical: `/projeler/${slug}` },
+    openGraph: {
+      title,
+      description,
+      url,
+      locale: "tr_TR",
+      type: "website",
+      images: [{ url: `/projeler/${slug}/opengraph-image`, width: 1200, height: 630, alt: project.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`/projeler/${slug}/opengraph-image`],
     },
   };
 }

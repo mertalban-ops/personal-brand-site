@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import CtaStrip from "@/components/CtaStrip";
@@ -7,11 +7,11 @@ import Breadcrumb from "@/components/layout/Breadcrumb";
 import { processSteps, pricingNote } from "@/data/process";
 import { CheckCircle2 } from "lucide-react";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Süreç — Albanexa",
-  description:
-    "Keşif görüşmesinden teslime kadar 8 adımlı çalışma sürecimiz ve neleri birlikte yapacağımız.",
-};
+  description: "Keşif görüşmesinden teslime kadar 8 adımlı çalışma sürecimiz ve neleri birlikte yapacağımız.",
+  path: "/surec",
+});
 
 export default function SurecPage() {
   return (

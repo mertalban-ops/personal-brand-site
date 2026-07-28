@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/metadata";
 import Navbar from "@/components/Navbar";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import { contact } from "@/data/contact";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Gizlilik Politikası — Albanexa",
-  description:
-    "Albanexa gizlilik politikası ve kişisel veri işleme bilgilendirmesi.",
-};
+  description: "Albanexa gizlilik politikası ve kişisel veri işleme bilgilendirmesi.",
+  path: "/gizlilik",
+});
 
 export default function GizlilikPage() {
   return (

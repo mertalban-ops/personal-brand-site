@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/data/config";
 
 export default function robots(): MetadataRoute.Robots {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://personal-brand-site-azure.vercel.app";
   return {
     rules: { userAgent: "*", allow: "/" },
-    sitemap: `${base}/sitemap.xml`,
+    sitemap: `${siteConfig.siteUrl}/sitemap.xml`,
   };
 }

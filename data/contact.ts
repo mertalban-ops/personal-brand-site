@@ -2,7 +2,7 @@
 export const contact = {
   name: "Albanexa",
   email: "mert@albanexa.com",
-  location: "Izmir, Turkey",
+  location: "İzmir, Türkiye",
   // Örn: "905xxxxxxxxx" (başında + veya 0 olmadan, uluslararası format)
   whatsapp: "905379531547",
   // Örn: "https://www.linkedin.com/in/kullanici-adi"

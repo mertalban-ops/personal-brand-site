@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/metadata";
 import Navbar from "@/components/Navbar";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import { contact } from "@/data/contact";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Kullanım Koşulları — Albanexa",
   description: "Albanexa web sitesi kullanım koşulları.",
-};
+  path: "/kullanim-kosullari",
+});
 
 export default function KullanimKosullariPage() {
   return (

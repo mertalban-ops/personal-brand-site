@@ -1,11 +1,12 @@
 import { Suspense } from "react";
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/metadata";
 import ProjelerClient from "./ProjelerClient";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Projeler — Albanexa",
   description: "Gerçek firmalar için geliştirdiğimiz web siteleri, iş takip sistemleri, web uygulamaları ve otomasyon çözümleri.",
-};
+  path: "/projeler",
+});
 
 export default function ProjelerPage() {
   return (

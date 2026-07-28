@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/metadata";
 import IsBirligiClient from "./IsBirligiClient";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "İş Birliği & Ortaklık — Albanexa",
-  description:
-    "Ajansınız, tasarım stüdyonuz veya yazılım ekibiniz için güvenilir teknoloji ortağı. Modellerimizi inceleyin.",
-};
+  description: "Ajansınız, tasarım stüdyonuz veya yazılım ekibiniz için güvenilir teknoloji ortağı. Modellerimizi inceleyin.",
+  path: "/is-birligi",
+});
 
 export default function IsBirligiPage() {
   return <IsBirligiClient />;

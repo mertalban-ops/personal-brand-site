@@ -1,15 +1,12 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/metadata";
 import WebSiteleriClient from "./WebSiteleriClient";
 import { siteConfig } from "@/data/config";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Kurumsal Web Siteleri — Albanexa",
-  description:
-    "Markanızı yalnızca görünür değil, ikna edici hale getiren hızlı, SEO uyumlu ve premium Next.js web siteleri.",
-  alternates: {
-    canonical: `${siteConfig.siteUrl}/cozumler/web-siteleri`,
-  },
-};
+  description: "Markanızı yalnızca görünür değil, ikna edici hale getiren hızlı, SEO uyumlu ve premium Next.js web siteleri.",
+  path: "/cozumler/web-siteleri",
+});
 
 export default function WebSiteleriPage() {
   const jsonLd = {
