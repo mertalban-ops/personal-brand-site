@@ -131,38 +131,43 @@ export async function submitContactForm(prevState: any, formData: FormData): Pro
 
     if (botToken && chatId) {
       const lines = [
-        `📬 *Albanexa — Yeni Form Gönderimi*`,
+        `📬 Albanexa — Yeni Form Gönderimi`,
         ``,
-        `👤 *Ad:* ${name}`,
-        company ? `🏢 *Firma:* ${company}` : null,
-        `✉️ *E-posta:* ${email}`,
-        phone ? `📞 *Telefon:* ${phone}` : null,
-        `🎯 *İhtiyaç:* ${needType}`,
+        `👤 Ad: ${name}`,
+        company ? `🏢 Firma: ${company}` : null,
+        `✉️ E-posta: ${email}`,
+        phone ? `📞 Telefon: ${phone}` : null,
+        `🎯 İhtiyaç: ${needType}`,
         ``,
-        `📝 *Problem:*\n${problem}`,
-        currentMethod  ? `⚙️ *Mevcut Yöntem:* ${currentMethod}` : null,
-        userCount      ? `👥 *Kullanıcı Sayısı:* ${userCount}` : null,
-        timeline       ? `📅 *Süre:* ${timeline}` : null,
-        budget         ? `💰 *Bütçe:* ${budget}` : null,
-        additionalInfo ? `💬 *Ek Bilgi:* ${additionalInfo}` : null,
-        message        ? `📄 *Mesaj:* ${message}` : null,
+        `📝 Problem:\n${problem}`,
+        currentMethod  ? `⚙️ Mevcut Yöntem: ${currentMethod}` : null,
+        userCount      ? `👥 Kullanıcı Sayısı: ${userCount}` : null,
+        timeline       ? `📅 Süre: ${timeline}` : null,
+        budget         ? `💰 Bütçe: ${budget}` : null,
+        additionalInfo ? `💬 Ek Bilgi: ${additionalInfo}` : null,
+        message        ? `📄 Mesaj: ${message}` : null,
         ``,
         `─────────────────────`,
-        `${geo.flag} *Konum:* ${geo.location}`,
-        `📡 *İSS:* ${geo.isp}`,
-        `🕐 *Saat Dilimi:* ${geo.timezone}`,
+        `${geo.flag} Konum: ${geo.location}`,
+        `📡 İSS: ${geo.isp}`,
+        `🕐 Saat Dilimi: ${geo.timezone}`,
         `${device} · ${browser} · ${os}`,
-        `🔗 *Nereden:* ${source}`,
-        `🗣️ *Dil:* ${lang}`,
+        `🔗 Nereden: ${source}`,
+        `🗣️ Dil: ${lang}`,
         ``,
         `🕑 ${localTime}`,
       ].filter(Boolean).join("\n");
 
-      await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      const tgRes = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: chatId, text: lines, parse_mode: "Markdown" }),
-      }).catch(() => {});
+        body: JSON.stringify({ chat_id: chatId, text: lines }),
+      });
+      if (!tgRes.ok) {
+        console.error("[TG] send failed:", await tgRes.text());
+      }
+    } else {
+      console.error("[TG] missing env vars — BOT_TOKEN:", !!botToken, "CHAT_ID:", !!chatId);
     }
 
     return {
