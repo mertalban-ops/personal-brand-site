@@ -23,6 +23,7 @@ const mono = IBM_Plex_Mono({
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ActiveProjectProvider } from "@/context/ActiveProjectContext";
 import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { Analytics } from "@vercel/analytics/react";
 import { siteConfig } from "@/data/config";
 import ClientSceneBackground from "@/components/ClientSceneBackground";
@@ -33,7 +34,6 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -46,7 +46,7 @@ export default function RootLayout({
         "@type": ["Organization", "ProfessionalService", "LocalBusiness"],
         "@id": `${siteConfig.siteUrl}/#organization`,
         "name": siteConfig.brandName,
-        "description": "Albanexa, İzmir merkezli, Türkiye geneline hizmet veren, Mert Alban tarafından kurulan bağımsız dijital çözüm stüdyosudur. KOBİ'ler için özel iş takip sistemleri, stok ve cari hesap yazılımları, kurumsal web siteleri ve SaaS altyapıları geliştirmektedir.",
+        "description": "Albanexa, İzmir merkezli, Türkiye geneline ve uluslararası uzaktan projelere hizmet veren Mert Alban tarafından yönetilen bağımsız dijital ürün stüdyosudur. İşletmeler için özel iş takip sistemleri, stok ve cari hesap yazılımları, kurumsal web siteleri ve SaaS altyapıları geliştirmektedir.",
         "url": siteConfig.siteUrl,
         "logo": {
           "@type": "ImageObject",
@@ -59,12 +59,18 @@ export default function RootLayout({
           "addressLocality": "İzmir",
           "addressCountry": "TR"
         },
-        "areaServed": {
-          "@type": "Country",
-          "name": "Türkiye"
-        },
+        "areaServed": [
+          {
+            "@type": "Country",
+            "name": "Türkiye"
+          },
+          {
+            "@type": "Place",
+            "name": "Dünya Geneli (Remote)"
+          }
+        ],
         "priceRange": "₺₺₺",
-        "knowsLanguage": ["tr", "en"],
+        "knowsLanguage": ["tr", "en", "de"],
         "serviceType": [
           "Özel Yazılım Geliştirme",
           "İş Takip Sistemi",
@@ -83,7 +89,7 @@ export default function RootLayout({
         "@id": `${siteConfig.siteUrl}/#person`,
         "name": siteConfig.founderName,
         "jobTitle": "Kurucu & Baş Yazılım Mühendisi",
-        "description": "Mert Alban, kalite yönetimi ve süreç analizi geçmişini yazılım geliştirmeyle birleştirerek KOBİ'ler için özel dijital operasyon sistemleri tasarlayan Albanexa'nın kurucusudur.",
+        "description": "Mert Alban, kalite yönetimi, süreç mühendisliği ve operasyonel analiz tecrübesini yazılım geliştirmeyle birleştirerek işletmeler için özel dijital sistemler kuran Albanexa'nın kurucusudur.",
         "knowsAbout": [
           "Özel yazılım geliştirme",
           "İş takip sistemleri",
@@ -134,11 +140,20 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2.5 focus:font-semibold focus:text-black focus:shadow-xl focus:outline-none"
+        >
+          Ana içeriğe atla
+        </a>
         <LanguageProvider>
           <ActiveProjectProvider>
             <ClientSceneBackground />
-            {children}
+            <div id="main-content" className="flex-grow">
+              {children}
+            </div>
             <Footer />
+            <FloatingWhatsApp />
             <Analytics />
           </ActiveProjectProvider>
         </LanguageProvider>

@@ -170,9 +170,39 @@ export async function submitContactForm(prevState: any, formData: FormData): Pro
       console.error("[TG] missing env vars — BOT_TOKEN:", !!botToken, "CHAT_ID:", !!chatId);
     }
 
+    // Optional n8n Workflow automation trigger
+    const n8nWebhookUrl = process.env.N8N_WEBHOOK_URL;
+    if (n8nWebhookUrl) {
+      try {
+        await fetch(n8nWebhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            company,
+            phone,
+            needType,
+            problem,
+            currentMethod,
+            userCount,
+            timeline,
+            budget,
+            additionalInfo,
+            message,
+            source,
+            geo,
+            localTime,
+          }),
+        });
+      } catch (n8nErr) {
+        console.error("[n8n] webhook dispatch error:", n8nErr);
+      }
+    }
+
     return {
       success: true,
-      message: "Talebiniz alındı. En kısa sürede değerlendirilerek dönüş yapılacaktır.",
+      message: "Talebiniz alındı. En geç bir iş günü içinde sizinle iletişime geçeceğiz.",
     };
   } catch (error) {
     console.error("Error submitting contact form:", error);

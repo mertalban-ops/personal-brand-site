@@ -82,19 +82,6 @@ export default async function SolutionDetailPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {solution.seoSummary && (
-        <p className="sr-only">{solution.seoSummary}</p>
-      )}
-      {solution.pageFaqs && solution.pageFaqs.length > 0 && (
-        <div className="sr-only" aria-hidden="true">
-          {solution.pageFaqs.map((faq) => (
-            <div key={faq.q}>
-              <p>{faq.q}</p>
-              <p>{faq.a}</p>
-            </div>
-          ))}
-        </div>
-      )}
       <CozumlerDetailClient slug={slug} />
     </>
   );
