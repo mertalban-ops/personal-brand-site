@@ -38,27 +38,69 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   // Global structured data schema
+  const sameAs = [siteConfig.socialLinks.github, siteConfig.socialLinks.linkedin].filter(Boolean);
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Organization",
+        "@type": ["Organization", "ProfessionalService", "LocalBusiness"],
         "@id": `${siteConfig.siteUrl}/#organization`,
         "name": siteConfig.brandName,
+        "description": "Albanexa, İzmir merkezli, Türkiye geneline hizmet veren, Mert Alban tarafından kurulan bağımsız dijital çözüm stüdyosudur. KOBİ'ler için özel iş takip sistemleri, stok ve cari hesap yazılımları, kurumsal web siteleri ve SaaS altyapıları geliştirmektedir.",
         "url": siteConfig.siteUrl,
-        "logo": `${siteConfig.siteUrl}/logo.png`,
-        "sameAs": [siteConfig.socialLinks.github, siteConfig.socialLinks.linkedin].filter(Boolean)
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${siteConfig.siteUrl}/logo.png`
+        },
+        "email": siteConfig.contactEmail,
+        "telephone": `+${siteConfig.whatsappNumber}`,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "İzmir",
+          "addressCountry": "TR"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Türkiye"
+        },
+        "priceRange": "₺₺₺",
+        "knowsLanguage": ["tr", "en"],
+        "serviceType": [
+          "Özel Yazılım Geliştirme",
+          "İş Takip Sistemi",
+          "Stok ve Cari Hesap Yönetim Sistemi",
+          "Kurumsal Web Sitesi",
+          "SaaS Altyapısı",
+          "Operasyon Otomasyonu"
+        ],
+        "founder": {
+          "@id": `${siteConfig.siteUrl}/#person`
+        },
+        "sameAs": sameAs
       },
       {
         "@type": "Person",
         "@id": `${siteConfig.siteUrl}/#person`,
         "name": siteConfig.founderName,
-        "jobTitle": "Founder & Lead Software Engineer",
+        "jobTitle": "Kurucu & Baş Yazılım Mühendisi",
+        "description": "Mert Alban, kalite yönetimi ve süreç analizi geçmişini yazılım geliştirmeyle birleştirerek KOBİ'ler için özel dijital operasyon sistemleri tasarlayan Albanexa'nın kurucusudur.",
+        "knowsAbout": [
+          "Özel yazılım geliştirme",
+          "İş takip sistemleri",
+          "Stok ve cari hesap yönetimi",
+          "SaaS mimari tasarımı",
+          "Operasyon otomasyonu",
+          "Kalite yönetimi ve süreç analizi",
+          "Next.js",
+          "Supabase",
+          "TypeScript",
+          "n8n iş akışı otomasyonu"
+        ],
         "worksFor": {
           "@id": `${siteConfig.siteUrl}/#organization`
         },
         "url": siteConfig.siteUrl,
-        "sameAs": [siteConfig.socialLinks.github, siteConfig.socialLinks.linkedin].filter(Boolean)
+        "sameAs": sameAs
       },
       {
         "@type": "WebSite",
@@ -67,6 +109,14 @@ export default function RootLayout({
         "name": siteConfig.brandName,
         "publisher": {
           "@id": `${siteConfig.siteUrl}/#organization`
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": `${siteConfig.siteUrl}/projeler?q={search_term_string}`
+          },
+          "query-input": "required name=search_term_string"
         }
       }
     ]

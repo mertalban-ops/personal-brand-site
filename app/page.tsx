@@ -1,4 +1,6 @@
 import { buildPageMetadata } from "@/lib/metadata";
+import { siteConfig } from "@/data/config";
+import { faqs } from "@/data/faqs";
 
 export const metadata = buildPageMetadata({
   title: "Albanexa — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
@@ -20,19 +22,39 @@ import FAQPreview from "@/components/home/FAQPreview";
 import FinalCTA from "@/components/home/FinalCTA";
 
 export default function Home() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${siteConfig.siteUrl}/#faq`,
+    "mainEntity": faqs.map((f) => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.a,
+      },
+    })),
+  };
+
   return (
-    <main className="w-full" style={{ overflowX: "clip" }}>
-      <Navbar />
-      <Hero />
-      <TrustStrip />
-      <ProblemsSolutions />
-      <HomeSolutions />
-      <Projects />
-      <WebSiteVitrin />
-      <Process />
-      <FounderTrust />
-      <FAQPreview />
-      <FinalCTA />
-    </main>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <main className="w-full" style={{ overflowX: "clip" }}>
+        <Navbar />
+        <Hero />
+        <TrustStrip />
+        <ProblemsSolutions />
+        <HomeSolutions />
+        <Projects />
+        <WebSiteVitrin />
+        <Process />
+        <FounderTrust />
+        <FAQPreview />
+        <FinalCTA />
+      </main>
+    </>
   );
 }

@@ -1,0 +1,47 @@
+# Albanexa
+
+> Albanexa, İzmir merkezli, Türkiye geneline hizmet veren, Mert Alban tarafından kurulan bağımsız dijital çözüm stüdyosudur. KOBİ'ler için özel iş takip sistemleri, stok ve cari hesap yazılımları, kurumsal web siteleri ve SaaS ürün altyapıları geliştirmektedir.
+
+## Kurucu
+
+**Mert Alban** — Kurucu & Baş Yazılım Mühendisi
+Kalite yönetimi ve süreç analizi geçmişini yazılım geliştirmeyle birleştirerek KOBİ'ler için özel dijital operasyon sistemleri tasarlamaktadır.
+
+## Hizmetler
+
+- **İş Takip Sistemi**: Sipariş, görev ve müşteri süreçlerini tek panelde yönetme
+- **Stok ve Cari Hesap Takip**: Depo hareketleri, müşteri bakiyeleri ve tahsilat yönetimi
+- **Operasyon Otomasyonu**: n8n tabanlı iş akışları, e-posta ve sistem entegrasyonları
+- **SaaS Ürün Altyapısı**: Multi-tenant mimari, abonelik yönetimi, ölçeklenebilir veritabanı
+- **Kurumsal Web Sitesi**: Next.js tabanlı, hızlı, SEO uyumlu, mobil öncelikli siteler
+- **İşletmeye Özel Web Uygulaması**: Rol bazlı erişim, gerçek zamanlı veri, özel raporlama paneli
+
+## Referans Projeler
+
+- **StokApp**: Toptan tekstil işletmesi için stok, cari hesap ve tahsilat yönetim sistemi. Ekstre hazırlama süresi 2 saatten 30 saniyeye düştü.
+- **Hezer Auto Service**: Araç servis işletmesi için iş emri takip ve müşteri yönetim sistemi. Saha ekibi WhatsApp'tan sisteme geçti.
+- **CARPASS**: Araç geçmiş raporlama SaaS uygulaması. Mobil ve web üzerinden çalışan çok-kiracılı altyapı.
+
+## Teknoloji Yetkinlikleri
+
+Next.js, React, TypeScript, Supabase, PostgreSQL, n8n, Expo (React Native), Node.js, Tailwind CSS
+
+## İletişim
+
+- Web: https://www.albanexa.com
+- E-posta: mert@albanexa.com
+- Konum: İzmir, Türkiye (Türkiye geneline uzaktan hizmet)
+
+## Sayfa Haritası
+
+- /cozumler — Tüm dijital çözümler
+- /cozumler/is-takip-sistemleri — İş takip sistemi hizmet sayfası
+- /cozumler/stok-cari-tahsilat — Stok ve cari hesap yazılımı
+- /cozumler/operasyon-otomasyonlari — Operasyon otomasyonu
+- /cozumler/saas-urun-altyapisi — SaaS altyapı geliştirme
+- /cozumler/web-siteleri — Kurumsal web sitesi hizmetleri
+- /cozumler/web-uygulamalari — Özel web uygulamaları
+- /projeler — Referans projeler ve vaka çalışmaları
+- /surec — 8 adımlı çalışma süreci
+- /studyo — Stüdyo ve kurucu hakkında
+- /iletisim — İletişim ve ücretsiz keşif görüşmesi

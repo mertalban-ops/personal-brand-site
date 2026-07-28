@@ -3,15 +3,22 @@ export type SolutionModule = {
   items: string[];
 };
 
+export type SolutionFAQ = {
+  q: string;
+  a: string;
+};
+
 export type Solution = {
   slug: "is-takip-sistemleri" | "stok-cari-tahsilat" | "operasyon-otomasyonlari" | "saas-urun-altyapisi" | "web-siteleri" | "web-uygulamalari";
   title: string;
   tagline: string;
+  seoSummary?: string;
   problemStatement: string;
   forWhom: string[];
   commonProblems: string[];
   modules: SolutionModule[];
   outcomes: string[];
+  pageFaqs?: SolutionFAQ[];
   relatedProjectSlug?: string;
   cta: string;
 };
@@ -21,6 +28,7 @@ export const solutionsTr: Solution[] = [
     slug: "is-takip-sistemleri",
     title: "İş Takip Sistemleri",
     tagline: "Sipariş, görev ve müşteri süreçlerini tek panelden yönetin",
+    seoSummary: "İş takip sistemi, siparişleri, görevleri ve müşteri süreçlerini WhatsApp ve Excel'den bağımsız tek bir dijital panelde yönetmenizi sağlar. Albanexa, servis işletmeleri, saha ekipleri ve çok lokasyonlu operasyonlar için işletmeye özel iş takip ve operasyon yönetim yazılımları geliştirmektedir.",
     problemStatement: "İş emirleri kişilerin hafızasında, görevler WhatsApp'ta, müşteri bilgileri dağınık Excel tablolarında kalıyor.",
     forWhom: [
       "Servis ve bakım işletmeleri",
@@ -45,6 +53,24 @@ export const solutionsTr: Solution[] = [
       "Yöneticinin tüm operasyonu tek ekrandan görmesi",
       "Raporlamanın otomatik ve anlık hale gelmesi",
     ],
+    pageFaqs: [
+      {
+        q: "İş takip sistemi ne işe yarar?",
+        a: "İş takip sistemi; iş emirlerini, görev atamalarını, müşteri geçmişini ve servis süreçlerini dijital ortamda kaydeder. Hangi işin hangi aşamada olduğunu, kimin sorumlu olduğunu ve ne zaman tamamlandığını anlık olarak görmenizi sağlar. WhatsApp ve hafıza yerine sistemin yönetmesi sayesinde işlerin kişilere bağlı kalmasını ortadan kaldırır.",
+      },
+      {
+        q: "Hazır CRM veya ERP yerine özel bir sistem kurmanın avantajı nedir?",
+        a: "Hazır CRM ve ERP sistemleri genellikle işletmenizin terminolojisine, iş akışına ve sektörüne uymak için fazla genel kalır ya da uyarlamak için yüksek lisans maliyeti gerektirir. Özel bir iş takip sistemi, yalnızca sizin operasyonunuzu modeller; ekibinizin benimsemesi daha kolay, bakım maliyeti daha düşük olur.",
+      },
+      {
+        q: "Sistem kaç kullanıcıyla çalışabilir?",
+        a: "Kurduğumuz sistemler rol bazlı erişim kontrolüyle tasarlanır: yönetici, personel ve salt okunur raporlama gibi farklı roller tanımlanabilir. Kullanıcı sayısında teknik bir üst sınır yoktur; sistem büyüdükçe ölçeklenecek mimariyle kurulur.",
+      },
+      {
+        q: "Mobil cihazlardan da kullanılabiliyor mu?",
+        a: "Evet. Tüm sistemlerimiz responsive tasarımla geliştirilir; bilgisayar, tablet ve akıllı telefon üzerinden ekstra uygulama indirmeden tarayıcıdan erişilebilir.",
+      },
+    ],
     relatedProjectSlug: "hezer-auto-service",
     cta: "İş Takip Sistemi Konuşalım",
   },
@@ -52,6 +78,7 @@ export const solutionsTr: Solution[] = [
     slug: "stok-cari-tahsilat",
     title: "Stok, Cari Hesap ve Tahsilat",
     tagline: "Deponuzu, alacaklarınızı ve tahsilatlarınızı tek sistemde görün",
+    seoSummary: "Stok ve cari hesap takip sistemi, depo hareketlerini, müşteri bakiyelerini ve tahsilatları gerçek zamanlı olarak tek ekranda gösterir. Albanexa, toptan ve perakende işletmeler için Excel'in yerini alan özel stok yönetim ve cari hesap yazılımları geliştirmektedir.",
     problemStatement: "Stok sayımları tutarsız, müşteri bakiyeleri belirsiz, tahsilatlar unutuluyor.",
     forWhom: [
       "Toptan ve perakende satış işletmeleri",
@@ -76,6 +103,24 @@ export const solutionsTr: Solution[] = [
       "Müşteri bakiyelerinin her an erişilebilir olması",
       "Tahsilat hatırlatmalarının otomatikleşmesi",
     ],
+    pageFaqs: [
+      {
+        q: "Stok takip sistemi nedir ve işletmeme ne kazandırır?",
+        a: "Stok takip sistemi, depoya giren ve çıkan her ürünü kayıt altına alır; kritik stok seviyelerinde uyarı verir ve anlık envanter durumunu gösterir. Sayım hataları azalır, kayıp-kaçak azalır ve satın alma kararları gerçek veriye dayanır. Excel'le yapılan manuel takibe kıyasla hem zaman hem hata payı önemli ölçüde düşer.",
+      },
+      {
+        q: "Cari hesap takibi ve tahsilat yönetimi nasıl çalışır?",
+        a: "Sistemde her müşterinin açık bakiyesi, vadeli satışları ve ödeme geçmişi ayrı bir hesapta izlenir. Vadesini geçen alacaklar için otomatik hatırlatma gönderilebilir. Tek tıkla PDF hesap ekstresi oluşturulup WhatsApp üzerinden paylaşılabilir; hesap ekstresi hazırlama süresi önemli ölçüde kısalır.",
+      },
+      {
+        q: "Excel'den özel bir sisteme geçiş ne kadar sürer?",
+        a: "Mevcut Excel verilerinin aktarımı da dahil olmak üzere tipik bir stok ve cari hesap projesi 4 ila 8 hafta arasında tamamlanır. Veri geçiş planı, kapsam belgesinde netleştirilir ve hiçbir veri kaybı olmadan sisteme aktarılır.",
+      },
+      {
+        q: "Birden fazla depo veya lokasyon destekleniyor mu?",
+        a: "Evet. Sistem çok depolu yapıyı destekler; her deponun stok durumu ayrı ayrı izlenebilir, transferler kayıt altına alınır. Lokasyonlar arası raporlama tek bir yönetici panelinden yapılabilir.",
+      },
+    ],
     relatedProjectSlug: "stockapp",
     cta: "Stok ve Cari Sistemi Konuşalım",
   },
@@ -83,6 +128,7 @@ export const solutionsTr: Solution[] = [
     slug: "operasyon-otomasyonlari",
     title: "Operasyon Otomasyonları",
     tagline: "Tekrar eden işleri otomatiğe bağlayın, personelinizi asıl işe odaklayın",
+    seoSummary: "Operasyon otomasyonu, e-posta gönderimi, rapor hazırlama ve sistemler arası veri aktarımı gibi tekrar eden manuel işleri otomatik akışlara bağlar. Albanexa, n8n tabanlı iş akışları ve özel entegrasyonlarla KOBİ'lerin günlük operasyon yükünü azaltmakta ve müşteri iletişimini otomatikleştirmektedir.",
     problemStatement: "Her gün aynı manuel işler zaman ve enerji harcatıyor: e-posta göndermek, rapor hazırlamak, veri aktarmak.",
     forWhom: [
       "Tekrar eden operasyonel iş yükü olan işletmeler",
@@ -107,6 +153,24 @@ export const solutionsTr: Solution[] = [
       "Müşteri iletişiminin zamanında ve tutarlı olması",
       "Raporlamanın otomatik çalışması",
     ],
+    pageFaqs: [
+      {
+        q: "Hangi manuel işler otomatikleştirilebilir?",
+        a: "Tekrar eden her iş otomasyona uygundur: müşteri sipariş onay e-postaları, haftalık satış raporları, düşük stok uyarıları, vade tarihi hatırlatmaları, WhatsApp bildirim akışları ve sistemler arası veri aktarımı bunların başında gelir. Mevcut operasyonunuzu analiz ederek hangi adımların otomasyona uygun olduğunu birlikte belirleriz.",
+      },
+      {
+        q: "n8n nedir ve neden tercih edilmektedir?",
+        a: "n8n, açık kaynaklı bir iş akışı otomasyon aracıdır. Farklı uygulamaları ve API'leri görsel bir arayüzde birbirine bağlar. Lisans maliyeti düşük, özelleştirme esnekliği yüksektir. İşletme verilerini kendi sunucunuzda tutmanızı sağlar, bu da veri güvenliği açısından önemlidir.",
+      },
+      {
+        q: "Mevcut yazılımlarımızla entegrasyon sağlanabiliyor mu?",
+        a: "Evet, çoğu modern yazılım REST API veya webhook desteği sunar. Fatura programları, muhasebe yazılımları, e-ticaret platformları ve özel veritabanlarıyla entegrasyon mümkündür. Entegrasyon kapsamı keşif görüşmesinde netleştirilir.",
+      },
+      {
+        q: "Otomasyon sistemi kurulduktan sonra bakımı kim yapıyor?",
+        a: "Teslim sonrası aylık bakım anlaşması kapsamında otomasyon akışlarının çalışır durumda kalması, API değişikliklerine uyarlanması ve yeni otomasyon ihtiyaçlarının karşılanması Albanexa tarafından yönetilir.",
+      },
+    ],
     relatedProjectSlug: "saas-operasyon-altyapisi",
     cta: "Otomasyon Sistemini Konuşalım",
   },
@@ -114,6 +178,7 @@ export const solutionsTr: Solution[] = [
     slug: "saas-urun-altyapisi",
     title: "SaaS Ürün Altyapısı",
     tagline: "Sektörünüzdeki sorunu çözen dijital ürünü birlikte inşa edin",
+    seoSummary: "SaaS ürün altyapısı, şirket içinde çözülen bir problemi diğer firmalara kiralanan abonelik ürününe dönüştürmenizi sağlar. Albanexa, multi-tenant mimari, abonelik yönetimi ve ölçeklenebilir veritabanı tasarımıyla sektörel SaaS ürünlerinin teknik altyapısını kurmaktadır.",
     problemStatement: "Şirket içi çözülen bir problemi, diğer firmalara satılabilir abonelik modeline dönüştürmek karmaşık görünüyor.",
     forWhom: [
       "Sektörel yazılım ürünü geliştirmek isteyen girişimciler",
@@ -138,6 +203,12 @@ export const solutionsTr: Solution[] = [
       "Ölçeklenebilir abonelik ve faturalandırma sistemi",
       "Ürün büyüdükçe dayanıklı kalan teknik temel",
     ],
+    pageFaqs: [
+      { q: "SaaS nedir ve nasıl çalışır?", a: "SaaS (Software as a Service), yazılımın kurulum gerektirmeden tarayıcı üzerinden aylık veya yıllık abonelikle kullanıldığı modeldir. Kullanıcılar sisteme hesaplarıyla giriş yapar; güncelleme, bakım ve sunucu yönetimi yazılımı geliştiren taraf tarafından yapılır." },
+      { q: "Multi-tenant mimari ne demek, neden önemli?", a: "Multi-tenant mimaride birden fazla müşteri (kiracı) aynı yazılım altyapısını güvenli biçimde paylaşır; her kiracının verisi birbirinden izole tutulur. Bu yapı hem altyapı maliyetini düşürür hem de ürünün yüzlerce firmaya ölçeklenmesini mümkün kılar." },
+      { q: "MVP'den tam ürüne geçiş ne kadar sürer?", a: "Kapsam ve özelliklere göre değişmekle birlikte, temel abonelik ve multi-tenant altyapısı içeren bir MVP genellikle 6–10 hafta içinde tamamlanır. Tam ürüne geçiş; ödeme entegrasyonu, rol yönetimi ve ölçeklendirme testleri dahil 3–5 ay sürebilir." },
+      { q: "Abonelik ve ödeme altyapısı nasıl kurulur?", a: "Abonelik yönetimi için Stripe veya iyzico entegrasyonu yapılır; plan oluşturma, yükseltme, düşürme ve otomatik yenileme akışları tasarlanır. Faturalandırma ve ödeme geçmişi paneli, müşteri self-servis portalıyla birlikte sunulur." },
+    ],
     relatedProjectSlug: "saas-operasyon-altyapisi",
     cta: "SaaS Ürünü Konuşalım",
   },
@@ -145,6 +216,7 @@ export const solutionsTr: Solution[] = [
     slug: "web-siteleri",
     title: "Kurumsal Web Siteleri",
     tagline: "Markanızı profesyonel, güvenilir ve ikna edici gösteren web siteleri",
+    seoSummary: "Kurumsal web sitesi, markanızı dijitalde profesyonel biçimde temsil eden, ziyaretçiyi müşteriye dönüştüren ve arama motorlarında görünür kılan temel dijital varlığınızdır. Albanexa, KOBİ'ler ve uzmanlar için Next.js tabanlı, hızlı, SEO uyumlu ve mobil öncelikli kurumsal web siteleri geliştirmektedir.",
     problemStatement: "Mevcut site eski veya amatör görünüyor, hizmetler net anlaşılmıyor, ziyaretçiler iletişime geçmiyor.",
     forWhom: [
       "Profesyonel bir dijital varlık oluşturmak isteyen KOBİ'ler",
@@ -170,6 +242,12 @@ export const solutionsTr: Solution[] = [
       "Hizmetlerin ve teklifin net anlaşılması",
       "İletişim ve teklif taleplerinin artması",
     ],
+    pageFaqs: [
+      { q: "Kurumsal web sitesi ne kadar sürede hazır olur?", a: "Kapsam ve içerik hazırlığına göre değişmekle birlikte, çok sayfalı bir kurumsal web sitesi genellikle 3–5 hafta içinde tamamlanır. Tasarım onayı ve içerik teslimatı süreci doğrudan etkiler; bu nedenle ilk görüşmede içerik takvimi netleştirilir." },
+      { q: "Web sitemin Google'da görünmesi için ne yapılıyor?", a: "Site, teknik SEO temelleriyle inşa edilir: doğru HTML semantiği, hızlı yükleme süresi, mobil uyumluluk, schema.org yapısal verisi ve canonical URL yönetimi. Ek olarak Google Search Console entegrasyonu ve sitemap gönderimi yapılır." },
+      { q: "Hazır şablon (WordPress, Wix) yerine özel site neden tercih edilmeli?", a: "Özel geliştirilen siteler rakiplerin şablonundan ayrışır, marka kimliğini tam yansıtır ve sayfa hızı açısından hazır şablonlardan belirgin biçimde üstün performans gösterir. Aynı zamanda içerik güncellemeleri daha esnek yönetilir ve SEO kontrolü tamamen sizin elinizde olur." },
+      { q: "Site teslim sonrası güncelleme ve bakım nasıl sağlanıyor?", a: "Teslim sonrası destek paketi opsiyoneldir. Yönetici paneli veya kolay düzenlenebilir içerik alanları sayesinde metin ve görsel güncellemelerini kendiniz yapabilirsiniz. Teknik güncelleme ve hosting yönetimi için aylık bakım anlaşması seçeneği sunulmaktadır." },
+    ],
     relatedProjectSlug: "personal-brand-site",
     cta: "Web Sitesi Konuşalım",
   },
@@ -177,6 +255,7 @@ export const solutionsTr: Solution[] = [
     slug: "web-uygulamalari",
     title: "İşletmeye Özel Web Uygulamaları",
     tagline: "Kullanıcıların giriş yaptığı, veri yönettiği ve süreç izlediği web sistemleri",
+    seoSummary: "İşletmeye özel web uygulaması, ekibinizin giriş yapıp günlük operasyonlarını yönettiği, hazır yazılımların karşılayamadığı iş akışlarına göre sıfırdan tasarlanan bir sistemdir. Albanexa, rol bazlı erişim, gerçek zamanlı veri ve özel raporlama panelleriyle KOBİ'ler için ölçeklenebilir web uygulamaları geliştirmektedir.",
     problemStatement: "Hazır yazılımlar işletmenizin özel süreçlerine uymuyor; Excel ve WhatsApp ile yönetim artık yetmiyor.",
     forWhom: [
       "Ekibinin günlük kullandığı özel bir panel isteyen işletmeler",
@@ -200,6 +279,12 @@ export const solutionsTr: Solution[] = [
       "İşlerin kişilere değil sisteme bağlı olması",
       "Anlık veri görünürlüğü ve raporlama",
       "Ekibin benimsediği kullanışlı arayüz",
+    ],
+    pageFaqs: [
+      { q: "Web uygulaması ile web sitesi arasındaki fark nedir?", a: "Web sitesi ağırlıklı olarak bilgi sunar; ziyaretçi içeriği okur. Web uygulaması ise kullanıcının giriş yapıp veri girdiği, iş akışlarını yönettiği interaktif bir sistemdir. İş takip paneli, sipariş yönetimi veya ekip koordinasyon araçları web uygulaması kategorisine girer." },
+      { q: "Hazır ERP veya CRM yerine özel web uygulaması ne zaman tercih edilmeli?", a: "Hazır sistemler genel süreçlere göre tasarlanmıştır ve işletmenizin terminolojisine veya özgün iş akışına tam uymayabilir. Çalışanların %70'ten fazlası ek işlem yaptığında ya da sistemi esnetmek için sürekli geliştirici tutulduğunda özel geliştirme çok daha verimlidir." },
+      { q: "Rol bazlı erişim kontrolü ne anlama geliyor?", a: "Rol bazlı erişimde her kullanıcı yalnızca kendi yetkisindeki ekran ve verilere ulaşır. Örneğin saha teknisyeni kendi iş emirlerini görebilirken yönetici tüm ekip verilerine ve raporlara erişebilir. Bu yapı hem güvenliği artırır hem de kullanıcı arayüzünü sade tutar." },
+      { q: "Mevcut Excel/Access dosyalarını web uygulamasına taşıyabilir miyiz?", a: "Evet. Mevcut Excel dosyaları veya Access veri tabanı, veri temizleme ve dönüştürme adımından sonra yeni sisteme aktarılır. Bu süreç, özellikle yıllarca biriken müşteri, stok veya sipariş verilerinin kayıpsız taşınmasını kapsar." },
     ],
     relatedProjectSlug: "stockapp",
     cta: "Web Uygulaması Konuşalım",

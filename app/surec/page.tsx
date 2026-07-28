@@ -5,6 +5,7 @@ import CtaStrip from "@/components/CtaStrip";
 import AnimatedSection from "@/components/AnimatedSection";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import { processSteps, pricingNote } from "@/data/process";
+import { siteConfig } from "@/data/config";
 import { CheckCircle2 } from "lucide-react";
 
 export const metadata = buildPageMetadata({
@@ -14,8 +15,41 @@ export const metadata = buildPageMetadata({
 });
 
 export default function SurecPage() {
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Albanexa ile yazılım projesi nasıl ilerler?",
+    "description": "Keşif görüşmesinden teslime ve destek sürecine kadar 8 adımlı çalışma yöntemimiz.",
+    "totalTime": "P4W",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "TRY",
+      "value": "İlk görüşmede netleştirilir"
+    },
+    "supply": [
+      { "@type": "HowToSupply", "name": "Operasyon ve süreç tanımı" },
+      { "@type": "HowToSupply", "name": "Mevcut araçlar (Excel, defter, WhatsApp vb.)" }
+    ],
+    "tool": [
+      { "@type": "HowToTool", "name": "Next.js" },
+      { "@type": "HowToTool", "name": "Supabase" },
+      { "@type": "HowToTool", "name": "TypeScript" }
+    ],
+    "step": processSteps.map((s) => ({
+      "@type": "HowToStep",
+      "name": `${s.step} — ${s.title}`,
+      "text": `${s.description} Çıktı: ${s.output}.`,
+      "url": `${siteConfig.siteUrl}/surec#adim-${s.step}`,
+    })),
+  };
+
   return (
-    <main className="w-full" style={{ overflowX: "clip" }}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      <main className="w-full" style={{ overflowX: "clip" }}>
       <Navbar />
 
       {/* Hero */}
@@ -158,5 +192,6 @@ export default function SurecPage() {
 
       <CtaStrip />
     </main>
+    </>
   );
 }

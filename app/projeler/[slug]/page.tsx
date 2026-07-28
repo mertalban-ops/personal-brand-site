@@ -88,11 +88,16 @@ export default async function ProjectDetailPage({ params }: Props) {
         "operatingSystem": "Web Cloud",
         "applicationCategory": "BusinessApplication",
         "description": project.caseSummary,
-        "publisher": {
-          "@type": "Organization",
-          "name": siteConfig.brandName,
-          "url": siteConfig.siteUrl
-        }
+        "publisher": { "@id": `${siteConfig.siteUrl}/#organization` }
+      },
+      {
+        "@type": "Article",
+        "@id": `${siteConfig.siteUrl}/projeler/${slug}#article`,
+        "headline": `${project.name} — Vaka Çalışması`,
+        "description": project.caseSummary,
+        "author": { "@id": `${siteConfig.siteUrl}/#person` },
+        "publisher": { "@id": `${siteConfig.siteUrl}/#organization` },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteConfig.siteUrl}/projeler/${slug}` }
       }
     ]
   };
