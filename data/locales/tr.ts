@@ -7,7 +7,7 @@ export const tr: Dictionary = {
     services: "Sistem Çözümleri",
     cases: "Projeler",
     process: "Süreç",
-    contactBtn: "Projemi Konuşalım",
+    contactBtn: "Projenizi Görüşelim",
     privacy: "Gizlilik",
     terms: "Kullanım Koşulları",
     cooperation: "İş Birliği",
