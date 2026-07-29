@@ -29,7 +29,7 @@ export default function WebSiteVitrin() {
       { icon: Globe, label: "Kurumsal görünüm", desc: "Markanızı güvenilir ve profesyonel gösteren tasarım." },
       { icon: Smartphone, label: "Mobil uyumlu", desc: "Farklı ekran boyutlarında tutarlı ve esnek responsive yapı." },
       { icon: Zap, label: "Hız ve performans", desc: "Core Web Vitals odaklı, hızlı açılan sayfalar." },
-      { icon: Search, label: "SEO temeli", desc: "Arama motorlarında görünürlüğünüzü artıran altyapı." },
+      { icon: Search, label: "SEO temeli", desc: "Arama motorlarının siteyi daha kolay taramasını ve anlamasını destekleyen teknik altyapı." },
     ],
     primaryCta: "Web Sitesi Hizmetini İnceleyin",
     secondaryCta: "Web Sitesi Konuşalım",
