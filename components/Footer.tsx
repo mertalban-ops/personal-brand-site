@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, MessageCircle, MapPin } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { siteConfig } from "@/data/config";
@@ -31,8 +32,16 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-10 mb-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-2">
-            <Link href="/" className="display text-base font-bold tracking-tight text-ink">
-              {siteConfig.brandName.toUpperCase()}
+            <Link href="/" className="inline-block">
+              <div className="rounded-md bg-white/95 px-2 py-1 shadow-sm">
+                <Image
+                  src="/albanexa-logo.png"
+                  alt="Albanexa"
+                  width={120}
+                  height={48}
+                  className="h-8 w-auto"
+                />
+              </div>
             </Link>
             <p className="mt-3 max-w-sm text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
               {t.contact.footerText}

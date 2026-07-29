@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -111,10 +112,17 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <Link href="/" className="flex items-baseline gap-3" onClick={() => setIsOpen(false)}>
-          <span className="display text-sm font-bold tracking-tight text-ink">
-            ALBANEXA
-          </span>
+        <Link href="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
+          <div className="rounded-md bg-white/95 px-2 py-1 shadow-sm">
+            <Image
+              src="/albanexa-logo.png"
+              alt="Albanexa"
+              width={108}
+              height={44}
+              className="h-7 w-auto"
+              priority
+            />
+          </div>
           <span className="mono-label hidden text-faint sm:inline" style={{ color: "var(--faint)" }}>
             dijital çözümler & sistemler
           </span>
