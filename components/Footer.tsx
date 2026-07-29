@@ -33,15 +33,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-2">
             <Link href="/" className="inline-block">
-              <div className="rounded-md bg-white/95 px-2 py-1 shadow-sm">
-                <Image
-                  src="/albanexa-logo.png"
-                  alt="Albanexa"
-                  width={120}
-                  height={48}
-                  className="h-8 w-auto"
-                />
-              </div>
+              <Image
+                src="/albanexa-logo.png"
+                alt="Albanexa"
+                width={180}
+                height={72}
+                className="h-12 w-auto"
+              />
             </Link>
             <p className="mt-3 max-w-sm text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
               {t.contact.footerText}

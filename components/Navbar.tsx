@@ -113,16 +113,14 @@ export default function Navbar() {
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
         <Link href="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
-          <div className="rounded-md bg-white/95 px-2 py-1 shadow-sm">
-            <Image
-              src="/albanexa-logo.png"
-              alt="Albanexa"
-              width={108}
-              height={44}
-              className="h-7 w-auto"
-              priority
-            />
-          </div>
+          <Image
+            src="/albanexa-logo.png"
+            alt="Albanexa"
+            width={160}
+            height={65}
+            className="h-10 w-auto"
+            priority
+          />
           <span className="mono-label hidden text-faint sm:inline" style={{ color: "var(--faint)" }}>
             dijital çözümler & sistemler
           </span>
