@@ -55,7 +55,7 @@ const studioTr: StudioDetails = {
       },
       {
         title: "Sürdürülebilir ve geliştirilebilir mimari kurmak",
-        text: "Aşırı karmaşık yapılar yerine uzun yıllar bakım gerektirmeden çalışacak hafif ve özel Next.js/Supabase çözümleri inşa ediyoruz."
+        text: "Aşırı karmaşık yapılar yerine bakım kolaylığı gözetilen, hafif ve özelleştirilmiş Next.js/Supabase çözümleri geliştiriyoruz."
       }
     ],
     note: "Her projede ihtiyaçların doğru anlaşılmasına, kapsamın açık biçimde belirlenmesine ve sürecin şeffaf yürütülmesine önem verilir.",
@@ -63,7 +63,7 @@ const studioTr: StudioDetails = {
   techApproach:
     "Görseller, yazı tipleri, JavaScript yükü ve sayfa bileşenleri Core Web Vitals hedefleri (LCP < 2.5s, CLS < 0.1, INP < 200ms) dikkate alınarak optimize edilir. Teknoloji seçiminde işletmenin gerçek ihtiyacı ve uzun vadeli bakım kolaylığı esastır.",
   securityNote:
-    "Tüm sistemlerde rol bazlı erişim kontrolü, şifrelenmiş veritabanı yapısı, SSL sertifikaları ve düzenli yedekleme standarttır.",
+    "Yetkilendirme yapısı, veri güvenliği ve yedekleme gereksinimleri projenin kapsamına ve kullanılan altyapıya göre planlanır. Rol bazlı erişim kontrolü, veritabanı güvenliği ve SSL kullanımı, gerektiren projelerde uygulanır.",
 };
 
 const studioEn: StudioDetails = {
@@ -99,7 +99,7 @@ const studioEn: StudioDetails = {
       },
       {
         title: "Develop simple, maintainable software",
-        text: "Rather than heavy templates, we construct lightweight, customized Next.js/Supabase solutions that run reliably for years."
+        text: "Rather than heavy templates, we build lightweight, customized Next.js/Supabase solutions prioritizing long-term maintainability."
       }
     ],
     note: "We prioritize clear scoping, transparent communication, and empirical verification across every project phase.",
@@ -107,7 +107,7 @@ const studioEn: StudioDetails = {
   techApproach:
     "Assets, fonts, and scripts are optimized with Core Web Vitals targets in mind. Modern web standards (Next.js, Supabase, TypeScript, Tailwind) power our long-term maintainable architecture.",
   securityNote:
-    "Role-based access control, relational database security, HSTS headers, and automated backups are standard in every system we launch.",
+    "Authorization design, database security, and backup requirements are planned according to each project's scope and infrastructure. Role-based access control, database security, and SSL are applied where the project requires them.",
 };
 
 const studioDe: StudioDetails = {
@@ -143,7 +143,7 @@ const studioDe: StudioDetails = {
       },
       {
         title: "Einfache, wartbare Software entwickeln",
-        text: "Statt schwerer Vorlagen erstellen wir schlanke Next.js/Supabase-Lösungen, die jahrelang zuverlässig laufen."
+        text: "Statt schwerer Vorlagen entwickeln wir schlanke, maßgeschneiderte Next.js/Supabase-Lösungen mit Fokus auf langfristige Wartbarkeit."
       }
     ],
     note: "Wir legen großen Wert auf klare Zieldefinitionen, transparente Kommunikation und empirische Prüfung in jeder Projektphase.",
@@ -151,7 +151,7 @@ const studioDe: StudioDetails = {
   techApproach:
     "Bilder, Schriften und Skripte werden unter Berücksichtigung der Core Web Vitals-Ziele optimiert. Wartungsfreundlichkeit bestimmt unsere Stack-Auswahl.",
   securityNote:
-    "Rollenbasierte Zugriffskontrolle, relationale Datenbanksicherheit und automatische Backups sind Standard in jedem System.",
+    "Berechtigungsstruktur, Datensicherheit und Backup-Anforderungen werden je nach Projektumfang und genutzter Infrastruktur geplant. Rollenbasierte Zugangskontrolle und Datenbanksicherheit werden dort eingesetzt, wo das Projekt es erfordert.",
 };
 
 export const getStudio = (lang: string): StudioDetails => {

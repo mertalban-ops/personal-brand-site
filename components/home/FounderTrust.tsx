@@ -25,10 +25,14 @@ export default function FounderTrust() {
             <div>
               <p className="mono-label mb-2">{t.about.label}</p>
               <h2 className="display text-2xl font-bold text-ink md:text-3xl mb-4">
-                {s.founder.name} — {s.founder.role}
+                {s.brand.tagline}
               </h2>
               <p className="text-muted leading-relaxed mb-6 max-w-3xl">
                 {s.founder.bio}
+              </p>
+              <p className="text-xs text-faint mb-4">
+                {language === "de" ? "Studio-Leitung: " : language === "en" ? "Studio Lead: " : "Stüdyo Yöneticisi: "}
+                <span className="font-medium text-muted">{s.founder.name}</span>
               </p>
               
               <ul className="space-y-4 mb-6">

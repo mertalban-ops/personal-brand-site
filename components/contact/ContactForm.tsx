@@ -476,7 +476,20 @@ export default function ContactForm() {
               />
             </div>
 
-            <div className="pt-2">
+            <div className="space-y-3 pt-2">
+              <p className="text-[0.7rem] text-muted leading-relaxed">
+                {c.kvkkPrefix}{" "}
+                <Link
+                  href="/kvkk-aydinlatma"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-accent underline hover:text-accent/80 transition-colors"
+                  aria-label={`${c.kvkkLinkText} (yeni sekmede açılır)`}
+                >
+                  {c.kvkkLinkText}
+                </Link>
+                {c.kvkkSuffix}
+              </p>
               <button
                 id="cf-next-btn"
                 type="button"
@@ -598,10 +611,11 @@ export default function ContactForm() {
               <p className="text-[0.7rem] text-muted leading-relaxed">
                 {c.kvkkPrefix || "Formda paylaştığınız kişisel veriler, talebinizi değerlendirmek ve sizinle iletişim kurmak amacıyla işlenir. Ayrıntılar için"}{" "}
                 <Link
-                  href="/gizlilik"
+                  href="/kvkk-aydinlatma"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-medium text-accent underline hover:text-accent/80 transition-colors"
+                  aria-label={`${c.kvkkLinkText || "KVKK Aydınlatma Metni"} (yeni sekmede açılır)`}
                 >
                   {c.kvkkLinkText || "KVKK Aydınlatma Metni"}
                 </Link>
