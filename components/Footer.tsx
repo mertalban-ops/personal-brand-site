@@ -38,7 +38,7 @@ export default function Footer() {
                 alt="Albanexa"
                 width={360}
                 height={145}
-                className="h-20 w-auto sm:h-24 md:h-28"
+                className="h-16 w-auto sm:h-20 md:h-24"
               />
             </Link>
             <p className="mt-3 max-w-sm text-sm leading-relaxed" style={{ color: "var(--muted)" }}>

@@ -118,7 +118,7 @@ export default function Navbar() {
             alt="Albanexa"
             width={320}
             height={130}
-            className="h-16 w-auto sm:h-20 md:h-24"
+            className="h-12 w-auto sm:h-14 md:h-16"
             priority
           />
           <span className="mono-label hidden text-faint sm:inline" style={{ color: "var(--faint)" }}>
