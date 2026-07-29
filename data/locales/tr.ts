@@ -34,7 +34,7 @@ export const tr: Dictionary = {
     },
   },
   about: {
-    label: "05 — Stüdyo Yaklaşımı",
+    label: "Stüdyo Yaklaşımı",
     title: "Bir işletmenin dijital sistemi, sadece ekranlardan oluşmaz.",
     paragraphs: [
       "İyi bir iş takip sistemi; doğru veri akışı, net kullanıcı deneyimi, güvenilir raporlama ve işletmenin günlük alışkanlıklarına uygun tasarımla değer üretir.",
@@ -297,7 +297,7 @@ export const tr: Dictionary = {
       },
       {
         q: "Geliştirdiğiniz sistemler mobilde de kullanılabiliyor mu?",
-        a: "Evet. Kurduğumuz tüm web tabanlı iş takip ve operasyon sistemleri hem bilgisayarda (desktop) hem de cep telefonu veya tabletlerde (responsive) esnek ve uyumlu çalışacak standartta tasarlanır.",
+        a: "Evet. Kurduğumuz tüm web tabanlı iş takip ve operasyon sistemleri hem bilgisayarda hem de cep telefonu veya tabletlerde sorunsuz çalışacak standartta tasarlanır.",
       },
       {
         q: "Fiyat nasıl belirlenir ve süreç ne kadar sürer?",

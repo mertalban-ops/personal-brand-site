@@ -17,8 +17,8 @@ const articleSchema = {
   "headline": "Cari Hesap Takip Sistemi Nedir? KOBİ'ler İçin Kapsamlı Rehber",
   "description":
     "Cari hesap nedir, manuel takibin sorunları nelerdir, özel sistem ne kazandırır? Vadeli satış yapan KOBİ'ler için dijital cari hesap yönetimi rehberi.",
-  "datePublished": "2025-07-29",
-  "dateModified": "2025-07-29",
+  "datePublished": "2026-07-29",
+  "dateModified": "2026-07-29",
   "author": { "@id": `${siteConfig.siteUrl}/#person` },
   "publisher": { "@id": `${siteConfig.siteUrl}/#organization` },
   "mainEntityOfPage": {

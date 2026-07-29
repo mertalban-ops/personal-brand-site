@@ -34,7 +34,7 @@ export const en: Dictionary = {
     },
   },
   about: {
-    label: "05 — Studio Approach",
+    label: "Studio Approach",
     title: "A business digital system isn't just made of screens.",
     paragraphs: [
       "A great business tracking system creates value through accurate data flow, clear user experience, reliable reporting, and a design that fits the company's daily habits.",
@@ -80,7 +80,7 @@ export const en: Dictionary = {
       },
       {
         title: "Automation Systems",
-        text: "Automate automated client reminders, email dispatching, and your repetitive manual tasks.",
+        text: "Automate client reminders, email dispatching, and repetitive manual tasks.",
         icon: "Workflow",
       },
       {

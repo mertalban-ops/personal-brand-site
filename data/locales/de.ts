@@ -34,7 +34,7 @@ export const de: Dictionary = {
     },
   },
   about: {
-    label: "05 — Studio-Ansatz",
+    label: "Studio-Ansatz",
     title: "Ein digitales Geschäftssystem besteht nicht nur aus Bildschirmen.",
     paragraphs: [
       "Ein großartiges Geschäftsverfolgungssystem schafft Wert durch genauen Datenfluss, klare Benutzererfahrung, zuverlässige Berichterstattung und ein Design, das zu den täglichen Gewohnheiten des Unternehmens passt.",

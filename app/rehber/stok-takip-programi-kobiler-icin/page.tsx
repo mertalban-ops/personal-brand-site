@@ -17,8 +17,8 @@ const articleSchema = {
   "headline": "KOBİ'ler İçin Stok Takip Programı: Excel ve Hazır Yazılımın Ötesi",
   "description":
     "Stok takip programı nedir, Excel neden yetersiz kalır, hazır yazılım ile özel sistem arasındaki fark nedir? KOBİ'ler için kapsamlı rehber.",
-  "datePublished": "2025-07-29",
-  "dateModified": "2025-07-29",
+  "datePublished": "2026-07-29",
+  "dateModified": "2026-07-29",
   "author": { "@id": `${siteConfig.siteUrl}/#person` },
   "publisher": { "@id": `${siteConfig.siteUrl}/#organization` },
   "mainEntityOfPage": {

@@ -3,9 +3,9 @@ import { siteConfig } from "@/data/config";
 import { faqs } from "@/data/faqs";
 
 export const metadata = buildPageMetadata({
-  title: "Albanexa — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
+  title: "Albanexa — KOBİ'ler İçin Özel Yazılım ve Dijital Sistemler",
   description:
-    "Mert Alban / Albanexa: KOBİ'ler için kurumsal web siteleri, özel iş takip sistemleri, web uygulamaları, SaaS ürünleri ve otomasyon çözümleri.",
+    "Albanexa: KOBİ'ler için özel iş takip sistemleri, stok ve cari hesap yazılımları, kurumsal web siteleri ve SaaS altyapısı. İzmir merkezli, Türkiye geneline hizmet veren dijital ürün stüdyosu.",
   path: "/",
 });
 

@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import StudyoClient from "./StudyoClient";
 
 export const metadata = buildPageMetadata({
-  title: "Stüdyo Hakkında — Albanexa",
-  description: "Albanexa nedir, kim tarafından kuruldu ve hangi ilkelerle çalışır.",
+  title: "Stüdyo — Albanexa Hakkında",
+  description: "Albanexa, Mert Alban tarafından yönetilen bağımsız bir dijital ürün stüdyosudur. KOBİ'ler için özel yazılım, iş takip sistemleri ve kurumsal web siteleri geliştiriyoruz.",
   path: "/studyo",
 });
 

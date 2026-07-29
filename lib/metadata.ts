@@ -18,6 +18,7 @@ export function buildPageMetadata({
     description,
     alternates: { canonical: path },
     openGraph: {
+      siteName: "Albanexa",
       title,
       description,
       url,

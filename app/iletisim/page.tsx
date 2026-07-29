@@ -2,8 +2,8 @@ import { buildPageMetadata } from "@/lib/metadata";
 import IletisimClient from "./IletisimClient";
 
 export const metadata = buildPageMetadata({
-  title: "İletişim — Albanexa",
-  description: "Projenizi konuşalım. Ücretsiz keşif görüşmesi için iletişime geçin.",
+  title: "İletişim — Ücretsiz İhtiyaç Analizi",
+  description: "Albanexa ile projenizi konuşun. İş takip sistemi, web sitesi veya özel yazılım için 30 dakikalık ücretsiz ihtiyaç analizi alın.",
   path: "/iletisim",
 });
 

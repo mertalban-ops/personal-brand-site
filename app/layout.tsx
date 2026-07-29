@@ -30,6 +30,36 @@ import ClientSceneBackground from "@/components/ClientSceneBackground";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
+  title: {
+    default: "Albanexa — Web Siteleri, İş Takip Sistemleri ve Dijital Çözümler",
+    template: "%s | Albanexa",
+  },
+  description:
+    "Albanexa, KOBİ'ler için özel yazılım geliştiren İzmir merkezli bağımsız dijital ürün stüdyosudur. İş takip sistemleri, stok ve cari hesap yazılımları, kurumsal web siteleri.",
+  keywords: [
+    "Albanexa",
+    "Mert Alban",
+    "özel yazılım geliştirme",
+    "iş takip sistemi",
+    "stok takip programı",
+    "cari hesap takip",
+    "kurumsal web sitesi",
+    "KOBİ yazılımı",
+    "web uygulaması geliştirme",
+    "SaaS altyapısı",
+    "dijital ürün stüdyosu",
+    "İzmir yazılım",
+  ],
+  openGraph: {
+    siteName: "Albanexa",
+    locale: "tr_TR",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
 };
 
 export default function RootLayout({
