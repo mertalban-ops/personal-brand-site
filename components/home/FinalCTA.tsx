@@ -2,8 +2,6 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { Mail } from "lucide-react";
-import { contact } from "@/data/contact";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function FinalCTA() {
@@ -25,27 +23,26 @@ export default function FinalCTA() {
       >
         <p className="mono-label mb-4">{t.contact.label}</p>
         <h2 className="display text-balance text-4xl font-bold text-ink md:text-5xl">
-          Web siteniz, sisteminiz veya uygulamanız —{" "}
-          <span className="text-accent">birlikte inşa edelim.</span>
+          İşletmeniz için doğru dijital çözümü{" "}
+          <span className="text-accent">birlikte belirleyelim.</span>
         </h2>
         <p className="mt-6 text-lg leading-relaxed text-muted max-w-xl mx-auto">
-          İhtiyacınızı kısa bir ön görüşmede değerlendirelim; hangi çözümün gerçekten
-          gerekli olduğunu birlikte netleştirelim. İlk görüşme ücretsiz.
+          İhtiyacınızı kısaca paylaşın. Mevcut süreci, hedefleri ve uygulanabilir
+          çözüm seçeneklerini birlikte değerlendirelim.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/iletisim"
             className="btn-shine glow-accent rounded-lg bg-accent px-8 py-3.5 font-semibold text-black transition-transform hover:-translate-y-0.5"
           >
-            Projemi Anlat
+            Ücretsiz ihtiyaç analizi al
           </Link>
-          <a
-            href={`mailto:${contact.email}?subject=${encodeURIComponent("Proje talebi")}`}
+          <Link
+            href="/projeler"
             className="inline-flex items-center gap-2 rounded-lg border border-line px-8 py-3.5 font-medium text-ink transition-colors hover:border-accent/50 hover:text-accent"
           >
-            <Mail className="h-4 w-4" />
-            E-posta Gönder
-          </a>
+            Projeleri incele
+          </Link>
         </div>
       </motion.div>
     </section>

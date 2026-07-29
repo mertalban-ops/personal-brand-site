@@ -115,6 +115,63 @@ test.describe("Albanexa B2B Master Optimization E2E Tests", () => {
     await expect(page.locator("#cf-timeline")).toBeVisible();
   });
 
+  test("Founder block removed from homepage", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("main", { state: "visible", timeout: 25000 });
+    const content = await page.textContent("body");
+    expect(content).not.toContain("Mert Alban — Stüdyo Yöneticisi & Mühendis");
+    expect(content).not.toContain("Her projede doğrudan Mert Alban ile çalışırsınız");
+    expect(content).not.toContain("Tüm projeler Mert Alban tarafından baştan sona geliştirilir");
+    expect(content).not.toContain("Kurucumuzun benzersiz yaklaşımı");
+  });
+
+  test("Footer contains short Albanexa description and Mert Alban only once", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("footer", { state: "visible", timeout: 25000 });
+    const footerText = await page.locator("footer").textContent();
+    expect(footerText).toContain("Mert Alban");
+    const matches = (footerText ?? "").match(/Mert Alban/g) ?? [];
+    expect(matches.length).toBeLessThanOrEqual(1);
+    expect(footerText).toContain("KVKK");
+    expect(footerText).toContain("LinkedIn");
+  });
+
+  test("Studio page shows management section, not founder as hero", async ({ page }) => {
+    await page.goto("/studyo");
+    await page.waitForSelector("h1", { state: "visible", timeout: 25000 });
+    const content = await page.textContent("body");
+    expect(content).toMatch(/Stüdyo Yönetimi|Studio Management|Studio-Leitung/);
+    expect(content).toContain("Mert Alban");
+    const h1 = await page.locator("h1").first().textContent();
+    expect(h1).not.toMatch(/^Mert Alban/);
+  });
+
+  test("Homepage flow: Projects → Process → FAQ → CTA", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("main", { state: "visible", timeout: 25000 });
+    const main = await page.locator("main").innerHTML();
+    const projectsPos = main.indexOf("stockapp") > -1 ? main.indexOf("stockapp") : main.indexOf("StockApp");
+    const ctaPos = main.indexOf("ihtiyaç analizi") > -1 ? main.indexOf("ihtiyaç analizi") : main.indexOf("Ücretsiz");
+    expect(projectsPos).toBeGreaterThan(-1);
+    expect(ctaPos).toBeGreaterThan(-1);
+    expect(ctaPos).toBeGreaterThan(projectsPos);
+  });
+
+  test("Final CTA contains correct primary button text", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("main", { state: "visible", timeout: 25000 });
+    const content = await page.textContent("body");
+    expect(content).toMatch(/Ücretsiz ihtiyaç analizi al|Free needs analysis|Kostenlose Bedarfsanalyse/i);
+  });
+
+  test("No horizontal overflow on homepage", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("main", { state: "visible", timeout: 25000 });
+    const bodyWidth = await page.evaluate(() => document.body.scrollWidth);
+    const viewportWidth = await page.evaluate(() => window.innerWidth);
+    expect(bodyWidth).toBeLessThanOrEqual(viewportWidth + 2);
+  });
+
   test("Language context switching preserves the active page", async ({ page }) => {
     await page.goto("/projeler/stockapp");
     await page.waitForSelector("nav", { state: "visible", timeout: 25000 });

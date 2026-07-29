@@ -80,11 +80,11 @@ export default function StudyoClient() {
         </div>
       </AnimatedSection>
 
-      {/* Founder Profile */}
+      {/* Studio Management */}
       <AnimatedSection>
         <div className="mx-auto max-w-6xl px-5 py-16">
           <h2 className="display text-2xl font-bold text-ink mb-8">
-            {language === "tr" ? "Kurucu" : language === "de" ? "Gründer" : "Founder"}
+            {language === "tr" ? "Stüdyo Yönetimi" : language === "de" ? "Studio-Leitung" : "Studio Management"}
           </h2>
           <FounderCard />
         </div>

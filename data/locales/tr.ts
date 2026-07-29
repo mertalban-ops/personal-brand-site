@@ -321,7 +321,7 @@ export const tr: Dictionary = {
     emailBtn: "E-posta Gönder",
     whatsappBtn: "WhatsApp'tan Yaz",
     footerText:
-      "Albanexa, İzmir merkezli, Türkiye geneline hizmet veren, Mert Alban tarafından kurulan yazılım stüdyosudur. KOBİ'ler için özel iş takip sistemleri, web uygulamaları, SaaS ürünleri ve otomasyon çözümleri geliştirmektedir.",
+      "Albanexa, işletmelere özel dijital sistemler, web uygulamaları ve web deneyimleri geliştiren bağımsız bir dijital ürün stüdyosudur. Stüdyonun çalışmaları Mert Alban tarafından yönetilir.",
     rights: "Tüm hakları saklıdır.",
     servicesCol: "Sistem Çözümleri",
     studioCol: "Stüdyo",

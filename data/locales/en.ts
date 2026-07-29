@@ -321,7 +321,7 @@ export const en: Dictionary = {
     emailBtn: "Send E-mail",
     whatsappBtn: "Message on WhatsApp",
     footerText:
-      "We develop premium custom digital operation systems and SaaS infrastructures that consolidate business processes scattered across notebooks, Excel, and WhatsApp into a single center.",
+      "Albanexa is an independent digital product studio developing custom digital systems, web applications, and web experiences for businesses. The studio is led by Mert Alban.",
     rights: "All rights reserved.",
     servicesCol: "System Solutions",
     studioCol: "Studio",

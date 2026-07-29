@@ -105,12 +105,18 @@ export default function Footer() {
           style={{ borderColor: "var(--line)", color: "var(--faint)" }}
         >
           <p>© {year} {siteConfig.brandName}. {t.contact.rights}</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <Link href="/gizlilik" className="transition-colors hover:text-ink">{t.nav.privacy ?? "Gizlilik"}</Link>
+            <Link href="/kvkk-aydinlatma" className="transition-colors hover:text-ink">KVKK</Link>
             <Link href="/kullanim-kosullari" className="transition-colors hover:text-ink">{t.nav.terms ?? "Kullanım Koşulları"}</Link>
-            <span className="font-mono uppercase tracking-wider hidden md:inline" style={{ fontSize: "0.65rem" }}>
-              Digital Operation Systems · {location}
-            </span>
+            <a
+              href="https://linkedin.com/in/mertalban"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-ink"
+            >
+              LinkedIn
+            </a>
           </div>
         </div>
       </div>
