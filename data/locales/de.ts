@@ -217,12 +217,12 @@ export const de: Dictionary = {
       {
         step: "02",
         title: "Systemdesign",
-        text: "Wir planen die Bildschirme, Datenstruktur und Berichtsflüsse streng nach der DNA und Terminologie Ihres Unternehmens.",
+        text: "Wir planen die Bildschirme, Datenstruktur und Berichtsflüsse nach den tatsächlichen Arbeitsabläufen und der Terminologie Ihres Unternehmens.",
       },
       {
         step: "03",
         title: "Entwicklung",
-        text: "Wir entwickeln das webbasierte, mobilfähige System mit einer hochgradig minimalistischen Oberfläche frei von technischem Durcheinander.",
+        text: "Wir entwickeln das webbasierte, mobilfähige System mit einer minimalistischen Oberfläche, die technische Komplexität von den Endnutzern fernhält.",
       },
       {
         step: "04",
@@ -283,7 +283,7 @@ export const de: Dictionary = {
       "Die Qualität eines digitalen Systems misst sich nicht an der Länge des geschriebenen Codes; sie misst sich an dem Gefühl 'Ich habe die Kontrolle und alles ist sicher', das der Geschäftsinhaber hat, wenn er es am Ende des Tages betrachtet. Unser Ziel ist es, zuverlässige operative Strukturen aufzubauen, die genau dieses Gefühl vermitteln.",
   },
   faq: {
-    label: "06 — Häufig gestellte Fragen",
+    label: "05 — Häufig gestellte Fragen",
     title: "Häufig gestellte Fragen",
     subtitle: "Wichtige Details über die Qualität der von uns entwickelten Systeme und unseren Arbeitsprozess.",
     items: [
@@ -314,7 +314,7 @@ export const de: Dictionary = {
     ],
   },
   contact: {
-    label: "07 — Kontakt",
+    label: "06 — Kontakt",
     title: "Lassen Sie uns Ihr Tracking-Chaos in ein professionelles System verwandeln.",
     subtitle:
       "Wenn Ihre Lager-, Finanz-, Verkaufs-, Inkasso- oder Berichterstattungsprozesse verstreut sind, können wir dies mit einem für Ihr Unternehmen maßgeschneiderten digitalen Premium-System handhabbar machen. Lassen Sie uns Ihr Projekt in einer kostenlosen 30-minütigen Bedarfsanalyse besprechen.",

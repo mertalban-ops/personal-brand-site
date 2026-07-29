@@ -172,6 +172,54 @@ test.describe("Albanexa B2B Master Optimization E2E Tests", () => {
     expect(bodyWidth).toBeLessThanOrEqual(viewportWidth + 2);
   });
 
+  test("Section numbering is sequential: 04 → 05 → 06 on homepage", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("main", { state: "visible", timeout: 25000 });
+    const labels = await page.locator(".mono-label").allTextContents();
+    const numbered = labels.filter(l => /^0\d —/.test(l.trim()));
+    const nums = numbered.map(l => parseInt(l.trim().slice(0, 2), 10));
+    for (let i = 1; i < nums.length; i++) {
+      expect(nums[i]).toBeGreaterThan(nums[i - 1]);
+      expect(nums[i] - nums[i - 1]).toBe(1);
+    }
+  });
+
+  test("No 'Offer' labels visible on homepage", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("main", { state: "visible", timeout: 25000 });
+    const content = await page.textContent("body");
+    expect(content).not.toMatch(/\bOffer 0[123]\b/i);
+  });
+
+  test("'Çözüm' label appears on homepage solution cards", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("main", { state: "visible", timeout: 25000 });
+    const content = await page.textContent("body");
+    expect(content).toMatch(/Çözüm 01|Solution 01|Lösung 01/);
+  });
+
+  test("No 'Doğrudan kurucu iletişimi' on any page", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("main", { state: "visible", timeout: 25000 });
+    const content = await page.textContent("body");
+    expect(content).not.toContain("Doğrudan kurucu iletişimi");
+    expect(content).not.toContain("Direct founder contact");
+  });
+
+  test("No absolute 'sıfırdan başlar ve o işletmenin dışında' claim", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("main", { state: "visible", timeout: 25000 });
+    const content = await page.textContent("body");
+    expect(content).not.toContain("sıfırdan başlar ve o işletmenin dışında başka hiçbir yerde kullanılmaz");
+  });
+
+  test("No DNA jargon in visible text", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector("main", { state: "visible", timeout: 25000 });
+    const content = await page.textContent("body");
+    expect(content).not.toMatch(/işletmenizin DNA'sına/i);
+  });
+
   test("Language context switching preserves the active page", async ({ page }) => {
     await page.goto("/projeler/stockapp");
     await page.waitForSelector("nav", { state: "visible", timeout: 25000 });

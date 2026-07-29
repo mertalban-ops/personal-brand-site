@@ -116,7 +116,7 @@ export const tr: Dictionary = {
       },
       {
         problem: "Hazır yazılımlar işletmenizin özel operasyonel ihtiyaçlarına uymuyor, Excel ise yavaş kalıyor",
-        solution: "İşletmenizin DNA'sına göre sıfırdan tasarlanmış hızlı ve güvenli web uygulaması",
+        solution: "İşletmenizin süreçlerine ve çalışma biçimine göre özelleştirilmiş web uygulaması",
       },
     ],
   },
@@ -217,12 +217,12 @@ export const tr: Dictionary = {
       {
         step: "02",
         title: "Sistem Tasarımı",
-        text: "Stok, cari hesap, satış, kullanıcı rolleri ve rapor akışlarını işletmenizin DNA'sına uygun olarak planlıyoruz.",
+        text: "Stok, cari hesap, satış, kullanıcı rolleri ve rapor akışlarını işletmenizin çalışma biçimine ve ihtiyaçlarına göre planlıyoruz.",
       },
       {
         step: "03",
         title: "Geliştirme",
-        text: "Web tabanlı, mobil uyumlu ve hiçbir teknik karmaşası olmayan, son derece sade arayüzlü sistemi geliştiriyoruz.",
+        text: "Web tabanlı, mobil uyumlu ve teknik ayrıntıları kullanıcıdan uzak tutan sade bir arayüzle sistemi geliştiriyoruz.",
       },
       {
         step: "04",
@@ -283,7 +283,7 @@ export const tr: Dictionary = {
       "Bir dijital sistemin kalitesi, yazılan kodun uzunluğuyla değil; işletme sahibinin gün sonunda o sisteme bakıp hissettiği 'kontrol bende ve her şey güvende' duygusuyla ölçülür. Amacımız işletmelere tam olarak bu hissi veren güvenilir operasyon yapıları kurmaktır.",
   },
   faq: {
-    label: "06 — Sıkça Sorulan Sorular",
+    label: "05 — Sıkça Sorulan Sorular",
     title: "Sıkça Sorulan Sorular",
     subtitle: "Kurduğumuz sistemlerin niteliği ve işleyiş süreci hakkındaki temel detaylar.",
     items: [
@@ -293,7 +293,7 @@ export const tr: Dictionary = {
       },
       {
         q: "Hazır paket mi satıyorsunuz, özel sistem mi geliştiriyorsunuz?",
-        a: "Satın alınan hazır paket değil, tamamen işletmenin işleyişine, terminolojisine ve ihtiyaçlarına göre terzi usulü tasarlanan özel bir sistemdir. Her proje sıfırdan başlar ve o işletmenin dışında başka hiçbir yerde kullanılmaz.",
+        a: "Satın alınan hazır bir paket değil, işletmenin işleyişine, terminolojisine ve ihtiyaçlarına göre özelleştirilmiş bir sistemdir. Modüller, kullanıcı akışları ve entegrasyonlar işletmenin gereksinimlerine göre ayrı ayrı planlanır.",
       },
       {
         q: "Geliştirdiğiniz sistemler mobilde de kullanılabiliyor mu?",
@@ -305,7 +305,7 @@ export const tr: Dictionary = {
       },
       {
         q: "Sistem teslim edildikten sonra destek veriyor musunuz?",
-        a: "Evet. İşleyen bir sistemin her zaman bakıma ve gelişime ihtiyacı vardır. Teslim sonrası aylık bakım anlaşmalarıyla sistemin güvenliğini sağlıyor ve yeni eklenti taleplerinizi karşılıyoruz.",
+        a: "Evet. İşleyen bir sistemin bakıma ve gelişime ihtiyacı vardır. Teslim sonrası aylık bakım anlaşmalarıyla güvenlik kontrollerini, güncellemeleri ve yeni geliştirme ihtiyaçlarını planlı biçimde yönetiyoruz.",
       },
       {
         q: "Web sitesi mi, web uygulaması mı ihtiyacım var?",
@@ -314,7 +314,7 @@ export const tr: Dictionary = {
     ],
   },
   contact: {
-    label: "07 — Projenizi Konuşalım",
+    label: "06 — Projenizi Konuşalım",
     title: "İşletmenizdeki takip karmaşasını profesyonel bir sisteme dönüştürelim.",
     subtitle:
       "Stok, cari hesap, satış, tahsilat veya raporlama süreçleriniz dağınıksa, işletmenize özel premium bir dijital sistemle bunu yönetilebilir hale getirebiliriz. Projenizi 30 dakikalık ücretsiz ihtiyaç analiziyle masaya yatıralım.",

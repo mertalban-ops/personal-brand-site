@@ -7,7 +7,7 @@ export type FAQ = {
 export const faqs: FAQ[] = [
   {
     q: "Hazır paket mi satıyorsunuz, özel sistem mi geliştiriyorsunuz?",
-    a: "Satın alınan hazır paket değil, tamamen işletmenin işleyişine, terminolojisine ve ihtiyaçlarına göre terzi usulü tasarlanan özel bir sistemdir. Her proje sıfırdan başlar ve o işletmenin dışında başka hiçbir yerde kullanılmaz.",
+    a: "Satın alınan hazır bir paket değil, işletmenin işleyişine, terminolojisine ve ihtiyaçlarına göre özelleştirilmiş bir sistemdir. Modüller, kullanıcı akışları ve entegrasyonlar işletmenin gereksinimlerine göre ayrı ayrı planlanır.",
     category: "genel",
   },
   {
@@ -27,7 +27,7 @@ export const faqs: FAQ[] = [
   },
   {
     q: "Sistem teslim edildikten sonra destek veriyor musunuz?",
-    a: "Evet. Teslim sonrası aylık bakım anlaşmalarıyla sistemin güvenliğini sağlıyor ve yeni eklenti taleplerinizi karşılıyoruz.",
+    a: "Evet. Teslim sonrası aylık bakım anlaşmalarıyla güvenlik kontrollerini, güncellemeleri ve yeni geliştirme ihtiyaçlarını planlı biçimde yönetiyoruz.",
     category: "surec",
   },
   {

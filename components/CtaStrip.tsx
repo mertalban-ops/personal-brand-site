@@ -72,10 +72,10 @@ export default function CtaStrip({ title, desc }: CtaStripProps) {
       icon: Star,
       label:
         language === "tr"
-          ? "Doğrudan kurucu iletişimi & Özel kapsam"
+          ? "Şeffaf proje iletişimi · İhtiyaca özel kapsam"
           : language === "de"
-          ? "Direkte Gründerkommunikation & Individueller Umfang"
-          : "Direct founder contact & Custom scope",
+          ? "Transparente Projektkommunikation · Individueller Umfang"
+          : "Transparent project communication · Custom scope",
     },
   ];
 

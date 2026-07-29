@@ -217,12 +217,12 @@ export const en: Dictionary = {
       {
         step: "02",
         title: "System Design",
-        text: "We plan the screens, data structure, and reporting flows strictly according to your company's DNA and terminology.",
+        text: "We plan the screens, data structure, and reporting flows according to your company's actual workflows and terminology.",
       },
       {
         step: "03",
         title: "Development",
-        text: "We develop the web-based, mobile-ready system with a highly minimalist interface free from technical clutter.",
+        text: "We develop the web-based, mobile-ready system with a minimalist interface that keeps technical complexity away from end users.",
       },
       {
         step: "04",
@@ -283,7 +283,7 @@ export const en: Dictionary = {
       "The quality of a digital system isn't measured by the length of code written; it's measured by the 'I'm in control and everything is secure' feeling the business owner gets when looking at it at the end of the day. Our goal is to build reliable operational structures that provide exactly this feeling to businesses.",
   },
   faq: {
-    label: "06 — Frequently Asked Questions",
+    label: "05 — Frequently Asked Questions",
     title: "Frequently Asked Questions",
     subtitle: "Key details about the quality of the systems we build and our working process.",
     items: [
@@ -314,7 +314,7 @@ export const en: Dictionary = {
     ],
   },
   contact: {
-    label: "07 — Let's Talk",
+    label: "06 — Let's Talk",
     title: "Let's transform your tracking chaos into a professional system.",
     subtitle:
       "If your inventory, finance, sales, collection, or reporting processes are scattered, we can make it manageable with a premium digital system tailored for your business. Let's discuss your project in a free 30-minute needs analysis call.",

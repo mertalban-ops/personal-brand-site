@@ -217,8 +217,8 @@ export default function HomeSolutions() {
                         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 transition-colors group-hover:bg-accent/15">
                           <Icon className="h-6 w-6 text-accent" />
                         </div>
-                        <span className="text-[0.65rem] font-mono text-faint uppercase tracking-wider">
-                          Offer 0{i + 1}
+                        <span className="text-[0.65rem] font-mono text-faint uppercase tracking-wider" aria-hidden="true">
+                          {language === "tr" ? "Çözüm" : language === "de" ? "Lösung" : "Solution"} {String(i + 1).padStart(2, "0")}
                         </span>
                       </div>
 
