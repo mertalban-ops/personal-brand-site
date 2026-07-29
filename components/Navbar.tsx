@@ -116,9 +116,9 @@ export default function Navbar() {
           <Image
             src="/albanexa-logo.png"
             alt="Albanexa"
-            width={160}
-            height={65}
-            className="h-10 w-auto"
+            width={220}
+            height={90}
+            className="h-12 w-auto sm:h-14 md:h-16"
             priority
           />
           <span className="mono-label hidden text-faint sm:inline" style={{ color: "var(--faint)" }}>

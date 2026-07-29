@@ -36,9 +36,9 @@ export default function Footer() {
               <Image
                 src="/albanexa-logo.png"
                 alt="Albanexa"
-                width={180}
-                height={72}
-                className="h-12 w-auto"
+                width={260}
+                height={105}
+                className="h-16 w-auto sm:h-20 md:h-24"
               />
             </Link>
             <p className="mt-3 max-w-sm text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
