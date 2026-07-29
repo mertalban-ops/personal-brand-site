@@ -74,7 +74,7 @@ test.describe("Albanexa B2B Master Optimization E2E Tests", () => {
     
     const content = await page.textContent("body");
     expect(content).toContain("StockApp");
-    expect(content).toMatch(/Referans Proje & Vaka Çalışması|Reference Project & Case Study|Referenzprojekt & Fallstudie/i);
+    expect(content).toMatch(/Canlı Proje & Vaka Çalışması|Live Project & Case Study|Live-Projekt & Fallstudie/i);
     await expect(page.locator("text=Mockup Grid").first()).toBeVisible();
   });
 
@@ -136,9 +136,9 @@ test.describe("Albanexa B2B Master Optimization E2E Tests", () => {
     expect(url).toContain("/projeler/stockapp");
 
     if (targetLang === "en") {
-      await page.waitForSelector("text=Reference Project & Case Study", { state: "visible", timeout: 15000 });
+      await page.waitForSelector("text=Live Project & Case Study", { state: "visible", timeout: 15000 });
     } else {
-      await page.waitForSelector("text=Referans Proje & Vaka Çalışması", { state: "visible", timeout: 15000 });
+      await page.waitForSelector("text=Canlı Proje & Vaka Çalışması", { state: "visible", timeout: 15000 });
     }
   });
 });

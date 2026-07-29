@@ -121,7 +121,7 @@ export const tr: Dictionary = {
     ],
   },
   projects: {
-    label: "03 — Vaka Çalışmaları & Referanslar",
+    label: "03 — Gerçek Projeler & Vaka Çalışmaları",
     title: "Geliştirdiğimiz Özel Dijital Çözümler",
     problemLabel: "Problem",
     featuresLabel: "İşletmeye Fayda & Özellikler",

@@ -82,10 +82,10 @@ export default function ProjelerClient() {
           : "Concept and technical solution works",
       desc:
         language === "tr"
-          ? "Teknik mimari yetkinliklerimizi, çok-kiracılı (multi-tenant) sistem tasarımlarımızı gösteren referans modeller."
+          ? "Teknik mimari yetkinliklerimizi ve ölçeklenebilir sistem tasarımlarımızı gösteren çözüm modelleri."
           : language === "de"
-          ? "Referenzmodelle, die unsere technischen Architekturkompetenzen und Mandantensystemdesigns demonstrieren."
-          : "Reference models demonstrating our technical architectural capabilities and multi-tenant system designs.",
+          ? "Modelle, die unsere technischen Architekturkompetenzen und Mandantensystemdesigns demonstrieren."
+          : "Models demonstrating our technical architectural capabilities and multi-tenant system designs.",
     },
     {
       id: "internal-project" as ProjectCategory,
