@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/rehber/stok-takip-programi-kobiler-icin",  priority: 0.8, freq: "monthly" },
     { path: "/rehber/cari-hesap-takip-sistemi-nedir",    priority: 0.8, freq: "monthly" },
     { path: "/gizlilik",                               priority: 0.3, freq: "yearly" },
+    { path: "/kvkk-aydinlatma",                        priority: 0.4, freq: "yearly" },
     { path: "/kullanim-kosullari",                     priority: 0.3, freq: "yearly" },
   ];
 
