@@ -24,7 +24,7 @@ export default function WebSiteleriClient() {
       { p: "Ziyaretçiler sitenizi inceliyor ancak iletişime geçmeden çıkıyor.", s: "Müşterinin karar yolculuğuna uygun net sayfa akışı ve CTA yerleşimi." },
       { p: "Siteniz yavaş yükleniyor, mobil kullanıcılar beklemekten sıkılıyor.", s: "Next.js statik site üretimi (SSG) ve Core Web Vitals optimizasyonu." },
       { p: "Google ve arama motorlarında hizmetleriniz bulunamıyor.", s: "Teknik SEO standartları, sitemap, meta yapılandırması ve structured data." },
-      { p: "ChatGPT, Perplexity gibi yapay zeka arama motorları işletmenizi hiç önermiyor.", s: "AEO ve GEO optimizasyonu ile yapay zeka tarafından oluşturulan yanıtlarda yer ediniyoruz." }
+      { p: "Arama motorlarında veya yapay zekâ yanıtlarında içeriklerin anlaşılması zor kalıyor.", s: "AEO/GEO odaklı içerik mimarisi ve yapılandırılmış verilerle içeriklerin arama motorları ve AI sistemleri tarafından daha kolay yorumlanabilmesini hedefliyoruz." }
     ],
     vsKicker: "Temel Farklar",
     vsTitle: "Web Sitesi ile Web Uygulaması arasındaki fark nedir?",
@@ -43,24 +43,24 @@ export default function WebSiteleriClient() {
       { title: "Kişisel Marka & Portfolyo", desc: "Uzmanlığınızı, projelerinizi ve iş yapış şeklinizi öne çıkararak B2B müşterilerin doğrudan sizinle bağ kurmasını sağlayan kişisel marka alanı." },
       { title: "SaaS Tanıtım & Landing Page", desc: "Yazılım veya dijital ürününüzün değer önerisini, fiyatlandırma planlarını ve özelliklerini sunarak ziyaretçileri aboneliğe dönüştüren tek sayfa vitrin." },
       { title: "3D & İnteraktif Deneyimler", desc: "Ürünlerinizi veya hizmet süreçlerinizi tarayıcı üzerinde 3D modeller, etkileşimli grafikler ve akıcı animasyonlarla anlatan premium yapılar." },
-      { title: "Logo & Marka Kimliği Tasarımı", desc: "İşletmenizin karakterini ve değerlerini yansıtan, dijital ve basılı her ortamda kusursuz çalışan profesyonel logo ve görsel kimlik çalışmaları." },
-      { title: "Dijital Görünürlük: SEO, AEO & GEO", desc: "Google sıralamalarından ChatGPT, Perplexity ve yapay zeka arama motorlarına kadar her platformda markanızın bulunmasını ve önerilmesini sağlıyoruz." }
+      { title: "Logo & Marka Kimliği Tasarımı", desc: "İşletmenizin karakterini ve değerlerini yansıtan, dijital ve basılı mecralarda tutarlı ve profesyonel logo ve görsel kimlik çalışmaları." },
+      { title: "Dijital Anlaşılabilirlik: SEO, AEO & GEO", desc: "Arama motorlarının ve yapay zekâ destekli bilgi sistemlerinin site içeriğinizi daha kolay yorumlayabilmesi için yapılandırılmış içerik altyapısı kuruyoruz." }
     ],
     techKicker: "Tasarım & Mühendislik",
     techTitle: "Sıfırdan yazılan kod, işletmenize tam uyum sağlayan yapı",
     techDesc: "Albanexa olarak hazır şablonlar, hantal WordPress eklentileri veya yavaş web kurucuları kullanmıyoruz. Sitenizin her satırını Next.js ile sıfırdan geliştiriyoruz.",
     techFeatures: [
-      { title: "Core Web Vitals Standartları", desc: "Açılış hızı Google sıralama kriterleri için en kritik etkendir. Saniyeler içinde açılan sayfalar üretiyoruz." },
+      { title: "Core Web Vitals Standartları", desc: "Açılış hızı Google sıralama kriterleri için en kritik etkendir. Core Web Vitals hedefleri dikkate alınarak optimize edilen sayfalar üretiyoruz." },
       { title: "Klavye ve Ekran Okuyucu Uyumu (A11y)", desc: "Web sitenizin herkes tarafından kullanılabilir olması için semantik etiketleme ve odak yönetimini önemsiyoruz." },
       { title: "Structured Data Entegrasyonu", desc: "Arama motorlarının işletmenizi, projelerinizi ve sunduğunuz çözümleri doğru tanıması için arka plana şema yapıları kuruyoruz." },
-      { title: "AEO — Yapay Zeka Arama Optimizasyonu", desc: "ChatGPT, Perplexity ve Claude gibi AI asistanların kullanıcı sorularını yanıtlarken işletmenizi önermeye başlaması için içerik ve yapı optimizasyonu yapıyoruz." },
-      { title: "GEO — Üretken Arama Optimizasyonu", desc: "Google AI Overviews, Bing Copilot ve benzeri platformlarda markanızın kaynak olarak gösterilmesi için içerik otoritesi ve atıf stratejisi geliştiriyoruz." }
+      { title: "AEO — Cevap Motoru Uyumlu İçerik Mimarisi", desc: "Açık soru-cevap blokları ve şema işaretlemeleriyle bilgi yapısının arama ve cevap sistemleri tarafından daha net işlenmesini destekliyoruz." },
+      { title: "GEO — Üretken Sistemler İçin Anlaşılabilirlik", desc: "Varlık ilişkileri ve semantik etiketleme ile içeriğin yapay zekâ destekli aramalarda doğru ilişkilendirilmesini hedefliyoruz. (GEO/AEO çalışmaları kesin görünürlük garantisi vermez)." }
     ],
     caseTitle: "Personal Brand Site Örneği",
     caseBadge: "Aktif Vaka",
     caseDesc: "Şu an incelediğiniz Albanexa web sitesi, Next.js 16, Tailwind CSS 4 ve Framer Motion ile geliştirdiğimiz çok sayfalı premium kişisel marka sitesine canlı bir örnektir.",
-    caseScoresLabel: "Performans Skorları:",
-    caseScoresVal: "%98+ Mobil / %100 Masaüstü",
+    caseScoresLabel: "Performans Hedefi:",
+    caseScoresVal: "Core Web Vitals Odaklı (LCP < 2.5s)",
     caseTechLabel: "Teknoloji Stack:",
     caseTechVal: "Next.js App Router, TS, Tailwind v4",
     caseFeaturesLabel: "Özellikler:",
@@ -96,7 +96,7 @@ export default function WebSiteleriClient() {
       { p: "Visitors explore your site but leave without contacting you.", s: "Clear page flow and CTA placement tailored to decision journeys." },
       { p: "Your site loads slowly, frustrating mobile visitors.", s: "Next.js Static Site Generation (SSG) and Core Web Vitals optimization." },
       { p: "Your services cannot be found on Google and search engines.", s: "Technical SEO standards, sitemap, meta setup, and structured data." },
-      { p: "AI search engines like ChatGPT and Perplexity never recommend your business.", s: "AEO and GEO optimization to earn placement in AI-generated answers and overviews." }
+      { p: "Content is difficult for AI assistants and search overviews to process clearly.", s: "We structure content and schema markup to help search engines and AI systems interpret your business accurately." }
     ],
     vsKicker: "Key Differences",
     vsTitle: "What is the difference between a Website and a Web App?",
@@ -115,24 +115,24 @@ export default function WebSiteleriClient() {
       { title: "Personal Brand & Portfolio", desc: "A personal brand space showcasing your expertise, projects, and work methods to help B2B clients connect directly with you." },
       { title: "SaaS Presentation & Landing Page", desc: "A single-page showcase presenting your software or digital product's value proposition, plans, and features to convert users." },
       { title: "3D & Interactive Experiences", desc: "Premium layouts explaining your products or services using 3D models, interactive graphics, and fluid browser animations." },
-      { title: "Logo & Brand Identity Design", desc: "Professional logo and visual identity work that reflects your business personality and performs flawlessly across digital and print media." },
-      { title: "Digital Visibility: SEO, AEO & GEO", desc: "From Google rankings to ChatGPT, Perplexity, and AI overviews — we ensure your brand is found and recommended on every platform." }
+      { title: "Logo & Brand Identity Design", desc: "Professional logo and visual identity work that reflects your business personality and performs consistently across digital and print media." },
+      { title: "Digital Interpretability: SEO, AEO & GEO", desc: "We build structured content architectures so search engines and AI knowledge systems can easily interpret and associate your content." }
     ],
     techKicker: "Design & Engineering",
     techTitle: "Bespoke code, a structure fully tailored to your business",
     techDesc: "At Albanexa, we do not use templates, heavy WordPress plugins, or slow website builders. We write every line of code from scratch using Next.js.",
     techFeatures: [
-      { title: "Core Web Vitals Standards", desc: "Initial load speed is the most critical factor for Google ranking. We build pages that open in seconds." },
+      { title: "Core Web Vitals Standards", desc: "Initial load speed is a critical factor for Google ranking. We build pages optimized with Core Web Vitals targets in mind." },
       { title: "Keyboard & Screen Reader Compatibility (A11y)", desc: "We prioritize semantic markup and focus management so your website is accessible to everyone." },
       { title: "Structured Data Integration", desc: "We set up schema structures in the backend to help search engines correctly identify your business, projects, and solutions." },
-      { title: "AEO — Answer Engine Optimization", desc: "We restructure content and markup so AI assistants like ChatGPT, Perplexity, and Claude start recommending your business when answering user queries." },
-      { title: "GEO — Generative Engine Optimization", desc: "We build content authority and citation strategies so your brand appears as a source in Google AI Overviews, Bing Copilot, and similar platforms." }
+      { title: "AEO — Answer Engine Compatible Architecture", desc: "Structured Q&A blocks and schema markup to assist search and answer systems in processing key information." },
+      { title: "GEO — Generative Engine Interpretability", desc: "Semantic tags and entity relationships to support accurate attribution in AI overviews. (GEO/AEO efforts do not provide guaranteed placement)." }
     ],
     caseTitle: "Personal Brand Site Example",
     caseBadge: "Active Case",
     caseDesc: "The Albanexa website you are currently exploring is a live example of a premium, multi-page personal brand site built with Next.js 16, Tailwind CSS 4, and Framer Motion.",
-    caseScoresLabel: "Performance Scores:",
-    caseScoresVal: "%98+ Mobile / %100 Desktop",
+    caseScoresLabel: "Performance Goal:",
+    caseScoresVal: "Core Web Vitals Focused (LCP < 2.5s)",
     caseTechLabel: "Technology Stack:",
     caseTechVal: "Next.js App Router, TS, Tailwind v4",
     caseFeaturesLabel: "Features:",
@@ -168,7 +168,7 @@ export default function WebSiteleriClient() {
       { p: "Besucher erkunden Ihre Website, gehen aber wieder, ohne Sie zu kontaktieren.", s: "Klarer Seitenfluss und Platzierung von CTAs, die auf die Entscheidungsreise abgestimmt sind." },
       { p: "Ihre Website lädt langsam, was mobile Besucher frustriert.", s: "Next.js Static Site Generation (SSG) und Core Web Vitals Optimierung." },
       { p: "Ihre Dienstleistungen können bei Google und Suchmaschinen nicht gefunden werden.", s: "Technische SEO-Standards, Sitemap, Meta-Setup und strukturierte Daten." },
-      { p: "KI-Suchmaschinen wie ChatGPT und Perplexity empfehlen Ihr Unternehmen nie.", s: "AEO und GEO-Optimierung für Platzierungen in KI-generierten Antworten und Übersichten." }
+      { p: "Inhalte sind für KI-Assistenten und Suchübersichten schwer verständlich.", s: "Wir strukturieren Inhalte und Markup, damit Suchmaschinen und KI-Systeme Ihr Unternehmen präzise interpretieren können." }
     ],
     vsKicker: "Hauptunterschiede",
     vsTitle: "Was ist der Unterschied zwischen einer Website und einer Web-App?",
@@ -187,24 +187,24 @@ export default function WebSiteleriClient() {
       { title: "Persönliche Marke & Portfolio", desc: "Ein persönlicher Markenbereich, der Ihr Fachwissen, Ihre Projekte und Arbeitsmethoden präsentiert, um B2B-Kunden zu helfen, sich direkt mit Ihnen zu verbinden." },
       { title: "SaaS-Präsentation & Landingpage", desc: "Ein einseitiges Showcase, das das Wertversprechen, die Pläne und die Funktionen Ihres Software- oder Digitalprodukts präsentiert, um Benutzer zu konvertieren." },
       { title: "3D & Interaktive Erlebnisse", desc: "Premium-Layouts, die Ihre Produkte oder Dienstleistungen mithilfe von 3D-Modellen, interaktiven Grafiken und flüssigen Browser-Animationen erklären." },
-      { title: "Logo & Markenidentitäts-Design", desc: "Professionelle Logo- und visuelle Identitätsarbeit, die Ihre Unternehmerpersönlichkeit widerspiegelt und über digitale und Druckmedien tadellos funktioniert." },
-      { title: "Digitale Sichtbarkeit: SEO, AEO & GEO", desc: "Von Google-Rankings bis ChatGPT, Perplexity und KI-Übersichten — wir sorgen dafür, dass Ihre Marke auf jeder Plattform gefunden und empfohlen wird." }
+      { title: "Logo & Markenidentitäts-Design", desc: "Professionelle Logo- und visuelle Identitätsarbeit, die Ihre Marke widerspiegelt und konsistent über digitale und Druckmedien funktioniert." },
+      { title: "Digitale Verständlichkeit: SEO, AEO & GEO", desc: "Wir erstellen strukturierte Inhaltsarchitekturen, damit Suchmaschinen und KI-Wissenssysteme Ihre Inhalte leicht interpretieren können." }
     ],
     techKicker: "Design & Engineering",
     techTitle: "Maßgeschneiderter Code, eine Struktur, die vollständig auf Ihr Unternehmen zugeschnitten ist",
     techDesc: "Bei Albanexa verwenden wir keine Vorlagen, schweren WordPress-Plugins oder langsamen Website-Builder. Wir schreiben jede Zeile Code von Grund auf neu mit Next.js.",
     techFeatures: [
-      { title: "Core Web Vitals Standards", desc: "Die anfängliche Ladegeschwindigkeit ist der wichtigste Faktor für das Google-Ranking. Wir bauen Seiten, die sich in Sekunden öffnen." },
+      { title: "Core Web Vitals Standards", desc: "Die anfängliche Ladegeschwindigkeit ist ein wichtiger Faktor für das Google-Ranking. Wir bauen Seiten mit Blick auf Core Web Vitals." },
       { title: "Tastatur- und Bildschirmleser-Kompatibilität (A11y)", desc: "Wir legen Wert auf semantisches Markup und Fokusverwaltung, damit Ihre Website für jeden zugänglich ist." },
       { title: "Integration strukturierter Daten", desc: "Wir richten Schema-Strukturen im Backend ein, damit Suchmaschinen Ihr Unternehmen, Ihre Projekte und Ihre Lösungen korrekt identifizieren können." },
-      { title: "AEO — Answer Engine Optimization", desc: "Wir optimieren Inhalte und Markup, damit KI-Assistenten wie ChatGPT, Perplexity und Claude Ihr Unternehmen bei Nutzeranfragen empfehlen." },
-      { title: "GEO — Generative Engine Optimization", desc: "Wir entwickeln Content-Autorität und Zitierstrategien, damit Ihre Marke in Google AI Overviews, Bing Copilot und ähnlichen Plattformen als Quelle erscheint." }
+      { title: "AEO — Antwort-Engine-Kompatible Architektur", desc: "Strukturierte F&A-Blöcke und Schema-Markup zur Unterstützung von Such- und Antwortsystemen bei der Informationsverarbeitung." },
+      { title: "GEO — Generative Engine Verständlichkeit", desc: "Semantische Tags und Entitätsbeziehungen zur Unterstützung korrekter Zuordnungen in KI-Übersichten. (GEO/AEO-Maßnahmen garantieren keine Platzierung)." }
     ],
     caseTitle: "Beispiel für eine persönliche Marken-Website",
     caseBadge: "Aktiver Fall",
     caseDesc: "Die Albanexa-Website, die Sie gerade erkunden, ist ein Live-Beispiel für eine erstklassige, mehrseitige persönliche Marken-Website, die mit Next.js 16, Tailwind CSS 4 und Framer Motion erstellt wurde.",
-    caseScoresLabel: "Leistungsbewertungen:",
-    caseScoresVal: "%98+ Mobil / %100 Desktop",
+    caseScoresLabel: "Leistungsziel:",
+    caseScoresVal: "Core Web Vitals Fokus (LCP < 2.5s)",
     caseTechLabel: "Technologie-Stack:",
     caseTechVal: "Next.js App Router, TS, Tailwind v4",
     caseFeaturesLabel: "Eigenschaften:",

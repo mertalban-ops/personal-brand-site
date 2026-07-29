@@ -25,131 +25,131 @@ export interface StudioDetails {
 const studioTr: StudioDetails = {
   brand: {
     name: "Albanexa",
-    tagline: "Dijital Çözüm Stüdyosu",
+    tagline: "İşletme Süreçlerini Anlayan Dijital Çözüm Yaklaşımı",
     description:
-      "Albanexa, Mert Alban tarafından yönetilen bağımsız bir dijital çözüm stüdyosudur. Projenin ihtiyaç duyduğu özel uzmanlıklarda güvenilir çözüm ortaklarıyla çalışılır.",
+      "Albanexa, işletmelerin günlük çalışma biçimlerini, operasyonel ihtiyaçlarını ve büyüme hedeflerini anlayarak dijital çözümler geliştiren bağımsız bir ürün stüdyosudur. Projenin kapsamına göre gerekli uzmanlık alanlarında güvenilir çözüm ortaklarıyla çalışılır.",
     location: "İzmir, Türkiye · Türkiye geneline uzaktan hizmet",
     whyBuilt:
-      "Çoğu KOBİ ya hantal ERP sistemlerine mahkum kalıyor ya da Excel ve WhatsApp arasında kaybolmuş süreçlerle çalışıyor. Doğru boyutta, gerçekten kullanılan sistemler ve müşteri kazandıran web siteleri kurmak için Albanexa kuruldu.",
+      "Çoğu KOBİ ya hantal ERP sistemlerine mahkum kalıyor ya da Excel ve WhatsApp arasında kaybolmuş süreçlerle çalışıyor. İşletmenizin ölçeğine uygun, gerçekten kullanılan sistemler ve dönüşüm odaklı web siteleri geliştirmek için çalışıyoruz.",
   },
   founder: {
     name: "Mert Alban",
-    role: "Kurucu",
-    bio: "Mert Alban, kalite yönetimi, süreç analizi, eğitim ve veri bazlı operasyon geliştirme deneyimini yazılım geliştirmeyle birleştirir. Bu yaklaşım sayesinde yalnızca çalışan ekranlar değil, işletmenin günlük işleyişine uyum sağlayan ve ekiplerin gerçekten kullanabildiği sistemler tasarlar.",
+    role: "Stüdyo Yöneticisi & Mühendis",
+    bio: "Albanexa, işletmelerin günlük çalışma biçimlerini, operasyonel ihtiyaçlarını ve büyüme hedeflerini anlayarak dijital çözümler geliştiren bağımsız bir ürün stüdyosudur. Projeler; süreç analizi, kullanıcı deneyimi, tasarım ve teknik geliştirme birlikte değerlendirilerek yürütülür. Amaç yalnızca çalışan bir yazılım üretmek değil, işletmenin gerçek ihtiyacına uyum sağlayan, anlaşılır ve geliştirilebilir bir sistem oluşturmaktır. Stüdyonun çalışmaları Mert Alban tarafından yönetilir.",
     principles: [
       {
         title: "Süreci anlamadan kodlamaya başlamamak",
-        text: "Müşterinin günlük akışını, operasyon adımlarını ve veri girdilerini tamamen haritalandırmadan tek bir satır kod yazmıyoruz."
+        text: "Günlük operasyon adımlarını, iş akışlarını ve veri girdilerini haritalandırmadan tek bir satır kod yazmıyoruz."
       },
       {
-        title: "Kullanıcıların sistemi benimsemesini düşünmek",
-        text: "Yazılımın başarısı kodun temizliği kadar, personelin onu severek kullanmasıyla ölçülür. Arayüzleri en basit ve hızlı seviyede tutuyoruz."
+        title: "Kullanıcıların sistemi benimsemesini sağlamak",
+        text: "Yazılımın başarısı kodun temizliği kadar, personelin onu kolayca kullanmasıyla ölçülür. Arayüzleri sade ve hızlı tutuyoruz."
       },
       {
-        title: "Operasyonel darboğazları ölçmek",
-        text: "Hangi adımda zaman kaybedildiğini, hangi verinin mükerrer girildiğini analiz ediyor ve darboğazları ortadan kaldırıyoruz."
+        title: "Operasyonel darboğazları analiz etmek",
+        text: "Hangi adımda zaman kaybedildiğini ve hangi verinin mükerrer girildiğini inceleyerek süreçleri dijitalleştiriyoruz."
       },
       {
-        title: "Yönetici görünürlüğünü artırmak",
-        text: "İşletme sahibinin depodaki son durumu, güncel cari bakiyeleri ve tahsilat durumunu tek bir temiz dashboard'dan görmesini sağlıyoruz."
+        title: "Yönetici görünürlüğünü ve raporlamayı artırmak",
+        text: "Stok durumunu, güncel cari bakiyeleri ve tahsilatları tek bir anlaşılır yönetim panelinden görünür kılıyoruz."
       },
       {
-        title: "Basit ve sürdürülebilir çözümler geliştirmek",
-        text: "Karmaşık kütüphaneler veya hazır şablonlar yerine, uzun yıllar bakım gerektirmeden çalışacak hafif ve özel Next.js/Supabase mimarileri kuruyoruz."
+        title: "Sürdürülebilir ve geliştirilebilir mimari kurmak",
+        text: "Aşırı karmaşık yapılar yerine uzun yıllar bakım gerektirmeden çalışacak hafif ve özel Next.js/Supabase çözümleri inşa ediyoruz."
       }
     ],
-    note: "Tüm süreçlerde analiz ve geliştirme aşamalarına doğrudan dahil oluyorum.",
+    note: "Her projede ihtiyaçların doğru anlaşılmasına, kapsamın açık biçimde belirlenmesine ve sürecin şeffaf yürütülmesine önem verilir.",
   },
   techApproach:
-    "Modern web teknolojileri (Next.js, Supabase, TypeScript, Tailwind) kullanıyoruz. Teknoloji seçiminde işletmenin gerçek ihtiyacı ve uzun vadeli bakım kolaylığı belirleyici.",
+    "Görseller, yazı tipleri, JavaScript yükü ve sayfa bileşenleri Core Web Vitals hedefleri (LCP < 2.5s, CLS < 0.1, INP < 200ms) dikkate alınarak optimize edilir. Teknoloji seçiminde işletmenin gerçek ihtiyacı ve uzun vadeli bakım kolaylığı esastır.",
   securityNote:
-    "Tüm sistemlerde rol bazlı erişim kontrolü, güvenli veritabanı yapısı ve düzenli yedekleme standarttır.",
+    "Tüm sistemlerde rol bazlı erişim kontrolü, şifrelenmiş veritabanı yapısı, SSL sertifikaları ve düzenli yedekleme standarttır.",
 };
 
 const studioEn: StudioDetails = {
   brand: {
     name: "Albanexa",
-    tagline: "Digital Solution Studio",
+    tagline: "Process-Aware Digital Solution Approach",
     description:
-      "Albanexa is an independent digital solution studio managed by Mert Alban. We collaborate with trusted partners for specialized project requirements.",
+      "Albanexa is an independent product studio developing custom digital systems, automations, and high-performance web applications by understanding operational needs.",
     location: "İzmir, Türkiye · Remote service globally",
     whyBuilt:
-      "Most SMBs either get trapped in bulky ERP systems or lose control of their data between Excel and messaging apps. Albanexa was established to build right-sized, genuinely used systems and high-converting websites.",
+      "Most SMBs either get trapped in bulky ERP systems or lose control of their data between Excel and messaging apps. Albanexa builds right-sized, genuinely adopted systems and high-converting websites.",
   },
   founder: {
     name: "Mert Alban",
-    role: "Founder",
-    bio: "Mert Alban combines his experience in quality management, process analysis, training, and data-driven operations with custom software development. Through this holistic approach, he designs not just functioning interfaces, but digital systems that seamlessly integrate into daily operations and are gladly adopted by teams.",
+    role: "Studio Lead & Engineer",
+    bio: "Albanexa is an independent product studio developing digital solutions by analyzing daily workflows, operational bottlenecks, and growth objectives. Projects integrate process analysis, UX design, and technical engineering. The studio's operations are led by Mert Alban, collaborating with trusted domain specialists depending on project scope.",
     principles: [
       {
         title: "Never code before mapping the daily process",
         text: "We write zero code until we map out your exact daily workflows, operational steps, and data entry points."
       },
       {
-        title: "Ensure user adoption & training",
-        text: "The success of a system is measured by how easily the staff adopts it. We design interfaces for speed, clarity, and minimal friction."
+        title: "Ensure user adoption & minimal friction",
+        text: "The success of a system is measured by how easily staff adopts it. We design interfaces for speed, clarity, and ease."
       },
       {
-        title: "Measure and optimize operational bottlenecks",
-        text: "We pinpoint where time is lost or data is entered redundantly, and engineer structures to bypass those exact bottlenecks."
+        title: "Measure and resolve operational bottlenecks",
+        text: "We pinpoint where time is lost or data is entered redundantly, and engineer structures to bypass those bottlenecks."
       },
       {
         title: "Increase executive visibility & reporting",
-        text: "We empower business owners to view real-time stock levels, current accounts, and collections on a single, clean executive dashboard."
+        text: "We empower business owners to view real-time stock levels, current accounts, and collections on a clean executive dashboard."
       },
       {
         title: "Develop simple, maintainable software",
-        text: "Rather than heavy templates or complex libraries, we construct lightweight, customized Next.js/Supabase solutions that run reliably for years."
+        text: "Rather than heavy templates, we construct lightweight, customized Next.js/Supabase solutions that run reliably for years."
       }
     ],
-    note: "I am directly involved in the scoping, design, and development stages of every project.",
+    note: "We prioritize clear scoping, transparent communication, and empirical verification across every project phase.",
   },
   techApproach:
-    "We utilize modern web standards (Next.js, Supabase, TypeScript, Tailwind CSS). Maintenance ease and operational longevity guide our technical stacks.",
+    "Assets, fonts, and scripts are optimized with Core Web Vitals targets in mind. Modern web standards (Next.js, Supabase, TypeScript, Tailwind) power our long-term maintainable architecture.",
   securityNote:
-    "Role-based access control, relational database security, and automated backups are standard in every system we launch.",
+    "Role-based access control, relational database security, HSTS headers, and automated backups are standard in every system we launch.",
 };
 
 const studioDe: StudioDetails = {
   brand: {
     name: "Albanexa",
-    tagline: "Studio für digitale Lösungen",
+    tagline: "Prozessorientierter digitaler Lösungsansatz",
     description:
-      "Albanexa ist ein von Mert Alban geführtes unabhängiges Studio für digitale Lösungen. Bei Bedarf arbeiten wir mit vertrauenswürdigen Partnern zusammen.",
+      "Albanexa ist ein unabhängiges Produktstudio, das maßgeschneiderte digitale Systeme, Automatisierungen und performante Webanwendungen entwickelt.",
     location: "Izmir, Türkei · Weltweiter Remote-Service",
     whyBuilt:
-      "Viele KMU kämpfen entweder mit unhandlichen ERP-Systemen oder verlieren ihre Daten zwischen Excel und Messaging-Apps. Albanexa wurde gegründet, um maßgeschneiderte, wirklich genutzte Systeme und konversionsstarke Websites zu entwickeln.",
+      "Viele KMU kämpfen mit unhandlichen ERP-Systemen oder verlieren ihre Daten zwischen Excel und Messaging-Apps. Albanexa wurde gegründet, um maßgeschneiderte, wirklich genutzte Systeme zu entwickeln.",
   },
   founder: {
     name: "Mert Alban",
-    role: "Gründer",
-    bio: "Mert Alban kombiniert seine Erfahrung in Qualitätsmanagement, Prozessanalyse, Schulung und datengesteuerten Abläufen mit maßgeschneiderter Softwareentwicklung. Durch diesen ganzheitlichen Ansatz entwirft er nicht nur funktionierende Benutzeroberflächen, sondern digitale Systeme, die sich nahtlos in die täglichen Abläufe einfügen und von Teams gerne angenommen werden.",
+    role: "Studioleiter & Ingenieur",
+    bio: "Albanexa ist ein unabhängiges Produktstudio, das digitale Lösungen durch die Analyse täglicher Arbeitsabläufe entwickelt. Projekte verbinden Prozessanalyse, UX-Design und Software-Engineering. Die Arbeiten des Studios werden von Mert Alban geleitet.",
     principles: [
       {
         title: "Niemals codieren, bevor der Prozess erfasst ist",
-        text: "Wir schreiben keinen Code, bevor wir Ihre täglichen Arbeitsabläufe, Betriebsschritte und Dateneingabepunkte genau analysiert haben."
+        text: "Wir schreiben keinen Code, bevor wir Ihre täglichen Arbeitsabläufe und Dateneingabepunkte genau analysiert haben."
       },
       {
-        title: "Benutzerakzeptanz und Schulung sicherstellen",
-        text: "Der Erfolg eines Systems bemisst sich daran, wie gerne das Personal es nutzt. Wir entwerfen Benutzeroberflächen für Geschwindigkeit und Klarheit."
+        title: "Benutzerakzeptanz sicherstellen",
+        text: "Der Erfolg eines Systems bemisst sich daran, wie leicht das Personal es nutzt. Wir entwerfen Benutzeroberflächen für Klarheit."
       },
       {
         title: "Betriebliche Engpässe messen und optimieren",
-        text: "Wir analysieren, wo Zeit verloren geht oder Daten redundant erfasst werden, und entwickeln Strukturen zur Vermeidung dieser Engpässe."
+        text: "Wir analysieren, wo Zeit verloren geht, und entwickeln Strukturen zur Vermeidung dieser Engpässe."
       },
       {
         title: "Sichtbarkeit für Geschäftsführer erhöhen",
-        text: "Wir ermöglichen es Unternehmensinhabern, Lagerbestände, Kontokorrentsalden und Einnahmen auf einem einzigen, übersichtlichen Dashboard in Echtzeit zu sehen."
+        text: "Wir ermöglichen es Unternehmensinhabern, Lagerbestände, Kontokorrentsalden und Einnahmen auf einem Dashboard zu sehen."
       },
       {
         title: "Einfache, wartbare Software entwickeln",
-        text: "Statt schwerer Vorlagen oder komplexer Bibliotheken erstellen wir schlanke Next.js/Supabase-Lösungen, die jahrelang zuverlässig laufen."
+        text: "Statt schwerer Vorlagen erstellen wir schlanke Next.js/Supabase-Lösungen, die jahrelang zuverlässig laufen."
       }
     ],
-    note: "Ich bin an der Konzeption, dem Design und der Entwicklung jedes Projekts direkt beteiligt.",
+    note: "Wir legen großen Wert auf klare Zieldefinitionen, transparente Kommunikation und empirische Prüfung in jeder Projektphase.",
   },
   techApproach:
-    "Wir nutzen moderne Webstandards (Next.js, Supabase, TypeScript, Tailwind CSS). Wartungsfreundlichkeit und Langlebigkeit bestimmen unsere Stack-Auswahl.",
+    "Bilder, Schriften und Skripte werden unter Berücksichtigung der Core Web Vitals-Ziele optimiert. Wartungsfreundlichkeit bestimmt unsere Stack-Auswahl.",
   securityNote:
     "Rollenbasierte Zugriffskontrolle, relationale Datenbanksicherheit und automatische Backups sind Standard in jedem System.",
 };

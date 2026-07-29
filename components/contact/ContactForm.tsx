@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useTransition, useRef } from "react";
 import { ArrowRight, ArrowLeft, CheckCircle2, AlertCircle } from "lucide-react";
 import { submitContactForm } from "@/app/actions/contact";
@@ -20,6 +21,7 @@ type FormState = {
   timeline: string;
   budget: string;
   additionalInfo: string;
+  marketingConsent?: boolean;
 };
 
 export default function ContactForm() {
@@ -39,6 +41,7 @@ export default function ContactForm() {
     timeline: "",
     budget: "",
     additionalInfo: "",
+    marketingConsent: false,
   });
 
   const [fieldErrors, setFieldErrors] = useState<{ [key in keyof FormState]?: string }>({});
@@ -76,6 +79,10 @@ export default function ContactForm() {
     budgetPlaceholder: "Bütçe seçin...",
     additionalInfo: "Ek bilgi veya eklemek istedikleriniz",
     additionalInfoPlaceholder: "Sistem entegrasyonları, özel güvenlik talepleri vb.",
+    kvkkPrefix: "Formda paylaştığınız kişisel veriler, talebinizi değerlendirmek ve sizinle iletişim kurmak amacıyla işlenir. Ayrıntılar için",
+    kvkkLinkText: "KVKK Aydınlatma Metni",
+    kvkkSuffix: "'ni inceleyebilirsiniz.",
+    marketingConsentText: "Gelecekteki dijital rehber ve çözüm bilgilendirmelerini e-posta ile almak istiyorum (İsteğe bağlı).",
     privacyNote: "Talebinizi göndererek Gizlilik Sözleşmesini okuduğunuzu onaylarsınız.",
     submit: "Talebi Gönder",
     submitting: "Gönderiliyor...",
@@ -111,6 +118,10 @@ export default function ContactForm() {
     budgetPlaceholder: "Select budget...",
     additionalInfo: "Additional details or requirements",
     additionalInfoPlaceholder: "API integrations, specific security needs, etc.",
+    kvkkPrefix: "Personal data submitted in this form is processed to evaluate your project inquiry and communicate with you. For details, view our",
+    kvkkLinkText: "Privacy & Data Notice",
+    kvkkSuffix: ".",
+    marketingConsentText: "I would like to receive future solution updates and digital guides via email (Optional).",
     privacyNote: "By submitting, you agree that you have read our Privacy Policy.",
     submit: "Submit Proposal",
     submitting: "Submitting...",
@@ -146,6 +157,10 @@ export default function ContactForm() {
     budgetPlaceholder: "Budget wählen...",
     additionalInfo: "Zusätzliche Details oder Anforderungen",
     additionalInfoPlaceholder: "API-Integrationen, spezifische Sicherheitsanforderungen etc.",
+    kvkkPrefix: "Personenbezogene Daten in diesem Formular werden verarbeitet, um Ihre Anfrage zu bearbeiten. Details finden Sie in unserer",
+    kvkkLinkText: "Datenschutzerklärung",
+    kvkkSuffix: ".",
+    marketingConsentText: "Ich möchte künftige Branchen-Updates und Anleitungen per E-Mail erhalten (Optional).",
     privacyNote: "Mit der Einsendung erklären Sie sich mit unserer Datenschutzerklärung einverstanden.",
     submit: "Anfrage senden",
     submitting: "Wird gesendet...",
@@ -267,7 +282,7 @@ export default function ContactForm() {
       // Build FormData object for Server Action
       const formData = new FormData();
       Object.entries(form).forEach(([key, val]) => {
-        formData.append(key, val);
+        formData.append(key, String(val ?? ""));
       });
       // Append honeypot field
       const hpField = (document.getElementById("cf_website_confirm") as HTMLInputElement)?.value || "";
@@ -579,9 +594,30 @@ export default function ContactForm() {
               />
             </div>
 
-            <p className="text-[0.65rem] text-faint leading-relaxed">
-              {c.privacyNote}
-            </p>
+            <div className="space-y-2 pt-1">
+              <p className="text-[0.7rem] text-muted leading-relaxed">
+                {c.kvkkPrefix || "Formda paylaştığınız kişisel veriler, talebinizi değerlendirmek ve sizinle iletişim kurmak amacıyla işlenir. Ayrıntılar için"}{" "}
+                <Link
+                  href="/gizlilik"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-accent underline hover:text-accent/80 transition-colors"
+                >
+                  {c.kvkkLinkText || "KVKK Aydınlatma Metni"}
+                </Link>
+                {c.kvkkSuffix || "'ni inceleyebilirsiniz."}
+              </p>
+
+              <label className="flex items-center gap-2 text-[0.7rem] text-muted cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={form.marketingConsent || false}
+                  onChange={(e) => setForm((prev) => ({ ...prev, marketingConsent: e.target.checked }))}
+                  className="h-3.5 w-3.5 rounded border-line bg-surface/30 text-accent focus:ring-accent accent-accent"
+                />
+                <span>{c.marketingConsentText || "Gelecekteki dijital rehber ve bilgilendirmeleri e-posta ile almak istiyorum (İsteğe bağlı)."}</span>
+              </label>
+            </div>
 
             <div className="flex gap-3 pt-2">
               <button

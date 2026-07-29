@@ -297,7 +297,7 @@ export const tr: Dictionary = {
       },
       {
         q: "Geliştirdiğiniz sistemler mobilde de kullanılabiliyor mu?",
-        a: "Evet. Kurduğumuz tüm web tabanlı iş takip ve operasyon sistemleri hem bilgisayarda (desktop) hem de cep telefonu veya tabletlerde (responsive) kusursuz çalışacak premium standartta tasarlanır.",
+        a: "Evet. Kurduğumuz tüm web tabanlı iş takip ve operasyon sistemleri hem bilgisayarda (desktop) hem de cep telefonu veya tabletlerde (responsive) esnek ve uyumlu çalışacak standartta tasarlanır.",
       },
       {
         q: "Fiyat nasıl belirlenir ve süreç ne kadar sürer?",
@@ -305,7 +305,7 @@ export const tr: Dictionary = {
       },
       {
         q: "Sistem teslim edildikten sonra destek veriyor musunuz?",
-        a: "Kesinlikle. İşleyen bir sistemin her zaman bakıma ve gelişime ihtiyacı vardır. Teslim sonrası aylık bakım anlaşmalarıyla sistemin güvenliğini sağlıyor ve yeni eklenti taleplerinizi karşılıyoruz.",
+        a: "Evet. İşleyen bir sistemin her zaman bakıma ve gelişime ihtiyacı vardır. Teslim sonrası aylık bakım anlaşmalarıyla sistemin güvenliğini sağlıyor ve yeni eklenti taleplerinizi karşılıyoruz.",
       },
       {
         q: "Web sitesi mi, web uygulaması mı ihtiyacım var?",

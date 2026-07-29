@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { useLanguage } from "@/context/LanguageContext";
@@ -26,6 +25,8 @@ export default function FAQPreview() {
         <div className="space-y-4">
           {t.faq.items.map((faq, i) => {
             const isOpen = openIndex === i;
+            const buttonId = `faq-btn-${i}`;
+            const panelId = `faq-panel-${i}`;
 
             return (
               <div
@@ -37,7 +38,10 @@ export default function FAQPreview() {
                 }`}
               >
                 <button
-                  className="flex w-full items-center justify-between p-5 text-left md:p-6"
+                  id={buttonId}
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
+                  className="flex w-full items-center justify-between p-5 text-left md:p-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-xl"
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                 >
                   <span className="font-semibold text-ink md:text-lg">{faq.q}</span>
@@ -50,21 +54,21 @@ export default function FAQPreview() {
                   </span>
                 </button>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-5 pb-5 text-muted md:px-6 md:pb-6 leading-relaxed text-sm">
-                        {faq.a}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {/* Server-rendered HTML answer container (CSS transition grid) */}
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={buttonId}
+                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-5 pb-5 text-muted md:px-6 md:pb-6 leading-relaxed text-sm">
+                      {faq.a}
+                    </div>
+                  </div>
+                </div>
               </div>
             );
           })}

@@ -27,7 +27,7 @@ export default function WebSiteVitrin() {
     desc: "Ziyaretçinin kim olduğunuzu, ne yaptığınızı ve neden sizi seçmesi gerektiğini ilk bakışta anlaması için net sayfa akışı, güçlü tasarım ve doğru iletişim yapısı kuruyoruz.",
     features: [
       { icon: Globe, label: "Kurumsal görünüm", desc: "Markanızı güvenilir ve profesyonel gösteren tasarım." },
-      { icon: Smartphone, label: "Mobil uyumlu", desc: "Her cihazda kusursuz çalışan responsive yapı." },
+      { icon: Smartphone, label: "Mobil uyumlu", desc: "Farklı ekran boyutlarında tutarlı ve esnek responsive yapı." },
       { icon: Zap, label: "Hız ve performans", desc: "Core Web Vitals odaklı, hızlı açılan sayfalar." },
       { icon: Search, label: "SEO temeli", desc: "Arama motorlarında görünürlüğünüzü artıran altyapı." },
     ],
