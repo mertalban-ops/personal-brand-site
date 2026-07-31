@@ -1,0 +1,91 @@
+{
+  "name": "Albanexa — Proje Teslimi Sonrası Google Yorum İsteği",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "albanexa-project-complete",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-complete",
+      "name": "Proje Teslim Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "notes": "Manuel tetiklemek için: curl -X POST https://n8n.albanexa.com/webhook/albanexa-project-complete -H 'Content-Type: application/json' -d '{\"clientName\":\"...\",\"clientEmail\":\"...\",\"projectName\":\"...\"}'"
+    },
+    {
+      "parameters": {
+        "amount": 3,
+        "unit": "days"
+      },
+      "id": "wait-3-days",
+      "name": "3 Gün Bekle",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [460, 300],
+      "notes": "Teslimden 3 gün sonra göndermek memnuniyeti pekiştiriyor"
+    },
+    {
+      "parameters": {
+        "fromEmail": "mert@albanexa.com",
+        "toEmail": "={{ $json.body.clientEmail }}",
+        "subject": "={{ $json.body.projectName }} projesinde deneyiminizi paylaşır mısınız?",
+        "emailType": "html",
+        "message": "={{ '<html><body style=\"font-family:sans-serif;color:#1a1a2e;max-width:560px;margin:0 auto;padding:32px\"><p>Merhaba ' + $json.body.clientName + ',</p><p>' + $json.body.projectName + ' projesinin tamamlanmasından bu yana 3 gün geçti. Umarım sistem işletmenize fayda sağlamaya başlamıştır.</p><p>Kısa bir zaman ayırarak Google\\'da deneyiminizi paylaşırsanız çok sevinirim. Bu değerlendirmeler hem diğer işletmelere yol gösteriyor hem de benim için büyük destek oluyor.</p><p style=\"text-align:center;margin:32px 0\"><a href=\"' + $env.GBP_REVIEW_URL + '\" style=\"background:#10b981;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px\">Google\\'da Değerlendirin →</a></p><p>Sistemle ilgili herhangi bir soru veya küçük bir ayarlama isteğiniz olursa her zaman yazabilirsiniz.</p><p>İyi çalışmalar,<br><strong>Mert Alban</strong><br>Albanexa<br><a href=\"https://www.albanexa.com\">albanexa.com</a></p></body></html>' }}"
+      },
+      "id": "send-review-email",
+      "name": "Yorum İsteği E-postası",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{\n  json: {\n    logged: true,\n    client: $('Proje Teslim Webhook').item.json.body.clientName,\n    project: $('Proje Teslim Webhook').item.json.body.projectName,\n    sentAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "log-sent",
+      "name": "Gönderim Kaydı",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "value": "={{ $env.LEADS_SHEET_ID }}", "mode": "id" },
+        "sheetName": { "value": "ReviewRequests", "mode": "name" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "values": {
+            "string": [
+              { "name": "Tarih", "value": "={{ $json.sentAt }}" },
+              { "name": "Müşteri", "value": "={{ $json.client }}" },
+              { "name": "Proje", "value": "={{ $json.project }}" },
+              { "name": "Durum", "value": "Gönderildi" }
+            ]
+          }
+        }
+      },
+      "id": "log-sheets",
+      "name": "Sheets'e Kaydet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.4,
+      "position": [1120, 300]
+    }
+  ],
+  "connections": {
+    "Proje Teslim Webhook": { "main": [[{ "node": "3 Gün Bekle", "type": "main", "index": 0 }]] },
+    "3 Gün Bekle": { "main": [[{ "node": "Yorum İsteği E-postası", "type": "main", "index": 0 }]] },
+    "Yorum İsteği E-postası": { "main": [[{ "node": "Gönderim Kaydı", "type": "main", "index": 0 }]] },
+    "Gönderim Kaydı": { "main": [[{ "node": "Sheets'e Kaydet", "type": "main", "index": 0 }]] }
+  },
+  "_meta": {
+    "description": "Proje tesliminden 3 gün sonra müşteriye Google Business Profile yorum isteği e-postası gönderir. GBP_REVIEW_URL env değişkenine profil doğrulama sonrası review linki girilmeli.",
+    "trigger": "Manuel: POST /albanexa-project-complete {clientName, clientEmail, projectName}",
+    "envVars": ["GBP_REVIEW_URL", "LEADS_SHEET_ID", "SMTP_CREDENTIALS"],
+    "category": "Reputation & CRM",
+    "setup": "GBP doğrulandıktan sonra profil sayfasından 'Yorum al' linkini kopyalayıp GBP_REVIEW_URL env değişkenine girin."
+  }
+}
