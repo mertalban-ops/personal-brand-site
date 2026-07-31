@@ -138,8 +138,11 @@ export default function RootLayout({
         "worksFor": {
           "@id": `${siteConfig.siteUrl}/#organization`
         },
-        "url": siteConfig.siteUrl,
-        "sameAs": sameAs
+        "url": `${siteConfig.siteUrl}/studyo`,
+        "sameAs": [
+          siteConfig.socialLinks.linkedin,
+          siteConfig.socialLinks.github,
+        ].filter(Boolean)
       },
       {
         "@type": "WebSite",
@@ -148,14 +151,6 @@ export default function RootLayout({
         "name": siteConfig.brandName,
         "publisher": {
           "@id": `${siteConfig.siteUrl}/#organization`
-        },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": `${siteConfig.siteUrl}/projeler?q={search_term_string}`
-          },
-          "query-input": "required name=search_term_string"
         }
       }
     ]
