@@ -92,21 +92,20 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
             <div className="grid gap-10 lg:grid-cols-5 items-center">
               <div className="lg:col-span-2">
                 <span className="mono-label mb-2 block">
-                  {language === "tr" ? "GÖRSEL PROTOTİP" : language === "de" ? "VISUELLER PROTOTYP" : "VISUAL PROTOTYPE"}
+                  {language === "tr" ? "TEMSİLİ ARAYÜZ GÖRSELİ" : language === "de" ? "REPRÄSENTATIVE ANSICHT" : "REPRESENTATIVE INTERFACE"}
                 </span>
                 <h2 className="display text-3xl font-bold text-ink mb-4">
                   {language === "tr" ? "Sistem Arayüzü ve Akış Tasarımı" : language === "de" ? "Systemoberfläche & Ablaufdesign" : "System Interface & Flow Design"}
                 </h2>
                 <p className="text-muted leading-relaxed">
                   {language === "tr"
-                    ? "İşletmenin ihtiyaçlarına göre sıfırdan kurgulanan ve canlıya alınan operasyonel arayüz yapısının çalışan prototipi."
+                    ? "İşletmenin ihtiyaçlarına göre tasarlanan operasyonel arayüzün temsili görseli. Gerçek uygulama ekranlarından ilham alınarak hazırlanmıştır."
                     : language === "de"
-                    ? "Ein funktionierender Prototyp der operativen Schnittstellenstruktur, die basierend auf den Anforderungen des Unternehmens von Grund auf neu aufgebaut und in Betrieb genommen wurde."
-                    : "A working prototype of the operational interface structure built from scratch and put into production based on the company's needs."}
+                    ? "Repräsentative Darstellung der operativen Benutzeroberfläche, inspiriert von den echten Anwendungsbildschirmen."
+                    : "Representative visualization of the operational interface, inspired by actual application screens."}
                 </p>
               </div>
               <div className="lg:col-span-3 card-surface p-6 rounded-2xl border border-line relative overflow-hidden bg-bg-raised/10">
-                <span className="absolute top-3 right-3 text-[10px] font-mono text-faint uppercase z-30">Mockup Grid</span>
                 <div className="w-full h-80 rounded-xl overflow-hidden bg-bg">
                   {project.slug === "stockapp" && <StockAppPreview reduce={false} />}
                   {project.slug === "hezer-auto-service" && <AutoServicePreview reduce={false} />}

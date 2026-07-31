@@ -1,5 +1,4 @@
 import { buildPageMetadata } from "@/lib/metadata";
-import { Suspense } from "react";
 import StudyoClient from "./StudyoClient";
 
 export const metadata = buildPageMetadata({
@@ -9,9 +8,5 @@ export const metadata = buildPageMetadata({
 });
 
 export default function StudyoPage() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-bg flex items-center justify-center text-muted">Loading...</div>}>
-      <StudyoClient />
-    </Suspense>
-  );
+  return <StudyoClient />;
 }

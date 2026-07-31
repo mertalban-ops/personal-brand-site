@@ -56,6 +56,25 @@ export default async function ProjectDetailPage({ params }: Props) {
   const project = getProjectBySlug(slug, "tr");
   if (!project) notFound();
 
+  const isSoftware = project.category === "customer-project" || project.category === "product-lab";
+
+  const productSchema = isSoftware
+    ? {
+        "@type": "SoftwareApplication",
+        "name": project.name,
+        "operatingSystem": "Web Cloud",
+        "applicationCategory": "BusinessApplication",
+        "description": project.caseSummary,
+        "publisher": { "@id": `${siteConfig.siteUrl}/#organization` },
+      }
+    : {
+        "@type": "CreativeWork",
+        "name": project.name,
+        "description": project.caseSummary,
+        "creator": { "@id": `${siteConfig.siteUrl}/#person` },
+        "publisher": { "@id": `${siteConfig.siteUrl}/#organization` },
+      };
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -82,14 +101,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           }
         ]
       },
-      {
-        "@type": "SoftwareApplication",
-        "name": project.name,
-        "operatingSystem": "Web Cloud",
-        "applicationCategory": "BusinessApplication",
-        "description": project.caseSummary,
-        "publisher": { "@id": `${siteConfig.siteUrl}/#organization` }
-      },
+      productSchema,
       {
         "@type": "Article",
         "@id": `${siteConfig.siteUrl}/projeler/${slug}#article`,
