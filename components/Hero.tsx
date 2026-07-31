@@ -167,9 +167,9 @@ export default function Hero() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-ink font-semibold text-base mb-1">
+                <p className="text-ink font-semibold text-base mb-1">
                   {language === "tr" ? "Güvenli B2B Dijital Çözümler" : language === "de" ? "Sichere B2B-Digitallösungen" : "Secure B2B Digital Solutions"}
-                </h3>
+                </p>
                 <p className="text-muted text-xs max-w-xs mx-auto">
                   {language === "tr"
                     ? "Albanexa ile iş süreçlerinizi otomatikleştirin ve ölçeklenebilir altyapılar kurun."

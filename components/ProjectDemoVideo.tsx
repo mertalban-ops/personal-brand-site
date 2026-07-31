@@ -706,7 +706,7 @@ export default function ProjectDemoVideo({
         <div style={{ padding: "8px 14px", borderTop: `1px solid ${s.border}`, display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(255,255,255,0.01)" }}>
           <div style={{ display: "flex", gap: 5 }}>
             {screens.map((_, i) => (
-              <button key={i} onClick={() => setIdx(i)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+              <button key={i} onClick={() => setIdx(i)} aria-label={`Ekran ${i + 1}`} style={{ background: "none", border: "none", cursor: "pointer", padding: "4px" }}>
                 <motion.div animate={{ width: i === idx ? 18 : 6, background: i === idx ? accent : s.border }}
                   style={{ height: 6, borderRadius: 4 }} transition={{ duration: 0.3 }} />
               </button>

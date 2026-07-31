@@ -79,7 +79,7 @@ export default function Footer() {
 
           {/* Solutions */}
           <div>
-            <h4 className="mb-4 text-sm font-semibold text-ink">{t.contact.servicesCol}</h4>
+            <p className="mb-4 text-sm font-semibold text-ink">{t.contact.servicesCol}</p>
             <ul className="space-y-2.5 text-sm" style={{ color: "var(--muted)" }}>
               {footerLinks.solutions.map((link) => (
                 <li key={link.href}>
@@ -93,7 +93,7 @@ export default function Footer() {
 
           {/* Studio */}
           <div>
-            <h4 className="mb-4 text-sm font-semibold text-ink">{t.contact.studioCol}</h4>
+            <p className="mb-4 text-sm font-semibold text-ink">{t.contact.studioCol}</p>
             <ul className="space-y-2.5 text-sm" style={{ color: "var(--muted)" }}>
               {footerLinks.studio.map((link) => (
                 <li key={link.href}>
