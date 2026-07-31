@@ -102,25 +102,36 @@ const publishedArticles = [
     readingTime: 10,
     publishedAt: "2026-07-31",
   },
-];
-
-const plannedArticles = [
   {
     slug: "izmir-yazilim-gelistirme-firmalari",
     title: "İzmir'de Yazılım Geliştirme: Doğru Firma Nasıl Seçilir?",
-    description: "İzmir merkezli işletmeler için yazılım firması seçim rehberi.",
+    description:
+      "İzmir'deki KOBİ'ler için yazılım geliştirme firması veya bağımsız geliştirici seçerken sorulması gereken sorular, karşılaştırma kriterleri ve sık yapılan hatalar.",
+    category: "Yazılım Seçimi & Strateji",
+    readingTime: 7,
+    publishedAt: "2026-07-31",
   },
   {
     slug: "otomasyon-ile-verimliligi-artirma",
-    title: "Operasyon Otomasyonu ile Verimliliği Artırma",
-    description: "n8n ile tekrar eden işletme süreçlerini otomatikleştirme rehberi.",
+    title: "Operasyon Otomasyonu ile Verimliliği Artırma: KOBİ Rehberi",
+    description:
+      "KOBİ'ler için tekrar eden iş süreçlerini otomatikleştirme rehberi. n8n ile e-posta bildirimleri, raporlar, stok uyarıları ve sistem entegrasyonları.",
+    category: "Operasyon & Otomasyon",
+    readingTime: 8,
+    publishedAt: "2026-07-31",
   },
   {
     slug: "web-uygulamasi-nedir-ne-ise-yarar",
     title: "Web Uygulaması Nedir, Ne İşe Yarar?",
-    description: "Web sitesi ile web uygulaması arasındaki fark ve hangi işletmelere gerektiği.",
+    description:
+      "Web sitesi ile web uygulaması arasındaki fark nedir? Hangi işletmeler web uygulamasına ihtiyaç duyar? KOBİ'ler için kapsamlı açıklama ve karar rehberi.",
+    category: "Yazılım Geliştirme & Dijitalleşme",
+    readingTime: 7,
+    publishedAt: "2026-07-31",
   },
 ];
+
+const plannedArticles: { slug: string; title: string; description: string }[] = [];
 
 export default function RehberPage() {
   const listSchema = {
@@ -203,22 +214,24 @@ export default function RehberPage() {
           </div>
 
           {/* Planned */}
-          <div className="mb-12">
-            <p className="mono-label mb-6">Yakında</p>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {plannedArticles.map((article) => (
-                <div
-                  key={article.slug}
-                  className="card-surface rounded-xl p-5 opacity-50"
-                >
-                  <h2 className="font-semibold text-ink text-sm leading-snug mb-2">
-                    {article.title}
-                  </h2>
-                  <p className="text-xs text-muted leading-relaxed">{article.description}</p>
-                </div>
-              ))}
+          {plannedArticles.length > 0 && (
+            <div className="mb-12">
+              <p className="mono-label mb-6">Yakında</p>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {plannedArticles.map((article) => (
+                  <div
+                    key={article.slug}
+                    className="card-surface rounded-xl p-5 opacity-50"
+                  >
+                    <h2 className="font-semibold text-ink text-sm leading-snug mb-2">
+                      {article.title}
+                    </h2>
+                    <p className="text-xs text-muted leading-relaxed">{article.description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="rounded-xl border border-line bg-surface/40 px-6 py-5">
             <p className="text-sm text-muted leading-relaxed">
