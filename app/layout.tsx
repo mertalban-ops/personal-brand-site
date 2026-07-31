@@ -72,7 +72,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   // Global structured data schema
-  const sameAs = [siteConfig.socialLinks.github, siteConfig.socialLinks.linkedin].filter(Boolean);
+  const sameAs = [
+    siteConfig.socialLinks.github,
+    siteConfig.socialLinks.linkedin,
+    "https://maps.google.com/?q=Albanexa+İzmir",
+  ].filter(Boolean);
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [

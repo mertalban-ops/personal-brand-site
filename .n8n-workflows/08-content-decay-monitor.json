@@ -1,0 +1,116 @@
+{
+  "name": "Albanexa — İçerik Çürümesi Monitörü",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 9 1 * *" }] }
+      },
+      "id": "trigger-monthly",
+      "name": "Her Ayın 1'i 09:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.googleapis.com/webmasters/v3/sites/https%3A%2F%2Fwww.albanexa.com%2F/searchAnalytics/query",
+        "authentication": "oAuth2",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "startDate", "value": "={{ $now.minus({days: 28}).format('yyyy-MM-dd') }}" },
+            { "name": "endDate", "value": "={{ $now.minus({days: 1}).format('yyyy-MM-dd') }}" },
+            { "name": "dimensions", "value": ["page"] },
+            { "name": "rowLimit", "value": 50 }
+          ]
+        }
+      },
+      "id": "gsc-current",
+      "name": "GSC — Son 28 Gün",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.googleapis.com/webmasters/v3/sites/https%3A%2F%2Fwww.albanexa.com%2F/searchAnalytics/query",
+        "authentication": "oAuth2",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "startDate", "value": "={{ $now.minus({days: 56}).format('yyyy-MM-dd') }}" },
+            { "name": "endDate", "value": "={{ $now.minus({days: 29}).format('yyyy-MM-dd') }}" },
+            { "name": "dimensions", "value": ["page"] },
+            { "name": "rowLimit", "value": 50 }
+          ]
+        }
+      },
+      "id": "gsc-previous",
+      "name": "GSC — Önceki 28 Gün",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "id": "merge-periods",
+      "name": "Dönemleri Birleştir",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const [currentData, previousData] = [$('GSC — Son 28 Gün').item.json, $('GSC — Önceki 28 Gün').item.json];\nconst current = {};\nconst previous = {};\n\n(currentData.rows || []).forEach(r => { current[r.keys[0]] = r; });\n(previousData.rows || []).forEach(r => { previous[r.keys[0]] = r; });\n\nconst decaying = [];\nconst growing = [];\n\nObject.keys(current).forEach(page => {\n  const curr = current[page];\n  const prev = previous[page];\n  if (!prev || prev.clicks === 0) return;\n  const clickChange = ((curr.clicks - prev.clicks) / prev.clicks) * 100;\n  const posChange = prev.position - curr.position; // pozitif = iyileşme\n  if (clickChange < -20) decaying.push({ page: page.replace('https://www.albanexa.com',''), clicks: curr.clicks, prevClicks: prev.clicks, change: clickChange.toFixed(0), pos: curr.position.toFixed(1) });\n  if (clickChange > 50 && curr.clicks >= 5) growing.push({ page: page.replace('https://www.albanexa.com',''), clicks: curr.clicks, change: clickChange.toFixed(0) });\n});\n\ndecaying.sort((a,b) => a.change - b.change);\ngrowing.sort((a,b) => b.change - a.change);\n\nlet msg = `📉 *İçerik Performans Raporu — ${new Date().toLocaleDateString('tr-TR')}*\\n\\n`;\nif (decaying.length > 0) {\n  msg += `*Düşen Sayfalar (>${20}% tıklama kaybı):*\\n`;\n  decaying.slice(0,5).forEach(p => { msg += `• ${p.page}\\n  ${p.prevClicks}→${p.clicks} tık (${p.change}%) · Konum: ${p.pos}\\n`; });\n} else {\n  msg += `✅ Ciddi düşüş yok.\\n`;\n}\nif (growing.length > 0) {\n  msg += `\\n*Büyüyen Sayfalar:*\\n`;\n  growing.slice(0,3).forEach(p => { msg += `• ${p.page} +${p.change}% (${p.clicks} tık)\\n`; });\n}\n\nreturn [{ json: { message: msg } }];"
+      },
+      "id": "compare-periods",
+      "name": "Dönemleri Karşılaştır",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chat_id", "value": "={{ $env.TELEGRAM_CHAT_ID }}" },
+            { "name": "text", "value": "={{ $json.message }}" },
+            { "name": "parse_mode", "value": "Markdown" }
+          ]
+        }
+      },
+      "id": "send-decay-report",
+      "name": "Telegram'a Gönder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 300]
+    }
+  ],
+  "connections": {
+    "Her Ayın 1'i 09:00": {
+      "main": [[
+        { "node": "GSC — Son 28 Gün", "type": "main", "index": 0 },
+        { "node": "GSC — Önceki 28 Gün", "type": "main", "index": 0 }
+      ]]
+    },
+    "GSC — Son 28 Gün": { "main": [[{ "node": "Dönemleri Birleştir", "type": "main", "index": 0 }]] },
+    "GSC — Önceki 28 Gün": { "main": [[{ "node": "Dönemleri Birleştir", "type": "main", "index": 1 }]] },
+    "Dönemleri Birleştir": { "main": [[{ "node": "Dönemleri Karşılaştır", "type": "main", "index": 0 }]] },
+    "Dönemleri Karşılaştır": { "main": [[{ "node": "Telegram'a Gönder", "type": "main", "index": 0 }]] }
+  },
+  "_meta": {
+    "description": "Her ayın 1'inde son 28 günü önceki 28 günle karşılaştırır. %20'den fazla tıklama kaybı olan sayfaları 'içerik çürümesi' olarak işaretler, Telegram'a rapor gönderir.",
+    "envVars": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "GSC_OAUTH2_CREDENTIALS"],
+    "schedule": "Ayın 1'i 09:00",
+    "category": "Content Intelligence"
+  }
+}

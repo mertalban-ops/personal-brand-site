@@ -1,0 +1,111 @@
+{
+  "name": "Albanexa — İçerik Brief Üreticisi",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "albanexa-brief",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-brief",
+      "name": "Brief İstek Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "notes": "POST body: { keyword: 'izmir yazilim gelistirme', targetPage: '/rehber/...' }"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.googleapis.com/webmasters/v3/sites/https%3A%2F%2Fwww.albanexa.com%2F/searchAnalytics/query",
+        "authentication": "oAuth2",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "startDate", "value": "={{ $now.minus({days: 90}).format('yyyy-MM-dd') }}" },
+            { "name": "endDate", "value": "={{ $now.minus({days: 1}).format('yyyy-MM-dd') }}" },
+            { "name": "dimensions", "value": ["query"] },
+            { "name": "dimensionFilterGroups", "value": [{ "filters": [{ "dimension": "query", "operator": "contains", "expression": "={{ $json.body.keyword }}" }] }] },
+            { "name": "rowLimit", "value": 20 }
+          ]
+        }
+      },
+      "id": "gsc-related-queries",
+      "name": "GSC — İlgili Sorgular",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 200]
+    },
+    {
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "messages": {
+          "values": [
+            {
+              "role": "user",
+              "content": "={{ 'Sen bir SEO içerik uzmanısın. Aşağıdaki verilerle kapsamlı bir Türkçe içerik brief hazırla.\\n\\nHedef anahtar kelime: ' + $('Brief İstek Webhook').item.json.body.keyword + '\\n\\nGSC\\'den gelen ilgili sorgular:\\n' + JSON.stringify($('GSC — İlgili Sorgular').item.json.rows || [], null, 2) + '\\n\\nBrief formatı:\\n1. Makale başlığı (3 öneri)\\n2. Meta açıklama (155 karakter)\\n3. Hedef kitlesi\\n4. Anahtar kelime listesi (primer + LSI)\\n5. İçerik yapısı (H2 ve H3 başlıkları)\\n6. FAQ soruları (4 adet)\\n7. Dahili link önerileri (albanexa.com sayfaları)\\n8. Rakip içerikten farklılaşma noktası\\n9. Tahmini okuma süresi\\n10. CTA önerisi\\n\\nSite: albanexa.com — İzmir merkezli KOBİ yazılım stüdyosu.' }}"
+            }
+          ]
+        },
+        "options": {
+          "maxTokensToSample": 2000
+        }
+      },
+      "id": "claude-brief",
+      "name": "Claude — Brief Oluştur",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "value": "={{ $env.CONTENT_BRIEF_SHEET_ID }}", "mode": "id" },
+        "sheetName": { "value": "Briefs", "mode": "name" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "values": {
+            "string": [
+              { "name": "Tarih", "value": "={{ $now.format('yyyy-MM-dd') }}" },
+              { "name": "Anahtar Kelime", "value": "={{ $('Brief İstek Webhook').item.json.body.keyword }}" },
+              { "name": "Brief", "value": "={{ $json.text }}" },
+              { "name": "Durum", "value": "Beklemede" }
+            ]
+          }
+        }
+      },
+      "id": "save-brief",
+      "name": "Sheets'e Kaydet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.4,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { brief: $('Claude — Brief Oluştur').item.json.text } }];"
+      },
+      "id": "return-brief",
+      "name": "Brief Döndür",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 400]
+    }
+  ],
+  "connections": {
+    "Brief İstek Webhook": { "main": [[{ "node": "GSC — İlgili Sorgular", "type": "main", "index": 0 }]] },
+    "GSC — İlgili Sorgular": { "main": [[{ "node": "Claude — Brief Oluştur", "type": "main", "index": 0 }]] },
+    "Claude — Brief Oluştur": {
+      "main": [[
+        { "node": "Sheets'e Kaydet", "type": "main", "index": 0 },
+        { "node": "Brief Döndür", "type": "main", "index": 0 }
+      ]]
+    }
+  },
+  "_meta": {
+    "description": "Anahtar kelime alır, GSC'den ilgili sorguları çeker, Claude API ile tam içerik brief oluşturur. Webhook yanıtı olarak brief'i döndürür ve Sheets'e kaydeder.",
+    "trigger": "POST /albanexa-brief { keyword: '...', targetPage: '...' }",
+    "envVars": ["GSC_OAUTH2_CREDENTIALS", "ANTHROPIC_API_KEY", "CONTENT_BRIEF_SHEET_ID"],
+    "category": "Content Intelligence"
+  }
+}

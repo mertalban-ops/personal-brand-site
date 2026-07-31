@@ -1,0 +1,105 @@
+{
+  "name": "Albanexa — Kırık Link Monitörü",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 11 * * 0" }] }
+      },
+      "id": "trigger-weekly",
+      "name": "Her Pazar 11:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://www.albanexa.com/sitemap.xml"
+      },
+      "id": "fetch-sitemap",
+      "name": "Sitemap Çek",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const xml = $input.item.json.data || '';\nconst urls = [];\nconst regex = /<loc>(.*?)<\\/loc>/g;\nlet match;\nwhile ((match = regex.exec(xml)) !== null) urls.push(match[1]);\nreturn urls.map(url => ({ json: { url } }));"
+      },
+      "id": "parse-urls",
+      "name": "URL'leri Ayıkla",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "response": { "response": { "fullResponse": true, "neverError": true } },
+          "redirect": { "redirect": { "followRedirects": true } },
+          "timeout": 10000
+        }
+      },
+      "id": "check-url",
+      "name": "HTTP Durum Kontrol",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [{ "value1": "={{ $json.statusCode }}", "operation": "largerEqual", "value2": 400 }]
+        }
+      },
+      "id": "filter-broken",
+      "name": "Kırık Linkleri Filtrele",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nif (items.length === 0) return [{ json: { message: '✅ *Kırık Link Yok*\\nTüm sayfalar erişilebilir.' } }];\nconst list = items.map(i => `• ${i.json.url} → *${i.json.statusCode}*`).join('\\n');\nreturn [{ json: { message: `🔴 *${items.length} Kırık Link Tespit Edildi*\\n\\n${list}` } }];"
+      },
+      "id": "build-report",
+      "name": "Rapor Oluştur",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chat_id", "value": "={{ $env.TELEGRAM_CHAT_ID }}" },
+            { "name": "text", "value": "={{ $json.message }}" },
+            { "name": "parse_mode", "value": "Markdown" }
+          ]
+        }
+      },
+      "id": "send-report",
+      "name": "Telegram'a Gönder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1560, 300]
+    }
+  ],
+  "connections": {
+    "Her Pazar 11:00": { "main": [[{ "node": "Sitemap Çek", "type": "main", "index": 0 }]] },
+    "Sitemap Çek": { "main": [[{ "node": "URL'leri Ayıkla", "type": "main", "index": 0 }]] },
+    "URL'leri Ayıkla": { "main": [[{ "node": "HTTP Durum Kontrol", "type": "main", "index": 0 }]] },
+    "HTTP Durum Kontrol": { "main": [[{ "node": "Kırık Linkleri Filtrele", "type": "main", "index": 0 }]] },
+    "Kırık Linkleri Filtrele": { "main": [[{ "node": "Rapor Oluştur", "type": "main", "index": 0 }]] },
+    "Rapor Oluştur": { "main": [[{ "node": "Telegram'a Gönder", "type": "main", "index": 0 }]] }
+  },
+  "_meta": {
+    "description": "Her Pazar sitemap'teki tüm URL'lerin HTTP durumunu kontrol eder. 400+ dönen sayfalar Telegram'a kırmızı uyarı olarak gönderilir.",
+    "envVars": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"],
+    "schedule": "Pazar 11:00",
+    "category": "SEO Monitoring"
+  }
+}
