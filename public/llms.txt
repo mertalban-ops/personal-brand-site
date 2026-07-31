@@ -46,3 +46,9 @@ Next.js, React, TypeScript, Supabase, PostgreSQL, n8n, Expo (React Native), Node
 - /studyo — Stüdyo ve kurucu hakkında
 - /iletisim — İletişim ve ücretsiz keşif görüşmesi
 - /rehber — KOBİ'ler için dijital operasyon rehberleri (stok takibi, cari hesap, özel yazılım)
+- /rehber/stok-takip-programi-kobiler-icin — Stok takip programı nedir, Excel neden yetersiz, özel sistem nasıl çalışır
+- /rehber/cari-hesap-takip-sistemi-nedir — Cari hesap takip sistemi, vadeli satış ve tahsilat yönetimi rehberi
+- /rehber/is-takip-sistemi-nedir-kobiler-icin — İş takip sistemi nedir, hangi işletmeler için gereklidir, Excel ve WhatsApp'tan farkı
+- /rehber/excel-yerine-ozel-stok-takip-sistemi — Excel'den özel stok takip sistemine geçiş rehberi ve karşılaştırma
+- /rehber/erp-alternatifi-kucuk-isletmeler-icin — ERP yerine özel yazılım: KOBİ'ler için karar ve karşılaştırma rehberi
+- /rehber/web-uygulamasi-yaptirmak-surec-ve-maliyet — Web uygulaması yaptırma süreci, maliyet faktörleri ve dikkat noktaları
