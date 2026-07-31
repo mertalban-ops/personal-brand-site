@@ -75,23 +75,50 @@ const publishedArticles = [
     readingTime: 8,
     publishedAt: "2026-07-31",
   },
-];
-
-const plannedArticles = [
+  {
+    slug: "whatsapp-is-takibi-neden-yanlis",
+    title: "WhatsApp ile İş Takibi Neden Yanlış?",
+    description:
+      "WhatsApp grubunda sipariş, görev ve müşteri takibi neden işletmelere zarar verir? 7 kritik sorun ve profesyonel alternatif.",
+    category: "İş Takip & Operasyon Yönetimi",
+    readingTime: 6,
+    publishedAt: "2026-07-31",
+  },
   {
     slug: "ozel-yazilim-maliyeti-ve-fiyatlandirma",
     title: "Özel Yazılım Ne Kadar Tutar? Türkiye Fiyat Rehberi",
-    description: "KOBİ'ler için özel yazılım geliştirme maliyetlerini etkileyen faktörler.",
+    description:
+      "KOBİ'ler için özel yazılım geliştirme maliyetini etkileyen faktörler, gerçekçi bütçe aralıkları ve gizli maliyet tuzakları.",
+    category: "Yazılım Seçimi & Strateji",
+    readingTime: 7,
+    publishedAt: "2026-07-31",
   },
   {
     slug: "saas-urun-nasil-gelistirilir",
     title: "SaaS Ürün Nasıl Geliştirilir? Başlangıçtan Lansmana",
-    description: "Sektörel problemi çözen bir yazılımı abonelik modeline dönüştürme rehberi.",
+    description:
+      "Sektörel problemi çözen yazılımı abonelik modeline dönüştürme rehberi. Multi-tenant mimari, fiyatlandırma ve teknik altyapı kararları.",
+    category: "SaaS & Ürün Geliştirme",
+    readingTime: 10,
+    publishedAt: "2026-07-31",
+  },
+];
+
+const plannedArticles = [
+  {
+    slug: "izmir-yazilim-gelistirme-firmalari",
+    title: "İzmir'de Yazılım Geliştirme: Doğru Firma Nasıl Seçilir?",
+    description: "İzmir merkezli işletmeler için yazılım firması seçim rehberi.",
   },
   {
-    slug: "whatsapp-is-takibi-neden-yanlis",
-    title: "WhatsApp ile İş Takibi Neden Yanlış?",
-    description: "WhatsApp'ın iş koordinasyonu için neden yetersiz kaldığının analizi.",
+    slug: "otomasyon-ile-verimliligi-artirma",
+    title: "Operasyon Otomasyonu ile Verimliliği Artırma",
+    description: "n8n ile tekrar eden işletme süreçlerini otomatikleştirme rehberi.",
+  },
+  {
+    slug: "web-uygulamasi-nedir-ne-ise-yarar",
+    title: "Web Uygulaması Nedir, Ne İşe Yarar?",
+    description: "Web sitesi ile web uygulaması arasındaki fark ve hangi işletmelere gerektiği.",
   },
 ];
 

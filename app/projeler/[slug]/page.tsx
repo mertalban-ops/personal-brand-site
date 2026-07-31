@@ -107,6 +107,8 @@ export default async function ProjectDetailPage({ params }: Props) {
         "@id": `${siteConfig.siteUrl}/projeler/${slug}#article`,
         "headline": `${project.name} — Vaka Çalışması`,
         "description": project.caseSummary,
+        "datePublished": "2025-07-01",
+        "dateModified": "2026-07-31",
         "author": { "@id": `${siteConfig.siteUrl}/#person` },
         "publisher": { "@id": `${siteConfig.siteUrl}/#organization` },
         "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteConfig.siteUrl}/projeler/${slug}` }

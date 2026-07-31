@@ -52,3 +52,6 @@ Next.js, React, TypeScript, Supabase, PostgreSQL, n8n, Expo (React Native), Node
 - /rehber/excel-yerine-ozel-stok-takip-sistemi — Excel'den özel stok takip sistemine geçiş rehberi ve karşılaştırma
 - /rehber/erp-alternatifi-kucuk-isletmeler-icin — ERP yerine özel yazılım: KOBİ'ler için karar ve karşılaştırma rehberi
 - /rehber/web-uygulamasi-yaptirmak-surec-ve-maliyet — Web uygulaması yaptırma süreci, maliyet faktörleri ve dikkat noktaları
+- /rehber/whatsapp-is-takibi-neden-yanlis — WhatsApp ile iş takibinin 7 kritik sorunu ve profesyonel alternatif
+- /rehber/ozel-yazilim-maliyeti-ve-fiyatlandirma — Türkiye'de özel yazılım geliştirme maliyetleri ve bütçe rehberi
+- /rehber/saas-urun-nasil-gelistirilir — SaaS ürün geliştirme: multi-tenant mimari, abonelik modeli ve teknik altyapı

@@ -82,9 +82,12 @@ export default function RootLayout({
         "name": siteConfig.brandName,
         "description": "Albanexa, İzmir merkezli, Türkiye geneline ve uluslararası uzaktan projelere hizmet veren Mert Alban tarafından yönetilen bağımsız dijital ürün stüdyosudur. İşletmeler için özel iş takip sistemleri, stok ve cari hesap yazılımları, kurumsal web siteleri ve SaaS altyapıları geliştirmektedir.",
         "url": siteConfig.siteUrl,
+        "foundingDate": "2024",
         "logo": {
           "@type": "ImageObject",
-          "url": `${siteConfig.siteUrl}/logo.png`
+          "url": `${siteConfig.siteUrl}/logo.png`,
+          "width": 200,
+          "height": 200
         },
         "email": siteConfig.contactEmail,
         "telephone": `+${siteConfig.whatsappNumber}`,
