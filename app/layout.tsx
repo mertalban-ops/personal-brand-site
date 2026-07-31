@@ -25,6 +25,7 @@ import { ActiveProjectProvider } from "@/context/ActiveProjectContext";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { Analytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { siteConfig } from "@/data/config";
 import ClientSceneBackground from "@/components/ClientSceneBackground";
 
@@ -186,6 +187,7 @@ export default function RootLayout({
           </ActiveProjectProvider>
         </LanguageProvider>
       </body>
+      <GoogleAnalytics gaId="G-EBXG0KWWV0" />
     </html>
   );
 }
