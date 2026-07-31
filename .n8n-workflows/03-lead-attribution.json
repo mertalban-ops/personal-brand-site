@@ -1,0 +1,107 @@
+{
+  "name": "Albanexa — Lead Attribution & CRM Kaydı",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "albanexa-lead",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-lead",
+      "name": "İletişim Formu Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.item.json.body || $input.item.json;\nconst now = new Date().toISOString();\n\n// Kaynak belirleme\nconst referer = body.referer || body._referer || '';\nlet source = 'Direct';\nif (referer.includes('google')) source = 'Google Organic';\nelse if (referer.includes('linkedin')) source = 'LinkedIn';\nelse if (referer.includes('instagram')) source = 'Instagram';\nelse if (referer.includes('t.co') || referer.includes('twitter')) source = 'Twitter/X';\nelse if (referer.includes('albanexa.com/rehber')) source = 'Rehber (Internal)';\nelse if (referer.includes('albanexa.com')) source = 'Internal';\nelse if (referer.length > 0) source = referer.split('/')[2] || 'Other';\n\n// Öncelik skoru\nlet priority = 'Normal';\nconst budget = body.budget || '';\nif (budget.includes('50k') || budget.includes('150k') || budget.includes('300k')) priority = 'Yüksek';\nif (budget.includes('5k-15k')) priority = 'Düşük';\n\nreturn [{\n  json: {\n    name: body.name || body.fullName || '',\n    email: body.email || '',\n    phone: body.phone || '',\n    company: body.company || '',\n    message: body.message || '',\n    service: body.service || body.interest || '',\n    budget: budget,\n    source: source,\n    priority: priority,\n    page: body.page || referer,\n    createdAt: now,\n    status: 'Yeni'\n  }\n}];"
+      },
+      "id": "enrich-lead",
+      "name": "Lead Zenginleştir & Kaynak Belirle",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "value": "={{ $env.LEADS_SHEET_ID }}", "mode": "id" },
+        "sheetName": { "value": "Leads", "mode": "name" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "values": {
+            "string": [
+              { "name": "Tarih", "value": "={{ $json.createdAt }}" },
+              { "name": "Ad Soyad", "value": "={{ $json.name }}" },
+              { "name": "E-posta", "value": "={{ $json.email }}" },
+              { "name": "Telefon", "value": "={{ $json.phone }}" },
+              { "name": "Şirket", "value": "={{ $json.company }}" },
+              { "name": "Mesaj", "value": "={{ $json.message }}" },
+              { "name": "Hizmet", "value": "={{ $json.service }}" },
+              { "name": "Bütçe", "value": "={{ $json.budget }}" },
+              { "name": "Kaynak", "value": "={{ $json.source }}" },
+              { "name": "Öncelik", "value": "={{ $json.priority }}" },
+              { "name": "Durum", "value": "={{ $json.status }}" }
+            ]
+          }
+        }
+      },
+      "id": "save-sheets",
+      "name": "Google Sheets'e Kaydet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.4,
+      "position": [680, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chat_id", "value": "={{ $env.TELEGRAM_CHAT_ID }}" },
+            { "name": "text", "value": "={{ '🎯 *Yeni Lead!*\\n\\n👤 ' + $json.name + '\\n📧 ' + $json.email + '\\n📞 ' + $json.phone + '\\n🏢 ' + $json.company + '\\n\\n💰 Bütçe: ' + ($json.budget || '—') + '\\n🔧 Hizmet: ' + ($json.service || '—') + '\\n📍 Kaynak: ' + $json.source + '\\n⚡ Öncelik: ' + $json.priority + '\\n\\n💬 ' + $json.message.substring(0, 200) }}" },
+            { "name": "parse_mode", "value": "Markdown" }
+          ]
+        }
+      },
+      "id": "notify-telegram",
+      "name": "Telegram Bildirimi",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "fromEmail": "mert@albanexa.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Albanexa — Talebiniz Alındı",
+        "emailType": "html",
+        "message": "<html><body style='font-family:sans-serif;color:#1a1a2e;max-width:560px;margin:0 auto;padding:32px'><p>Merhaba {{ $json.name }},</p><p>İletişim talebiniz alındı. En kısa sürede, genellikle <strong>24 saat içinde</strong>, size dönüş yapacağım.</p><p>Bu süre zarfında Albanexa'nın referans projelerine göz atabilirsiniz:</p><ul><li><a href='https://www.albanexa.com/projeler/stockapp'>StokApp — Stok & Cari Hesap Sistemi</a></li><li><a href='https://www.albanexa.com/projeler/hezer-auto-service'>Hezer Auto Service — İş Emri Takip</a></li></ul><p>Görüşmek üzere,<br><strong>Mert Alban</strong><br>Albanexa</p><p style='font-size:12px;color:#666'>mert@albanexa.com · <a href='https://www.albanexa.com'>albanexa.com</a></p></body></html>"
+      },
+      "id": "auto-reply",
+      "name": "Otomatik Yanıt E-postası",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [680, 600]
+    }
+  ],
+  "connections": {
+    "İletişim Formu Webhook": { "main": [[{ "node": "Lead Zenginleştir & Kaynak Belirle", "type": "main", "index": 0 }]] },
+    "Lead Zenginleştir & Kaynak Belirle": {
+      "main": [[
+        { "node": "Google Sheets'e Kaydet", "type": "main", "index": 0 },
+        { "node": "Telegram Bildirimi", "type": "main", "index": 0 },
+        { "node": "Otomatik Yanıt E-postası", "type": "main", "index": 0 }
+      ]]
+    }
+  },
+  "_meta": {
+    "description": "İletişim formu webhook'u aldığında: kaynak (Google/LinkedIn/Rehber) belirler, öncelik skoru atar, Google Sheets'e kaydeder, Telegram bildirimi gönderir ve müşteriye otomatik yanıt e-postası yollar.",
+    "envVars": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "LEADS_SHEET_ID", "SMTP_CREDENTIALS"],
+    "trigger": "Webhook (POST /albanexa-lead)",
+    "category": "CRM & Lead Management"
+  }
+}

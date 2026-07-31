@@ -1,0 +1,98 @@
+{
+  "name": "Albanexa — Marka Monitoring (Google Alerts RSS)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 9 * * 1,4" }] }
+      },
+      "id": "trigger-biweekly",
+      "name": "Pazartesi & Perşembe 09:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://www.google.com/alerts/feeds/{{ $env.GOOGLE_ALERTS_TOKEN_ALBANEXA }}/{{ $env.GOOGLE_ALERTS_FEED_ALBANEXA }}",
+        "options": {}
+      },
+      "id": "fetch-brand-rss",
+      "name": "Albanexa RSS",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1,
+      "position": [460, 200]
+    },
+    {
+      "parameters": {
+        "url": "https://www.google.com/alerts/feeds/{{ $env.GOOGLE_ALERTS_TOKEN_MERT }}/{{ $env.GOOGLE_ALERTS_FEED_MERT }}",
+        "options": {}
+      },
+      "id": "fetch-founder-rss",
+      "name": "Mert Alban RSS",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "id": "merge-feeds",
+      "name": "Beslemeleri Birleştir",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nif (items.length === 0) return [{ json: { message: 'ℹ️ Bu hafta marka hakkında yeni içerik bulunamadı.' } }];\n\nconst list = items.slice(0, 10).map(i => {\n  const title = i.json.title || 'Başlıksız';\n  const link = i.json.link || '';\n  const date = i.json.pubDate ? new Date(i.json.pubDate).toLocaleDateString('tr-TR') : '?';\n  return `• [${title.substring(0,60)}](${link}) — ${date}`;\n}).join('\\n');\n\nreturn [{\n  json: {\n    message: `🔍 *Marka Monitoring — ${new Date().toLocaleDateString('tr-TR')}*\\n\\n${list}\\n\\nToplam: ${items.length} sonuç`\n  }\n}];"
+      },
+      "id": "format-brand",
+      "name": "Rapor Oluştur",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chat_id", "value": "={{ $env.TELEGRAM_CHAT_ID }}" },
+            { "name": "text", "value": "={{ $json.message }}" },
+            { "name": "parse_mode", "value": "Markdown" },
+            { "name": "disable_web_page_preview", "value": true }
+          ]
+        }
+      },
+      "id": "send-brand-report",
+      "name": "Telegram'a Gönder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 300]
+    }
+  ],
+  "connections": {
+    "Pazartesi & Perşembe 09:00": {
+      "main": [[
+        { "node": "Albanexa RSS", "type": "main", "index": 0 },
+        { "node": "Mert Alban RSS", "type": "main", "index": 0 }
+      ]]
+    },
+    "Albanexa RSS": { "main": [[{ "node": "Beslemeleri Birleştir", "type": "main", "index": 0 }]] },
+    "Mert Alban RSS": { "main": [[{ "node": "Beslemeleri Birleştir", "type": "main", "index": 1 }]] },
+    "Beslemeleri Birleştir": { "main": [[{ "node": "Rapor Oluştur", "type": "main", "index": 0 }]] },
+    "Rapor Oluştur": { "main": [[{ "node": "Telegram'a Gönder", "type": "main", "index": 0 }]] }
+  },
+  "_meta": {
+    "description": "Google Alerts RSS beslemelerinden 'Albanexa' ve 'Mert Alban' aramaları izler. Pazartesi ve Perşembe Telegram'a özet gönderir.",
+    "setup": "1. Google Alerts'te 'Albanexa' ve 'Mert Alban' için uyarı oluşturun, RSS seçin. 2. RSS URL'lerini env değişkenlerine ekleyin.",
+    "envVars": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "GOOGLE_ALERTS_TOKEN_ALBANEXA", "GOOGLE_ALERTS_FEED_ALBANEXA", "GOOGLE_ALERTS_TOKEN_MERT", "GOOGLE_ALERTS_FEED_MERT"],
+    "schedule": "Pazartesi & Perşembe 09:00",
+    "category": "Brand Monitoring"
+  }
+}

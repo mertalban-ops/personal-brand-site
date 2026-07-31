@@ -1,0 +1,76 @@
+{
+  "name": "Albanexa — Search Console Haftalık Özet",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 8 * * 1" }] }
+      },
+      "id": "trigger-weekly",
+      "name": "Her Pazartesi 08:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://www.googleapis.com/webmasters/v3/sites/https%3A%2F%2Fwww.albanexa.com%2F/searchAnalytics/query",
+        "authentication": "oAuth2",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "startDate", "value": "={{ $now.minus({days: 7}).format('yyyy-MM-dd') }}" },
+            { "name": "endDate", "value": "={{ $now.minus({days: 1}).format('yyyy-MM-dd') }}" },
+            { "name": "dimensions", "value": ["query", "page"] },
+            { "name": "rowLimit", "value": 25 }
+          ]
+        }
+      },
+      "id": "gsc-clicks",
+      "name": "GSC — Son 7 Gün Verisi",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = $input.item.json.rows || [];\nconst sorted = [...rows].sort((a,b) => b.clicks - a.clicks);\nconst top10 = sorted.slice(0, 10);\n\nconst totalClicks = rows.reduce((s, r) => s + r.clicks, 0);\nconst totalImpressions = rows.reduce((s, r) => s + r.impressions, 0);\nconst avgCtr = totalImpressions > 0 ? ((totalClicks / totalImpressions) * 100).toFixed(1) : 0;\nconst avgPos = rows.length > 0 ? (rows.reduce((s,r) => s + r.position, 0) / rows.length).toFixed(1) : 0;\n\nconst table = top10.map(r =>\n  `| ${r.keys[0].substring(0,40)} | ${r.clicks} | ${r.impressions} | ${(r.ctr*100).toFixed(1)}% | ${r.position.toFixed(1)} |`\n).join('\\n');\n\nreturn [{\n  json: {\n    summary: `📊 *Albanexa Search Console — Haftalık Özet*\\n` +\n      `📅 Son 7 gün\\n\\n` +\n      `• Toplam tıklama: *${totalClicks}*\\n` +\n      `• Gösterim: *${totalImpressions}*\\n` +\n      `• Ort. CTR: *${avgCtr}%*\\n` +\n      `• Ort. Konum: *${avgPos}*\\n\\n` +\n      `*Top 10 Sorgu:*\\n` +\n      `| Sorgu | Tık | Gösterim | CTR | Konum |\\n` +\n      `|---|---|---|---|---|\\n` +\n      table\n  }\n}];"
+      },
+      "id": "format-report",
+      "name": "Rapor Oluştur",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chat_id", "value": "={{ $env.TELEGRAM_CHAT_ID }}" },
+            { "name": "text", "value": "={{ $json.summary }}" },
+            { "name": "parse_mode", "value": "Markdown" }
+          ]
+        }
+      },
+      "id": "send-telegram",
+      "name": "Telegram'a Gönder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 300]
+    }
+  ],
+  "connections": {
+    "Her Pazartesi 08:00": { "main": [[{ "node": "GSC — Son 7 Gün Verisi", "type": "main", "index": 0 }]] },
+    "GSC — Son 7 Gün Verisi": { "main": [[{ "node": "Rapor Oluştur", "type": "main", "index": 0 }]] },
+    "Rapor Oluştur": { "main": [[{ "node": "Telegram'a Gönder", "type": "main", "index": 0 }]] }
+  },
+  "_meta": {
+    "description": "Her Pazartesi 08:00'de Search Console'dan son 7 günün tıklama, gösterim, CTR ve konum verilerini çekip Telegram'a özet gönderir.",
+    "envVars": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "GSC_OAUTH2_CREDENTIALS"],
+    "schedule": "Pazartesi 08:00",
+    "category": "SEO Monitoring"
+  }
+}

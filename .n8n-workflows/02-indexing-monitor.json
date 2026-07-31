@@ -1,0 +1,110 @@
+{
+  "name": "Albanexa — Yeni Sayfa İndeksleme Monitörü",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 10 * * *" }] }
+      },
+      "id": "trigger-daily",
+      "name": "Her Gün 10:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://www.albanexa.com/sitemap.xml",
+        "options": {}
+      },
+      "id": "fetch-sitemap",
+      "name": "Sitemap Çek",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const xml = $input.item.json.data || '';\nconst urls = [];\nconst regex = /<loc>(.*?)<\\/loc>/g;\nlet match;\nwhile ((match = regex.exec(xml)) !== null) {\n  urls.push(match[1]);\n}\nreturn urls.map(url => ({ json: { url } }));"
+      },
+      "id": "parse-urls",
+      "name": "URL'leri Ayıkla",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://www.googleapis.com/webmasters/v3/sites/https%3A%2F%2Fwww.albanexa.com%2F/urlInspection/index:inspect",
+        "authentication": "oAuth2",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "inspectionUrl", "value": "={{ $json.url }}" },
+            { "name": "siteUrl", "value": "https://www.albanexa.com/" }
+          ]
+        }
+      },
+      "id": "check-index",
+      "name": "İndeks Durumu Kontrol",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [{ "value1": "={{ $json.inspectionResult.indexStatusResult.coverageState }}", "operation": "notEqual", "value2": "Submitted and indexed" }]
+        }
+      },
+      "id": "filter-not-indexed",
+      "name": "İndekslenmemişleri Filtrele",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nif (items.length === 0) return [{ json: { message: '✅ Tüm sayfalar indekslenmiş.' } }];\nconst list = items.map(i => `• ${i.json.inspectionResult?.inspectionUrl} — ${i.json.inspectionResult?.indexStatusResult?.coverageState}`).join('\\n');\nreturn [{ json: { message: `⚠️ *İndekslenmemiş Sayfalar (${items.length})*\\n${list}` } }];"
+      },
+      "id": "build-alert",
+      "name": "Uyarı Mesajı Oluştur",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chat_id", "value": "={{ $env.TELEGRAM_CHAT_ID }}" },
+            { "name": "text", "value": "={{ $json.message }}" },
+            { "name": "parse_mode", "value": "Markdown" }
+          ]
+        }
+      },
+      "id": "alert-telegram",
+      "name": "Telegram Uyarısı",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1560, 200]
+    }
+  ],
+  "connections": {
+    "Her Gün 10:00": { "main": [[{ "node": "Sitemap Çek", "type": "main", "index": 0 }]] },
+    "Sitemap Çek": { "main": [[{ "node": "URL'leri Ayıkla", "type": "main", "index": 0 }]] },
+    "URL'leri Ayıkla": { "main": [[{ "node": "İndeks Durumu Kontrol", "type": "main", "index": 0 }]] },
+    "İndeks Durumu Kontrol": { "main": [[{ "node": "İndekslenmemişleri Filtrele", "type": "main", "index": 0 }]] },
+    "İndekslenmemişleri Filtrele": { "main": [[{ "node": "Uyarı Mesajı Oluştur", "type": "main", "index": 0 }]] },
+    "Uyarı Mesajı Oluştur": { "main": [[{ "node": "Telegram Uyarısı", "type": "main", "index": 0 }]] }
+  },
+  "_meta": {
+    "description": "Her gün sitemap'teki URL'leri GSC URL Inspection API ile kontrol eder. İndekslenmemiş sayfalar varsa Telegram uyarısı gönderir.",
+    "envVars": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "GSC_OAUTH2_CREDENTIALS"],
+    "schedule": "Günlük 10:00",
+    "category": "SEO Monitoring"
+  }
+}

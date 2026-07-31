@@ -1,0 +1,94 @@
+{
+  "name": "Albanexa — Deploy Sonrası Otomatik QA",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "albanexa-deploy-hook",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "vercel-webhook",
+      "name": "Vercel Deploy Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [{ "value1": "={{ $json.body.type }}", "operation": "equal", "value2": "deployment.ready" }]
+        }
+      },
+      "id": "filter-ready",
+      "name": "Sadece Başarılı Deploy",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const criticalPages = [\n  'https://www.albanexa.com',\n  'https://www.albanexa.com/cozumler',\n  'https://www.albanexa.com/projeler',\n  'https://www.albanexa.com/iletisim',\n  'https://www.albanexa.com/rehber',\n  'https://www.albanexa.com/izmir-yazilim-gelistirme',\n  'https://www.albanexa.com/sitemap.xml',\n  'https://www.albanexa.com/robots.txt'\n];\nreturn criticalPages.map(url => ({ json: { url } }));"
+      },
+      "id": "define-pages",
+      "name": "Kontrol Edilecek Sayfalar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": { "redirect": { "redirect": { "followRedirects": true } } }
+      },
+      "id": "http-check",
+      "name": "HTTP Durum Kontrolü",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst failed = items.filter(i => (i.json.statusCode || 200) >= 400);\nconst ok = items.filter(i => (i.json.statusCode || 200) < 400);\n\nconst deployUrl = $('Vercel Deploy Webhook').item.json.body?.deployment?.url || 'albanexa.com';\nconst duration = Date.now() - new Date($('Vercel Deploy Webhook').item.json.body?.createdAt || Date.now()).getTime();\n\nlet status = failed.length === 0 ? '✅' : '❌';\nlet report = `${status} *Albanexa Deploy QA*\\n`;\nreport += `🚀 ${deployUrl}\\n`;\nreport += `📊 ${ok.length}/${items.length} sayfa OK\\n\\n`;\n\nif (failed.length > 0) {\n  report += `*Başarısız:*\\n`;\n  failed.forEach(i => { report += `• ${i.json.url} → ${i.json.statusCode}\\n`; });\n} else {\n  report += `*Tüm kritik sayfalar erişilebilir.*`;\n}\n\nreturn [{ json: { report, failed: failed.length } }];"
+      },
+      "id": "build-qa-report",
+      "name": "QA Raporu Oluştur",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chat_id", "value": "={{ $env.TELEGRAM_CHAT_ID }}" },
+            { "name": "text", "value": "={{ $json.report }}" },
+            { "name": "parse_mode", "value": "Markdown" }
+          ]
+        }
+      },
+      "id": "send-qa-report",
+      "name": "QA Sonucunu Gönder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 300]
+    }
+  ],
+  "connections": {
+    "Vercel Deploy Webhook": { "main": [[{ "node": "Sadece Başarılı Deploy", "type": "main", "index": 0 }]] },
+    "Sadece Başarılı Deploy": { "main": [[{ "node": "Kontrol Edilecek Sayfalar", "type": "main", "index": 0 }]] },
+    "Kontrol Edilecek Sayfalar": { "main": [[{ "node": "HTTP Durum Kontrolü", "type": "main", "index": 0 }]] },
+    "HTTP Durum Kontrolü": { "main": [[{ "node": "QA Raporu Oluştur", "type": "main", "index": 0 }]] },
+    "QA Raporu Oluştur": { "main": [[{ "node": "QA Sonucunu Gönder", "type": "main", "index": 0 }]] }
+  },
+  "_meta": {
+    "description": "Vercel'den deployment.ready webhook alındığında 8 kritik sayfanın HTTP durumunu kontrol eder. Hata varsa Telegram'a kırmızı uyarı, başarılıysa yeşil onay gönderir.",
+    "setup": "Vercel proje ayarlarından Webhooks → Add → bu n8n webhook URL'sini girin, 'deployment.ready' eventi seçin.",
+    "envVars": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"],
+    "trigger": "Webhook (Vercel deployment.ready)",
+    "category": "DevOps & QA"
+  }
+}
