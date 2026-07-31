@@ -64,6 +64,11 @@ export const metadata: Metadata = {
   verification: {
     google: "c20fOLWvAmiLp3Cfx8gevf0GvUXJJwMWtf6FtLSoa64",
   },
+  icons: {
+    icon: "/albanexa-logo.png",
+    shortcut: "/albanexa-logo.png",
+    apple: "/albanexa-logo.png",
+  },
 };
 
 export default function RootLayout({
