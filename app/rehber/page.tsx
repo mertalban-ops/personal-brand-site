@@ -13,12 +13,12 @@ export const metadata = buildPageMetadata({
 });
 
 // Hedef sorgular — gelecek makaleler:
-// "excel yerine stok takibi"        → /rehber/excel-yerine-ozel-stok-takip-sistemi
-// "iş takip sistemi nedir"          → /rehber/is-takip-sistemi-nedir-kobiler-icin
-// "erp alternatifi kobiler için"    → /rehber/erp-alternatifi-kucuk-isletmeler-icin
 // "özel yazılım fiyatları"          → /rehber/ozel-yazilim-maliyeti-ve-fiyatlandirma
 // "saas urun gelistirme"            → /rehber/saas-urun-nasil-gelistirilir
-// "web uygulaması yaptırmak"        → /rehber/web-uygulamasi-yaptirmak-surec-ve-maliyet
+// "whatsapp iş takibi"              → /rehber/whatsapp-is-takibi-neden-yanlis
+// "izmir yazılım geliştirme"        → /rehber/izmir-yazilim-gelistirme-firmalari
+// "web uygulaması nedir"            → /rehber/web-uygulamasi-nedir-ne-ise-yarar
+// "iş otomasyonu kobiler"           → /rehber/otomasyon-ile-verimliligi-artirma
 
 const publishedArticles = [
   {
@@ -39,23 +39,59 @@ const publishedArticles = [
     readingTime: 6,
     publishedAt: "2025-07-29",
   },
+  {
+    slug: "is-takip-sistemi-nedir-kobiler-icin",
+    title: "İş Takip Sistemi Nedir? KOBİ'ler İçin Kapsamlı Rehber",
+    description:
+      "İş takip sistemi nedir, hangi işletmeler için gereklidir, Excel ve WhatsApp'tan farkı nedir? Operasyonunu dijitalleştirmek isteyen KOBİ'ler için eksiksiz rehber.",
+    category: "İş Takip & Operasyon Yönetimi",
+    readingTime: 8,
+    publishedAt: "2026-07-31",
+  },
+  {
+    slug: "excel-yerine-ozel-stok-takip-sistemi",
+    title: "Excel Yerine Özel Stok Takip Sistemi: Fark ve Geçiş Rehberi",
+    description:
+      "Excel'i stok takibinde neden terk etmelisiniz? Özel stok takip sistemine geçişin avantajları, karşılaştırma tablosu ve adım adım geçiş planı.",
+    category: "Stok & Envanter Yönetimi",
+    readingTime: 7,
+    publishedAt: "2026-07-31",
+  },
+  {
+    slug: "erp-alternatifi-kucuk-isletmeler-icin",
+    title: "ERP Alternatifi: Küçük İşletmeler İçin Özel Yazılım",
+    description:
+      "Büyük ERP sistemleri KOBİ'ler için neden uygun değildir? Özel geliştirilmiş yazılım ERP'ye kıyasla nasıl daha iyi bir alternatif sunar?",
+    category: "Yazılım Seçimi & Strateji",
+    readingTime: 9,
+    publishedAt: "2026-07-31",
+  },
+  {
+    slug: "web-uygulamasi-yaptirmak-surec-ve-maliyet",
+    title: "Web Uygulaması Yaptırmak: Süreç, Maliyet ve Dikkat Edilecekler",
+    description:
+      "İşletmenize özel web uygulaması yaptırmayı düşünüyor musunuz? Süreç nasıl işler, maliyetler nasıl belirlenir, hangi soruları sormalısınız?",
+    category: "Yazılım Geliştirme & Dijitalleşme",
+    readingTime: 8,
+    publishedAt: "2026-07-31",
+  },
 ];
 
 const plannedArticles = [
   {
-    slug: "excel-yerine-ozel-stok-takip-sistemi",
-    title: "Excel Yerine Özel Stok Takip Sistemi: Geçiş Rehberi",
-    description: "Excel'den özel yazılıma geçişte dikkat edilmesi gerekenler ve kazanımlar.",
-  },
-  {
-    slug: "is-takip-sistemi-nedir-kobiler-icin",
-    title: "İş Takip Sistemi Nedir? WhatsApp'tan Sisteme Geçiş",
-    description: "Sipariş, görev ve servis süreçlerini dijitalleştirmenin pratik yolu.",
-  },
-  {
     slug: "ozel-yazilim-maliyeti-ve-fiyatlandirma",
-    title: "Özel Yazılım Ne Kadar Tutar? 2025 Türkiye Fiyat Rehberi",
+    title: "Özel Yazılım Ne Kadar Tutar? Türkiye Fiyat Rehberi",
     description: "KOBİ'ler için özel yazılım geliştirme maliyetlerini etkileyen faktörler.",
+  },
+  {
+    slug: "saas-urun-nasil-gelistirilir",
+    title: "SaaS Ürün Nasıl Geliştirilir? Başlangıçtan Lansmana",
+    description: "Sektörel problemi çözen bir yazılımı abonelik modeline dönüştürme rehberi.",
+  },
+  {
+    slug: "whatsapp-is-takibi-neden-yanlis",
+    title: "WhatsApp ile İş Takibi Neden Yanlış?",
+    description: "WhatsApp'ın iş koordinasyonu için neden yetersiz kaldığının analizi.",
   },
 ];
 
