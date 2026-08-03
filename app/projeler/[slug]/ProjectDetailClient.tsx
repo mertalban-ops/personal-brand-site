@@ -9,6 +9,8 @@ import CaseStudyNextStep from "@/components/projects/CaseStudyNextStep";
 import { getProjectBySlug, getProjects } from "@/data/projects";
 import { useLanguage } from "@/context/LanguageContext";
 import { notFound } from "next/navigation";
+import { useEffect } from "react";
+import { trackViewContent } from "@/lib/meta-events";
 
 // Dynamic lazy import of visual preview mockups
 import dynamic from "next/dynamic";
@@ -31,6 +33,10 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
   const project = getProjectBySlug(slug, language);
 
   if (!project) notFound();
+
+  useEffect(() => {
+    trackViewContent(slug);
+  }, [slug]);
 
   const isConcept = project.category === "concept-work";
 
