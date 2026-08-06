@@ -166,6 +166,25 @@ export const en: Dictionary = {
         slug: "hezer-auto-service",
       },
       {
+        name: "Hezer Otoşanzıman",
+        tagline: "Auto Service Corporate Website",
+        status: "Live",
+        problem:
+          "Hezer Otoşanzıman had no digital presence; potential customers couldn't find the shop online and had no way to verify its credibility.",
+        solution:
+          "A conversion-focused corporate website showcasing the shop's expertise, service scope, and contact information.",
+        approach: "Mobile-first, fast-loading design with a local SEO technical foundation to rank in local searches.",
+        benefit: "Potential customers now find the shop online and trust is established before the first contact.",
+        tech: ["Next.js", "Tailwind CSS", "TypeScript", "SEO"],
+        features: [
+          "Local SEO-optimized corporate presentation page",
+          "Service scope and expertise sections",
+          "Mobile-friendly fast contact and navigation structure",
+        ],
+        previewType: "auto-service",
+        slug: "hezer-otosanziman-site",
+      },
+      {
         name: "CARPASS",
         tagline: "AI-Powered Vehicle Risk Analysis SaaS Platform",
         status: "In Development",

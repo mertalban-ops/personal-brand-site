@@ -166,6 +166,25 @@ export const de: Dictionary = {
         slug: "hezer-auto-service",
       },
       {
+        name: "Hezer Otoşanzıman",
+        tagline: "Autoservice Unternehmenswebsite",
+        status: "Live",
+        problem:
+          "Hezer Otoşanzıman hatte keine digitale Präsenz; potenzielle Kunden konnten das Unternehmen nicht online finden und hatten keine Möglichkeit, die Glaubwürdigkeit zu prüfen.",
+        solution:
+          "Eine konversionsorientierte Unternehmenswebsite, die das Fachwissen, den Serviceumfang und die Kontaktdaten des Betriebs präsentiert.",
+        approach: "Mobile-first, schnell ladendes Design mit lokalem SEO-Fundament für bessere Sichtbarkeit in lokalen Suchergebnissen.",
+        benefit: "Potenzielle Kunden finden das Unternehmen jetzt online und Vertrauen wird vor dem ersten Kontakt aufgebaut.",
+        tech: ["Next.js", "Tailwind CSS", "TypeScript", "SEO"],
+        features: [
+          "Lokal SEO-optimierte Unternehmensdarstellungsseite",
+          "Serviceumfang- und Fachkompetenz-Sektionen",
+          "Mobilfreundliche schnelle Kontakt- und Navigationsstruktur",
+        ],
+        previewType: "auto-service",
+        slug: "hezer-otosanziman-site",
+      },
+      {
         name: "CARPASS",
         tagline: "KI-gestützte SaaS-Plattform für Fahrzeugrisikoanalyse",
         status: "In Entwicklung",
