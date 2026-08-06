@@ -7,6 +7,7 @@ import { submitContactForm } from "@/app/actions/contact";
 import { useLanguage } from "@/context/LanguageContext";
 import { siteConfig } from "@/data/config";
 import { track } from "@vercel/analytics";
+import { trackLead } from "@/lib/meta-events";
 
 type FormState = {
   name: string;
@@ -290,7 +291,7 @@ export default function ContactForm() {
 
       const result = await submitContactForm(null, formData);
       if (result.success) {
-        try { track("contact_form_submitted", { needType: form.needType, company: !!form.company }); } catch (err) {}
+        try { track("contact_form_submitted", { needType: form.needType, company: !!form.company }); trackLead(); } catch (err) {}
         setSuccessMsg(result.message);
         setErrorMsg(null);
       } else {

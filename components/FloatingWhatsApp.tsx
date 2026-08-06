@@ -4,6 +4,7 @@ import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/config";
 import { useLanguage } from "@/context/LanguageContext";
 import { track } from "@vercel/analytics";
+import { trackContact } from "@/lib/meta-events";
 
 export default function FloatingWhatsApp() {
   const { language } = useLanguage();
@@ -29,6 +30,7 @@ export default function FloatingWhatsApp() {
   const handleClick = () => {
     try {
       track("whatsapp_click", { location: "floating_widget", language });
+      trackContact();
     } catch (err) {
       // Ignore tracking error
     }
