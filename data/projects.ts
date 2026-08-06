@@ -216,9 +216,9 @@ export const projectsTr: Project[] = [
     role: "Web Tasarımcı & Geliştirici",
     previousWorkflow: "İşletmenin hiçbir dijital varlığı yoktu. Müşteriler yalnızca ağızdan ağıza tavsiyeyle ulaşabiliyordu.",
     clientTestimonial: {
-      author: "Hezer Otoşanzıman Sahibi",
-      role: "İşletme Sahibi",
-      text: "Şimdi borç takibi yapabiliyorum. Gelir giderlerimi takip edebiliyorum, işimi kolaylaştırdı ve çok pratik oldu. Mesela geçen araba teslim ettim, direkt adama PDF gönderdim — hem zamandan kazandım hem dükkana sistem oturttum."
+      author: "Serdar Hezer",
+      role: "Sahibi, Hezer Otoşanzıman",
+      text: "Artık borç takibini rahatça yapabiliyorum, gelir-giderimi anlık görebiliyorum. İşimi gerçekten kolaylaştırdı, çok pratik oldu. Geçen gün bir aracı teslim ederken müşteriye direkt PDF hesap ekstresi gönderdim — hem zamandan kazandım hem de dükkâna gerçek anlamda oturmuş bir sistemim oldu.",
     },
     caseModules: [
       {
@@ -608,9 +608,9 @@ export const projectsEn: Project[] = [
     role: "Web Designer & Developer",
     previousWorkflow: "The business had zero digital presence. Customers could only reach them through word-of-mouth referrals.",
     clientTestimonial: {
-      author: "Owner, Hezer Otoşanzıman",
-      role: "Business Owner",
-      text: "Now I can track debts and monitor my income and expenses — it made my job much easier. For example, last time I handed over a car, I sent the client a PDF right away. I saved time and finally got the business running like a proper system."
+      author: "Serdar Hezer",
+      role: "Owner, Hezer Otoşanzıman",
+      text: "I can now easily track debts and see my income and expenses in real time. It really made my job easier and it's very practical. The other day when I handed over a vehicle, I sent the customer a PDF account statement directly — I saved time and now I truly have a proper system running in my shop."
     },
     caseModules: [
       {
@@ -1000,9 +1000,9 @@ export const projectsDe: Project[] = [
     role: "Webdesigner & Entwickler",
     previousWorkflow: "Das Unternehmen hatte keinerlei digitale Präsenz. Kunden konnten nur über Mundpropaganda erreicht werden.",
     clientTestimonial: {
-      author: "Inhaber, Hezer Otoşanzıman",
-      role: "Geschäftsinhaber",
-      text: "Jetzt kann ich Schulden verfolgen und meine Einnahmen und Ausgaben überwachen — das hat meine Arbeit viel einfacher gemacht. Als ich das letzte Mal ein Auto übergab, habe ich dem Kunden sofort ein PDF geschickt. Ich habe Zeit gespart und endlich ein richtiges System im Laden."
+      author: "Serdar Hezer",
+      role: "Inhaber, Hezer Otoşanzıman",
+      text: "Ich kann jetzt mühelos Schulden verfolgen und meine Einnahmen und Ausgaben in Echtzeit einsehen. Es hat meinen Job wirklich erleichtert und ist sehr praktisch. Als ich neulich ein Fahrzeug übergab, habe ich dem Kunden direkt einen PDF-Kontoauszug geschickt — ich habe Zeit gespart und habe jetzt ein echtes System in meinem Laden."
     },
     caseModules: [
       {
