@@ -320,7 +320,7 @@ export const en: Dictionary = {
       },
       {
         q: "How is pricing determined and how long does the process take?",
-        a: "It varies depending on the size of the system and the number of modules (Inventory, Finance, Reports, Automation, etc.). In our first meeting, we analyze your operation and provide you with a clear budget and timeline (usually between 4 to 12 weeks).",
+        a: "It varies depending on the size of the system and the number of modules (Inventory, Finance, Reports, Automation, etc.). In our first meeting, we analyze your operation and provide you with a clear budget and timeline (usually between 2 to 8 weeks).",
       },
       {
         q: "Do you provide support after the system is delivered?",

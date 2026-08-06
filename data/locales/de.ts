@@ -320,7 +320,7 @@ export const de: Dictionary = {
       },
       {
         q: "Wie wird die Preisgestaltung festgelegt und wie lange dauert der Prozess?",
-        a: "Dies variiert je nach Größe des Systems und der Anzahl der Module (Lager, Finanzen, Berichte, Automatisierung usw.). In unserem ersten Gespräch analysiere ich Ihren Betrieb und unterbreite Ihnen ein klares Budget und einen Zeitplan (normalerweise zwischen 4 und 12 Wochen).",
+        a: "Dies variiert je nach Größe des Systems und der Anzahl der Module (Lager, Finanzen, Berichte, Automatisierung usw.). In unserem ersten Gespräch analysiere ich Ihren Betrieb und unterbreite Ihnen ein klares Budget und einen Zeitplan (normalerweise zwischen 2 und 8 Wochen).",
       },
       {
         q: "Bieten Sie Support nach Auslieferung des Systems?",

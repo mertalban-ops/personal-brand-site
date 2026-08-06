@@ -213,8 +213,76 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
               </div>
             ))}
           </div>
+
+          {/* Before / After metrics (only when real data exists) */}
+          {project.metrics && project.metrics.length > 0 && (
+            <div className="mt-10">
+              <p className="mono-label mb-4">
+                {language === "tr" ? "ÖLÇÜLEBILIR ETKİ" : language === "de" ? "MESSBARER EINFLUSS" : "MEASURABLE IMPACT"}
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {project.metrics.map((m) => (
+                  <div
+                    key={m.label}
+                    className="rounded-xl border border-line bg-bg-raised/30 p-5"
+                  >
+                    <p className="text-xs font-semibold text-muted uppercase tracking-wider mb-3">{m.label}</p>
+                    <div className="flex items-center gap-3">
+                      <div className="flex-1 rounded-lg bg-red-500/10 border border-red-500/20 px-3 py-2 text-center">
+                        <p className="text-xs text-red-400/70 mb-0.5">{language === "tr" ? "Önce" : language === "de" ? "Vorher" : "Before"}</p>
+                        <p className="font-bold text-red-400">{m.before}</p>
+                      </div>
+                      <ArrowRight className="h-4 w-4 shrink-0 text-accent" />
+                      <div className="flex-1 rounded-lg bg-accent/10 border border-accent/20 px-3 py-2 text-center">
+                        <p className="text-xs text-accent/70 mb-0.5">{language === "tr" ? "Sonra" : language === "de" ? "Nachher" : "After"}</p>
+                        <p className="font-bold text-accent">{m.after}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </AnimatedSection>
+
+      {/* Client Testimonial (only when real, non-placeholder text exists) */}
+      {project.clientTestimonial && !project.clientTestimonial.text.includes("eklenecek") && (
+        <AnimatedSection>
+          <div className="mx-auto max-w-6xl px-5 py-16">
+            <p className="mono-label mb-6">
+              {language === "tr" ? "MÜŞTERİ YORUMU" : language === "de" ? "KUNDENFEEDBACK" : "CLIENT FEEDBACK"}
+            </p>
+            <div className="relative card-surface rounded-2xl p-8 md:p-10 border border-line hover:border-accent/30 transition-colors max-w-3xl">
+              <div
+                className="absolute -top-5 left-10 select-none text-7xl font-serif leading-none"
+                style={{ color: "var(--accent)", opacity: 0.2 }}
+                aria-hidden="true"
+              >
+                &ldquo;
+              </div>
+              <blockquote className="relative z-10">
+                <p className="text-lg md:text-xl font-medium text-ink leading-relaxed">
+                  {project.clientTestimonial.text}
+                </p>
+                <footer className="mt-6 flex items-center gap-4">
+                  <div
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xs font-bold text-black"
+                    style={{ background: "var(--accent)" }}
+                    aria-hidden="true"
+                  >
+                    {project.clientTestimonial.author.split(" ").map((w) => w[0]).join("").slice(0, 2)}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-ink text-sm">{project.clientTestimonial.author}</p>
+                    <p className="text-xs text-muted">{project.clientTestimonial.role}</p>
+                  </div>
+                </footer>
+              </blockquote>
+            </div>
+          </div>
+        </AnimatedSection>
+      )}
 
       {/* Lessons (if any) */}
       {project.lessons && project.lessons.length > 0 && (

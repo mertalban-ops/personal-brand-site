@@ -41,6 +41,7 @@ export type Project = {
   role?: string;
   previousWorkflow?: string;
   clientTestimonial?: { author: string; role: string; text: string };
+  metrics?: { label: string; before: string; after: string }[];
 };
 
 export const projectsTr: Project[] = [
@@ -104,6 +105,10 @@ export const projectsTr: Project[] = [
       "Tahsilat takibi ve vade uyarıları sistem üzerinden otomatik yürütülüyor",
       "Tek tıkla PDF hesap ekstresi oluşturma ve WhatsApp paylaşım akışı",
     ],
+    metrics: [
+      { label: "Hesap ekstresi hazırlama", before: "~2 saat", after: "30 saniye" },
+      { label: "Stok ve bakiye durumu", before: "Haftalık Excel", after: "Anlık ekran" },
+    ],
     lessons: [
       "PDF oluşturma akışının mobil tarayıcıda da sorunsuz çalışması için ekstra test gerekti",
       "Kritik stok eşiğinin kullanıcı tarafından ayarlanabilir olması talep edildi ve eklendi",
@@ -138,9 +143,9 @@ export const projectsTr: Project[] = [
     role: "Süreç Analisti & Geliştirici",
     previousWorkflow: "Müşteri kabul işlemleri kağıt formlarla yapılıyor, onarım durumları atölyedeki ustalarla sözlü olarak koordine ediliyordu. Müşteri geçmişi ancak eski fatura dosyalarından bulunabiliordu.",
     clientTestimonial: {
-      author: "Hezer Otoşanzıman Sahibi",
-      role: "İşletme Sahibi",
-      text: "Şimdi borç takibi yapabiliyorum. Gelir giderlerimi takip edebiliyorum, işimi kolaylaştırdı ve çok pratik oldu. Mesela geçen araba teslim ettim, direkt adama PDF gönderdim — hem zamandan kazandım hem dükkana sistem oturttum."
+      author: "Serdar Hezer",
+      role: "Sahibi, Hezer Otoşanzıman",
+      text: "Artık borç takibini rahatça yapabiliyorum, gelir-giderimi anlık görebiliyorum. İşimi gerçekten kolaylaştırdı, çok pratik oldu. Geçen gün bir aracı teslim ederken müşteriye direkt PDF hesap ekstresi gönderdim — hem zamandan kazandım hem de dükkâna gerçek anlamda oturmuş bir sistemim oldu.",
     },
     caseModules: [
       {
@@ -172,6 +177,11 @@ export const projectsTr: Project[] = [
       "Araç ve onarım geçmişinin kağıtsız ve merkezi olarak tutulması",
       "İş emrinin kim tarafından, hangi aşamada olduğunun her an görülebilmesi",
       "Süreç durumlarının müşteri ve ekip için daha görünür hale gelmesini destekleyen yapı",
+      "İşlem sonunda müşteriye anında PDF servis raporu gönderilebiliyor",
+    ],
+    metrics: [
+      { label: "Müşteriye servis raporu", before: "Kağıt form", after: "Anında PDF" },
+      { label: "Araç geçmişine erişim", before: "Eski fatura dosyaları", after: "Plaka ile saniyeler" },
     ],
     lessons: [
       "Saha personelinin tablet ile hızlı veri girişi yapabilmesi için form tasarımı sadeleştirildi",
@@ -487,6 +497,10 @@ export const projectsEn: Project[] = [
       "Collection tracking managed systematically",
       "One-click PDF account statement generation workflow",
     ],
+    metrics: [
+      { label: "Account statement preparation", before: "~2 hours", after: "30 seconds" },
+      { label: "Stock & balance status", before: "Weekly Excel", after: "Live dashboard" },
+    ],
     lessons: [
       "PDF generation workflow required extra testing to work flawlessly on mobile browsers",
       "Critical stock threshold was requested to be user-adjustable and added accordingly",
@@ -521,9 +535,9 @@ export const projectsEn: Project[] = [
     role: "Process Analyst & Developer",
     previousWorkflow: "Vehicle intake was done using paper forms, and repair status was coordinated verbally with technicians. Service histories could only be found by digging through physical invoice folders.",
     clientTestimonial: {
-      author: "Owner, Hezer Otoşanzıman",
-      role: "Business Owner",
-      text: "Now I can track debts and monitor my income and expenses — it made my job much easier. For example, last time I handed over a car, I sent the client a PDF right away. I saved time and finally got the business running like a proper system."
+      author: "Serdar Hezer",
+      role: "Owner, Hezer Otoşanzıman",
+      text: "I can now easily track debts and see my income and expenses in real time. It really made my job easier and it's very practical. The other day when I handed over a vehicle, I sent the customer a PDF account statement directly — I saved time and now I truly have a proper system running in my shop.",
     },
     caseModules: [
       {
@@ -555,6 +569,11 @@ export const projectsEn: Project[] = [
       "Vehicle and repair history kept paperless and centralized",
       "Work order status and assignment visible at any moment",
       "Improved visibility of process stages for both the team and customers",
+      "PDF service report sent to customer instantly at end of each service",
+    ],
+    metrics: [
+      { label: "Service report delivery", before: "Paper form", after: "Instant PDF" },
+      { label: "Vehicle history access", before: "Old invoice files", after: "Plate → seconds" },
     ],
     lessons: [
       "Form design was simplified to allow fast data entry by field technicians on tablets",
@@ -870,6 +889,10 @@ export const projectsDe: Project[] = [
       "Einnahmenverfolgung über das System abgewickelt",
       "PDF-Kontoauszugserstellung per Mausklick",
     ],
+    metrics: [
+      { label: "Kontoauszug erstellen", before: "~2 Stunden", after: "30 Sekunden" },
+      { label: "Lager- & Saldostatus", before: "Wöchentliches Excel", after: "Live-Dashboard" },
+    ],
     lessons: [
       "Der PDF-Erstellungs-Workflow erforderte zusätzliche Tests, um auf mobilen Browsern einwandfrei zu funktionieren",
       "Der kritische Bestandsschwellenwert wurde als vom Benutzer anpassbar angefordert und hinzugefügt",
@@ -904,9 +927,9 @@ export const projectsDe: Project[] = [
     role: "Prozessanalyst & Entwickler",
     previousWorkflow: "Die Fahrzeugaufnahme erfolgte über Papierformulare, Reparaturschritte wurden mündlich mit den Mechanikern abgestimmt. Historische Daten waren nur über alte Rechnungsordner abrufbar.",
     clientTestimonial: {
-      author: "Inhaber, Hezer Otoşanzıman",
-      role: "Geschäftsinhaber",
-      text: "Jetzt kann ich Schulden verfolgen und meine Einnahmen und Ausgaben überwachen — das hat meine Arbeit viel einfacher gemacht. Als ich das letzte Mal ein Auto übergab, habe ich dem Kunden sofort ein PDF geschickt. Ich habe Zeit gespart und endlich ein richtiges System im Laden."
+      author: "Serdar Hezer",
+      role: "Inhaber, Hezer Otoşanzıman",
+      text: "Ich kann jetzt mühelos Schulden verfolgen und meine Einnahmen und Ausgaben in Echtzeit einsehen. Es hat meinen Job wirklich erleichtert und ist sehr praktisch. Als ich neulich ein Fahrzeug übergab, habe ich dem Kunden direkt einen PDF-Kontoauszug geschickt — ich habe Zeit gespart und habe jetzt ein echtes System in meinem Laden.",
     },
     caseModules: [
       {
@@ -938,6 +961,11 @@ export const projectsDe: Project[] = [
       "Fahrzeug- und Reparaturschritte papierlos und zentralisiert",
       "Status des Arbeitsauftrags und Zuweisung jederzeit sichtbar",
       "Verbesserte Sichtbarkeit der Prozessschritte für das Team und die Kunden",
+      "PDF-Servicebericht wird dem Kunden am Ende jedes Services sofort zugesendet",
+    ],
+    metrics: [
+      { label: "Servicebericht-Versand", before: "Papierformular", after: "Sofort-PDF" },
+      { label: "Fahrzeughistorie abrufen", before: "Alte Rechnungsordner", after: "Kennzeichen → Sekunden" },
     ],
     lessons: [
       "Das Formulardesign wurde vereinfacht, um eine schnelle Dateneingabe durch Techniker auf Tablets zu ermöglichen",

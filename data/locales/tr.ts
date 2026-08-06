@@ -320,7 +320,7 @@ export const tr: Dictionary = {
       },
       {
         q: "Fiyat nasıl belirlenir ve süreç ne kadar sürer?",
-        a: "Sistemin büyüklüğüne, modül sayısına (Stok, Finans, Rapor, Otomasyon vs.) göre değişkenlik gösterir. İlk görüşmemizde operasyonunuzu analiz eder, projenin net bütçesini ve takvimini (genelde 4 ila 12 hafta arası) size sunarız.",
+        a: "Sistemin büyüklüğüne, modül sayısına (Stok, Finans, Rapor, Otomasyon vs.) göre değişkenlik gösterir. İlk görüşmemizde operasyonunuzu analiz eder, projenin net bütçesini ve takvimini (genelde 2 ila 8 hafta arası) size sunarız.",
       },
       {
         q: "Sistem teslim edildikten sonra destek veriyor musunuz?",

@@ -22,7 +22,7 @@ export const faqs: FAQ[] = [
   },
   {
     q: "Fiyat nasıl belirlenir?",
-    a: "Sistemin büyüklüğüne, modül sayısına (Stok, Finans, Rapor, Otomasyon) ve entegrasyon ihtiyacına göre değişir. İlk görüşmede net bütçe ve takvim sunuyoruz.",
+    a: "Sistemin büyüklüğüne, modül sayısına (Stok, Finans, Rapor, Otomasyon) ve entegrasyon ihtiyacına göre değişir. Abonelik bazlı bakım anlaşmaları aylık 2.000 TL'den, tek seferlik sistem projeleri ise 5.000 TL'den başlar. İlk görüşmede projenize özel net bütçe ve takvim sunuyoruz.",
     category: "fiyat",
   },
   {
@@ -42,7 +42,7 @@ export const faqs: FAQ[] = [
   },
   {
     q: "Geliştirme ne kadar sürer?",
-    a: "Projenin kapsamına göre genellikle 4 ila 12 hafta arasında değişir. Modül sayısı, entegrasyonlar ve veri geçişi ihtiyacı süreyi etkiler. İlk görüşmede tahmini takvimi paylaşırız.",
+    a: "Projenin kapsamına göre genellikle 2 ila 8 hafta arasında değişir. Modül sayısı, entegrasyonlar ve veri geçişi ihtiyacı süreyi etkiler. İlk görüşmede tahmini takvimi paylaşırız.",
     category: "fiyat",
   },
 ];
