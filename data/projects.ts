@@ -138,9 +138,9 @@ export const projectsTr: Project[] = [
     role: "Süreç Analisti & Geliştirici",
     previousWorkflow: "Müşteri kabul işlemleri kağıt formlarla yapılıyor, onarım durumları atölyedeki ustalarla sözlü olarak koordine ediliyordu. Müşteri geçmişi ancak eski fatura dosyalarından bulunabiliordu.",
     clientTestimonial: {
-      author: "Hezer Oto Servis Müdürü",
-      role: "Servis Müdürü",
-      text: "Müşteri görüşü eklenecek."
+      author: "Hezer Otoşanzıman Sahibi",
+      role: "İşletme Sahibi",
+      text: "Şimdi borç takibi yapabiliyorum. Gelir giderlerimi takip edebiliyorum, işimi kolaylaştırdı ve çok pratik oldu. Mesela geçen araba teslim ettim, direkt adama PDF gönderdim — hem zamandan kazandım hem dükkana sistem oturttum."
     },
     caseModules: [
       {
@@ -181,6 +181,59 @@ export const projectsTr: Project[] = [
       "SMS ile müşteri bilgilendirme",
       "Parça ve malzeme maliyet takibi",
       "Fatura ve tahsilat modülü",
+    ],
+  },
+  {
+    name: "Hezer Otoşanzıman",
+    tagline: "Oto Servis Kurumsal Web Sitesi",
+    status: "Active",
+    category: "customer-project",
+    problem: "Hezer Otoşanzıman'ın dijital varlığı yoktu; potansiyel müşteriler servisi bulamıyor, mevcut müşteriler ise işletmenin güvenilirliğini teyit edecek bir kaynak arayıyordu.",
+    solution: "Servis uzmanlığını, hizmet kapsamını ve iletişim bilgilerini ön plana çıkaran dönüşüm odaklı kurumsal web sitesi.",
+    approach: "Mobil öncelikli, hızlı açılan ve arama motorlarında yerel aramalarda öne çıkacak teknik altyapıyla tasarlandı.",
+    benefit: "Potansiyel müşteriler artık servisi çevrimiçi buluyor ve ilk temastan önce güven oluşturuluyor.",
+    tech: ["Next.js", "Tailwind CSS", "TypeScript", "SEO"],
+    features: [
+      "Yerel SEO optimizasyonlu kurumsal tanıtım sayfası",
+      "Hizmet kapsamı ve uzmanlık alanları bölümü",
+      "Mobil uyumlu hızlı iletişim ve yönlendirme yapısı",
+    ],
+    previewType: "auto-service",
+    slug: "hezer-otosanziman-site",
+    caseSummary: "Hezer Otoşanzıman için kurumsal web sitesi tasarlandı ve geliştirildi. Servis uzmanlığını ve iletişim bilgilerini öne çıkaran, yerel SEO optimize edilmiş bu site potansiyel müşterilerin işletmeyi çevrimiçi bulmasını sağlıyor.",
+    targetUser: "Otoşanzıman servisi arayan yerel araç sahipleri",
+    industry: "Otomotiv & Servis Hizmetleri",
+    role: "Web Tasarımcı & Geliştirici",
+    previousWorkflow: "İşletmenin hiçbir dijital varlığı yoktu. Müşteriler yalnızca ağızdan ağıza tavsiyeyle ulaşabiliyordu.",
+    clientTestimonial: {
+      author: "Hezer Otoşanzıman Sahibi",
+      role: "İşletme Sahibi",
+      text: "Şimdi borç takibi yapabiliyorum. Gelir giderlerimi takip edebiliyorum, işimi kolaylaştırdı ve çok pratik oldu. Mesela geçen araba teslim ettim, direkt adama PDF gönderdim — hem zamandan kazandım hem dükkana sistem oturttum."
+    },
+    caseModules: [
+      {
+        name: "Kurumsal Tanıtım",
+        features: ["Servis uzmanlığı ve hizmet kapsamı", "Takım ve deneyim sunumu", "Sosyal kanıt ve müşteri yorumları"],
+      },
+      {
+        name: "Yerel SEO Altyapısı",
+        features: ["Google Business Profile entegrasyonu", "Yerel arama optimizasyonu", "Schema markup ve meta yapısı"],
+      },
+      {
+        name: "İletişim & Dönüşüm",
+        features: ["Hızlı iletişim CTA'ları", "WhatsApp yönlendirme", "Mobil uyumlu harita entegrasyonu"],
+      },
+    ],
+    userJourney: [
+      "Potansiyel müşteri Google'da 'İzmir otoşanzıman servisi' arar",
+      "Hezer Otoşanzıman web sitesini bulur",
+      "Hizmetleri ve uzmanlığı inceler",
+      "WhatsApp veya telefon ile iletişime geçer",
+    ],
+    outcomes: [
+      "İşletme artık çevrimiçi bulunabilir ve yerel aramalarda görünür",
+      "Potansiyel müşteriler ilk temas öncesinde güven oluşturabilir",
+      "Mevcut müşteriler servisi kolayca tavsiye edebilir",
     ],
   },
   {
@@ -468,9 +521,9 @@ export const projectsEn: Project[] = [
     role: "Process Analyst & Developer",
     previousWorkflow: "Vehicle intake was done using paper forms, and repair status was coordinated verbally with technicians. Service histories could only be found by digging through physical invoice folders.",
     clientTestimonial: {
-      author: "Hezer Auto Service Manager",
-      role: "Service Manager",
-      text: "Customer testimonial to be added."
+      author: "Owner, Hezer Otoşanzıman",
+      role: "Business Owner",
+      text: "Now I can track debts and monitor my income and expenses — it made my job much easier. For example, last time I handed over a car, I sent the client a PDF right away. I saved time and finally got the business running like a proper system."
     },
     caseModules: [
       {
@@ -511,6 +564,59 @@ export const projectsEn: Project[] = [
       "SMS notification system for clients",
       "Parts and material cost tracking",
       "Billing and invoicing module",
+    ],
+  },
+  {
+    name: "Hezer Otoşanzıman",
+    tagline: "Auto Service Corporate Website",
+    status: "Active",
+    category: "customer-project",
+    problem: "Hezer Otoşanzıman had no digital presence; potential customers couldn't find the shop online and had no way to verify its credibility before visiting.",
+    solution: "A conversion-focused corporate website showcasing the shop's expertise, service scope, and contact information.",
+    approach: "Mobile-first, fast-loading design with local SEO technical foundation to rank in local searches.",
+    benefit: "Potential customers now find the shop online and trust is established before the first contact.",
+    tech: ["Next.js", "Tailwind CSS", "TypeScript", "SEO"],
+    features: [
+      "Local SEO-optimized corporate presentation",
+      "Service scope and expertise sections",
+      "Mobile-friendly fast contact and navigation structure",
+    ],
+    previewType: "auto-service",
+    slug: "hezer-otosanziman-site",
+    caseSummary: "A corporate website was designed and developed for Hezer Otoşanzıman, an auto transmission service shop. The site showcases the shop's expertise and enables customers to find the business in local search results.",
+    targetUser: "Local vehicle owners searching for transmission repair services",
+    industry: "Automotive & Service Industry",
+    role: "Web Designer & Developer",
+    previousWorkflow: "The business had zero digital presence. Customers could only reach them through word-of-mouth referrals.",
+    clientTestimonial: {
+      author: "Owner, Hezer Otoşanzıman",
+      role: "Business Owner",
+      text: "Now I can track debts and monitor my income and expenses — it made my job much easier. For example, last time I handed over a car, I sent the client a PDF right away. I saved time and finally got the business running like a proper system."
+    },
+    caseModules: [
+      {
+        name: "Corporate Presentation",
+        features: ["Service expertise and scope", "Team and experience showcase", "Social proof and customer reviews"],
+      },
+      {
+        name: "Local SEO Infrastructure",
+        features: ["Google Business Profile integration", "Local search optimization", "Schema markup and meta structure"],
+      },
+      {
+        name: "Contact & Conversion",
+        features: ["Fast contact CTAs", "WhatsApp redirect", "Mobile-friendly map integration"],
+      },
+    ],
+    userJourney: [
+      "Potential customer searches 'İzmir transmission service' on Google",
+      "Finds the Hezer Otoşanzıman website in local results",
+      "Reviews services and expertise sections",
+      "Contacts via WhatsApp or phone",
+    ],
+    outcomes: [
+      "Business is now discoverable online and visible in local searches",
+      "Potential customers can establish trust before first contact",
+      "Existing customers can easily refer the shop to others",
     ],
   },
   {
@@ -798,9 +904,9 @@ export const projectsDe: Project[] = [
     role: "Prozessanalyst & Entwickler",
     previousWorkflow: "Die Fahrzeugaufnahme erfolgte über Papierformulare, Reparaturschritte wurden mündlich mit den Mechanikern abgestimmt. Historische Daten waren nur über alte Rechnungsordner abrufbar.",
     clientTestimonial: {
-      author: "Hezer Autoservice-Manager",
-      role: "Serviceleiter",
-      text: "Kundenbewertung wird hinzugefügt."
+      author: "Inhaber, Hezer Otoşanzıman",
+      role: "Geschäftsinhaber",
+      text: "Jetzt kann ich Schulden verfolgen und meine Einnahmen und Ausgaben überwachen — das hat meine Arbeit viel einfacher gemacht. Als ich das letzte Mal ein Auto übergab, habe ich dem Kunden sofort ein PDF geschickt. Ich habe Zeit gespart und endlich ein richtiges System im Laden."
     },
     caseModules: [
       {
@@ -841,6 +947,59 @@ export const projectsDe: Project[] = [
       "SMS-Benachrichtigungssystem für Kunden",
       "Teile- und Materialkostenverfolgung",
       "Abrechnungs- und Rechnungsmodul",
+    ],
+  },
+  {
+    name: "Hezer Otoşanzıman",
+    tagline: "Autoservice Unternehmenswebsite",
+    status: "Active",
+    category: "customer-project",
+    problem: "Hezer Otoşanzıman hatte keine digitale Präsenz; potenzielle Kunden konnten das Unternehmen nicht online finden und hatten keine Möglichkeit, die Glaubwürdigkeit zu prüfen.",
+    solution: "Eine konversionsorientierte Unternehmenswebsite, die das Fachwissen, den Serviceumfang und die Kontaktdaten des Betriebs präsentiert.",
+    approach: "Mobile-first, schnell ladendes Design mit lokalem SEO-Fundament für bessere Sichtbarkeit in lokalen Suchergebnissen.",
+    benefit: "Potenzielle Kunden finden das Unternehmen jetzt online, und Vertrauen wird vor dem ersten Kontakt aufgebaut.",
+    tech: ["Next.js", "Tailwind CSS", "TypeScript", "SEO"],
+    features: [
+      "Lokal SEO-optimierte Unternehmensdarstellung",
+      "Serviceumfang- und Fachkompetenz-Sektionen",
+      "Mobilfreundliche schnelle Kontakt- und Navigationsstruktur",
+    ],
+    previewType: "auto-service",
+    slug: "hezer-otosanziman-site",
+    caseSummary: "Eine Unternehmenswebsite wurde für Hezer Otoşanzıman, eine Getriebeservicewerkstatt, entworfen und entwickelt. Die Website präsentiert das Fachwissen des Betriebs und ermöglicht es Kunden, das Unternehmen in lokalen Suchergebnissen zu finden.",
+    targetUser: "Lokale Fahrzeugbesitzer, die nach Getriebereparaturdiensten suchen",
+    industry: "Automobil- & Servicedienstleistungen",
+    role: "Webdesigner & Entwickler",
+    previousWorkflow: "Das Unternehmen hatte keinerlei digitale Präsenz. Kunden konnten nur über Mundpropaganda erreicht werden.",
+    clientTestimonial: {
+      author: "Inhaber, Hezer Otoşanzıman",
+      role: "Geschäftsinhaber",
+      text: "Jetzt kann ich Schulden verfolgen und meine Einnahmen und Ausgaben überwachen — das hat meine Arbeit viel einfacher gemacht. Als ich das letzte Mal ein Auto übergab, habe ich dem Kunden sofort ein PDF geschickt. Ich habe Zeit gespart und endlich ein richtiges System im Laden."
+    },
+    caseModules: [
+      {
+        name: "Unternehmensdarstellung",
+        features: ["Fachwissen und Serviceumfang", "Team- und Erfahrungspräsentation", "Social Proof und Kundenbewertungen"],
+      },
+      {
+        name: "Lokale SEO-Infrastruktur",
+        features: ["Google Business Profile-Integration", "Lokale Suchoptimierung", "Schema-Markup und Meta-Struktur"],
+      },
+      {
+        name: "Kontakt & Conversion",
+        features: ["Schnelle Kontakt-CTAs", "WhatsApp-Weiterleitung", "Mobilfreundliche Kartenintegration"],
+      },
+    ],
+    userJourney: [
+      "Potenzieller Kunde sucht 'Izmir Getriebeservice' auf Google",
+      "Findet die Hezer Otoşanzıman-Website in lokalen Ergebnissen",
+      "Sieht sich Services und Fachkompetenz an",
+      "Kontaktiert via WhatsApp oder Telefon",
+    ],
+    outcomes: [
+      "Unternehmen ist online auffindbar und in lokalen Suchen sichtbar",
+      "Potenzielle Kunden können Vertrauen vor dem ersten Kontakt aufbauen",
+      "Bestandskunden können das Unternehmen leicht weiterempfehlen",
     ],
   },
   {

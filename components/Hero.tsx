@@ -146,6 +146,35 @@ export default function Hero() {
               {t.hero.secondaryBtn}
             </Link>
           </motion.div>
+
+          {/* Trust metrics */}
+          <motion.div
+            className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3"
+            {...enter(0.6)}
+          >
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl font-bold text-ink tabular-nums">3</span>
+              <span className="text-sm text-muted">
+                {language === "de" ? "Live-Systeme" : language === "en" ? "live systems" : "canlı müşteri sistemi"}
+              </span>
+            </div>
+            <span className="h-4 w-px bg-line hidden sm:block" aria-hidden="true" />
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-sm font-semibold text-ink tabular-nums">2&nbsp;sa.</span>
+              <span className="text-xs text-muted">→</span>
+              <span className="text-sm font-semibold text-accent tabular-nums">30&nbsp;sn.</span>
+              <span className="text-sm text-muted">
+                {language === "de" ? "Berichtszeit" : language === "en" ? "report time" : "rapor süresi"}
+              </span>
+            </div>
+            <span className="h-4 w-px bg-line hidden sm:block" aria-hidden="true" />
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl font-bold text-ink tabular-nums">4–12</span>
+              <span className="text-sm text-muted">
+                {language === "de" ? "Wochen Lieferung" : language === "en" ? "week delivery" : "hafta teslim"}
+              </span>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Sağ: 3D robot + phone showcase */}

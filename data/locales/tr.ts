@@ -166,6 +166,25 @@ export const tr: Dictionary = {
         slug: "hezer-auto-service",
       },
       {
+        name: "Hezer Otoşanzıman",
+        tagline: "Oto Servis Kurumsal Web Sitesi",
+        status: "Canlı",
+        problem:
+          "Hezer Otoşanzıman'ın dijital varlığı yoktu; potansiyel müşteriler servisi bulamıyor, mevcut müşteriler güvenilirliği teyit edecek bir kaynak arayıyordu.",
+        solution:
+          "Servis uzmanlığını, hizmet kapsamını ve iletişim bilgilerini ön plana çıkaran dönüşüm odaklı kurumsal web sitesi.",
+        approach: "Mobil öncelikli, hızlı açılan ve yerel aramalarda öne çıkacak teknik altyapıyla tasarlandı.",
+        benefit: "Potansiyel müşteriler artık servisi çevrimiçi buluyor ve ilk temastan önce güven oluşturuluyor.",
+        tech: ["Next.js", "Tailwind CSS", "TypeScript", "SEO"],
+        features: [
+          "Yerel SEO optimizasyonlu kurumsal tanıtım sayfası",
+          "Hizmet kapsamı ve uzmanlık alanları bölümü",
+          "Mobil uyumlu hızlı iletişim ve yönlendirme yapısı",
+        ],
+        previewType: "auto-service",
+        slug: "hezer-otosanziman-site",
+      },
+      {
         name: "CARPASS",
         tagline: "Yapay Zeka Destekli Araç Risk Analizi SaaS Platformu",
         status: "Geliştirme Aşamasında",

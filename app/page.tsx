@@ -15,6 +15,7 @@ import TrustStrip from "@/components/TrustStrip";
 import ProblemsSolutions from "@/components/ProblemsSolutions";
 import HomeSolutions from "@/components/home/HomeSolutions";
 import Projects from "@/components/Projects";
+import Testimonials from "@/components/Testimonials";
 import WebSiteVitrin from "@/components/home/WebSiteVitrin";
 import Process from "@/components/Process";
 import FAQPreview from "@/components/home/FAQPreview";
@@ -48,6 +49,7 @@ export default function Home() {
         <ProblemsSolutions />
         <HomeSolutions />
         <Projects />
+        <Testimonials />
         <WebSiteVitrin />
         <Process />
         <FAQPreview />

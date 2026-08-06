@@ -27,7 +27,9 @@ export default function Projects() {
   const { t, language } = useLanguage();
   const { activeType, setActiveType } = useActiveProject();
 
-  const liveClientProjects = t.projects.items.filter(p => p.slug === "stockapp" || p.slug === "hezer-auto-service");
+  const liveClientProjects = t.projects.items.filter(p =>
+    p.slug === "stockapp" || p.slug === "hezer-auto-service" || p.slug === "hezer-otosanziman-site"
+  );
   const productLabProjects = t.projects.items.filter(p => p.slug === "carpass");
   const conceptProjects = t.projects.items.filter(p => p.slug === "saas-operasyon-altyapisi");
 
@@ -123,7 +125,7 @@ export default function Projects() {
           <h3 className="display text-lg font-bold text-ink mb-6 border-l-2 border-accent pl-3">
             {language === "tr" ? "Canlı Müşteri Projeleri" : language === "de" ? "Live-Kundenprojekte" : "Live Client Projects"}
           </h3>
-          <div className="grid gap-6 sm:grid-cols-2 md:gap-8">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:gap-8">
             {liveClientProjects.map((p, i) =>
               renderCard(
                 p,
