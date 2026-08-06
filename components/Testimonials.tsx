@@ -9,9 +9,9 @@ const content = {
   tr: {
     label: "Gerçek Müşteri Yorumu",
     quote:
-      "Şimdi borç takibi yapabiliyorum. Gelir giderlerimi takip edebiliyorum, işimi kolaylaştırdı ve çok pratik oldu. Mesela geçen araba teslim ettim, direkt adama PDF gönderdim — hem zamandan kazandım hem dükkana sistem oturttum.",
-    author: "Hezer Otoşanzıman Sahibi",
-    business: "Hezer Otoşanzıman · İzmir",
+      "Artık borç takibini rahatça yapabiliyorum, gelir-giderimi anlık görebiliyorum. İşimi gerçekten kolaylaştırdı, çok pratik oldu. Geçen gün bir aracı teslim ederken müşteriye direkt PDF hesap ekstresi gönderdim — hem zamandan kazandım hem de dükkâna gerçek anlamda oturmuş bir sistemim oldu.",
+    author: "Serdar Hezer",
+    business: "Sahibi, Hezer Otoşanzıman · İzmir",
     tag: "Doğrulanmış Müşteri",
     cta: "Sizi de benzer bir sisteme kavuşturalım →",
     ctaHref: "/iletisim",
@@ -19,9 +19,9 @@ const content = {
   en: {
     label: "Real Customer Feedback",
     quote:
-      "Now I can track debts and monitor my income and expenses — it made my job much easier and more practical. For example, last time I handed over a car, I sent the client a PDF on the spot. I saved time and finally got the business running like a proper system.",
-    author: "Owner, Hezer Otoşanzıman",
-    business: "Hezer Otoşanzıman · İzmir, Turkey",
+      "I can now easily track debts and see my income and expenses in real time. It really made my job easier and it's very practical. The other day when I handed over a vehicle, I sent the customer a PDF account statement directly — I saved time and now I truly have a proper system running in my shop.",
+    author: "Serdar Hezer",
+    business: "Owner, Hezer Otoşanzıman · İzmir, Turkey",
     tag: "Verified Customer",
     cta: "Let's build the same for you →",
     ctaHref: "/iletisim",
@@ -29,9 +29,9 @@ const content = {
   de: {
     label: "Echtes Kundenfeedback",
     quote:
-      "Jetzt kann ich Schulden verfolgen und meine Einnahmen und Ausgaben überwachen — das hat meine Arbeit viel einfacher und praktischer gemacht. Als ich das letzte Mal ein Auto übergab, habe ich dem Kunden direkt ein PDF geschickt. Ich habe Zeit gespart und endlich ein richtiges System im Laden.",
-    author: "Inhaber, Hezer Otoşanzıman",
-    business: "Hezer Otoşanzıman · İzmir, Türkei",
+      "Ich kann jetzt mühelos Schulden verfolgen und meine Einnahmen und Ausgaben in Echtzeit einsehen. Es hat meinen Job wirklich erleichtert und ist sehr praktisch. Als ich neulich ein Fahrzeug übergab, habe ich dem Kunden direkt einen PDF-Kontoauszug geschickt — ich habe Zeit gespart und habe jetzt ein echtes System in meinem Laden.",
+    author: "Serdar Hezer",
+    business: "Inhaber, Hezer Otoşanzıman · İzmir, Türkei",
     tag: "Verifizierter Kunde",
     cta: "Bauen wir dasselbe für Sie →",
     ctaHref: "/iletisim",
@@ -80,7 +80,7 @@ export default function Testimonials() {
                     style={{ background: "var(--accent)" }}
                     aria-hidden="true"
                   >
-                    HO
+                    SH
                   </div>
                   <div>
                     <p className="font-semibold text-ink">{c.author}</p>
