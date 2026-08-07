@@ -7,9 +7,9 @@ import AnimatedSection from "./AnimatedSection";
 
 const content = {
   tr: {
-    label: "Gerçek Müşteri Yorumu",
+    label: "Müşteri Yorumu",
     quote:
-      "Artık borç takibini rahatça yapabiliyorum, gelir-giderimi anlık görebiliyorum. İşimi gerçekten kolaylaştırdı, çok pratik oldu. Geçen gün bir aracı teslim ederken müşteriye direkt PDF hesap ekstresi gönderdim — hem zamandan kazandım hem de dükkâna gerçek anlamda oturmuş bir sistemim oldu.",
+      "Artık borç takibini rahatça yapabiliyorum, gelir-giderimi anlık görebiliyorum. İşimi gerçekten kolaylaştırdı, çok pratik oldu. Geçen gün bir aracı teslim ettikten hemen sonra servis raporunu müşteriye PDF olarak gönderdim — hem zamandan kazandım hem de dükkâna gerçek anlamda oturmuş bir sistemim oldu.",
     author: "Serdar Hezer",
     business: "Sahibi, Hezer Otoşanzıman · İzmir",
     tag: "Doğrulanmış Müşteri",
@@ -17,9 +17,9 @@ const content = {
     ctaHref: "/iletisim",
   },
   en: {
-    label: "Real Customer Feedback",
+    label: "Customer Feedback",
     quote:
-      "I can now easily track debts and see my income and expenses in real time. It really made my job easier and it's very practical. The other day when I handed over a vehicle, I sent the customer a PDF account statement directly — I saved time and now I truly have a proper system running in my shop.",
+      "I can now easily track debts and see my income and expenses in real time. It really made my job easier and it's very practical. The other day, right after handing over a vehicle, I sent the customer the service report as a PDF — I saved time and now I truly have a proper system running in my shop.",
     author: "Serdar Hezer",
     business: "Owner, Hezer Otoşanzıman · İzmir, Turkey",
     tag: "Verified Customer",
@@ -27,9 +27,9 @@ const content = {
     ctaHref: "/iletisim",
   },
   de: {
-    label: "Echtes Kundenfeedback",
+    label: "Kundenfeedback",
     quote:
-      "Ich kann jetzt mühelos Schulden verfolgen und meine Einnahmen und Ausgaben in Echtzeit einsehen. Es hat meinen Job wirklich erleichtert und ist sehr praktisch. Als ich neulich ein Fahrzeug übergab, habe ich dem Kunden direkt einen PDF-Kontoauszug geschickt — ich habe Zeit gespart und habe jetzt ein echtes System in meinem Laden.",
+      "Ich kann jetzt mühelos Schulden verfolgen und meine Einnahmen und Ausgaben in Echtzeit einsehen. Es hat meinen Job wirklich erleichtert und ist sehr praktisch. Neulich, kurz nach der Fahrzeugübergabe, habe ich dem Kunden den Servicebericht direkt als PDF geschickt — ich habe Zeit gespart und habe jetzt ein echtes System in meinem Laden.",
     author: "Serdar Hezer",
     business: "Inhaber, Hezer Otoşanzıman · İzmir, Türkei",
     tag: "Verifizierter Kunde",
