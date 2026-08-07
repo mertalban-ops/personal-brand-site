@@ -4,7 +4,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "Cari Hesap Takip Sistemi Nedir? KOBİ'ler İçin Kapsamlı Rehber — Albanexa",
+  title: "Cari Hesap Takip Sistemi Nedir? KOBİ'ler İçin Kapsamlı Rehber",
   description:
     "Cari hesap nedir, manuel takibin sorunları nelerdir, özel sistem ne kazandırır? Vadeli satış yapan KOBİ'ler için dijital cari hesap yönetimi rehberi.",
   path: "/rehber/cari-hesap-takip-sistemi-nedir",

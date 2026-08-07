@@ -4,7 +4,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "ERP Alternatifi: Küçük İşletmeler İçin Özel Yazılım — Albanexa",
+  title: "ERP Alternatifi: Küçük İşletmeler İçin Özel Yazılım",
   description:
     "Büyük ERP sistemleri KOBİ'ler için neden uygun değildir? Özel geliştirilmiş yazılım, ERP'ye kıyasla nasıl daha iyi bir alternatif sunar? Karşılaştırma ve karar rehberi.",
   path: "/rehber/erp-alternatifi-kucuk-isletmeler-icin",

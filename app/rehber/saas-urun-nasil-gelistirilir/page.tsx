@@ -4,7 +4,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "SaaS Ürün Nasıl Geliştirilir? Başlangıçtan Lansmana — Albanexa",
+  title: "SaaS Ürün Nasıl Geliştirilir? Başlangıçtan Lansmana",
   description:
     "Sektörel problemi çözen bir yazılımı abonelik modeline dönüştürme rehberi. Multi-tenant mimari, fiyatlandırma modeli ve teknik altyapı kararları.",
   path: "/rehber/saas-urun-nasil-gelistirilir",

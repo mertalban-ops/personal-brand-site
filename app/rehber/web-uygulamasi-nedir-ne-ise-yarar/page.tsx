@@ -4,7 +4,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "Web Uygulaması Nedir, Ne İşe Yarar? — Albanexa",
+  title: "Web Uygulaması Nedir, Ne İşe Yarar?",
   description:
     "Web sitesi ile web uygulaması arasındaki fark nedir? Hangi işletmeler web uygulamasına ihtiyaç duyar? KOBİ'ler için kapsamlı açıklama ve karar rehberi.",
   path: "/rehber/web-uygulamasi-nedir-ne-ise-yarar",

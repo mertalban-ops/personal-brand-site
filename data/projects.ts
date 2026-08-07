@@ -37,6 +37,8 @@ export type Project = {
   lessons?: string[];
   futureWork?: string[];
   liveUrl?: string;
+  screenshots?: string[];
+  videoUrl?: string;
   industry?: string;
   role?: string;
   previousWorkflow?: string;

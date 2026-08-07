@@ -4,7 +4,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "Web Uygulaması Yaptırmak: Süreç, Maliyet ve Dikkat Edilecekler — Albanexa",
+  title: "Web Uygulaması Yaptırmak: Süreç, Maliyet ve Dikkat Edilecekler",
   description:
     "İşletmenize özel web uygulaması yaptırmayı düşünüyor musunuz? Süreç nasıl işler, maliyetler nasıl belirlenir, hangi soruları sormalısınız? Eksiksiz rehber.",
   path: "/rehber/web-uygulamasi-yaptirmak-surec-ve-maliyet",

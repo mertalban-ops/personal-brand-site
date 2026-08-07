@@ -4,7 +4,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "Operasyon Otomasyonu ile Verimliliği Artırma — Albanexa",
+  title: "Operasyon Otomasyonu ile Verimliliği Artırma",
   description:
     "KOBİ'ler için tekrar eden iş süreçlerini otomatikleştirme rehberi. n8n ile e-posta bildirimleri, raporlar, stok uyarıları ve sistem entegrasyonları.",
   path: "/rehber/otomasyon-ile-verimliligi-artirma",

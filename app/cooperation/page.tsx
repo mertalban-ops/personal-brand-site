@@ -3,7 +3,7 @@ import IsBirligiClient from "../is-birligi/IsBirligiClient";
 import { siteConfig } from "@/data/config";
 
 export const metadata: Metadata = {
-  title: "Partnership & Collaboration — Albanexa",
+  title: "Partnership & Collaboration",
   description: "Reliable technology partner for your agency, design studio, or software team. Explore our partnership models.",
   alternates: {
     canonical: `${siteConfig.siteUrl}/is-birligi`,

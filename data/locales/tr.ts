@@ -11,6 +11,7 @@ export const tr: Dictionary = {
     privacy: "Gizlilik",
     terms: "Kullanım Koşulları",
     cooperation: "İş Birliği",
+    rehber: "Rehber",
   },
   hero: {
     kicker: "Özel Yazılım & Dijital Operasyon Sistemleri",

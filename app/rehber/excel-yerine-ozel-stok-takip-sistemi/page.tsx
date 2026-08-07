@@ -4,7 +4,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "Excel Yerine Özel Stok Takip Sistemi: Fark ve Geçiş Rehberi — Albanexa",
+  title: "Excel Yerine Özel Stok Takip Sistemi: Fark ve Geçiş Rehberi",
   description:
     "Excel'i stok takibinde neden terk etmelisiniz? Özel stok takip sistemine geçişin avantajları, karşılaştırma tablosu ve adım adım geçiş planı.",
   path: "/rehber/excel-yerine-ozel-stok-takip-sistemi",

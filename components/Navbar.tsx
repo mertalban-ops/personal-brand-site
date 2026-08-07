@@ -22,6 +22,7 @@ export default function Navbar() {
     { href: "/cozumler", label: t.nav.solutions },
     { href: "/projeler", label: t.nav.cases },
     { href: "/surec", label: language === "tr" ? "Süreç" : language === "de" ? "Prozess" : "Process" },
+    { href: "/rehber", label: t.nav.rehber },
     { href: "/is-birligi", label: t.nav.cooperation },
     { href: "/studyo", label: t.nav.studio },
   ];
@@ -122,7 +123,7 @@ export default function Navbar() {
             priority
           />
           <span className="mono-label hidden text-faint sm:inline" style={{ color: "var(--faint)" }}>
-            dijital çözümler & sistemler
+            {language === "de" ? "digitale lösungen & systeme" : language === "en" ? "digital solutions & systems" : "dijital çözümler & sistemler"}
           </span>
         </Link>
 
@@ -195,6 +196,16 @@ export default function Navbar() {
             }`}
           >
             {t.nav.cases}
+          </Link>
+
+          {/* Rehber */}
+          <Link
+            href="/rehber"
+            className={`text-sm transition-colors hover:text-ink ${
+              pathname.startsWith("/rehber") ? "text-ink font-medium" : "text-muted"
+            }`}
+          >
+            {t.nav.rehber}
           </Link>
 
           {/* İş Birliği */}

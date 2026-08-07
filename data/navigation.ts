@@ -9,6 +9,7 @@ export const mainNavLinks: NavLink[] = [
   { href: "/cozumler", label: "Çözümler", labelEn: "Solutions", labelDe: "Lösungen" },
   { href: "/projeler", label: "Projeler", labelEn: "Projects", labelDe: "Projekte" },
   { href: "/surec", label: "Süreç", labelEn: "Process", labelDe: "Prozess" },
+  { href: "/rehber", label: "Rehber", labelEn: "Guide", labelDe: "Leitfaden" },
   { href: "/studyo", label: "Stüdyo", labelEn: "Studio", labelDe: "Studio" },
 ];
 

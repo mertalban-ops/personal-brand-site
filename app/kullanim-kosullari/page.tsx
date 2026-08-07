@@ -4,7 +4,7 @@ import Breadcrumb from "@/components/layout/Breadcrumb";
 import { contact } from "@/data/contact";
 
 export const metadata = buildPageMetadata({
-  title: "Kullanım Koşulları — Albanexa",
+  title: "Kullanım Koşulları",
   description: "Albanexa web sitesi kullanım koşulları.",
   path: "/kullanim-kosullari",
 });

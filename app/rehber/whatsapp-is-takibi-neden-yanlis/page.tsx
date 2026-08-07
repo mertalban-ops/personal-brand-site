@@ -4,7 +4,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "WhatsApp ile İş Takibi Neden Yanlış? — Albanexa",
+  title: "WhatsApp ile İş Takibi Neden Yanlış?",
   description:
     "WhatsApp grubunda sipariş, görev ve müşteri takibi neden işletmelere zarar verir? 7 kritik sorun ve profesyonel alternatif.",
   path: "/rehber/whatsapp-is-takibi-neden-yanlis",

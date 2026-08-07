@@ -4,7 +4,7 @@ import Breadcrumb from "@/components/layout/Breadcrumb";
 import { contact } from "@/data/contact";
 
 export const metadata = buildPageMetadata({
-  title: "KVKK Aydınlatma Metni — Albanexa",
+  title: "KVKK Aydınlatma Metni",
   description:
     "6698 sayılı KVKK kapsamında Albanexa kişisel veri işleme aydınlatma metni — işlenen veriler, amaçlar, saklama süreleri ve ilgili kişi hakları.",
   path: "/kvkk-aydinlatma",

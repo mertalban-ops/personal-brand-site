@@ -11,6 +11,7 @@ export const de: Dictionary = {
     privacy: "Datenschutz",
     terms: "Nutzungsbedingungen",
     cooperation: "Partnerschaft",
+    rehber: "Leitfaden",
   },
   hero: {
     kicker: "Maßgeschneiderte Software & Digitale Operative Systeme",

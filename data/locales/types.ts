@@ -9,6 +9,7 @@ export type Dictionary = {
     privacy: string;
     terms: string;
     cooperation: string;
+    rehber: string;
   };
   hero: {
     kicker: string;

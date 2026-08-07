@@ -4,7 +4,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "Özel Yazılım Ne Kadar Tutar? Türkiye Fiyat Rehberi — Albanexa",
+  title: "Özel Yazılım Ne Kadar Tutar? Türkiye Fiyat Rehberi",
   description:
     "KOBİ'ler için özel yazılım geliştirme maliyetini etkileyen faktörler, Türkiye'deki gerçekçi bütçe aralıkları ve gizli maliyet tuzakları.",
   path: "/rehber/ozel-yazilim-maliyeti-ve-fiyatlandirma",

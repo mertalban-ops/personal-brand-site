@@ -4,7 +4,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "İzmir'de Yazılım Firması Nasıl Seçilir? — Albanexa",
+  title: "İzmir'de Yazılım Firması Nasıl Seçilir?",
   description:
     "İzmir'deki KOBİ'ler için yazılım geliştirme firması veya bağımsız geliştirici seçerken sorulması gereken sorular, karşılaştırma kriterleri ve sık yapılan hatalar.",
   path: "/rehber/izmir-yazilim-gelistirme-firmalari",

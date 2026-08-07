@@ -6,7 +6,7 @@ import Breadcrumb from "@/components/layout/Breadcrumb";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "Rehber — Albanexa",
+  title: "Rehber",
   description:
     "KOBİ'ler için stok takibi, cari hesap yönetimi, iş takip sistemleri ve özel yazılım hakkında pratik rehberler.",
   path: "/rehber",

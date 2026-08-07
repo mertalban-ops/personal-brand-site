@@ -169,7 +169,7 @@ export default function Hero() {
             </div>
             <span className="h-4 w-px bg-line hidden sm:block" aria-hidden="true" />
             <div className="flex items-baseline gap-1.5">
-              <span className="text-2xl font-bold text-ink tabular-nums">4–12</span>
+              <span className="text-2xl font-bold text-ink tabular-nums">2–8</span>
               <span className="text-sm text-muted">
                 {language === "de" ? "Wochen Lieferung" : language === "en" ? "week delivery" : "hafta teslim"}
               </span>

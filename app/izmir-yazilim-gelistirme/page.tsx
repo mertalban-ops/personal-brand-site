@@ -6,7 +6,7 @@ import Breadcrumb from "@/components/layout/Breadcrumb";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "İzmir Yazılım Geliştirme — Özel Dijital Çözümler | Albanexa",
+  title: "İzmir Yazılım Geliştirme — Özel Dijital Çözümler",
   description:
     "İzmir merkezli bağımsız yazılım stüdyosu. KOBİ'ler için özel iş takip, stok, cari hesap ve SaaS ürün altyapısı geliştirme. 30 dakikalık ücretsiz ihtiyaç analizi.",
   path: "/izmir-yazilim-gelistirme",

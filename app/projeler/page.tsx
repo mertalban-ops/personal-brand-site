@@ -3,7 +3,7 @@ import { buildPageMetadata } from "@/lib/metadata";
 import ProjelerClient from "./ProjelerClient";
 
 export const metadata = buildPageMetadata({
-  title: "Projeler — Albanexa",
+  title: "Projeler",
   description: "Gerçek firmalar için geliştirdiğimiz web siteleri, iş takip sistemleri, web uygulamaları ve otomasyon çözümleri.",
   path: "/projeler",
 });

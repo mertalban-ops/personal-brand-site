@@ -3,7 +3,7 @@ import { siteConfig } from "@/data/config";
 import { faqs } from "@/data/faqs";
 
 export const metadata = buildPageMetadata({
-  title: "Albanexa — KOBİ'ler İçin Özel Yazılım ve Dijital Sistemler",
+  title: "KOBİ'ler İçin Özel Yazılım ve Dijital Sistemler",
   description:
     "Albanexa: KOBİ'ler için özel iş takip sistemleri, stok ve cari hesap yazılımları, kurumsal web siteleri ve SaaS altyapısı. İzmir merkezli, Türkiye geneline hizmet veren dijital ürün stüdyosu.",
   path: "/",

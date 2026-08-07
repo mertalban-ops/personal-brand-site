@@ -4,7 +4,7 @@ import Breadcrumb from "@/components/layout/Breadcrumb";
 import { contact } from "@/data/contact";
 
 export const metadata = buildPageMetadata({
-  title: "Gizlilik Politikası — Albanexa",
+  title: "Gizlilik Politikası",
   description:
     "Albanexa dijital çözüm stüdyosu gizlilik politikası — site kullanımı, teknik altyapı, çerezler ve veri güvenliği uygulamaları.",
   path: "/gizlilik",

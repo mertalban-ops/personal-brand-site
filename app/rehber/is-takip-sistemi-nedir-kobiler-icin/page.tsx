@@ -4,7 +4,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "İş Takip Sistemi Nedir? KOBİ'ler İçin Kapsamlı Rehber — Albanexa",
+  title: "İş Takip Sistemi Nedir? KOBİ'ler İçin Kapsamlı Rehber",
   description:
     "İş takip sistemi nedir, hangi işletmeler için gereklidir, Excel ve WhatsApp'tan farkı nedir? Operasyonlarını dijitalleştirmek isteyen KOBİ'ler için eksiksiz rehber.",
   path: "/rehber/is-takip-sistemi-nedir-kobiler-icin",

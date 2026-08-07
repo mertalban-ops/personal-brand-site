@@ -91,34 +91,81 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
         category={project.category}
       />
 
-      {/* Visual Prototype / Interactive Mockup */}
-      {(project.slug === "stockapp" || project.slug === "hezer-auto-service" || project.slug === "carpass") && (
+      {/* Visual — screenshots > video > interactive mockup, whichever has data */}
+      {(project.screenshots?.length || project.videoUrl || project.slug === "stockapp" || project.slug === "hezer-auto-service" || project.slug === "carpass") && (
         <AnimatedSection className="border-t border-line">
           <div className="mx-auto max-w-6xl px-5 py-16">
-            <div className="grid gap-10 lg:grid-cols-5 items-center">
-              <div className="lg:col-span-2">
+            {project.screenshots && project.screenshots.length > 0 ? (
+              /* Real screenshot gallery */
+              <div>
                 <span className="mono-label mb-2 block">
-                  {language === "tr" ? "TEMSİLİ ARAYÜZ GÖRSELİ" : language === "de" ? "REPRÄSENTATIVE ANSICHT" : "REPRESENTATIVE INTERFACE"}
+                  {language === "tr" ? "UYGULAMA GÖRSELLERİ" : language === "de" ? "APP-SCREENSHOTS" : "APP SCREENSHOTS"}
                 </span>
-                <h2 className="display text-3xl font-bold text-ink mb-4">
-                  {language === "tr" ? "Sistem Arayüzü ve Akış Tasarımı" : language === "de" ? "Systemoberfläche & Ablaufdesign" : "System Interface & Flow Design"}
+                <h2 className="display text-3xl font-bold text-ink mb-6">
+                  {language === "tr" ? "Gerçek Uygulama Ekranları" : language === "de" ? "Echte Anwendungsbildschirme" : "Real Application Screens"}
                 </h2>
-                <p className="text-muted leading-relaxed">
-                  {language === "tr"
-                    ? "İşletmenin ihtiyaçlarına göre tasarlanan operasyonel arayüzün temsili görseli. Gerçek uygulama ekranlarından ilham alınarak hazırlanmıştır."
-                    : language === "de"
-                    ? "Repräsentative Darstellung der operativen Benutzeroberfläche, inspiriert von den echten Anwendungsbildschirmen."
-                    : "Representative visualization of the operational interface, inspired by actual application screens."}
-                </p>
-              </div>
-              <div className="lg:col-span-3 card-surface p-6 rounded-2xl border border-line relative overflow-hidden bg-bg-raised/10">
-                <div className="w-full h-80 rounded-xl overflow-hidden bg-bg">
-                  {project.slug === "stockapp" && <StockAppPreview reduce={false} />}
-                  {project.slug === "hezer-auto-service" && <AutoServicePreview reduce={false} />}
-                  {project.slug === "carpass" && <CarpassPreview reduce={false} />}
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {project.screenshots.map((src, i) => (
+                    <div key={i} className="overflow-hidden rounded-xl border border-line bg-bg-raised/10">
+                      {/* next/image requires known dimensions; using img for flexibility */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={src}
+                        alt={`${project.name} ekran görüntüsü ${i + 1}`}
+                        loading="lazy"
+                        className="w-full h-auto object-cover"
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
+            ) : project.videoUrl ? (
+              /* Short demo video */
+              <div>
+                <span className="mono-label mb-2 block">
+                  {language === "tr" ? "DEMO VİDEO" : language === "de" ? "DEMO-VIDEO" : "DEMO VIDEO"}
+                </span>
+                <h2 className="display text-3xl font-bold text-ink mb-6">
+                  {language === "tr" ? "Sistem Tanıtım Videosu" : language === "de" ? "Systemvorführungsvideo" : "System Demo Video"}
+                </h2>
+                <div className="overflow-hidden rounded-2xl border border-line bg-bg-raised/10">
+                  <video
+                    src={project.videoUrl}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-auto"
+                  />
+                </div>
+              </div>
+            ) : (
+              /* Interactive mockup (code-generated preview) */
+              <div className="grid gap-10 lg:grid-cols-5 items-center">
+                <div className="lg:col-span-2">
+                  <span className="mono-label mb-2 block">
+                    {language === "tr" ? "TEMSİLİ ARAYÜZ GÖRSELİ" : language === "de" ? "REPRÄSENTATIVE ANSICHT" : "REPRESENTATIVE INTERFACE"}
+                  </span>
+                  <h2 className="display text-3xl font-bold text-ink mb-4">
+                    {language === "tr" ? "Sistem Arayüzü ve Akış Tasarımı" : language === "de" ? "Systemoberfläche & Ablaufdesign" : "System Interface & Flow Design"}
+                  </h2>
+                  <p className="text-muted leading-relaxed">
+                    {language === "tr"
+                      ? "İşletmenin ihtiyaçlarına göre tasarlanan operasyonel arayüzün temsili görseli. Gerçek uygulama ekranlarından ilham alınarak hazırlanmıştır."
+                      : language === "de"
+                      ? "Repräsentative Darstellung der operativen Benutzeroberfläche, inspiriert von den echten Anwendungsbildschirmen."
+                      : "Representative visualization of the operational interface, inspired by actual application screens."}
+                  </p>
+                </div>
+                <div className="lg:col-span-3 card-surface p-6 rounded-2xl border border-line relative overflow-hidden bg-bg-raised/10">
+                  <div className="w-full h-80 rounded-xl overflow-hidden bg-bg">
+                    {project.slug === "stockapp" && <StockAppPreview reduce={false} />}
+                    {project.slug === "hezer-auto-service" && <AutoServicePreview reduce={false} />}
+                    {project.slug === "carpass" && <CarpassPreview reduce={false} />}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </AnimatedSection>
       )}

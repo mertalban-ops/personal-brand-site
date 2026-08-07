@@ -4,7 +4,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "KOBİ'ler İçin Stok Takip Programı: Excel ve Hazır Yazılımın Ötesi — Albanexa",
+  title: "KOBİ'ler İçin Stok Takip Programı: Excel ve Hazır Yazılımın Ötesi",
   description:
     "Stok takip programı nedir, Excel neden yetersiz kalır, hazır yazılım ile özel sistem arasındaki fark nedir? KOBİ'ler için kapsamlı rehber.",
   path: "/rehber/stok-takip-programi-kobiler-icin",

@@ -3,7 +3,7 @@ import WebSiteleriClient from "./WebSiteleriClient";
 import { siteConfig } from "@/data/config";
 
 export const metadata = buildPageMetadata({
-  title: "Kurumsal Web Siteleri — Albanexa",
+  title: "Kurumsal Web Siteleri",
   description: "Markanızı yalnızca görünür değil, ikna edici hale getiren hızlı, SEO uyumlu ve premium Next.js web siteleri.",
   path: "/cozumler/web-siteleri",
 });

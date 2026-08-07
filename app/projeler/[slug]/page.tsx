@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     titleSuffix = "Müşteri Projesi";
   }
   
-  const title = `${project.name} — ${titleSuffix} | Albanexa`;
+  const title = `${project.name} — ${titleSuffix}`;
   const description = project.caseSummary;
   const url = `${siteConfig.siteUrl}/projeler/${slug}`;
   return {
