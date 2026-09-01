@@ -31,6 +31,7 @@ Next.js, React, TypeScript, Supabase, PostgreSQL, n8n, Expo (React Native), Node
 - Web: https://www.albanexa.com
 - E-posta: mert@albanexa.com
 - Konum: İzmir, Türkiye (Türkiye geneline uzaktan hizmet)
+- Google Business Profile: (GBP URL doğrulama bekleniyor — alındığında buraya ekle)
 
 ## Sayfa Haritası
 

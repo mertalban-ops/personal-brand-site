@@ -8,6 +8,7 @@ import {
   Shield, Search, BarChart3, Download,
   FileText,
 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 type ProjectType = "stockapp" | "auto-service" | "carpass" | "business-dashboard";
 
@@ -120,7 +121,15 @@ function SuccessBadge({ title, value, sub }: { title: string; value: string; sub
 }
 
 // ── Progress bar ──────────────────────────────────────────────────────
+const STATUS_LABELS = {
+  tr: { ok: "TEMİZ", warn: "UYARI", check: "KONTROL" },
+  en: { ok: "CLEAN",  warn: "WARN",  check: "CHECK" },
+  de: { ok: "OK",     warn: "WARN",  check: "PRÜFUNG" },
+};
+
 function AnalysisRow({ label, status, delay }: { label: string; status: "ok" | "warn" | "check"; delay: number }) {
+  const { language } = useLanguage();
+  const statusLabels = STATUS_LABELS[language as keyof typeof STATUS_LABELS] ?? STATUS_LABELS.tr;
   const color = status === "ok" ? s.accent : status === "warn" ? s.amber : s.blue;
   const Icon = status === "ok" ? CheckCircle2 : status === "warn" ? AlertCircle : Search;
   return (
@@ -143,7 +152,7 @@ function AnalysisRow({ label, status, delay }: { label: string; status: "ok" | "
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: delay + 0.75 }}
         style={{ color, fontSize: "0.58rem", fontWeight: 700, fontFamily: "monospace", minWidth: 28, textAlign: "right" as const }}
       >
-        {status === "ok" ? "TEMİZ" : status === "warn" ? "UYARI" : "KONTROL"}
+        {statusLabels[status]}
       </motion.span>
     </motion.div>
   );
@@ -591,11 +600,18 @@ const dashScreens = [
 ];
 
 // ── Screen config per project ──────────────────────────────────────────
-const config: Record<ProjectType, { screens: Array<() => React.ReactNode>; title: string; accent: string }> = {
-  stockapp:           { screens: stockScreens,  title: "StockApp — Stok & Cari Takip",   accent: s.accent },
-  "auto-service":     { screens: autoScreens,   title: "Hezer Auto — Servis Yönetimi",    accent: s.blue },
-  carpass:            { screens: carpassScreens, title: "CARPASS — Araç Güven Raporu",    accent: s.accent },
-  "business-dashboard": { screens: dashScreens, title: "SaaS Dashboard — Operasyon",     accent: s.blue },
+const configTitles: Record<ProjectType, Record<string, string>> = {
+  stockapp:             { tr: "StockApp — Stok & Cari Takip",  en: "StockApp — Inventory & Accounts",    de: "StockApp — Lager & Buchhaltung" },
+  "auto-service":       { tr: "Hezer Auto — Servis Yönetimi",  en: "Hezer Auto — Service Management",    de: "Hezer Auto — Serviceverwaltung" },
+  carpass:              { tr: "CARPASS — Araç Güven Raporu",   en: "CARPASS — Vehicle Trust Report",     de: "CARPASS — Fahrzeugvertrauensbericht" },
+  "business-dashboard": { tr: "SaaS Dashboard — Operasyon",   en: "SaaS Dashboard — Operations",        de: "SaaS Dashboard — Betrieb" },
+};
+
+const configBase: Record<ProjectType, { screens: Array<() => React.ReactNode>; accent: string }> = {
+  stockapp:             { screens: stockScreens,   accent: s.accent },
+  "auto-service":       { screens: autoScreens,    accent: s.blue },
+  carpass:              { screens: carpassScreens, accent: s.accent },
+  "business-dashboard": { screens: dashScreens,    accent: s.blue },
 };
 
 // ── Screen transition variants ─────────────────────────────────────────
@@ -615,7 +631,11 @@ export default function ProjectDemoVideo({
   hideChrome?: boolean;
   play?: boolean;
 }) {
-  const { screens, title, accent } = config[type] ?? config.stockapp;
+  const { language } = useLanguage();
+  const base = configBase[type] ?? configBase.stockapp;
+  const { screens, accent } = base;
+  const title = (configTitles[type] ?? configTitles.stockapp)[language] ?? (configTitles[type] ?? configTitles.stockapp).tr;
+  const screenLabel = language === "de" ? "Bildschirm" : language === "en" ? "Screen" : "Ekran";
   const [idx, setIdx] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [prevPlay, setPrevPlay] = useState(play);
@@ -706,7 +726,7 @@ export default function ProjectDemoVideo({
         <div style={{ padding: "8px 14px", borderTop: `1px solid ${s.border}`, display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(255,255,255,0.01)" }}>
           <div style={{ display: "flex", gap: 5 }}>
             {screens.map((_, i) => (
-              <button key={i} onClick={() => setIdx(i)} aria-label={`Ekran ${i + 1}`} style={{ background: "none", border: "none", cursor: "pointer", padding: "4px" }}>
+              <button key={i} onClick={() => setIdx(i)} aria-label={`${screenLabel} ${i + 1}`} style={{ background: "none", border: "none", cursor: "pointer", padding: "4px" }}>
                 <motion.div animate={{ width: i === idx ? 18 : 6, background: i === idx ? accent : s.border }}
                   style={{ height: 6, borderRadius: 4 }} transition={{ duration: 0.3 }} />
               </button>

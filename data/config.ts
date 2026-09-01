@@ -19,6 +19,7 @@ export interface SiteConfig {
     github?: string;
     instagram?: string;
   };
+  gbpUrl?: string; // Google Business Profile URL (g.page/... or maps.google.com/?cid=...)
   budgetRanges: {
     value: string;
     labelTr: string;

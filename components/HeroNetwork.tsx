@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Package, Wallet, ShoppingCart, TrendingUp, BarChart3, Zap } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const C = {
   accent: "#10b981",
@@ -11,17 +12,26 @@ const C = {
   faint: "#4b667e",
 };
 
-const NODES = [
-  { id: "stok",   label: "Stok",     Icon: Package,      cx: 50, cy: 7,  color: C.accent, dur: "1.8s", floatDur: 2.8 },
-  { id: "cari",   label: "Cari",     Icon: Wallet,       cx: 85, cy: 34, color: C.blue,   dur: "2.3s", floatDur: 3.1 },
-  { id: "satis",  label: "Satış",    Icon: ShoppingCart, cx: 73, cy: 80, color: C.amber,  dur: "1.6s", floatDur: 2.5 },
-  { id: "tahsil", label: "Tahsilat", Icon: TrendingUp,   cx: 27, cy: 80, color: C.accent, dur: "2.0s", floatDur: 3.0 },
-  { id: "rapor",  label: "Rapor",    Icon: BarChart3,    cx: 15, cy: 34, color: C.blue,   dur: "1.5s", floatDur: 2.6 },
-];
+const NODE_LABELS = {
+  tr: { stok: "Stok", cari: "Cari", satis: "Satış", tahsil: "Tahsilat", rapor: "Rapor", core: "Operasyon Merkezi" },
+  en: { stok: "Stock", cari: "Accounts", satis: "Sales", tahsil: "Payments", rapor: "Reports", core: "Ops Center" },
+  de: { stok: "Lager", cari: "Konto", satis: "Verkauf", tahsil: "Zahlungen", rapor: "Berichte", core: "Zentrale" },
+};
+
 const CORE = { cx: 50, cy: 46 };
 
 export default function HeroNetwork() {
   const reduce = useReducedMotion();
+  const { language } = useLanguage();
+  const labels = NODE_LABELS[language] ?? NODE_LABELS.tr;
+
+  const NODES = [
+    { id: "stok",   label: labels.stok,   Icon: Package,      cx: 50, cy: 7,  color: C.accent, dur: "1.8s", floatDur: 2.8 },
+    { id: "cari",   label: labels.cari,   Icon: Wallet,       cx: 85, cy: 34, color: C.blue,   dur: "2.3s", floatDur: 3.1 },
+    { id: "satis",  label: labels.satis,  Icon: ShoppingCart, cx: 73, cy: 80, color: C.amber,  dur: "1.6s", floatDur: 2.5 },
+    { id: "tahsil", label: labels.tahsil, Icon: TrendingUp,   cx: 27, cy: 80, color: C.accent, dur: "2.0s", floatDur: 3.0 },
+    { id: "rapor",  label: labels.rapor,  Icon: BarChart3,    cx: 15, cy: 34, color: C.blue,   dur: "1.5s", floatDur: 2.6 },
+  ];
 
   return (
     <div
@@ -116,7 +126,7 @@ export default function HeroNetwork() {
               color: C.accent, fontSize: "0.58rem", fontFamily: "monospace",
               fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", whiteSpace: "nowrap",
             }}>
-              Operasyon Merkezi
+              {labels.core}
             </p>
           </div>
         </motion.div>

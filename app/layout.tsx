@@ -81,7 +81,7 @@ export default function RootLayout({
   const sameAs = [
     siteConfig.socialLinks.github,
     siteConfig.socialLinks.linkedin,
-    "https://maps.google.com/?q=Albanexa+İzmir",
+    siteConfig.gbpUrl, // Set gbpUrl in data/config.ts once GBP verification completes
   ].filter(Boolean);
   const jsonLd = {
     "@context": "https://schema.org",
