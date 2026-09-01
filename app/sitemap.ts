@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/data/config";
+import { ornekler } from "@/data/ornekler";
 
 // lastModified dates reflect actual content change dates, not build time.
 // Update a page's date when its content materially changes.
@@ -12,6 +13,8 @@ const PAGES: {
   { path: "",                                          priority: 1.0, freq: "weekly",  lastModified: "2025-07-01" },
   { path: "/cozumler",                                 priority: 0.9, freq: "monthly", lastModified: "2025-07-01" },
   { path: "/cozumler/web-siteleri",                    priority: 0.9, freq: "monthly", lastModified: "2025-07-01" },
+  { path: "/oto-servis-web-sitesi",                    priority: 0.9, freq: "monthly", lastModified: "2026-09-01" },
+  { path: "/ornekler",                                 priority: 0.6, freq: "monthly", lastModified: "2026-09-01" },
   { path: "/cozumler/web-uygulamalari",                priority: 0.9, freq: "monthly", lastModified: "2025-07-01" },
   { path: "/cozumler/is-takip-sistemleri",             priority: 0.9, freq: "monthly", lastModified: "2025-07-01" },
   { path: "/cozumler/stok-cari-tahsilat",              priority: 0.9, freq: "monthly", lastModified: "2025-07-01" },
@@ -47,10 +50,20 @@ const PAGES: {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.siteUrl;
-  return PAGES.map(({ path, priority, freq, lastModified }) => ({
+  const staticPages = PAGES.map(({ path, priority, freq, lastModified }) => ({
     url: `${base}${path}`,
     lastModified: new Date(lastModified),
     changeFrequency: freq,
     priority,
   }));
+
+  // Örnek çalışma detay sayfaları (indekslenir; ana menüde yer almaz)
+  const ornekPages = ornekler.map((o) => ({
+    url: `${base}/ornekler/${o.slug}`,
+    lastModified: new Date("2026-09-01"),
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  }));
+
+  return [...staticPages, ...ornekPages];
 }

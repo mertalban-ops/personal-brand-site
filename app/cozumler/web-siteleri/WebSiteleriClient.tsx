@@ -270,6 +270,23 @@ export default function WebSiteleriClient() {
               {c.secondaryCta}
             </Link>
           </div>
+          <p className="mt-5 text-sm text-muted">
+            {language === "de"
+              ? "Autowerkstatt? "
+              : language === "en"
+              ? "Run an auto shop? "
+              : "Oto servis misiniz? "}
+            <Link
+              href="/oto-servis-web-sitesi"
+              className="font-semibold text-accent underline underline-offset-2 hover:no-underline"
+            >
+              {language === "de"
+                ? "Pakete & Preise ansehen →"
+                : language === "en"
+                ? "See packages & prices →"
+                : "Paket fiyatlarını görmek için →"}
+            </Link>
+          </p>
         </div>
       </section>
 

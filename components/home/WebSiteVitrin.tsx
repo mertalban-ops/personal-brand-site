@@ -149,6 +149,25 @@ export default function WebSiteVitrin() {
                 {c.secondaryCta}
               </Link>
             </motion.div>
+
+            {/* Sektöre özel giriş — kurumsal anlatımı bozmayan tek bağlantı */}
+            <motion.p className="mt-5 text-xs text-muted" {...enter(0.45)}>
+              {language === "de"
+                ? "Autowerkstatt? "
+                : language === "en"
+                ? "Run an auto shop? "
+                : "Oto servis misiniz? "}
+              <Link
+                href="/oto-servis-web-sitesi"
+                className="font-semibold text-accent underline underline-offset-2 hover:no-underline"
+              >
+                {language === "de"
+                  ? "Pakete & Preise ansehen →"
+                  : language === "en"
+                  ? "See packages & prices →"
+                  : "Paket ve fiyatları görün →"}
+              </Link>
+            </motion.p>
           </div>
 
           {/* Right Column: Site Types cards */}
