@@ -16,18 +16,9 @@ import Navbar from "@/components/Navbar";
 import AnimatedSection from "@/components/AnimatedSection";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import { siteConfig } from "@/data/config";
+import { useLanguage } from "@/context/LanguageContext";
 import { trackContact, trackLead } from "@/lib/meta-events";
-import {
-  packages,
-  maintenance,
-  exclusions,
-  losses,
-  steps,
-  faqs,
-  waMessages,
-  events,
-  teklifPdfPath,
-} from "@/data/oto-servis";
+import { getOtoServis, events, teklifPdfPath } from "@/data/oto-servis";
 
 const wa = (msg: string) =>
   `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(msg)}`;
@@ -42,6 +33,8 @@ const fire = (event: string) => {
 };
 
 export default function OtoServisClient() {
+  const { language } = useLanguage();
+  const c = getOtoServis(language);
   const reduce = useReducedMotion();
 
   const enter = (delay: number) =>
@@ -54,6 +47,8 @@ export default function OtoServisClient() {
           transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as const },
         };
 
+  const crumbHome = language === "de" ? "Startseite" : language === "en" ? "Home" : "Ana Sayfa";
+
   return (
     <main className="w-full" style={{ overflowX: "clip" }}>
       <Navbar />
@@ -62,16 +57,12 @@ export default function OtoServisClient() {
       <section className="relative pt-32 pb-14 md:pt-40 md:pb-20">
         <div className="bg-grid absolute inset-0 -z-10" />
         <div className="mx-auto max-w-4xl px-5 text-center">
-          <Breadcrumb crumbs={[{ label: "Ana Sayfa", href: "/" }, { label: "Oto Servis Web Sitesi" }]} />
-          <p className="mono-label mb-4">Oto Servisler İçin</p>
+          <Breadcrumb crumbs={[{ label: crumbHome, href: "/" }, { label: c.hero.kicker }]} />
+          <p className="mono-label mb-4">{c.hero.kicker}</p>
           <h1 className="display text-3xl font-bold text-ink md:text-5xl text-balance">
-            Müşteri servisi Google'da arıyor.{" "}
-            <span className="text-accent">Bir sayfan yoksa seni bulamıyor.</span>
+            {c.hero.titleA} <span className="text-accent">{c.hero.titleB}</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-            Oto servis, kaporta-boya ve oto elektrikçiler için sade, hızlı ve senin işletmene ait
-            bir web sitesi. Sabit fiyat, açık kapsam, sürpriz yok.
-          </p>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">{c.hero.desc}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a
               href="#paketler"
@@ -80,16 +71,16 @@ export default function OtoServisClient() {
               }}
               className="btn-shine glow-accent inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3.5 font-semibold text-black transition-transform hover:-translate-y-0.5"
             >
-              Paketleri ve fiyatları gör <ArrowRight className="h-4 w-4" />
+              {c.hero.ctaPackages} <ArrowRight className="h-4 w-4" />
             </a>
             <a
-              href={wa(waMessages.general)}
+              href={wa(c.waMessages.general)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => fire(events.whatsapp)}
               className="inline-flex items-center gap-2 rounded-lg border border-line bg-surface/30 px-6 py-3.5 font-medium text-ink transition-colors hover:border-accent/50 hover:text-accent"
             >
-              <MessageCircle className="h-4 w-4" /> WhatsApp'tan yaz
+              <MessageCircle className="h-4 w-4" /> {c.hero.ctaWhatsapp}
             </a>
           </div>
         </div>
@@ -101,17 +92,14 @@ export default function OtoServisClient() {
           <div className="rounded-2xl border border-line bg-bg-raised/30 p-6 md:p-8">
             <div className="mb-4 flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-1.5 rounded-md bg-accent/10 px-2.5 py-1 text-[0.7rem] font-semibold text-accent">
-                <Star className="h-3.5 w-3.5" /> Doğrulanmış Müşteri
+                <Star className="h-3.5 w-3.5" /> {c.social.badge}
               </span>
               <span className="inline-flex items-center gap-1.5 text-xs text-muted">
-                <MapPin className="h-3.5 w-3.5 text-accent" /> Aynı sektör · Aynı şehir (İzmir)
+                <MapPin className="h-3.5 w-3.5 text-accent" /> {c.social.sameSector}
               </span>
             </div>
             <blockquote className="text-base leading-relaxed text-ink md:text-lg">
-              “Artık borç takibini rahatça yapabiliyorum, gelir-giderimi anlık görebiliyorum. İşimi
-              gerçekten kolaylaştırdı, çok pratik oldu. Geçen gün bir aracı teslim ettikten hemen
-              sonra servis raporunu müşteriye PDF olarak gönderdim — hem zamandan kazandım hem de
-              dükkâna gerçek anlamda oturmuş bir sistemim oldu.”
+              “{c.social.quote}”
             </blockquote>
             <div className="mt-5 flex items-center justify-between gap-4 border-t border-line/60 pt-4">
               <div className="flex items-center gap-3">
@@ -119,15 +107,15 @@ export default function OtoServisClient() {
                   SH
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-ink">Serdar Hezer</p>
-                  <p className="text-xs text-muted">Sahibi, Hezer Otoşanzıman · İzmir</p>
+                  <p className="text-sm font-semibold text-ink">{c.social.author}</p>
+                  <p className="text-xs text-muted">{c.social.role}</p>
                 </div>
               </div>
               <Link
                 href="/projeler/hezer-otosanziman-site"
                 className="hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-accent hover:underline sm:inline-flex"
               >
-                Çalışmayı gör <ArrowRight className="h-4 w-4" />
+                {c.social.caseLink} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -138,13 +126,11 @@ export default function OtoServisClient() {
       <AnimatedSection>
         <div className="mx-auto max-w-6xl px-5 py-20">
           <div className="mb-12 text-center">
-            <p className="mono-label mb-2">Neden Önemli</p>
-            <h2 className="display text-2xl font-bold text-ink md:text-3xl">
-              Sitesi olmayan bir servisin kaybettiği üç şey
-            </h2>
+            <p className="mono-label mb-2">{c.lossesKicker}</p>
+            <h2 className="display text-2xl font-bold text-ink md:text-3xl">{c.lossesTitle}</h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-3">
-            {losses.map((item, i) => (
+            {c.losses.map((item, i) => (
               <motion.div
                 key={item.title}
                 {...enter(0.1 * i)}
@@ -152,7 +138,7 @@ export default function OtoServisClient() {
               >
                 <div className="mb-3 flex items-center gap-2 text-red-400/80">
                   <XCircle className="h-4 w-4 shrink-0" />
-                  <span className="text-[0.65rem] font-semibold uppercase tracking-wider">Kayıp</span>
+                  <span className="text-[0.65rem] font-semibold uppercase tracking-wider">{c.lossLabel}</span>
                 </div>
                 <h3 className="display mb-2 text-lg font-bold text-ink">{item.title}</h3>
                 <p className="text-sm leading-relaxed text-muted">{item.text}</p>
@@ -166,17 +152,13 @@ export default function OtoServisClient() {
       <AnimatedSection className="band-petrol border-y border-line">
         <div id="paketler" className="mx-auto max-w-6xl px-5 py-20 scroll-mt-24">
           <div className="mb-4 text-center">
-            <p className="mono-label mb-2">Paketler ve Fiyatlar</p>
-            <h2 className="display text-2xl font-bold text-ink md:text-3xl">
-              Sabit fiyat. Açık kapsam. Sürpriz yok.
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-sm text-muted">
-              Fiyatlar KDV hariçtir ve WhatsApp'tan gönderdiğimiz teklifle aynıdır.
-            </p>
+            <p className="mono-label mb-2">{c.packagesKicker}</p>
+            <h2 className="display text-2xl font-bold text-ink md:text-3xl">{c.packagesTitle}</h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm text-muted">{c.packagesNote}</p>
           </div>
 
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
-            {packages.map((p) => (
+            {c.packages.map((p) => (
               <div
                 key={p.id}
                 className={`relative flex flex-col rounded-2xl border p-6 ${
@@ -187,7 +169,7 @@ export default function OtoServisClient() {
               >
                 {p.highlight && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-1 text-[0.65rem] font-bold text-black">
-                    En çok tercih edilen
+                    {c.highlightBadge}
                   </span>
                 )}
                 <h3 className="display text-xl font-bold text-ink">{p.name}</h3>
@@ -204,12 +186,12 @@ export default function OtoServisClient() {
                 </ul>
 
                 <div className="mt-5 space-y-1.5 border-t border-line/60 pt-4 text-xs text-muted">
-                  <p>Teslim: <span className="font-semibold text-ink">{p.deliveryDays}</span></p>
-                  <p>Düzeltme: <span className="font-semibold text-ink">{p.revisions}</span></p>
+                  <p>{c.deliveryLabel} <span className="font-semibold text-ink">{p.deliveryDays}</span></p>
+                  <p>{c.revisionsLabel} <span className="font-semibold text-ink">{p.revisions}</span></p>
                 </div>
 
                 <a
-                  href={wa(waMessages.pkg(p.name))}
+                  href={wa(c.waMessages.pkg(p.name))}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => fire(events.whatsapp)}
@@ -219,7 +201,7 @@ export default function OtoServisClient() {
                       : "border border-line text-ink hover:border-accent/50 hover:text-accent"
                   }`}
                 >
-                  <MessageCircle className="h-4 w-4" /> Bu paketi konuşalım
+                  <MessageCircle className="h-4 w-4" /> {c.packageCta}
                 </a>
               </div>
             ))}
@@ -228,7 +210,7 @@ export default function OtoServisClient() {
           {/* Bakım */}
           <div className="mx-auto mt-6 max-w-2xl rounded-xl border border-line bg-bg-raised/10 p-5 text-center">
             <p className="text-sm text-ink">
-              <span className="font-bold text-accent">{maintenance.priceLabel}</span> — {maintenance.desc}
+              <span className="font-bold text-accent">{c.maintenance.priceLabel}</span> — {c.maintenance.desc}
             </p>
           </div>
         </div>
@@ -238,12 +220,10 @@ export default function OtoServisClient() {
       <AnimatedSection>
         <div className="mx-auto max-w-3xl px-5 py-16">
           <div className="rounded-2xl border border-line bg-bg-raised/20 p-6 md:p-8">
-            <h2 className="display mb-4 text-xl font-bold text-ink">Fiyata dahil değildir</h2>
-            <p className="mb-5 text-sm text-muted">
-              Dürüst olmak için baştan söylüyoruz. Aşağıdakiler paket fiyatına dahil değildir:
-            </p>
+            <h2 className="display mb-4 text-xl font-bold text-ink">{c.exclusionsTitle}</h2>
+            <p className="mb-5 text-sm text-muted">{c.exclusionsIntro}</p>
             <ul className="grid gap-3 sm:grid-cols-2">
-              {exclusions.map((ex) => (
+              {c.exclusions.map((ex) => (
                 <li key={ex} className="flex items-start gap-2.5 text-sm text-muted">
                   <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-faint" />
                   <span>{ex}</span>
@@ -258,11 +238,11 @@ export default function OtoServisClient() {
       <AnimatedSection className="band-petrol border-y border-line">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <div className="mb-12 text-center">
-            <p className="mono-label mb-2">Nasıl İlerliyoruz</p>
-            <h2 className="display text-2xl font-bold text-ink md:text-3xl">Üç adımda hazır</h2>
+            <p className="mono-label mb-2">{c.stepsKicker}</p>
+            <h2 className="display text-2xl font-bold text-ink md:text-3xl">{c.stepsTitle}</h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-3">
-            {steps.map((s, i) => (
+            {c.steps.map((s, i) => (
               <motion.div
                 key={s.step}
                 {...enter(0.1 * i)}
@@ -281,11 +261,11 @@ export default function OtoServisClient() {
       <AnimatedSection>
         <div className="mx-auto max-w-3xl px-5 py-20">
           <div className="mb-10 text-center">
-            <p className="mono-label mb-2">Sık Sorulan Sorular</p>
-            <h2 className="display text-2xl font-bold text-ink md:text-3xl">Aklına takılanlar</h2>
+            <p className="mono-label mb-2">{c.faqKicker}</p>
+            <h2 className="display text-2xl font-bold text-ink md:text-3xl">{c.faqTitle}</h2>
           </div>
           <div className="space-y-3">
-            {faqs.map((f) => (
+            {c.faqs.map((f) => (
               <details
                 key={f.q}
                 className="group rounded-xl border border-line bg-bg-raised/20 p-5 [&_summary::-webkit-details-marker]:hidden"
@@ -304,22 +284,17 @@ export default function OtoServisClient() {
       {/* h. KAPANIŞ CTA */}
       <AnimatedSection className="band-petrol border-t border-line">
         <div className="mx-auto max-w-3xl px-5 py-20 text-center">
-          <h2 className="display text-3xl font-bold text-ink md:text-4xl">
-            Kısa bir mesaj at, gerisini konuşalım
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-muted">
-            Hangi paketin sana uygun olduğundan emin değilsen dert etme. WhatsApp'tan yaz, birlikte
-            karar verelim. Teklifi PDF olarak da indirebilirsin.
-          </p>
+          <h2 className="display text-3xl font-bold text-ink md:text-4xl">{c.closing.title}</h2>
+          <p className="mx-auto mt-5 max-w-xl text-muted">{c.closing.desc}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a
-              href={wa(waMessages.general)}
+              href={wa(c.waMessages.general)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => fire(events.whatsapp)}
               className="btn-shine glow-accent inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3.5 font-semibold text-black transition-transform hover:-translate-y-0.5"
             >
-              <MessageCircle className="h-4 w-4" /> WhatsApp'tan yaz
+              <MessageCircle className="h-4 w-4" /> {c.closing.ctaWhatsapp}
             </a>
             <a
               href={teklifPdfPath}
@@ -330,13 +305,13 @@ export default function OtoServisClient() {
               }}
               className="inline-flex items-center gap-2 rounded-lg border border-line px-6 py-3.5 font-medium text-ink transition-colors hover:border-accent/50 hover:text-accent"
             >
-              <Download className="h-4 w-4" /> Teklifi PDF indir
+              <Download className="h-4 w-4" /> {c.closing.ctaPdf}
             </a>
           </div>
 
           {/* Yüksek taahhütlü seçenek */}
           <p className="mt-8 text-sm text-muted">
-            Daha ayrıntılı konuşmak istersen{" "}
+            {c.closing.analysisPre}
             <Link
               href="/iletisim"
               onClick={() => {
@@ -344,16 +319,16 @@ export default function OtoServisClient() {
               }}
               className="font-semibold text-accent underline underline-offset-2"
             >
-              ücretsiz ihtiyaç analizi
-            </Link>{" "}
-            planlayabilirsin.
+              {c.closing.analysisLink}
+            </Link>
+            {c.closing.analysisPost}
           </p>
 
           {/* Örnekler bağlantısı — sadece buradan verilir */}
           <p className="mt-3 text-sm text-muted">
-            Örnek çalışmaları görmek ister misin?{" "}
+            {c.closing.samplesPre}
             <Link href="/ornekler" className="font-semibold text-accent underline underline-offset-2">
-              Örnekleri incele
+              {c.closing.samplesLink}
             </Link>
           </p>
         </div>

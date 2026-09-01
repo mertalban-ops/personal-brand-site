@@ -1,7 +1,10 @@
 import { buildPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/data/config";
-import { packages, maintenance, faqs, CURRENCY } from "@/data/oto-servis";
+import { getOtoServis, CURRENCY } from "@/data/oto-servis";
 import OtoServisClient from "./OtoServisClient";
+
+// JSON-LD ve metadata sayfanın birincil dili (TR) üzerinden üretilir.
+const { packages, maintenance, faqs } = getOtoServis("tr");
 
 export const metadata = buildPageMetadata({
   title: "Oto Servis Web Sitesi — Sabit Fiyatlı Paketler",

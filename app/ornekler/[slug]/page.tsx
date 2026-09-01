@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ornekler, getOrnek, DISCLAIMER } from "@/data/ornekler";
+import { ornekler, getOrnek, disclaimer } from "@/data/ornekler";
 import { siteConfig } from "@/data/config";
 import OrnekDetailClient from "./OrnekDetailClient";
 
@@ -14,14 +14,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const o = getOrnek(slug);
   if (!o) notFound();
-  const title = `${o.name} — Örnek Çalışma`;
+  const t = o.i18n.tr;
+  const title = `${t.name} — Örnek Çalışma`;
   return {
     title,
-    description: `${o.summary} ${DISCLAIMER}`,
+    description: `${t.summary} ${disclaimer.tr}`,
     alternates: { canonical: `/ornekler/${slug}` },
     openGraph: {
       title,
-      description: o.summary,
+      description: t.summary,
       url: `${siteConfig.siteUrl}/ornekler/${slug}`,
       locale: "tr_TR",
       type: "website",
@@ -41,7 +42,7 @@ export default async function OrnekDetailPage({ params }: Props) {
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": siteConfig.siteUrl },
       { "@type": "ListItem", "position": 2, "name": "Örnekler", "item": `${siteConfig.siteUrl}/ornekler` },
-      { "@type": "ListItem", "position": 3, "name": o.name, "item": url },
+      { "@type": "ListItem", "position": 3, "name": o.i18n.tr.name, "item": url },
     ],
   };
 
