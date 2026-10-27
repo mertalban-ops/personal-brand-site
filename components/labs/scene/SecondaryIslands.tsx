@@ -590,6 +590,105 @@ function buildGothicCastleGeometry(hazeAmt = 0.14): THREE.BufferGeometry {
 }
 
 /**
+ * Grand background fortress: an octagonal crenellated curtain wall with round corner towers and a
+ * gatehouse, enclosing an enlarged Gothic cathedral-keep and a tall square donjon. Built to read at
+ * a distance through haze, so it relies on silhouette (many slender spires at varied heights).
+ */
+function buildGrandCastleGeometry(hazeAmt = 0.4): THREE.BufferGeometry {
+  const parts: THREE.BufferGeometry[] = [];
+  const hazeCol = new THREE.Color("#ead4c2");
+  const cWall = new THREE.Color("#ebe1d5");
+  const cTrim = new THREE.Color("#d0c2b2");
+  const cRoof = new THREE.Color("#596070");
+  const cDark = new THREE.Color("#2f2b33");
+  const cLit = new THREE.Color("#e7a75a");
+  const addPart = (geo: THREE.BufferGeometry, col: THREE.Color) => {
+    parts.push(ensureBoxCylinderUVsAndColors(geo, col, hazeCol, hazeAmt));
+    geo.dispose();
+  };
+
+  // Curtain wall: octagon of wall runs with merlons, corner towers at each vertex
+  const R = 2.2;
+  const sides = 8;
+  for (let i = 0; i < sides; i++) {
+    const a0 = (i / sides) * Math.PI * 2;
+    const a1 = ((i + 1) / sides) * Math.PI * 2;
+    const x0 = Math.cos(a0) * R;
+    const z0 = Math.sin(a0) * R;
+    const x1 = Math.cos(a1) * R;
+    const z1 = Math.sin(a1) * R;
+    const len = Math.hypot(x1 - x0, z1 - z0);
+    const mid = [(x0 + x1) / 2, (z0 + z1) / 2];
+    const yaw = -Math.atan2(z1 - z0, x1 - x0);
+    const wall = new THREE.BoxGeometry(len, 0.75, 0.2);
+    wall.rotateY(yaw);
+    wall.translate(mid[0], 0.38, mid[1]);
+    addPart(wall, cWall);
+    const merlons = Math.round(len / 0.17);
+    for (let m = 0; m < merlons; m++) {
+      const t = (m + 0.5) / merlons;
+      const mer = new THREE.BoxGeometry(0.08, 0.11, 0.22);
+      mer.rotateY(yaw);
+      mer.translate(x0 + (x1 - x0) * t, 0.8, z0 + (z1 - z0) * t);
+      addPart(mer, cTrim);
+    }
+    // Round corner tower
+    const tr = 0.26;
+    const th = 1.25 + (i % 2) * 0.35;
+    const shaft = new THREE.CylinderGeometry(tr * 0.9, tr, th, 16);
+    shaft.translate(x0, th / 2, z0);
+    addPart(shaft, cWall);
+    towerWindows(addPart, cDark, cLit, x0, z0, tr * 0.9, 0.3, th * 0.8, i + 50);
+    const cap = new THREE.CylinderGeometry(tr * 1.1, tr * 0.92, 0.12, 16);
+    cap.translate(x0, th, z0);
+    addPart(cap, cTrim);
+    towerCrenellation(addPart, cTrim, x0, th + 0.06, z0, tr * 1.04);
+    const roof = new THREE.ConeGeometry(tr * 0.85, 0.9 + (i % 3) * 0.2, 16);
+    roof.translate(x0, th + 0.12 + (0.9 + (i % 3) * 0.2) / 2, z0);
+    addPart(roof, cRoof);
+  }
+
+  // Gatehouse on the front (+z) wall: twin towers + pointed arch
+  for (const gx of [-0.32, 0.32]) {
+    const g = new THREE.CylinderGeometry(0.18, 0.2, 1.15, 14);
+    g.translate(gx, 0.58, R * 0.93);
+    addPart(g, cWall);
+    towerCrenellation(addPart, cTrim, gx, 1.16, R * 0.93, 0.19);
+  }
+  const gate = new THREE.BoxGeometry(0.34, 0.5, 0.06);
+  gate.translate(0, 0.25, R * 0.93 + 0.11);
+  addPart(gate, cDark);
+
+  // Tall square donjon behind the keep
+  const donjon = new THREE.BoxGeometry(0.75, 3.0, 0.75);
+  donjon.translate(-0.7, 1.5, -0.9);
+  addPart(donjon, cWall);
+  for (let lvl = 0; lvl < 4; lvl++) {
+    for (const [dx, dz, ry] of [[0, 0.385, 0], [0, -0.385, 0], [0.385, 0, Math.PI / 2], [-0.385, 0, Math.PI / 2]] as const) {
+      const w = new THREE.BoxGeometry(0.1, 0.22, 0.03);
+      w.rotateY(ry);
+      w.translate(-0.7 + dx, 0.7 + lvl * 0.6, -0.9 + dz);
+      addPart(w, hash3(lvl, dx, dz) > 0.75 ? cLit : cDark);
+    }
+  }
+  const djRoof = new THREE.ConeGeometry(0.62, 1.8, 4);
+  djRoof.rotateY(Math.PI / 4);
+  djRoof.translate(-0.7, 3.0 + 0.9, -0.9);
+  addPart(djRoof, cRoof);
+
+  // Enlarged Gothic cathedral-keep at the centre
+  const keep = buildGothicCastleGeometry(hazeAmt);
+  keep.scale(1.35, 1.45, 1.35);
+  keep.translate(0.25, 0, 0.1);
+  parts.push(keep);
+
+  const merged = mergeGeometries(parts, false)!;
+  parts.forEach((g) => g.dispose());
+  merged.computeVertexNormals();
+  return merged;
+}
+
+/**
  * Builds the monumental Distant Acropolis Citadel + 7-Span Semicircular Arched Stone Viaduct Bridge
  * seen under the colossal Moon on the right side of 0.0s & 2.4s.
  * Uses true semicircular arch geometry (not T-shaped boxes!) and atmospheric perspective haze.
@@ -800,7 +899,9 @@ interface IslandInstanceDef {
   bobAmp: number;
   bobSpeed: number;
   bobPhase: number;
-  type: "castle" | "citadel" | "tree-grove" | "ruin-arch" | "watchtower";
+  type: "castle" | "citadel" | "tree-grove" | "ruin-arch" | "watchtower" | "grand-castle";
+  /** Uniform scale of the island's architecture (side castles stay small, the background one large) */
+  structureScale?: number;
   treeCount: number;
   treeScale: number;
   waterfalls: { angle: number; width: number; height: number }[];
@@ -809,9 +910,31 @@ interface IslandInstanceDef {
 // 14 Multi-Layered Floating Archipelago Islands spanning Near-Midground, High Sky,
 // Far Horizon (Atmospheric Perspective), and 360° Back Orbit Discovery
 const ISLAND_DEFS: IslandInstanceDef[] = [
+  // 0. Grand fortress far behind the Tree of Life (between the crown and the moon in the hero view)
+  {
+    id: "grand-castle-isle",
+    // Right of the crown, rising toward the moon: reads as the dominant far fortress in the hero shot
+    position: [19, 0.6, -40],
+    radius: 5.4,
+    depth: 5.4,
+    seed: 131,
+    haze: 0.4,
+    bobAmp: 0.08,
+    bobSpeed: 0.3,
+    bobPhase: 1.4,
+    type: "grand-castle",
+    structureScale: 1.9,
+    treeCount: 5,
+    treeScale: 1.2,
+    waterfalls: [
+      { angle: 1.45, width: 0.8, height: 11 },
+      { angle: 1.95, width: 0.6, height: 10 },
+    ],
+  },
   // 1. Left Mid-Ground Gothic Cathedral Castle Island (prominent left landmark in 0.0s & 2.4s)
   {
     id: "left-castle-island",
+    structureScale: 0.72,
     position: [-9.8, 0.2, -5.2],
     radius: 2.35,
     depth: 3.95,
@@ -965,9 +1088,10 @@ const ISLAND_DEFS: IslandInstanceDef[] = [
   // 10. Far-Right Grand Citadel Acropolis & 7-Span Arched Viaduct Bridge (under the Moon in 0.0s & 2.4s)
   {
     id: "far-right-citadel",
-    position: [11.4, 0.65, -18.5],
-    radius: 3.15,
-    depth: 4.5,
+    structureScale: 0.62,
+    position: [16.5, -0.4, -7.5],
+    radius: 2.3,
+    depth: 3.6,
     seed: 77,
     haze: 0.46,
     bobAmp: 0.1,
@@ -1082,6 +1206,7 @@ export default function SecondaryIslands({ quality = "high" }: { quality?: "high
   const castleGeo = useMemo(() => buildGothicCastleGeometry(0.14), []);
   const watchtowerGeo = useMemo(() => buildGothicCastleGeometry(0.32), []);
   const citadelGeo = useMemo(() => buildDistantCitadelAndBridgeGeometry(0.46), []);
+  const grandCastleGeo = useMemo(() => buildGrandCastleGeometry(0.36), []);
   const miniBranchGeo = useMemo(() => buildMiniBonsaiBranches(), []);
   const miniFoliageGeo = useMemo(() => buildMiniBonsaiFoliage(), []);
 
@@ -1183,7 +1308,13 @@ export default function SecondaryIslands({ quality = "high" }: { quality?: "high
 
           {/* Architectural structures per island type with weathered Stone Masonry PBR */}
           {def.type === "castle" && (
-            <mesh geometry={castleGeo} position={[0, 0.08, -0.05]} castShadow receiveShadow>
+            <mesh
+              geometry={castleGeo}
+              position={[0, 0.08, -0.05]}
+              scale={def.structureScale ?? 1}
+              castShadow
+              receiveShadow
+            >
               <meshStandardMaterial
                 map={stonePBR.map}
                 normalMap={stonePBR.normalMap}
@@ -1199,7 +1330,7 @@ export default function SecondaryIslands({ quality = "high" }: { quality?: "high
           )}
 
           {def.type === "citadel" && (
-            <mesh geometry={citadelGeo} position={[0, 0.08, 0]} scale={0.92}>
+            <mesh geometry={citadelGeo} position={[0, 0.08, 0]} scale={0.92 * (def.structureScale ?? 1)}>
               <meshStandardMaterial
                 map={stonePBR.map}
                 normalMap={stonePBR.normalMap}
@@ -1208,6 +1339,22 @@ export default function SecondaryIslands({ quality = "high" }: { quality?: "high
                 metalness={0.03}
                 emissive="#f1ddd0"
                 emissiveIntensity={def.haze * 0.95}
+                vertexColors
+              />
+            </mesh>
+          )}
+
+          {def.type === "grand-castle" && (
+            <mesh geometry={grandCastleGeo} position={[0, 0.1, 0]} scale={def.structureScale ?? 1}>
+              <meshStandardMaterial
+                map={stonePBR.map}
+                normalMap={stonePBR.normalMap}
+                normalScale={new THREE.Vector2(0.6, 0.6)}
+                roughnessMap={stonePBR.roughnessMap}
+                roughness={0.8}
+                metalness={0.03}
+                emissive="#efdcd2"
+                emissiveIntensity={0.06 + def.haze * 0.55}
                 vertexColors
               />
             </mesh>
@@ -1263,7 +1410,9 @@ export default function SecondaryIslands({ quality = "high" }: { quality?: "high
           {/* Organic miniature bonsai trees with real bark & pointed-leaf botanical sprigs */}
           {Array.from({ length: def.treeCount }).map((_, ti) => {
             const ta = (ti / def.treeCount) * Math.PI * 2 + 0.62;
-            const tr = def.radius * (def.type === "castle" ? 0.68 : 0.46);
+            // Grand fortress: trees outside the curtain wall, on the turf ring near the rim
+            const tr =
+              def.radius * (def.type === "grand-castle" ? 0.86 : def.type === "castle" ? 0.68 : 0.46);
             const s = def.treeScale * (0.82 + (ti % 2) * 0.24);
             return (
               <group

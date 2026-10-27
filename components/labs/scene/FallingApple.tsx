@@ -22,11 +22,11 @@ import type { AppleAnchor } from "@/lib/labs/anchors";
  *  7. Pure Light Dissolution (4.25s - 4.55s): Dissolves into a transcendent golden solar bloom & anamorphic lens flare (9.6s)
  */
 // Timeline (seconds). One clock drives motion, light and particles so they stay in sync.
-const T_SELECT = 0.9; // glow up + tremble while the camera closes in
-const T_DETACH = 1.7; // stem releases, single pendulum swing
-const T_CLOUDS = 5.3; // long freefall past cliffs & waterfalls ends; apple enters the cloud layers
-const T_BURST = 7.2; // apple starts turning into light inside the clouds
-const T_DONE = 9.4; // fully dissolved → hand off to the page transition
+const T_SELECT = 0.48; // glow up + tremble while the camera closes in
+const T_DETACH = 0.9; // stem releases, single pendulum swing
+const T_CLOUDS = 2.82; // long freefall past cliffs & waterfalls ends; apple enters the cloud layers
+const T_BURST = 3.83; // apple starts turning into light inside the clouds
+const T_DONE = 5.0; // fully dissolved → hand off to the page transition
 
 /**
  * Fall progress → path progress: gravity ramp (0–20%), near-terminal velocity (20–85%),
@@ -309,7 +309,7 @@ export default function FallingApple({
     if (elapsed < T_DETACH) {
       const p = Math.min(1, elapsed / T_SELECT);
       const q = Math.max(0, (elapsed - T_SELECT) / (T_DETACH - T_SELECT));
-      const shake = elapsed < T_SELECT ? Math.sin(elapsed * 38) * 0.018 * p : 0;
+      const shake = elapsed < T_SELECT ? Math.sin(elapsed * 60) * 0.018 * p : 0;
       g.position.set(
         anchor.position[0] + shake,
         anchor.position[1] - q * q * 0.32,
@@ -327,7 +327,7 @@ export default function FallingApple({
           anchor.position[1] - 0.12,
           anchor.position[2] + radialDir.z * 3.85,
         );
-        camera.position.lerp(targetCam, Math.min(1, delta * 3.8));
+        camera.position.lerp(targetCam, Math.min(1, delta * 6.5));
         camera.lookAt(anchor.position[0], anchor.position[1], anchor.position[2]);
       }
       return;
@@ -350,7 +350,7 @@ export default function FallingApple({
     g.position.set(pt.x + microSwayX, pt.y, pt.z);
 
     // Poetic slow tumble & rotation in freefall (matching 6.4s -> 7.2s -> 8.0s -> 8.8s)
-    g.rotation.y = 0.5 + (elapsed - fallStart) * 0.65;
+    g.rotation.y = 0.5 + (elapsed - fallStart) * 1.2;
     g.rotation.z = Math.sin(elapsed * 2.4) * 0.16 + fallProgress * 0.25;
     g.rotation.x = Math.cos(elapsed * 1.9) * 0.12 + fallProgress * 0.18;
 
@@ -392,7 +392,7 @@ export default function FallingApple({
     // - Zone C (2.55s..4.55s, 8.0s & 8.8s ref): Camera rises above the apple and pitches ~34° DOWNWARD into the open cloud sea abyss
     //   so the island rock disappears high above the frame and only billowing clouds & starburst sparks surround the apple!
     if (followCamera) {
-      const abyssPhase = Math.max(0, Math.min(1, (elapsed - T_CLOUDS + 0.5) / 2.0));
+      const abyssPhase = Math.max(0, Math.min(1, (elapsed - T_CLOUDS + 0.27) / 1.06));
       const smoothAbyss = abyssPhase * abyssPhase * (3 - 2 * abyssPhase);
 
       const camDist = THREE.MathUtils.lerp(3.55, 3.95, smoothAbyss);
@@ -404,14 +404,14 @@ export default function FallingApple({
         pt.y + camHeightOffset,
         pt.z + radialDir.z * camDist,
       );
-      camera.position.lerp(desiredCamPos, Math.min(1, delta * 8.5));
+      camera.position.lerp(desiredCamPos, Math.min(1, delta * 11));
       camera.lookAt(pt.x, pt.y + lookYOffset, pt.z);
     }
 
     // Stage 6 & 7: Radial Golden Starburst Eruption & Light Dissolution in the Cloud Sea (3.32s - 4.55s, matching 8.8s & 9.6s)
     if (elapsed >= T_BURST) {
       const bTime = elapsed - T_BURST;
-      const bNorm = Math.min(1, bTime / (T_DONE - T_BURST - 0.4));
+      const bNorm = Math.min(1, bTime / (T_DONE - T_BURST - 0.2));
       // Apple condenses into a luminous golden-peach core at the center of the starburst (8.8s)
       const shrink = THREE.MathUtils.lerp(1.22, 0.58, bNorm);
       g.scale.setScalar(shrink);
@@ -424,7 +424,7 @@ export default function FallingApple({
 
       if (dissolveHaloRef.current) {
         // Pure light dissolution ramp in the final 0.45s (4.10s..4.55s -> 9.6s solar flare)
-        const dissolveT = Math.max(0, (elapsed - (T_DONE - 1.0)) / 1.0);
+        const dissolveT = Math.max(0, (elapsed - (T_DONE - 0.55)) / 0.55);
         // Final beat: the light swallows the frame (reference 9.6s is an almost white-gold screen)
         const haloScale = 1.6 + Math.pow(bNorm, 1.5) * 3.2 + Math.pow(dissolveT, 1.6) * 32.0;
         dissolveHaloRef.current.scale.setScalar(haloScale);
@@ -435,7 +435,7 @@ export default function FallingApple({
         burstPoints.current.visible = true;
         const bAttr = burstGeo.getAttribute("position") as THREE.BufferAttribute;
         const endPt = curve.getPointAt(1);
-        const drag = Math.pow(bTime * 0.62, 0.72);
+        const drag = Math.pow(bTime * 1.17, 0.72);
         for (let i = 0; i < BURST_COUNT; i++) {
           const d = burstDirs[i];
           const o = burstInitialOffsets[i];
@@ -451,14 +451,14 @@ export default function FallingApple({
       if (burstRingPoints.current) {
         burstRingPoints.current.visible = true;
         burstRingPoints.current.position.copy(curve.getPointAt(1));
-        const ringScale = 0.45 + Math.pow(bTime * 0.62, 0.68) * 1.85;
+        const ringScale = 0.45 + Math.pow(bTime * 1.17, 0.68) * 1.85;
         burstRingPoints.current.scale.setScalar(ringScale);
         burstRingPoints.current.rotation.z = bTime * 0.42;
       }
       if (burstStreaksRef.current) {
         burstStreaksRef.current.visible = true;
         const endPt = curve.getPointAt(1);
-        const drag = Math.pow(bTime * 0.62, 0.68);
+        const drag = Math.pow(bTime * 1.17, 0.68);
         const dummy = new THREE.Object3D();
         for (let i = 0; i < STREAK_COUNT; i++) {
           const sd = streakData[i];

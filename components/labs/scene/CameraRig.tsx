@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
@@ -8,8 +8,8 @@ import { CAMERA } from "@/lib/labs/treeConfig";
 
 const startPos = new THREE.Vector3(...CAMERA.start);
 const heroPos = new THREE.Vector3(...CAMERA.hero);
-const closeUpPos = new THREE.Vector3(...CAMERA.closeUp);
-const heroTarget = new THREE.Vector3(...CAMERA.target);
+const closeUpBase = new THREE.Vector3(...CAMERA.closeUp);
+const heroTargetBase = new THREE.Vector3(...CAMERA.target);
 const closeUpTarget = new THREE.Vector3(...CAMERA.closeUpTarget);
 
 function easeOutCubic(x: number) {
@@ -58,7 +58,22 @@ export default function CameraRig({
   const tourGraceTimerRef = useRef<number>(0);
 
   // Responsive distance multiplier so mobile portrait frames the entire island & tree crown
-  const aspectFactor = size.width / Math.max(1, size.height) < 0.85 ? 1.36 : 1.0;
+  // Portrait framing: back off just enough that the whole crown + island (≈7.4 units half-width incl. margin)
+  // fits the narrow horizontal FOV, and aim lower so the island sits above the title + control bar.
+  const aspect = size.width / Math.max(1, size.height);
+  const aspectFactor = Math.max(1, 7.4 / (Math.tan((21 * Math.PI) / 180) * aspect) / heroPos.z);
+  const portrait = aspect < 0.85;
+  const heroTarget = useMemo(
+    () => new THREE.Vector3(heroTargetBase.x, heroTargetBase.y + (portrait ? -2.4 : 0), heroTargetBase.z),
+    [portrait],
+  );
+  const closeUpPos = useMemo(
+    () =>
+      portrait
+        ? new THREE.Vector3(closeUpBase.x, closeUpBase.y - 0.3, closeUpBase.z * 1.55)
+        : closeUpBase.clone(),
+    [portrait],
+  );
 
   // QA hook: place the camera at an exact pose so renders can be aligned with reference frames.
   useEffect(() => {
@@ -111,7 +126,7 @@ export default function CameraRig({
     }
 
     animStart.current = performance.now();
-  }, [presetCommand, camera, controlsRef, aspectFactor]);
+  }, [presetCommand, camera, controlsRef, aspectFactor, heroTarget, closeUpPos]);
 
   useFrame((state, delta) => {
     const now = state.clock.elapsedTime;
