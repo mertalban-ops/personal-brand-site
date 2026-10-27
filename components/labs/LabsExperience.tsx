@@ -120,6 +120,11 @@ declare global {
       azimuthDeg?: number,
     ) => void;
     __labsTriggerFallDemo?: () => void;
+    __labsSetPose?: (
+      pos: [number, number, number],
+      target: [number, number, number],
+      fov?: number,
+    ) => void;
   }
 }
 
@@ -298,7 +303,7 @@ export default function LabsExperience({ heroStart = false }: { heroStart?: bool
             preserveDrawingBuffer: true,
           }}
           onCreated={({ gl }) => {
-            gl.toneMappingExposure = 1.02;
+            gl.toneMappingExposure = 0.9;
           }}
         >
           <LabsScene

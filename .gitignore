@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Labs reference-comparison raw renders (compare-*.jpg + metrics.json are kept)
+docs/labs-iterations/**/render-*.png
+docs/labs-iterations/**/tour-*.png

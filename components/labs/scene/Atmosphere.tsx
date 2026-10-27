@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import { Clouds, Cloud } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import {
@@ -10,6 +9,7 @@ import {
   getGoldenHourEnvMap,
   getLunarTexture,
 } from "@/lib/labs/pbrTextures";
+import Cumulus from "./Cumulus";
 
 const SKY_VERTEX = /* glsl */ `
   varying vec3 vWorldPos;
@@ -60,9 +60,9 @@ const SKY_FRAGMENT = /* glsl */ `
 
     // Reference palette (0.0s - 2.4s):
     // Deep twilight periwinkle-slate upper sky -> warm rose-lavender mid-sky -> luminous golden-apricot horizon
-    vec3 zenithCol = vec3(0.31, 0.41, 0.61);
-    vec3 upperMidCol = vec3(0.55, 0.59, 0.74);
-    vec3 horizonCol = vec3(0.97, 0.85, 0.72);
+    vec3 zenithCol = vec3(0.32, 0.45, 0.72);
+    vec3 upperMidCol = vec3(0.70, 0.70, 0.80);
+    vec3 horizonCol = vec3(0.98, 0.84, 0.66);
     vec3 lowerCloudCol = vec3(0.76, 0.66, 0.71);
 
     vec3 col;
@@ -85,7 +85,7 @@ const SKY_FRAGMENT = /* glsl */ `
       vec3 cloudShadow = vec3(0.72, 0.62, 0.68);
       vec3 cloudLit = mix(vec3(0.95, 0.82, 0.72), vec3(1.0, 0.94, 0.82), pow(sunAmt, 1.4));
       vec3 skyCloudCol = mix(cloudShadow, cloudLit, smoothstep(0.42, 0.74, c1));
-      col = mix(col, skyCloudCol, cloudMask * 0.66);
+      col = mix(col, skyCloudCol, cloudMask * 0.82);
     } else {
       col = mix(horizonCol, lowerCloudCol, smoothstep(0.0, -0.35, y));
     }
@@ -97,9 +97,10 @@ const SKY_FRAGMENT = /* glsl */ `
 
     // Warm golden-rose horizon mist band
     float horizonMist = exp(-abs(y) * 10.5);
-    col = mix(col, vec3(0.98, 0.88, 0.76), horizonMist * 0.38);
+    col = mix(col, vec3(0.98, 0.86, 0.70), horizonMist * 0.32);
 
-    gl_FragColor = vec4(col, 1.0);
+    // Palette is authored in sRGB; the composer works in linear space
+    gl_FragColor = vec4(pow(col, vec3(2.2)), 1.0);
   }
 `;
 
@@ -133,18 +134,21 @@ const MOON_FRAGMENT = /* glsl */ `
     float fresnel = pow(1.0 - max(0.0, dot(N, V)), 2.2);
     float limbFade = smoothstep(0.01, 0.16, max(0.0, dot(N, V)));
 
-    vec3 craterContrast = clamp((tex - 0.5) * 2.55 + 0.46, 0.0, 1.0);
-    vec3 darkMare = vec3(0.44, 0.49, 0.64);
-    vec3 litHighland = vec3(0.95, 0.89, 0.83);
-    vec3 surfaceCol = mix(darkMare, litHighland, craterContrast);
-    vec3 skyBlend = vec3(0.56, 0.60, 0.74);
-    vec3 moonCol = mix(skyBlend, surfaceCol, 0.38 + ndl * 0.62);
+    float lum = dot(tex, vec3(0.3333));
+    float crater = clamp((lum - 0.5) * 1.35 + 0.52, 0.0, 1.0);
+    vec3 mare = vec3(0.76, 0.75, 0.79);
+    vec3 highland = vec3(0.98, 0.94, 0.89);
+    vec3 surfaceCol = mix(mare, highland, crater);
+    vec3 skyBlend = vec3(0.88, 0.85, 0.88);
+    vec3 moonCol = mix(skyBlend, surfaceCol, 0.5 + ndl * 0.5);
 
-    // Crisp warm sunlit crescent rim on the upper-right edge
-    moonCol += vec3(1.0, 0.94, 0.80) * pow(max(0.0, dot(N, L)), 2.4) * (0.34 + fresnel * 0.72);
+    // Soft warm terminator glow on the sun-facing limb (no hard specular hotspot)
+    moonCol += vec3(1.0, 0.92, 0.78) * pow(max(0.0, dot(N, L)), 3.0) * (0.10 + fresnel * 0.22);
 
-    float alpha = limbFade * (0.55 + 0.45 * ndl);
-    gl_FragColor = vec4(moonCol, alpha);
+    // Lower limb dissolves into the golden haze & cloud tops, like the reference moon
+    float hazeFade = smoothstep(-0.95, 0.15, N.y);
+    float alpha = limbFade * (0.5 + 0.32 * ndl) * hazeFade;
+    gl_FragColor = vec4(pow(moonCol, vec3(2.2)), alpha);
   }
 `;
 
@@ -215,16 +219,22 @@ const CLOUD_SEA_FRAGMENT = /* glsl */ `
     float n1 = fbm(p);
     float n2 = fbm(p * 2.35 + vec2(n1 * 1.5, -n1 * 1.2));
     float cumulus = clamp(n1 * 0.52 + n2 * 0.48, 0.0, 1.0);
+    vec2 sunOff = vec2(0.055, -0.035);
+    float n1s = fbm(p + sunOff);
+    float n2s = fbm((p + sunOff) * 2.35 + vec2(n1s * 1.5, -n1s * 1.2));
+    float cumulusS = clamp(n1s * 0.52 + n2s * 0.48, 0.0, 1.0);
+    float relief = clamp(0.5 + (cumulusS - cumulus) * 7.5, 0.0, 1.0);
 
     // Directional golden light gradient from upper-right (+x, -z)
     float sunGrad = clamp((vWorldPos.x * 0.015 - vWorldPos.z * 0.010) + 0.52, 0.0, 1.0);
 
     // Deep rose-mauve-taupe cloud troughs -> warm apricot-peach mid -> sunlit golden-cream crests
-    vec3 shadowCol = vec3(0.56, 0.45, 0.52);
-    vec3 midCol = vec3(0.85, 0.70, 0.63);
-    vec3 crestCol = vec3(0.99, 0.91, 0.78);
+    vec3 shadowCol = vec3(0.82, 0.78, 0.82);
+    vec3 midCol = vec3(0.93, 0.87, 0.84);
+    vec3 crestCol = vec3(1.0, 0.90, 0.74);
 
-    float lightVal = smoothstep(0.22, 0.78, cumulus + (sunGrad - 0.5) * 0.26);
+    // Weak sun gradient: a strong one turned the far (180°) side of the sheet into lavender stripes
+    float lightVal = smoothstep(0.18, 0.86, cumulus * 0.55 + relief * 0.55 + (sunGrad - 0.5) * 0.1 + 0.04);
     vec3 col = mix(shadowCol, midCol, smoothstep(0.0, 0.52, lightVal));
     col = mix(col, crestCol, smoothstep(0.45, 0.92, lightVal));
 
@@ -233,9 +243,12 @@ const CLOUD_SEA_FRAGMENT = /* glsl */ `
     float edgeAlpha = 1.0 - smoothstep(58.0, 95.0, dist);
     // Optional central canyon opening so the falling apple can descend deep into the cloud abyss
     float innerMask = uInnerCutout > 0.5 ? smoothstep(5.2, 9.8, dist) : 1.0;
-    col = mix(col, vec3(0.93, 0.81, 0.72), smoothstep(32.0, 82.0, dist) * 0.58);
+    col = mix(col, vec3(0.95, 0.80, 0.64), smoothstep(36.0, 88.0, dist) * 0.55);
 
-    gl_FragColor = vec4(col, edgeAlpha * innerMask);
+    float a = edgeAlpha * innerMask;
+    // The upper sheet writes depth; never let its transparent canyon/edges occlude what lies below
+    if (a < 0.35) discard;
+    gl_FragColor = vec4(pow(col, vec3(2.2)), a);
   }
 `;
 
@@ -334,7 +347,8 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
     const mesh = new THREE.InstancedMesh(puffGeo, mat, count);
     const dummy = new THREE.Object3D();
     const col = new THREE.Color();
-    const palette = ["#fff6e4", "#f9dfc4", "#ecc4ae", "#d8b0b6", "#c096a0"];
+    // Neutral lavender-cream shadows (the old rose/mauve tones read as pink-brown after tone mapping)
+    const palette = ["#fff6e4", "#f9e6d4", "#efe2da", "#e2d9de", "#d5ced8"];
 
     for (let i = 0; i < count; i++) {
       const a = (i * 2.3999632) % (Math.PI * 2);
@@ -399,7 +413,7 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
 
     mesh.instanceMatrix.needsUpdate = true;
     if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
-    mesh.renderOrder = -1;
+    mesh.renderOrder = 2;
     return mesh;
   }, [high, cloudPuffTex]);
 
@@ -436,8 +450,8 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
 
   return (
     <>
-      <color attach="background" args={["#eed8c2"]} />
-      <fog attach="fog" args={["#f0dac5", 26, 86]} />
+      <color attach="background" args={["#e9cfb2"]} />
+      <fogExp2 attach="fog" args={["#efcfa8", 0.0085]} />
 
       {/* 360° Painterly Golden-Hour Sky Dome */}
       <mesh scale={125}>
@@ -452,14 +466,14 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
       </mesh>
 
       {/* Golden-hour cinematic lighting rig */}
-      <hemisphereLight args={["#fff4dc", "#7a6672", 1.08]} />
-      <ambientLight intensity={0.45} color="#ffedd4" />
+      <hemisphereLight args={["#fff1d6", "#6e5a62", 0.82]} />
+      <ambientLight intensity={0.24} color="#ffe8c8" />
 
       {/* Main golden sunset key light from upper-right */}
       <directionalLight
         position={[18, 13.5, 9.5]}
-        intensity={2.85}
-        color="#ffdba0"
+        intensity={3.1}
+        color="#ffd596"
         castShadow={high}
         shadow-mapSize={[1024, 1024]}
         shadow-camera-left={-11}
@@ -477,9 +491,9 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
       {/* Inner Tree of Life warm golden heart light (illuminates inner boughs & upper trunk like 2.4s & 4.8s) */}
       <pointLight
         position={[0.15, 3.25, 0.55]}
-        intensity={3.65}
-        distance={10.5}
-        decay={1.55}
+        intensity={7.5}
+        distance={12}
+        decay={1.4}
         color="#ffbd59"
       />
 
@@ -490,9 +504,9 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
       <directionalLight position={[0, -12, 6]} intensity={0.85} color="#f7d3b5" />
 
       {/* Colossal Textured Pale Moon in upper-right sky (framed prominently above right canopy in 0.0s & 2.4s) */}
-      <group position={[9.4, 6.85, -24.5]}>
+      <group position={[15.5, 13.6, -27]}>
         <mesh rotation={[0.1, -0.58, 0.14]}>
-          <sphereGeometry args={[7.35, 48, 36]} />
+          <sphereGeometry args={[9.6, 64, 48]} />
           <shaderMaterial
             vertexShader={MOON_VERTEX}
             fragmentShader={MOON_FRAGMENT}
@@ -508,11 +522,12 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
       <group ref={raysGroup} position={[14.5, 9.6, -16.5]} rotation={[0, 0, -0.54]}>
         {[-3.2, -1.2, 0.8, 2.8, 4.8].map((offset, idx) => (
           <mesh key={idx} position={[offset, -4.5, 0]}>
-            <planeGeometry args={[2.35, 28]} />
+            <planeGeometry args={[3.4, 28]} />
             <meshBasicMaterial
-              color="#ffebbf"
+              map={glowTex}
+              color="#ffe2a8"
               transparent
-              opacity={0.046}
+              opacity={0.03}
               blending={THREE.AdditiveBlending}
               depthWrite={false}
               side={THREE.DoubleSide}
@@ -529,7 +544,6 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
           fragmentShader={CLOUD_SEA_FRAGMENT}
           uniforms={upperCloudSeaUniforms}
           transparent
-          depthWrite={false}
         />
       </mesh>
 
@@ -548,53 +562,9 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
       {/* Multi-layered Painterly Cumulus Cloud Billows across the horizon & deep abyss */}
       <primitive object={cloudPuffMesh} />
 
-      {/* Soft volumetric cloud banks framing the lower foreground corners & horizon */}
-      <Clouds material={THREE.MeshBasicMaterial} limit={high ? 220 : 100}>
-        {/* Left foreground rose-lavender cumulus cloud bank (matches 0.0s bottom-left frame corner) */}
-        <Cloud
-          seed={22}
-          segments={high ? 32 : 14}
-          bounds={[15, 2.8, 12]}
-          volume={11}
-          color="#e5cdd2"
-          opacity={0.74}
-          position={[-15.5, -4.4, 5.5]}
-          speed={0.04}
-        />
-        {/* Right foreground warm golden cumulus cloud bank (matches 0.0s bottom-right frame corner) */}
-        <Cloud
-          seed={33}
-          segments={high ? 32 : 14}
-          bounds={[15, 2.8, 12]}
-          volume={11}
-          color="#fae6d0"
-          opacity={0.74}
-          position={[15.5, -4.4, 5.5]}
-          speed={0.04}
-        />
-        {/* Mid-depth cloud ring around the waterfall plunge zone */}
-        <Cloud
-          seed={11}
-          segments={high ? 36 : 16}
-          bounds={[32, 2.4, 28]}
-          volume={11.5}
-          color="#fae9d8"
-          opacity={0.62}
-          position={[0, -6.6, -4]}
-          speed={0.04}
-        />
-        {/* Deep abyss cloud cushion where the falling apple dissolves into starburst light (8.0s - 8.8s) */}
-        <Cloud
-          seed={55}
-          segments={high ? 36 : 16}
-          bounds={[24, 2.6, 24]}
-          volume={12}
-          color="#f8e5d4"
-          opacity={0.82}
-          position={[0, -14.8, 3.5]}
-          speed={0.03}
-        />
-      </Clouds>
+      {/* Lit cumulus heaps: many compact billows (instead of a few huge overlapping banks) so the
+          cloud sea gets the reference's cauliflower tops, shadowed undersides and depth layering. */}
+      <Cumulus quality={quality} />
 
       {/* Atmospheric golden pollen / light motes floating gently around the Tree of Life */}
       <points ref={pollenRef} geometry={pollenGeo}>

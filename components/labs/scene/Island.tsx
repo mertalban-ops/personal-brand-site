@@ -69,13 +69,13 @@ function fbm3(x: number, y: number, z: number, octaves = 4): number {
 
 // 7 waterfall angles around 360° (with 3 hero front waterfalls & 2 flank falls matching 0.0s, 2.4s, 6.4s & 7.2s)
 const WATERFALL_SPECS = [
-  { angle: 1.20, width: 0.92, height: 7.6, speed: 1.42 }, // Front-right main fall
-  { angle: 1.66, width: 0.78, height: 8.1, speed: 1.36 }, // Front-center-left main fall
-  { angle: 2.04, width: 0.95, height: 7.5, speed: 1.48 }, // Front-left main fall
-  { angle: 0.66, width: 0.62, height: 6.4, speed: 1.30 }, // Far-right flank fall
-  { angle: 2.54, width: 0.64, height: 6.5, speed: 1.34 }, // Far-left flank fall
-  { angle: 3.85, width: 0.78, height: 6.8, speed: 1.40 }, // Back-left fall (180° orbit)
-  { angle: 5.15, width: 0.76, height: 6.7, speed: 1.38 }, // Back-right fall (180° orbit)
+  { angle: 1.20, width: 0.62, height: 9.4, speed: 1.42 }, // Front-right main fall
+  { angle: 1.66, width: 0.52, height: 10.2, speed: 1.36 }, // Front-center-left main fall
+  { angle: 2.04, width: 0.66, height: 9.2, speed: 1.48 }, // Front-left main fall
+  { angle: 0.66, width: 0.42, height: 7.8, speed: 1.30 }, // Far-right flank fall
+  { angle: 2.54, width: 0.44, height: 8.0, speed: 1.34 }, // Far-left flank fall
+  { angle: 3.85, width: 0.56, height: 8.6, speed: 1.40 }, // Back-left fall (180° orbit)
+  { angle: 5.15, width: 0.54, height: 8.4, speed: 1.38 }, // Back-right fall (180° orbit)
 ];
 
 function islandEdgeRadiusAtAngle(theta: number): number {
@@ -120,57 +120,58 @@ const WATERFALL_FRAGMENT = /* glsl */ `
   uniform float uSpeed;
   uniform float uVeilLayer;
 
+  float hash1(float p) {
+    return fract(sin(p * 127.1) * 43758.5453123);
+  }
   float hash2(vec2 p) {
     return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+  }
+  float vnoise1(float x) {
+    float i = floor(x);
+    float f = fract(x);
+    return mix(hash1(i), hash1(i + 1.0), f * f * (3.0 - 2.0 * f));
   }
 
   void main() {
     float u = vUv.x;
-    float v = 1.0 - vUv.y; // 0 = top stream entry/lip, 1 = bottom cloud dissolution
+    float v = 1.0 - vUv.y; // 0 = top lip, 1 = dissolves into the cloud sea
+    float seed = uSpeed * 17.0 + uVeilLayer * 5.0;
 
-    // Multi-layer scrolling water UVs for gossamer waterfall threads
-    vec2 uv1 = vec2(u, v * 2.6 - uTime * uSpeed * 0.75);
-    vec2 uv2 = vec2(u * 1.45 - 0.18, v * 3.8 - uTime * uSpeed * 1.15);
-    vec2 uv3 = vec2(u * 2.2 + 0.12, v * 5.2 - uTime * uSpeed * 1.45);
+    // Separate water threads: the fall is a bundle of ropes of water, not one white sheet
+    float strands = smoothstep(0.32, 0.78, vnoise1(u * 9.0 + seed))
+                  * 0.7 + smoothstep(0.45, 0.85, vnoise1(u * 23.0 - seed)) * 0.45;
+    // Threads fray and spread as they fall
+    strands = mix(strands, 0.55, smoothstep(0.35, 0.95, v) * 0.6);
 
-    vec4 tex1 = texture2D(uMap, uv1);
-    vec4 tex2 = texture2D(uMap, uv2);
-    vec4 tex3 = texture2D(uMap, uv3);
+    // Scrolling streaks accelerate downwards (gravity): v^1.35 stretches the texture lower down
+    float fallV = pow(v, 1.35);
+    vec2 uv1 = vec2(u, fallV * 2.4 - uTime * uSpeed * 0.62);
+    vec2 uv2 = vec2(u * 1.6 - 0.18, fallV * 3.9 - uTime * uSpeed * 1.05);
+    float streaks = texture2D(uMap, uv1).a * 0.6 + texture2D(uMap, uv2).a * 0.5;
 
-    float streaks = tex1.a * 0.50 + tex2.a * 0.36 + tex3.a * 0.28;
-
-    // Soft curved horizontal edge feathering so waterfall edges never look like hard geometry
     float sideDist = sin(u * 3.14159265);
-    float sideMask = pow(smoothstep(0.0, 0.34, sideDist), 1.2);
+    float sideMask = smoothstep(0.0, 0.42, sideDist);
+    float topEntryFade = smoothstep(0.0, 0.04, v);
+    float crestFoam = smoothstep(0.01, 0.06, v) * (1.0 - smoothstep(0.06, 0.18, v));
+    float bottomFade = 1.0 - smoothstep(0.42 + (streaks - 0.5) * 0.14, 0.95, v);
 
-    // Zone 1: Top stream entry & lip crest foam (v = 0.0 .. 0.16)
-    float topEntryFade = smoothstep(0.0, 0.05, v);
-    float crestFoam = smoothstep(0.02, 0.09, v) * (1.0 - smoothstep(0.09, 0.22, v));
+    vec2 dropGrid = floor(vec2(u * 30.0, v * 48.0 - uTime * uSpeed * 7.0));
+    float dropSpark = step(0.95, hash2(dropGrid)) * sideMask * (1.0 - v * 0.6);
 
-    // Zone 3: Long gradual mist dissolution into the cloud sea (v = 0.52 .. 1.0)
-    // Eliminates any sharp triangular or rectangular bottom edge!
-    float bottomNoise = (tex1.a - 0.5) * 0.16;
-    float bottomFade = 1.0 - smoothstep(0.50 + bottomNoise, 0.96, v);
-
-    // Sparkling sunlit water droplets in the spray
-    vec2 dropGrid = floor(vec2(u * 26.0, (v * 42.0) - uTime * uSpeed * 6.5));
-    float dropSpark = step(0.93, hash2(dropGrid)) * sideMask * (1.0 - v * 0.5);
-
-    // Water color: translucent glacial-aqua core -> warm sunlit ivory-white foam -> golden sunset mist
-    vec3 waterCoreCol = vec3(0.84, 0.93, 0.96);
-    vec3 foamCol = vec3(1.0, 0.98, 0.93);
-    vec3 goldenMistCol = vec3(0.99, 0.91, 0.80);
-
-    float foamAmt = clamp(streaks * 0.88 + crestFoam * 0.72 + dropSpark * 0.5, 0.0, 1.0);
-    vec3 col = mix(waterCoreCol, foamCol, foamAmt);
-    col = mix(col, goldenMistCol, smoothstep(0.45, 0.92, v) * 0.68);
+    // Translucent water: cool shaded body, warm sunlit foam on the threads, golden mist low down
+    vec3 bodyCol = vec3(0.70, 0.78, 0.80);
+    vec3 foamCol = vec3(1.0, 0.97, 0.90);
+    vec3 mistCol = vec3(0.99, 0.89, 0.76);
+    float foamAmt = clamp(streaks * strands * 0.95 + crestFoam * 0.6 + dropSpark * 0.5, 0.0, 1.0);
+    vec3 col = mix(bodyCol, foamCol, foamAmt);
+    col = mix(col, mistCol, smoothstep(0.4, 0.95, v) * 0.7);
 
     float baseAlpha = uVeilLayer > 0.5
-      ? (0.16 + streaks * 0.48 + dropSpark * 0.35)
-      : (0.34 + streaks * 0.66 + crestFoam * 0.38);
+      ? (0.05 + streaks * 0.22 + dropSpark * 0.3) * (0.4 + smoothstep(0.25, 0.9, v))
+      : (0.10 + streaks * 0.55 * strands + crestFoam * 0.3) ;
 
-    float alpha = clamp(baseAlpha * sideMask * topEntryFade * bottomFade, 0.0, 0.92);
-    gl_FragColor = vec4(col, alpha);
+    float alpha = clamp(baseAlpha * sideMask * topEntryFade * bottomFade, 0.0, 0.85);
+    gl_FragColor = vec4(pow(col, vec3(2.2)), alpha);
   }
 `;
 
@@ -213,11 +214,13 @@ function buildCraggyCliffGeometry(quality: "high" | "low"): THREE.BufferGeometry
   const indices: number[] = [];
 
   // Realistic sunlit sandstone/basalt cliff palette matching 0.0s, 2.4s & 7.2s
-  const cTopMoss = new THREE.Color("#5e8034");
-  const cSunlitCliff = new THREE.Color("#be9f82");
-  const cMidRock = new THREE.Color("#826d5c");
-  const cShadowRock = new THREE.Color("#52433b");
-  const cDeepSpire = new THREE.Color("#3a2f2a");
+  // Darker weathered rock with moss in the flutes (reference crag reads dark & green-streaked, not tan)
+  const cTopMoss = new THREE.Color("#4f6e2a");
+  const cSunlitCliff = new THREE.Color("#a3876a");
+  const cMidRock = new THREE.Color("#6b5a4b");
+  const cShadowRock = new THREE.Color("#3f352d");
+  const cDeepSpire = new THREE.Color("#2b241f");
+  const cCliffMoss = new THREE.Color("#4a6326");
   const tmpCol = new THREE.Color();
 
   for (let iy = 0; iy <= heightSegs; iy++) {
@@ -271,6 +274,10 @@ function buildCraggyCliffGeometry(quality: "high" | "low"): THREE.BufferGeometry
         tmpCol.lerp(cMidRock, (v - 0.07) / 0.49);
       } else {
         tmpCol.copy(cMidRock).lerp(cDeepSpire, (v - 0.56) / 0.44);
+      }
+      // Moss creeping down the upper ridges
+      if (v < 0.55 && ridged > 0.5) {
+        tmpCol.lerp(cCliffMoss, Math.min(0.7, (ridged - 0.5) * 1.8) * (1 - v * 1.6));
       }
       // Deepen crevice ambient occlusion
       if (flute < 0) {

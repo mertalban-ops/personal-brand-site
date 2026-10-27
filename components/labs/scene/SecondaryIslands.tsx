@@ -56,8 +56,10 @@ const SEC_WATERFALL_FRAGMENT = /* glsl */ `
     vec3 col = mix(vec3(0.88, 0.94, 0.96), vec3(1.0, 0.97, 0.91), clamp(streaks + crest * 0.6, 0.0, 1.0));
     col = mix(col, vec3(0.96, 0.87, 0.78), uHaze * 0.65 + smoothstep(0.55, 0.98, v) * 0.45);
 
-    float alpha = clamp((0.30 + streaks * 0.68 + crest * 0.35) * sideMask * topFade * bottomFade, 0.0, 0.88) * (1.0 - uHaze * 0.35);
-    gl_FragColor = vec4(col, alpha);
+    // Thin separate threads of water rather than one opaque white sheet
+    float strands = 0.35 + 0.65 * smoothstep(0.3, 0.8, fract(sin(floor(u * 7.0) * 91.7) * 4375.85));
+    float alpha = clamp((0.12 + streaks * 0.55 * strands + crest * 0.3) * sideMask * topFade * bottomFade, 0.0, 0.8) * (1.0 - uHaze * 0.35);
+    gl_FragColor = vec4(pow(col, vec3(2.2)), alpha);
   }
 `;
 
@@ -948,8 +950,8 @@ export default function SecondaryIslands({ quality = "high" }: { quality?: "high
                 roughnessMap={stonePBR.roughnessMap}
                 roughness={0.78}
                 metalness={0.04}
-                emissive="#f2dac4"
-                emissiveIntensity={def.haze * 0.35}
+                emissive="#efdcd2"
+                emissiveIntensity={0.08 + def.haze * 0.6}
                 vertexColors
               />
             </mesh>
@@ -963,8 +965,8 @@ export default function SecondaryIslands({ quality = "high" }: { quality?: "high
                 normalScale={new THREE.Vector2(0.45, 0.45)}
                 roughness={0.84}
                 metalness={0.03}
-                emissive="#f5dec6"
-                emissiveIntensity={def.haze * 0.52}
+                emissive="#f1ddd0"
+                emissiveIntensity={def.haze * 0.95}
                 vertexColors
               />
             </mesh>

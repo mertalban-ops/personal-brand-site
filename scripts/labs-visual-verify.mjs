@@ -88,14 +88,14 @@ async function run() {
 
   // 4. Falling Apple & Starburst Comparison (6.4-9.0s reference)
   await page.evaluate(() => window.__labsTriggerFallDemo?.());
-  await page.waitForTimeout(1620); // Mid-fall past craggy cliffs, waterfalls & cloud sea below (7200ms.jpg)
+  await page.waitForTimeout(8000); // Below the island, falling toward the cloud sea (7200ms.jpg)
   await page.screenshot({ path: join(outDir, "qa-ref-3a-apple-falling.png") });
-  await page.waitForTimeout(2130); // Starburst eruption in deep cloud sea abyss (8800ms.jpg)
+  await page.waitForTimeout(3600); // Turning into light inside the clouds (8800ms.jpg)
   await page.screenshot({ path: join(outDir, "qa-ref-3b-apple-starburst.png") });
   console.log("  ✓ Captured qa-ref-3a-apple-falling.png & qa-ref-3b-apple-starburst.png");
 
-  // Wait for demo fall to reset
-  await page.waitForTimeout(1800);
+  // Wait for the 13.6s timeline to finish and the demo to reset
+  await page.waitForTimeout(3500);
 
   // 5. Measure FPS over 1.5 seconds of active rendering
   const fps = await page.evaluate(async () => {

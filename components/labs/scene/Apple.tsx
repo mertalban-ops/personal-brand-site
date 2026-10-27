@@ -64,9 +64,9 @@ export const CRYSTAL_APPLE_FRAGMENT = /* glsl */ `
     // Upper crown has a rich warm ruby-rose-amber glass blush;
     // Center has translucent honey-gold depth with internal refractive ribs;
     // Lower calyx has a radiant molten golden-ivory inner core.
-    vec3 bottomGlow = vec3(0.98, 0.72, 0.20);
-    vec3 midHoney = vec3(0.76, 0.35, 0.08);
-    vec3 upperRoseAmber = vec3(0.68, 0.21, 0.14);
+    vec3 bottomGlow = vec3(1.0, 0.80, 0.40);
+    vec3 midHoney = vec3(0.95, 0.60, 0.22);
+    vec3 upperRoseAmber = vec3(0.90, 0.50, 0.28);
 
     vec3 bodyCol = mix(bottomGlow, midHoney, smoothstep(0.06, 0.50, yNorm));
     bodyCol = mix(bodyCol, upperRoseAmber, smoothstep(0.46, 0.88, yNorm));
@@ -75,13 +75,13 @@ export const CRYSTAL_APPLE_FRAGMENT = /* glsl */ `
     float angle = atan(vLocalPos.z, vLocalPos.x);
     float causticRib = 0.5 + 0.5 * sin(angle * 6.0 + vLocalPos.y * 8.0 - uTime * 0.4);
     float centerDepth = pow(ndv, 1.15);
-    vec3 deepInterior = mix(vec3(0.44, 0.15, 0.04), vec3(0.92, 0.56, 0.12), (1.0 - yNorm) * 0.72 + causticRib * 0.28);
+    vec3 deepInterior = mix(vec3(0.86, 0.52, 0.18), vec3(1.0, 0.86, 0.50), (1.0 - yNorm) * 0.72 + causticRib * 0.28);
     vec3 col = mix(bodyCol, deepInterior, centerDepth * 0.64);
 
     // Subsurface warm core radiance rising from the lower calyx heart (like 5.6s & 6.4s)
     float radialCenter = max(0.0, 1.0 - length(vLocalPos.xz) * 2.65);
     float heartGlow = pow(radialCenter, 1.75) * max(0.0, 1.05 - yNorm * 0.92);
-    col += vec3(1.0, 0.76, 0.22) * heartGlow * 0.54 * uIntensity;
+    col += vec3(1.0, 0.80, 0.36) * heartGlow * 0.9 * uIntensity;
 
     // Crisp luminous Golden-Ivory Fresnel rim around the apple silhouette (exact match to 5.6s & 6.4s)
     float fresnel = pow(1.0 - ndv, 2.65);
@@ -115,8 +115,10 @@ export const CRYSTAL_APPLE_FRAGMENT = /* glsl */ `
     col *= mix(1.0, 0.42, uDimmed);
 
     // Semi-translucent crystal glass alpha: deep glassy interior, solid luminous Fresnel rim
-    float alpha = clamp(0.86 + fresnel * 0.14, 0.0, 1.0) * mix(1.0, 0.55, uDimmed);
-    gl_FragColor = vec4(col, alpha);
+    // Glassy: the body lets some of the sky/foliage through, the luminous rim stays solid
+    float alpha = clamp(0.74 + heartGlow * 0.2 + fresnel * 0.26, 0.0, 1.0) * mix(1.0, 0.55, uDimmed);
+    // Authored in sRGB; written to the linear HDR composer buffer (values > 1 feed the bloom)
+    gl_FragColor = vec4(pow(max(col, vec3(0.0)), vec3(2.2)), alpha);
   }
 `;
 
@@ -150,8 +152,9 @@ export function getSculptedAppleGeometries() {
     const t = i / steps; // 0 = bottom, 1 = top
     const theta = t * Math.PI;
     // Classic heart-shaped apple silhouette: wider upper shoulder, tapered 5-lobed bottom calyx
-    let r = Math.sin(theta) * 0.292 * (0.84 + 0.32 * Math.sin(t * Math.PI * 0.8));
-    let y = -Math.cos(theta) * 0.278;
+    // Taller than wide-ish (≈1.15:1, was 1.35:1 and read as an onion), shoulder high, tapered base
+    let r = Math.sin(theta) * 0.272 * (0.74 + 0.4 * Math.sin(t * Math.PI * 0.72));
+    let y = -Math.cos(theta) * 0.3;
 
     // Top stem cavity indentation
     if (t > 0.81) {

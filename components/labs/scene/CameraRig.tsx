@@ -60,6 +60,28 @@ export default function CameraRig({
   // Responsive distance multiplier so mobile portrait frames the entire island & tree crown
   const aspectFactor = size.width / Math.max(1, size.height) < 0.85 ? 1.36 : 1.0;
 
+  // QA hook: place the camera at an exact pose so renders can be aligned with reference frames.
+  useEffect(() => {
+    window.__labsSetPose = (pos, target, fov) => {
+      animStart.current = null;
+      introDone.current = true;
+      camera.position.set(...pos);
+      if (fov && camera instanceof THREE.PerspectiveCamera) {
+        camera.fov = fov;
+        camera.updateProjectionMatrix();
+      }
+      if (controlsRef.current) {
+        controlsRef.current.target.set(...target);
+        controlsRef.current.update();
+      } else {
+        camera.lookAt(...target);
+      }
+    };
+    return () => {
+      delete window.__labsSetPose;
+    };
+  }, [camera, controlsRef]);
+
   useEffect(() => {
     if (!presetCommand || presetCommand.id === lastCommandId.current) return;
     lastCommandId.current = presetCommand.id;

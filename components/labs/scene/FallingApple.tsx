@@ -21,6 +21,26 @@ import type { AppleAnchor } from "@/lib/labs/anchors";
  *  6. Magical Starburst Transformation (3.35s - 4.25s): Suspended over the sunlit clouds, the apple erupts into hundreds of radial golden-ivory light streaks & bokeh sparks (8.8s)
  *  7. Pure Light Dissolution (4.25s - 4.55s): Dissolves into a transcendent golden solar bloom & anamorphic lens flare (9.6s)
  */
+// Timeline (seconds). One clock drives motion, light and particles so they stay in sync.
+const T_SELECT = 1.4; // glow up + tremble while the camera closes in
+const T_DETACH = 2.6; // stem releases, single pendulum swing
+const T_CLOUDS = 8.0; // long freefall past cliffs & waterfalls ends; apple enters the cloud layers
+const T_BURST = 10.8; // apple starts turning into light inside the clouds
+const T_DONE = 13.6; // fully dissolved → hand off to the page transition
+
+/**
+ * Fall progress → path progress: gravity ramp (0–20%), near-terminal velocity (20–85%),
+ * then a soft cushioning as the apple sinks into the cloud bed. Continuous slope, e(1) = 1.
+ */
+function fallEase(p: number) {
+  const a = 2.924;
+  const s = 0.4 * a;
+  if (p < 0.2) return a * p * p;
+  if (p < 0.85) return 0.04 * a + s * (p - 0.2);
+  const d = p - 0.85;
+  return 0.04 * a + s * 0.65 + s * d - 2 * s * d * d;
+}
+
 export default function FallingApple({
   anchor,
   followCamera = true,
@@ -62,7 +82,8 @@ export default function FallingApple({
   // Long poetic 3D descent path from branch anchor (y ~ +3.6) out past the island rim (y ~ +0.8),
   // past the craggy cliff underside & waterfalls (y ~ -3.2), and deep into the open cloud sea abyss (y = -12.6)!
   const { curve, radialDir, abyssCenter } = useMemo(() => {
-    const p0 = new THREE.Vector3(...anchor.position);
+    // Starts where the detach swing ends (0.32 below the branch) so the hand-off is seamless
+    const p0 = new THREE.Vector3(anchor.position[0], anchor.position[1] - 0.32, anchor.position[2]);
     const radialOut = new THREE.Vector3(p0.x, 0, p0.z);
     if (radialOut.lengthSq() < 0.1) radialOut.set(0, 0, 1);
     radialOut.normalize();
@@ -124,7 +145,7 @@ export default function FallingApple({
     const mesh = new THREE.InstancedMesh(geo, mat, count);
     const dummy = new THREE.Object3D();
     const col = new THREE.Color();
-    const palette = ["#fff6e4", "#f8dec4", "#eabfa8", "#d6aeb8", "#bd92a0"];
+    const palette = ["#fff6e8", "#f6e6da", "#ece0dc", "#ddd3d8", "#cfc7d0"];
 
     for (let i = 0; i < count; i++) {
       if (i < 20) {
@@ -175,7 +196,7 @@ export default function FallingApple({
       map: glowTex,
       color: "#ffffff",
       transparent: true,
-      opacity: 0.92,
+      opacity: 0.3,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
       side: THREE.DoubleSide,
@@ -283,19 +304,22 @@ export default function FallingApple({
       shaderRef.current.uniforms.uTime.value = state.clock.elapsedTime;
     }
 
-    // Stage 1: Selection & Branch Tremble Anticipation (0.00s - 0.42s, matching 5.6s)
-    if (elapsed < 0.42) {
-      const p = elapsed / 0.42;
-      const shake = Math.sin(elapsed * 46) * 0.028 * p;
+    // Stage 1: selection glow + tremble (0 → T_SELECT), then the stem lets go and the apple
+    // swings once like a released pendulum before gravity wins (T_SELECT → T_DETACH).
+    if (elapsed < T_DETACH) {
+      const p = Math.min(1, elapsed / T_SELECT);
+      const q = Math.max(0, (elapsed - T_SELECT) / (T_DETACH - T_SELECT));
+      const shake = elapsed < T_SELECT ? Math.sin(elapsed * 38) * 0.018 * p : 0;
       g.position.set(
         anchor.position[0] + shake,
-        anchor.position[1] - p * p * 0.05,
+        anchor.position[1] - q * q * 0.32,
         anchor.position[2],
       );
-      g.rotation.z = shake * 2.2;
-      g.scale.setScalar(1.18 + p * 0.1);
+      g.rotation.z = shake * 2.2 + Math.sin(q * 7.5) * 0.22 * (1 - q);
+      g.rotation.y = q * 0.5;
+      g.scale.setScalar(1.18 + p * 0.06);
       if (shaderRef.current) {
-        shaderRef.current.uniforms.uIntensity.value = 1.2 + p * 0.38;
+        shaderRef.current.uniforms.uIntensity.value = 1.2 + p * 0.3;
       }
       if (followCamera) {
         const targetCam = new THREE.Vector3(
@@ -309,25 +333,24 @@ export default function FallingApple({
       return;
     }
 
-    // Stages 2, 3, 4 & 5: Poetic long freefall past roots (6.4s), cliff & waterfalls (7.2s), into open cloud abyss (8.0s)
-    // Fall window: 0.42s -> 3.38s (2.96 seconds of pure poetic freefall!)
-    const fallStart = 0.42;
-    const fallDuration = 2.96;
+    // Stages 2–5: long freefall past roots, cliff & waterfalls, into the cloud layers (T_DETACH → T_BURST)
+    const fallStart = T_DETACH;
+    const fallDuration = T_BURST - T_DETACH;
     const fallProgress = Math.min(1, (elapsed - fallStart) / fallDuration);
+    const clampedEase = Math.max(0, Math.min(1, fallEase(fallProgress)));
 
-    // Smooth S-curve acceleration: gentle weightless release -> steady high-altitude fall -> soft cushion over the clouds
-    const eased =
-      fallProgress < 0.5
-        ? 2.0 * fallProgress * fallProgress
-        : 1 - Math.pow(-2.0 * fallProgress + 2.0, 2.15) / 2.0;
-    const clampedEase = Math.max(0, Math.min(1, eased));
+    // Glow builds as the apple sinks through the cloud layers
+    if (shaderRef.current && elapsed < T_BURST) {
+      shaderRef.current.uniforms.uIntensity.value =
+        1.3 + Math.max(0, (elapsed - T_CLOUDS) / (T_BURST - T_CLOUDS)) * 0.7;
+    }
 
     const pt = curve.getPointAt(clampedEase);
     const microSwayX = Math.sin(elapsed * 3.8) * 0.055 * (1 - fallProgress * 0.5);
     g.position.set(pt.x + microSwayX, pt.y, pt.z);
 
     // Poetic slow tumble & rotation in freefall (matching 6.4s -> 7.2s -> 8.0s -> 8.8s)
-    g.rotation.y = (elapsed - fallStart) * 0.65;
+    g.rotation.y = 0.5 + (elapsed - fallStart) * 0.65;
     g.rotation.z = Math.sin(elapsed * 2.4) * 0.16 + fallProgress * 0.25;
     g.rotation.x = Math.cos(elapsed * 1.9) * 0.12 + fallProgress * 0.18;
 
@@ -369,7 +392,7 @@ export default function FallingApple({
     // - Zone C (2.55s..4.55s, 8.0s & 8.8s ref): Camera rises above the apple and pitches ~34° DOWNWARD into the open cloud sea abyss
     //   so the island rock disappears high above the frame and only billowing clouds & starburst sparks surround the apple!
     if (followCamera) {
-      const abyssPhase = Math.max(0, Math.min(1, (elapsed - 2.35) / 1.15));
+      const abyssPhase = Math.max(0, Math.min(1, (elapsed - T_CLOUDS + 0.6) / 2.6));
       const smoothAbyss = abyssPhase * abyssPhase * (3 - 2 * abyssPhase);
 
       const camDist = THREE.MathUtils.lerp(3.55, 3.95, smoothAbyss);
@@ -386,9 +409,9 @@ export default function FallingApple({
     }
 
     // Stage 6 & 7: Radial Golden Starburst Eruption & Light Dissolution in the Cloud Sea (3.32s - 4.55s, matching 8.8s & 9.6s)
-    if (elapsed >= 3.32) {
-      const bTime = elapsed - 3.32;
-      const bNorm = Math.min(1, bTime / 0.95);
+    if (elapsed >= T_BURST) {
+      const bTime = elapsed - T_BURST;
+      const bNorm = Math.min(1, bTime / (T_DONE - T_BURST - 0.4));
       // Apple condenses into a luminous golden-peach core at the center of the starburst (8.8s)
       const shrink = THREE.MathUtils.lerp(1.22, 0.58, bNorm);
       g.scale.setScalar(shrink);
@@ -401,17 +424,18 @@ export default function FallingApple({
 
       if (dissolveHaloRef.current) {
         // Pure light dissolution ramp in the final 0.45s (4.10s..4.55s -> 9.6s solar flare)
-        const dissolveT = Math.max(0, (elapsed - 3.95) / 0.6);
-        const haloScale = 1.6 + Math.pow(bNorm, 1.5) * 3.2 + Math.pow(dissolveT, 2.0) * 14.0;
+        const dissolveT = Math.max(0, (elapsed - (T_DONE - 1.3)) / 1.3);
+        // Final beat: the light swallows the frame (reference 9.6s is an almost white-gold screen)
+        const haloScale = 1.6 + Math.pow(bNorm, 1.5) * 3.2 + Math.pow(dissolveT, 1.6) * 32.0;
         dissolveHaloRef.current.scale.setScalar(haloScale);
-        dissolveHaloRef.current.material.opacity = Math.min(1, 0.32 + bNorm * 0.45 + dissolveT * 0.55);
+        dissolveHaloRef.current.material.opacity = Math.min(1, 0.32 + bNorm * 0.45 + dissolveT * 0.9);
       }
 
       if (burstPoints.current) {
         burstPoints.current.visible = true;
         const bAttr = burstGeo.getAttribute("position") as THREE.BufferAttribute;
         const endPt = curve.getPointAt(1);
-        const drag = Math.pow(bTime * 1.35, 0.72);
+        const drag = Math.pow(bTime * 0.62, 0.72);
         for (let i = 0; i < BURST_COUNT; i++) {
           const d = burstDirs[i];
           const o = burstInitialOffsets[i];
@@ -427,14 +451,14 @@ export default function FallingApple({
       if (burstRingPoints.current) {
         burstRingPoints.current.visible = true;
         burstRingPoints.current.position.copy(curve.getPointAt(1));
-        const ringScale = 0.45 + Math.pow(bTime * 1.35, 0.68) * 1.85;
+        const ringScale = 0.45 + Math.pow(bTime * 0.62, 0.68) * 1.85;
         burstRingPoints.current.scale.setScalar(ringScale);
         burstRingPoints.current.rotation.z = bTime * 0.42;
       }
       if (burstStreaksRef.current) {
         burstStreaksRef.current.visible = true;
         const endPt = curve.getPointAt(1);
-        const drag = Math.pow(bTime * 1.38, 0.68);
+        const drag = Math.pow(bTime * 0.62, 0.68);
         const dummy = new THREE.Object3D();
         for (let i = 0; i < STREAK_COUNT; i++) {
           const sd = streakData[i];
@@ -454,7 +478,7 @@ export default function FallingApple({
       g.scale.setScalar(1.24);
     }
 
-    if (elapsed >= 4.48 && !doneRef.current) {
+    if (elapsed >= T_DONE && !doneRef.current) {
       doneRef.current = true;
       onFallDone();
     }
@@ -462,19 +486,20 @@ export default function FallingApple({
 
   return (
     <group>
+      {/* renderOrder ≥ 3 below: light/particles draw after the cloud billboards (which don't write depth) */}
       {/* Close-up volumetric cumulus cloud pillows in the abyss below the waterfalls (7.2s, 8.0s & 8.8s) */}
       <primitive object={abyssCloudsMesh} />
       {/* 240 radial golden-ivory light streaks for the 8.8s starburst */}
-      <primitive ref={burstStreaksRef} object={streakMesh} />
+      <primitive ref={burstStreaksRef} object={streakMesh} renderOrder={3} />
 
       <group ref={appleGroup} position={anchor.position} scale={1.24}>
         {/* Warm inner glowing kernel */}
-        <mesh geometry={coreGeo} position={[0, -0.048, 0]} scale={[0.88, 0.78, 0.88]}>
+        <mesh renderOrder={3} geometry={coreGeo} position={[0, -0.048, 0]} scale={[0.88, 0.78, 0.88]}>
           <meshBasicMaterial color="#ffba38" transparent opacity={0.64} />
         </mesh>
 
         {/* Internal golden starlight sparkles */}
-        <points geometry={sparkleGeo}>
+        <points renderOrder={3} geometry={sparkleGeo}>
           <pointsMaterial
             map={glowTex}
             color="#ffffff"
@@ -487,7 +512,7 @@ export default function FallingApple({
         </points>
 
         {/* Translucent Crystal Golden Apple Body with Fresnel rim & rose-amber blush */}
-        <mesh geometry={appleGeo}>
+        <mesh renderOrder={3} geometry={appleGeo}>
           <shaderMaterial
             ref={shaderRef}
             vertexShader={CRYSTAL_APPLE_VERTEX}
@@ -534,7 +559,7 @@ export default function FallingApple({
         </mesh>
 
         {/* Controlled warm golden aura that expands into pure light dissolution at the end */}
-        <sprite ref={dissolveHaloRef} scale={1.55}>
+        <sprite renderOrder={4} ref={dissolveHaloRef} scale={1.55}>
           <spriteMaterial
             map={glowTex}
             color="#ffb438"
@@ -547,7 +572,7 @@ export default function FallingApple({
       </group>
 
       {/* Delicate golden particle trail during descent */}
-      <points ref={trailPoints} geometry={trailGeo}>
+      <points renderOrder={3} ref={trailPoints} geometry={trailGeo}>
         <pointsMaterial
           map={glowTex}
           color="#ffe8a3"
@@ -560,11 +585,11 @@ export default function FallingApple({
       </points>
 
       {/* Radial golden bokeh starburst eruption in the clouds (8.8s) */}
-      <points ref={burstPoints} geometry={burstGeo} visible={false}>
+      <points renderOrder={3} ref={burstPoints} geometry={burstGeo} visible={false}>
         <pointsMaterial
           map={glowTex}
           color="#fff5cc"
-          size={0.34}
+          size={0.5}
           transparent
           opacity={0.96}
           blending={THREE.AdditiveBlending}
@@ -573,11 +598,11 @@ export default function FallingApple({
       </points>
 
       {/* Secondary fine sparkle ring for multi-scale bokeh richness (8.8s) */}
-      <points ref={burstRingPoints} geometry={burstGeo} visible={false}>
+      <points renderOrder={3} ref={burstRingPoints} geometry={burstGeo} visible={false}>
         <pointsMaterial
           map={glowTex}
           color="#ffe492"
-          size={0.18}
+          size={0.26}
           transparent
           opacity={0.9}
           blending={THREE.AdditiveBlending}
