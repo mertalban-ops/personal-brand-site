@@ -36,18 +36,20 @@ const HERO_BOUGH_SLOTS: {
   normal: [number, number, number];
   scale: number;
 }[] = [
-  // 1. Center-front hero apple hanging beneath the central fork (matches 4.8s & 5.6s central hero apple!)
-  { position: [0.06, 3.52, 3.25], normal: [0.02, -0.15, 0.98], scale: 1.18 },
-  // 2. Upper-left foreground bough (matches 4.8s upper-left large apple)
-  { position: [-1.85, 4.18, 2.85], normal: [-0.55, 0.12, 0.82], scale: 1.12 },
-  // 3. Upper-right foreground bough (matches 4.8s right large hero apple)
-  { position: [2.15, 3.88, 2.95], normal: [0.62, 0.05, 0.78], scale: 1.16 },
-  // 4. Mid-left bough (matches 4.8s mid-left apple)
-  { position: [-1.42, 3.35, 2.55], normal: [-0.52, -0.12, 0.84], scale: 0.98 },
-  // 5. Mid-right inner bough (matches 4.8s mid-right apple to the right of center)
-  { position: [0.95, 3.32, 2.48], normal: [0.42, -0.14, 0.89], scale: 0.96 },
-  // 6. Lower-right foreground bough (matches 4.8s lower-right apple)
-  { position: [2.25, 2.75, 2.85], normal: [0.68, -0.22, 0.7], scale: 1.08 },
+  // Slots 1–6 hang just below the front canopy skirt of the vase-form tree, spread so every
+  // project apple is visible (none buried in foliage or hidden behind the trunk) from the hero view.
+  // 1. Center-front, under the central fork
+  { position: [0.15, 3.45, 3.35], normal: [0.04, -0.15, 0.99], scale: 1.18 },
+  // 2. Upper-left bough
+  { position: [-2.55, 3.85, 2.75], normal: [-0.68, 0.05, 0.73], scale: 1.12 },
+  // 3. Upper-right bough
+  { position: [2.65, 3.7, 2.6], normal: [0.7, 0.02, 0.71], scale: 1.14 },
+  // 4. Left flank, lower
+  { position: [-3.75, 3.2, 0.9], normal: [-0.95, -0.12, 0.28], scale: 1.0 },
+  // 5. Right flank, lower
+  { position: [3.8, 3.15, 0.75], normal: [0.96, -0.12, 0.25], scale: 1.0 },
+  // 6. Mid-left inner bough, between 1 and 2
+  { position: [-1.25, 3.05, 2.95], normal: [-0.4, -0.2, 0.89], scale: 1.04 },
   // 7. Back-right bough (visible at 90°-180° orbit)
   { position: [2.42, 3.35, -2.38], normal: [0.69, -0.14, -0.71], scale: 1.05 },
   // 8. Back-left bough (visible at 180°-270° orbit)

@@ -4,12 +4,7 @@ import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { getAppleGlowTexture, getBarkPBR, getLeafSprigPBR } from "@/lib/labs/pbrTextures";
-import {
-  CRYSTAL_APPLE_FRAGMENT,
-  CRYSTAL_APPLE_VERTEX,
-  getSculptedAppleGeometries,
-} from "./Apple";
+import { getBarkPBR, getLeafSprigPBR } from "@/lib/labs/pbrTextures";
 
 type Quality = "high" | "low";
 
@@ -161,7 +156,6 @@ function buildHeroTreeStructure(quality: Quality) {
   const rand = mulberry32(2026);
   const parts: THREE.BufferGeometry[] = [];
   const leafCenters: { pos: THREE.Vector3; scale: number; tier: number }[] = [];
-  const decorativeApples: { pos: THREE.Vector3; scale: number }[] = [];
 
   const segScale = quality === "high" ? 1 : 0.65;
 
@@ -334,12 +328,6 @@ function buildHeroTreeStructure(quality: Quality) {
       scale: 0.62,
       tier: 1,
     });
-    // Apples on the upper/front dome too, not only along the lower canopy skirt
-    const outward = new THREE.Vector3(Math.cos(baseAngle), 0, Math.sin(baseAngle));
-    decorativeApples.push({
-      pos: p1.clone().add(outward.multiplyScalar(1.15)).add(new THREE.Vector3(0, 1.45, 0)),
-      scale: 0.5 + rand() * 0.25,
-    });
 
     const secCount = 3;
     for (let s = 0; s < secCount; s++) {
@@ -375,17 +363,6 @@ function buildHeroTreeStructure(quality: Quality) {
         tier: 1,
       });
 
-      // Decorative translucent crystal golden apples hanging beneath secondary branches (matching 2.4s & 4.8s)
-      if ((i + s) % 2 === 0) {
-        decorativeApples.push({
-          pos: new THREE.Vector3(
-            sMid.x + (rand() - 0.5) * 0.28,
-            sMid.y - 0.34 - rand() * 0.14,
-            sMid.z + (rand() - 0.5) * 0.28,
-          ),
-          scale: 0.62 + rand() * 0.26,
-        });
-      }
 
       for (let t = 0; t < 3; t++) {
         const tAngle = secAngle + (t - 1) * 0.4 + (rand() - 0.5) * 0.16;
@@ -411,20 +388,6 @@ function buildHeroTreeStructure(quality: Quality) {
           scale: 0.82,
           tier: 2,
         });
-
-        // Glowing golden apples sit on the OUTER canopy shell (reference 0.0s–4.8s shows dozens
-        // studding the crown surface), pushed just outside the leaf clusters so they read.
-        if ((i + s + t) % 3 === 0) {
-          const out = new THREE.Vector3(tEnd.x, 0, tEnd.z).normalize();
-          decorativeApples.push({
-            pos: new THREE.Vector3(
-              tEnd.x + out.x * (0.42 + rand() * 0.2),
-              tEnd.y - 0.06 + (rand() - 0.5) * 0.3,
-              tEnd.z + out.z * (0.42 + rand() * 0.2),
-            ),
-            scale: 0.5 + rand() * 0.32,
-          });
-        }
       }
     }
   }
@@ -461,10 +424,6 @@ function buildHeroTreeStructure(quality: Quality) {
       pos: pTop.clone().add(new THREE.Vector3(0, 0.22, 0)),
       scale: 1.05,
       tier: 3,
-    });
-    decorativeApples.push({
-      pos: new THREE.Vector3(pTop.x * 1.12, pTop.y + 0.32, pTop.z * 1.12),
-      scale: 0.5 + rand() * 0.22,
     });
   }
   // Rounded central apex dome billow clusters
@@ -516,7 +475,7 @@ function buildHeroTreeStructure(quality: Quality) {
 
   const branchGeo = mergeGeometries(parts, false)!;
   parts.forEach((g) => g.dispose());
-  return { branchGeo, leafCenters, decorativeApples };
+  return { branchGeo, leafCenters };
 }
 
 /**
@@ -557,13 +516,12 @@ function build3DLeafClusterGeometry(): THREE.BufferGeometry {
 }
 
 export default function TreeOfLife({ quality = "high" }: { quality?: Quality }) {
-  const { branchGeo, leafCenters, decorativeApples } = useMemo(
+  const { branchGeo, leafCenters } = useMemo(
     () => buildHeroTreeStructure(quality),
     [quality],
   );
   const barkPBR = useMemo(() => getBarkPBR(), []);
   const leafPBR = useMemo(() => getLeafSprigPBR(), []);
-  const { appleGeo, twinCrownGeo, stemGeo } = useMemo(() => getSculptedAppleGeometries(), []);
 
   // More, smaller sprigs → finer leaf texture & a bumpier crown silhouette
   const sprigsPerCenter = quality === "high" ? 20 : 9;
@@ -644,78 +602,11 @@ export default function TreeOfLife({ quality = "high" }: { quality?: Quality }) 
     return mesh;
   }, [leafCenters, leafPBR, sprigsPerCenter, sprigScale, totalSprigs]);
 
-  // Decorative smaller translucent crystal golden apples + twin arching leaves high/deep in the boughs (matching 2.4s & 4.8s)
-  // Uses the EXACT same CRYSTAL_APPLE_VERTEX & CRYSTAL_APPLE_FRAGMENT shader as hero apples (ZERO flat orange spheres!)
-  const decoUniforms = useMemo(
-    () => ({
-      uTime: { value: 0 },
-      uIntensity: { value: 1.35 },
-      uDimmed: { value: 0.0 },
-    }),
-    [],
-  );
-
-  const { decoAppleMesh, decoLeafMesh, decoStemMesh } = useMemo(() => {
-    const mat = new THREE.ShaderMaterial({
-      vertexShader: CRYSTAL_APPLE_VERTEX,
-      fragmentShader: CRYSTAL_APPLE_FRAGMENT,
-      uniforms: decoUniforms,
-      transparent: true,
-    });
-    const aMesh = new THREE.InstancedMesh(appleGeo, mat, decorativeApples.length);
-
-    const lMat = new THREE.MeshStandardMaterial({
-      vertexColors: true,
-      emissive: "#52761e",
-      emissiveIntensity: 0.4,
-      roughness: 0.48,
-      side: THREE.DoubleSide,
-    });
-    const lMesh = new THREE.InstancedMesh(twinCrownGeo, lMat, decorativeApples.length);
-
-    const sMat = new THREE.MeshStandardMaterial({
-      color: "#5d4024",
-      roughness: 0.88,
-    });
-    const stMesh = new THREE.InstancedMesh(stemGeo, sMat, decorativeApples.length);
-
-    const dummy = new THREE.Object3D();
-    decorativeApples.forEach((item, i) => {
-      dummy.position.copy(item.pos);
-      dummy.rotation.set(0, (i * 1.7) % (Math.PI * 2), 0);
-      // Background fruit stays smaller than the clickable project apples (reference proportions)
-      dummy.scale.setScalar(item.scale * 0.85);
-      dummy.updateMatrix();
-      aMesh.setMatrixAt(i, dummy.matrix);
-      lMesh.setMatrixAt(i, dummy.matrix);
-      stMesh.setMatrixAt(i, dummy.matrix);
-    });
-    aMesh.instanceMatrix.needsUpdate = true;
-    lMesh.instanceMatrix.needsUpdate = true;
-    stMesh.instanceMatrix.needsUpdate = true;
-    return { decoAppleMesh: aMesh, decoLeafMesh: lMesh, decoStemMesh: stMesh };
-  }, [decorativeApples, appleGeo, twinCrownGeo, stemGeo, decoUniforms]);
-
-  // Soft warm light halo per apple: the reference apples visibly light the leaves around them
-  const glowTex = useMemo(() => getAppleGlowTexture(), []);
-  const appleHaloGeo = useMemo(() => {
-    const pos = new Float32Array(decorativeApples.length * 3);
-    decorativeApples.forEach((a, i) => {
-      pos[i * 3] = a.pos.x;
-      pos[i * 3 + 1] = a.pos.y;
-      pos[i * 3 + 2] = a.pos.z;
-    });
-    const g = new THREE.BufferGeometry();
-    g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    return g;
-  }, [decorativeApples]);
-
   const canopyGroup = useRef<THREE.Group>(null);
   useFrame((state) => {
     const g = canopyGroup.current;
     if (!g) return;
     const t = state.clock.elapsedTime;
-    decoUniforms.uTime.value = t;
     // Gentle multi-frequency breeze on the foliage crown while roots stay anchored on the island
     g.rotation.z = Math.sin(t * 0.55) * 0.008 + Math.sin(t * 1.25) * 0.0035;
     g.rotation.x = Math.cos(t * 0.45) * 0.0055;
@@ -736,23 +627,9 @@ export default function TreeOfLife({ quality = "high" }: { quality?: Quality }) 
         />
       </mesh>
 
-      {/* Wind-swaying 3D pointed-leaf canopy & background crystal golden fruits */}
+      {/* Wind-swaying 3D pointed-leaf canopy. Fruit = one interactive apple per project (Apple.tsx) */}
       <group ref={canopyGroup}>
         <primitive object={foliageMesh} />
-        <primitive object={decoAppleMesh} />
-        <primitive object={decoStemMesh} />
-        <primitive object={decoLeafMesh} />
-        <points geometry={appleHaloGeo}>
-          <pointsMaterial
-            map={glowTex}
-            color="#ffb84a"
-            size={0.95}
-            transparent
-            opacity={0.38}
-            blending={THREE.AdditiveBlending}
-            depthWrite={false}
-          />
-        </points>
       </group>
     </group>
   );
