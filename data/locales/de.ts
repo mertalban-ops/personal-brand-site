@@ -204,25 +204,6 @@ export const de: Dictionary = {
         previewType: "carpass",
         slug: "carpass",
       },
-      {
-        name: "Custom Enterprise SaaS Infra",
-        tagline: "Transformation von Unternehmensprozessen in Abonnementmodelle (SaaS)",
-        status: "Konzept / Architektur",
-        problem:
-          "Erfolgreich erstellte interne Unternehmenssoftware konnte nicht lizenziert und an andere Unternehmen der Branche verkauft werden.",
-        solution:
-          "Trennung des Kerns bestehender Geschäftsverfolgungssysteme und Umwandlung in ein sicheres, mandantenfähiges Abonnementprodukt.",
-        approach: "Skalierbares Cloud-Architekturdesign mit höchster Datensicherheit, Isolation und Leistung.",
-        benefit: "Das Unternehmen löst nicht nur sein eigenes Problem, sondern besitzt ein Technologieprodukt, das der gesamten Branche Lösungen bietet.",
-        tech: ["Next.js", "Supabase", "Stripe", "Multi-tenant"],
-        features: [
-          "Automatisierte Abrechnung und Abonnements integriert mit Stripe",
-          "Erweiterte rollen- und berechtigungsbasierte Benutzerzugriffskontrolle",
-          "Sichere, isolierte Daten für jedes Unternehmen (Mandant)",
-        ],
-        previewType: "business-dashboard",
-        slug: "saas-operasyon-altyapisi",
-      },
     ],
   },
   process: {

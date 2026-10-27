@@ -1,0 +1,161 @@
+{
+  "iteration": "iter-16-rim-veg",
+  "date": "2026-10-27T10:08:24.892Z",
+  "fps": 60,
+  "overall": 0.2832,
+  "errors": [],
+  "results": [
+    {
+      "id": "0000ms",
+      "label": "Açılış geniş plan",
+      "global": {
+        "ssim": 0.3403,
+        "hist": 0.3479,
+        "edge": 0.299,
+        "exposureDelta": 3.8421,
+        "contrastRatio": 1.1212,
+        "weighted": 0.2992
+      },
+      "regions": {
+        "tree": 0.2776,
+        "island": 0.2217,
+        "sky": 0.3773,
+        "castles": 0.3059,
+        "light": 0.335
+      }
+    },
+    {
+      "id": "2400ms",
+      "label": "Orta mesafe ağaç",
+      "global": {
+        "ssim": 0.2208,
+        "hist": 0.409,
+        "edge": 0.1644,
+        "exposureDelta": 8.6374,
+        "contrastRatio": 1.0831,
+        "weighted": 0.2419
+      },
+      "regions": {
+        "tree": 0.1822,
+        "island": 0.1959,
+        "sky": 0.3336,
+        "castles": 0.2574,
+        "light": 0.2848
+      }
+    },
+    {
+      "id": "4800ms",
+      "label": "Yakın ağaç / elmalar",
+      "global": {
+        "ssim": 0.0505,
+        "hist": 0.4728,
+        "edge": 0.0132,
+        "exposureDelta": 26.7514,
+        "contrastRatio": 1.1487,
+        "weighted": 0.2083
+      },
+      "regions": {
+        "tree": 0.2201,
+        "island": 0.2508,
+        "sky": 0.1847,
+        "castles": 0.1559,
+        "light": 0.212
+      }
+    },
+    {
+      "id": "5600ms",
+      "label": "Elma yakın plan",
+      "global": {
+        "ssim": 0.0637,
+        "hist": 0.5286,
+        "edge": -0.004,
+        "exposureDelta": 31.2822,
+        "contrastRatio": 1.1719,
+        "weighted": 0.2287
+      },
+      "regions": {
+        "tree": 0.2267,
+        "island": 0.2522,
+        "sky": 0.2522,
+        "castles": 0.1617,
+        "light": 0.2369
+      }
+    },
+    {
+      "id": "6400ms",
+      "label": "Düşüş başlangıcı",
+      "global": {
+        "ssim": 0.091,
+        "hist": 0.471,
+        "edge": 0.0435,
+        "exposureDelta": -3.8166,
+        "contrastRatio": 1.034,
+        "weighted": 0.2129
+      },
+      "regions": {
+        "tree": 0.2308,
+        "island": 0.1767,
+        "sky": 0.2192,
+        "castles": 0.1963,
+        "light": 0.2335
+      }
+    },
+    {
+      "id": "7200ms",
+      "label": "Uzun boşluk düşüşü",
+      "global": {
+        "ssim": 0.2653,
+        "hist": 0.4352,
+        "edge": 0.0992,
+        "exposureDelta": 31.5122,
+        "contrastRatio": 0.6559,
+        "weighted": 0.2523
+      },
+      "regions": {
+        "tree": 0.1686,
+        "island": 0.3429,
+        "sky": 0.1973,
+        "castles": 0.3248,
+        "light": 0.3
+      }
+    },
+    {
+      "id": "8800ms",
+      "label": "Parçacık dağılımı",
+      "global": {
+        "ssim": 0.3087,
+        "hist": 0.5586,
+        "edge": 0.0052,
+        "exposureDelta": 27.2619,
+        "contrastRatio": 0.6547,
+        "weighted": 0.3026
+      },
+      "regions": {
+        "tree": 0.2945,
+        "island": 0.1739,
+        "sky": 0.363,
+        "castles": 0.3642,
+        "light": 0.348
+      }
+    },
+    {
+      "id": "9600ms",
+      "label": "Parlama finali",
+      "global": {
+        "ssim": 0.7749,
+        "hist": 0.5831,
+        "edge": 0.0505,
+        "exposureDelta": -18.0321,
+        "contrastRatio": 0.8999,
+        "weighted": 0.5197
+      },
+      "regions": {
+        "tree": 0.5169,
+        "island": 0.4821,
+        "sky": 0.5621,
+        "castles": 0.485,
+        "light": 0.5533
+      }
+    }
+  ]
+}

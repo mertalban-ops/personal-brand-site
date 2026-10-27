@@ -1,6 +1,7 @@
 "use client";
 
 import { MessageCircle } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/config";
 import { useLanguage } from "@/context/LanguageContext";
 import { track } from "@vercel/analytics";
@@ -8,8 +9,9 @@ import { trackContact } from "@/lib/meta-events";
 
 export default function FloatingWhatsApp() {
   const { language } = useLanguage();
+  const pathname = usePathname();
 
-  if (!siteConfig.whatsappNumber) return null;
+  if (!siteConfig.whatsappNumber || pathname === "/labs") return null;
 
   const messages: Record<string, string> = {
     tr: "Merhaba, Albanexa web sitesinden ulaşıyorum. İşletmem için özel bir web sitesi veya dijital sistem hakkında görüşmek istiyorum.",

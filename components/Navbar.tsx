@@ -21,6 +21,7 @@ export default function Navbar() {
   const links = [
     { href: "/cozumler", label: t.nav.solutions },
     { href: "/projeler", label: t.nav.cases },
+    { href: "/labs", label: "Labs" },
     { href: "/surec", label: language === "tr" ? "Süreç" : language === "de" ? "Prozess" : "Process" },
     { href: "/rehber", label: t.nav.rehber },
     { href: "/is-birligi", label: t.nav.cooperation },
@@ -122,13 +123,13 @@ export default function Navbar() {
             className="h-12 w-auto sm:h-14 md:h-16"
             priority
           />
-          <span className="mono-label hidden text-faint sm:inline" style={{ color: "var(--faint)" }}>
+          <span className="mono-label hidden text-faint xl:inline" style={{ color: "var(--faint)" }}>
             {language === "de" ? "digitale lösungen & systeme" : language === "en" ? "digital solutions & systems" : "dijital çözümler & sistemler"}
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden items-center gap-7 md:flex">
+        <div className="hidden items-center gap-7 lg:flex">
           {/* Çözümler Dropdown */}
           <div
             className="relative"
@@ -196,6 +197,17 @@ export default function Navbar() {
             }`}
           >
             {t.nav.cases}
+          </Link>
+
+          {/* Labs — interactive project universe */}
+          <Link
+            href="/labs"
+            className={`relative text-sm transition-colors hover:text-accent ${
+              pathname.startsWith("/labs") ? "text-accent font-medium" : "text-muted"
+            }`}
+          >
+            Labs
+            <span className="ml-1 inline-block h-1 w-1 rounded-full bg-accent align-middle" />
           </Link>
 
           {/* Rehber */}
@@ -277,7 +289,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Nav Toggle */}
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-3 lg:hidden">
           {langSwitcherJSX}
           <Link
             href="/iletisim"
@@ -304,7 +316,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden bg-bg border-b border-line md:hidden shadow-lg"
+            className="overflow-hidden bg-bg border-b border-line lg:hidden shadow-lg"
           >
             <div className="flex flex-col px-5 py-6 space-y-5">
               {links.map((l) => (

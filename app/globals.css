@@ -164,6 +164,13 @@ body {
   background: var(--muted);
 }
 
+/* Labs intro → live scene handoff flash (mirrors the reference light burst) */
+@keyframes labsFlash {
+  0%   { opacity: 0; }
+  25%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 /* Spotlight animation */
 @keyframes spotlight {
   0%   { opacity: 0; transform: translate(-72%, -62%) skewX(-23deg); }

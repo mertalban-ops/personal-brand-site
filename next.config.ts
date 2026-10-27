@@ -3,6 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      // Removed projects
+      { source: "/projeler/saas-operasyon-altyapisi", destination: "/projeler", permanent: true },
+      { source: "/projeler/personal-brand-site", destination: "/projeler", permanent: true },
+      { source: "/labs/saas-operasyon-altyapisi", destination: "/labs", permanent: true },
+      { source: "/labs/personal-brand-site", destination: "/labs", permanent: true },
       {
         source: "/:path*",
         has: [{ type: "host", value: "albanexa.com" }],

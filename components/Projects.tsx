@@ -31,7 +31,6 @@ export default function Projects() {
     p.slug === "stockapp" || p.slug === "hezer-auto-service" || p.slug === "hezer-otosanziman-site"
   );
   const productLabProjects = t.projects.items.filter(p => p.slug === "carpass");
-  const conceptProjects = t.projects.items.filter(p => p.slug === "saas-operasyon-altyapisi");
 
   const renderCard = (p: typeof t.projects.items[0], index: number, cta1: string, cta2: string) => {
     return (
@@ -138,7 +137,7 @@ export default function Projects() {
         </div>
 
         {/* 2. Albanexa Ürün Laboratuvarı */}
-        <div className="mb-16">
+        <div>
           <h3 className="display text-lg font-bold text-ink mb-6 border-l-2 border-blue pl-3">
             {language === "tr" ? "Albanexa Ürün Laboratuvarı" : language === "de" ? "Albanexa Produktlabor" : "Albanexa Product Lab"}
           </h3>
@@ -149,23 +148,6 @@ export default function Projects() {
                 i,
                 language === "tr" ? "Ürün Geliştirme Sürecini İncele" : language === "de" ? "Produktentwicklung ansehen" : "Explore Product Development",
                 language === "tr" ? "Ürün Fikrinizi Konuşalım" : language === "de" ? "Produktidee besprechen" : "Discuss Product Idea"
-              )
-            )}
-          </div>
-        </div>
-
-        {/* 3. Konsept ve Teknik Yetkinlik */}
-        <div>
-          <h3 className="display text-lg font-bold text-ink mb-6 border-l-2 border-muted pl-3">
-            {language === "tr" ? "Konsept ve Teknik Yetkinlik" : language === "de" ? "Konzept & Technische Kompetenz" : "Concept & Technical Competence"}
-          </h3>
-          <div className="grid gap-6 sm:grid-cols-2 md:gap-8">
-            {conceptProjects.map((p, i) =>
-              renderCard(
-                p,
-                i,
-                language === "tr" ? "Mimari Yaklaşımı İncele" : language === "de" ? "Architektur ansehen" : "Explore Architecture",
-                language === "tr" ? "Altyapı Planı Konuşalım" : language === "de" ? "Infrastruktur besprechen" : "Discuss Infrastructure Plan"
               )
             )}
           </div>

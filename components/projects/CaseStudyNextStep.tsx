@@ -31,12 +31,6 @@ export default function CaseStudyNextStep({ projectSlug, projectName }: Props) {
         desc: "SaaS projenizin teknik altyapısını ve MVP geliştirme adımlarını planlayalım.",
         cta: "Ürün Fikrinizi Konuşalım",
       },
-      "saas-operasyon-altyapisi": {
-        label: "SaaS Mimari?",
-        title: "SaaS mimarinizi birlikte planlayalım.",
-        desc: "Ölçeklenebilir, multi-tenant bulut mimari bileşenlerini tasarlayalım.",
-        cta: "SaaS Mimarinizi Birlikte Planlayalım",
-      },
       default: {
         label: "Benzer Bir Sistem?",
         title: "İşletmeniz için de benzer bir çözüm konuşalım.",
@@ -63,12 +57,6 @@ export default function CaseStudyNextStep({ projectSlug, projectName }: Props) {
         desc: "Let's plan the technical stack and MVP steps for your SaaS project.",
         cta: "Let's Discuss Your Product Idea",
       },
-      "saas-operasyon-altyapisi": {
-        label: "SaaS Architecture?",
-        title: "Let's plan your SaaS architecture together.",
-        desc: "Let's design scalable, multi-tenant cloud architecture components.",
-        cta: "Let's Plan Your SaaS Architecture Together",
-      },
       default: {
         label: "Similar System?",
         title: "Let's discuss a similar solution for your business.",
@@ -94,12 +82,6 @@ export default function CaseStudyNextStep({ projectSlug, projectName }: Props) {
         title: "Lassen Sie uns über Ihre Produktidee oder Plattform sprechen.",
         desc: "Lassen Sie uns die technische Architektur und die MVP-Schritte für Ihr SaaS-Projekt planen.",
         cta: "Produktidee besprechen",
-      },
-      "saas-operasyon-altyapisi": {
-        label: "SaaS-Architektur?",
-        title: "Lassen Sie uns Ihre SaaS-Architektur gemeinsam planen.",
-        desc: "Lassen Sie uns skalierbare, mandantenfähige Cloud-Architekturkomponenten entwerfen.",
-        cta: "SaaS-Architektur gemeinsam planen",
       },
       default: {
         label: "Ähnliches System?",

@@ -204,25 +204,6 @@ export const tr: Dictionary = {
         previewType: "carpass",
         slug: "carpass",
       },
-      {
-        name: "İşletmeye Özel SaaS Altyapısı",
-        tagline: "Kurumsal Süreçleri Abonelik Modeline (SaaS) Dönüştürme",
-        status: "Konsept / Mimari",
-        problem:
-          "Başarılı bir şekilde kurulan şirket içi yazılımların, sektördeki diğer firmalara lisanslanarak satılamaması.",
-        solution:
-          "Mevcut iş takip sistemlerinin çekirdeğini ayırıp çok-kiracılı (multi-tenant) güvenli bir abonelik ürününe dönüştürmek.",
-        approach: "Veri güvenliğinin ve performansın en üst düzeyde olduğu, izole edilmiş ölçeklenebilir bulut mimarisi tasarımı.",
-        benefit: "Şirketin yalnızca kendi sorununu çözmekle kalmayıp, sektörüne teknoloji sağlayan bir ürüne sahip olması.",
-        tech: ["Next.js", "Supabase", "Stripe", "Multi-tenant"],
-        features: [
-          "Stripe ile entegre otomatik faturalandırma ve abonelik",
-          "Rol ve yetki bazlı gelişmiş kullanıcı erişim kontrolü",
-          "Her işletme (tenant) için izole edilmiş güvenli veri",
-        ],
-        previewType: "business-dashboard",
-        slug: "saas-operasyon-altyapisi",
-      },
     ],
   },
   process: {

@@ -62,7 +62,7 @@ export const evidenceRegistry: EvidenceItem[] = [
     projectId: "hezer-auto-service",
     claim: "Playwright ile uçtan uca (E2E) otomatik test akışları kuruldu.",
     status: "verified",
-    source: "Personal Brand Site Playwright Integration Suite",
+    source: "Playwright E2E Integration Suite",
     measuredAt: "2026-07-15",
     method: "Test suite completion logs showing 7/7 passed",
     approvedForMarketing: true,

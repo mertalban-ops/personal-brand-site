@@ -20,7 +20,8 @@ export default function ProjelerClient() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const cat = params.get("cat");
-    const validCats = ["customer-project", "product-lab", "concept-work", "internal-project"];
+    // Only categories that currently have projects (category is language-independent)
+    const validCats: string[] = Array.from(new Set(getProjects("tr").map((p) => p.category)));
     if (cat && validCats.includes(cat)) {
       setActiveFilter(cat);
     }
@@ -136,7 +137,9 @@ export default function ProjelerClient() {
       <section className="relative z-20 mb-12">
         <div className="mx-auto max-w-6xl px-5">
           <div className="flex flex-wrap items-center gap-2 border-b border-line pb-4" role="tablist" aria-label="Project filter">
-            {filterTabs.map((tab) => {
+            {filterTabs
+              .filter((tab) => tab.id === "all" || allProjects.some((p) => p.category === tab.id))
+              .map((tab) => {
               const isActive = activeFilter === tab.id;
               return (
                 <button
