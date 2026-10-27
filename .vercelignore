@@ -1,0 +1,14 @@
+# Local-only material that must never be uploaded with `vercel --prod`
+reference/
+referans video/
+docs/
+tests/
+test-results/
+scripts/
+.n8n-workflows/
+.impeccable/
+.superpowers/
+.agents/
+.claude/
+*.md
+!README.md
