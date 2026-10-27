@@ -56,7 +56,7 @@ export default function LabsScene({
 
   return (
     <>
-      <Atmosphere quality={quality} />
+      <Atmosphere quality={quality} falling={!!activeAnchor} />
       <CameraRig
         reducedMotion={reducedMotion}
         cinematic={cinematic}

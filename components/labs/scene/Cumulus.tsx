@@ -45,7 +45,7 @@ function buildHeaps(high: boolean): Heap[] {
     { center: [0, -7.4, 0], radius: 7.5, height: 2.6, puffs: 30, size: 4.4 },
   ];
   const golden = 2.39996;
-  const ring = high ? 26 : 14;
+  const ring = high ? 40 : 20;
   for (let i = 0; i < ring; i++) {
     const a = i * golden + 0.6;
     const r = 10 + (i / ring) * 34;

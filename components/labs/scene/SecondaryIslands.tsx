@@ -116,9 +116,79 @@ function ensureBoxCylinderUVsAndColors(
   return nonIndexed;
 }
 
+/** Smooth 3D value noise (trilinear over hash3 lattice). */
+function vnoise3(x: number, y: number, z: number): number {
+  const ix = Math.floor(x);
+  const iy = Math.floor(y);
+  const iz = Math.floor(z);
+  const fx = x - ix;
+  const fy = y - iy;
+  const fz = z - iz;
+  const ux = fx * fx * (3 - 2 * fx);
+  const uy = fy * fy * (3 - 2 * fy);
+  const uz = fz * fz * (3 - 2 * fz);
+  const l = (a: number, b: number, t: number) => a + (b - a) * t;
+  return l(
+    l(l(hash3(ix, iy, iz), hash3(ix + 1, iy, iz), ux), l(hash3(ix, iy + 1, iz), hash3(ix + 1, iy + 1, iz), ux), uy),
+    l(
+      l(hash3(ix, iy, iz + 1), hash3(ix + 1, iy, iz + 1), ux),
+      l(hash3(ix, iy + 1, iz + 1), hash3(ix + 1, iy + 1, iz + 1), ux),
+      uy,
+    ),
+    uz,
+  );
+}
+
+function cragRimRadius(theta: number, radius: number, seed: number) {
+  return (
+    radius *
+    (1 +
+      (vnoise3(Math.cos(theta) * 1.7 + seed, Math.sin(theta) * 1.7, seed * 0.37) - 0.5) * 0.42 +
+      Math.sin(theta * 3 + seed) * 0.05)
+  );
+}
+
 /**
- * Generates a deeply fractured, multi-faceted craggy floating island rock massif
- * with layered basalt/sandstone ribs, mossy crown, and jagged stalactite spires underneath.
+ * Shrubs crowding the turf edge + ivy curtains hanging over the cliff lip (the reference crags are
+ * never bare discs: vegetation spills over every rim). Crossed leaf cards, merged per island.
+ */
+function buildRimVegetation(radius: number, seed: number): THREE.BufferGeometry {
+  const parts: THREE.BufferGeometry[] = [];
+  const count = Math.round(radius * 11);
+  for (let i = 0; i < count; i++) {
+    const theta = (i / count) * Math.PI * 2 + (hash3(i, seed, 7) - 0.5) * 0.3;
+    const rr = cragRimRadius(theta, radius, seed);
+    const cx = Math.cos(theta);
+    const sz = Math.sin(theta);
+    // Shrub clump on the turf edge
+    const sc = 0.22 + hash3(i, seed, 8) * 0.22;
+    for (let k = 0; k < 3; k++) {
+      const q = new THREE.PlaneGeometry(sc * 2, sc * 1.6);
+      q.rotateY(k * (Math.PI / 3) + theta);
+      q.translate(cx * rr * 0.93, sc * 0.55 + 0.02, sz * rr * 0.93);
+      parts.push(q);
+    }
+    // Ivy curtain draped over the lip on every other slot
+    if (i % 2 === 0) {
+      const len = 0.35 + hash3(i, seed, 9) * 0.9;
+      const ivy = new THREE.PlaneGeometry(0.32 + sc * 0.6, len);
+      ivy.translate(0, -len * 0.5 + 0.04, 0);
+      ivy.rotateY(-theta + Math.PI / 2);
+      ivy.translate(cx * rr * 1.02, 0, sz * rr * 1.02);
+      parts.push(ivy);
+    }
+  }
+  const merged = mergeGeometries(parts, false)!;
+  parts.forEach((g) => g.dispose());
+  merged.computeVertexNormals();
+  return merged;
+}
+
+/**
+ * Floating crag modelled on the reference archipelago: an irregular (never circular) grassy rim
+ * that slightly overhangs, a short vertical cliff band, then a deep tapering underside built from
+ * jointed basalt-like columns with horizontal strata, moss streaks running down from the turf and
+ * stalactite fingers dripping from the column ridges.
  */
 function buildCragMesh(
   radius: number,
@@ -126,114 +196,222 @@ function buildCragMesh(
   seed: number,
   hazeAmt: number,
 ): THREE.BufferGeometry {
-  const radial = 44;
-  const heightSegs = 20;
+  const radial = 72;
+  const heightSegs = 34;
+  const hazeCol = new THREE.Color("#ead3bf");
+  const hz = (c: string, k = 1) => new THREE.Color(c).lerp(hazeCol, hazeAmt * k);
+  const cGrassA = hz("#5f8a2e", 0.72);
+  const cGrassB = hz("#7da23c", 0.72);
+  const cDirt = hz("#6b5236", 0.8);
+  const cMoss = hz("#4d6a28", 0.8);
+  const cSand = hz("#b49478");
+  const cRock = hz("#7a6656");
+  const cRockDark = hz("#3f342d", 0.92);
+  const cDeep = hz("#2c2520", 0.9);
+  const tmp = new THREE.Color();
+
+  const rimR = (theta: number) => cragRimRadius(theta, radius, seed);
+
+  // ---- Body (cliff band + columnar underside) ----
   const positions: number[] = [];
   const uvs: number[] = [];
   const colors: number[] = [];
   const indices: number[] = [];
-
-  const hazeCol = new THREE.Color("#ead3bf");
-  const cTop = new THREE.Color("#6e9138").lerp(hazeCol, hazeAmt * 0.72);
-  const cRockLight = new THREE.Color("#b89c82").lerp(hazeCol, hazeAmt);
-  const cRockMid = new THREE.Color("#7d6a5c").lerp(hazeCol, hazeAmt);
-  const cRockDark = new THREE.Color("#493d37").lerp(hazeCol, hazeAmt * 0.92);
-  const tmp = new THREE.Color();
-
+  const colCount = 9 + (seed % 5);
   for (let iy = 0; iy <= heightSegs; iy++) {
     const v = iy / heightSegs;
-    const y = -v * depth;
-    const shelf = Math.sin(v * Math.PI * 5.0) * 0.05 * (1 - v);
-    const profile = Math.pow(1 - v, 0.66) + shelf;
-
     for (let ix = 0; ix <= radial; ix++) {
       const u = ix / radial;
       const theta = u * Math.PI * 2;
-      // Sharp angular cliff flutes & strata
-      const flute =
-        Math.sin(theta * 8 + seed) * 0.15 +
-        Math.cos(theta * 15 - v * 2.8 + seed) * 0.11 +
-        (hash3(Math.cos(theta) * 2.5 + seed, v * 4.5, Math.sin(theta) * 2.5) - 0.5) * 0.25;
-
-      const r = iy === heightSegs ? 0 : Math.max(0.04, radius * profile * (1 + flute));
-      const spikeDrop =
-        iy > 2 && iy < heightSegs
-          ? Math.max(0, Math.sin(theta * 7 + seed * 1.7) * Math.cos(theta * 4 - seed)) *
+      const cx = Math.cos(theta);
+      const sz = Math.sin(theta);
+      const n = vnoise3(cx * 2.4 + seed, v * 3.2, sz * 2.4);
+      // Triangle wave → sharp vertical column ridges, jittered so they don't look machined
+      const colPhase = (theta / (Math.PI * 2)) * colCount + n * 0.45;
+      const ridge = 1 - Math.abs(2 * (colPhase - Math.floor(colPhase)) - 1);
+      const profile =
+        v < 0.12 ? 1 - v * 0.55 : (1 - 0.066) * Math.pow((1 - v) / 0.88, 0.95);
+      const strata = Math.sin(v * 46 + n * 3) * 0.025 * (1 - v);
+      let r =
+        iy === heightSegs
+          ? 0
+          : rimR(theta) * profile * (1 + (ridge - 0.5) * 0.18 * (0.35 + v) + (n - 0.5) * 0.24 + strata);
+      r = Math.max(0.02, r);
+      // Stalactite fingers hang from the column ridges in the lower half
+      const drip =
+        iy > 0 && iy < heightSegs
+          ? Math.pow(Math.max(0, vnoise3(theta * 2.2 + seed, 0.5, seed) - 0.42), 1.4) *
+            Math.pow(ridge, 2) *
             v *
-            (1 - v) *
+            v *
             depth *
-            0.55
+            1.15
           : 0;
+      positions.push(cx * r, -v * depth - drip, sz * r);
+      uvs.push(u * 6, v * 4);
 
-      positions.push(Math.cos(theta) * r, y - spikeDrop, Math.sin(theta) * r);
-      uvs.push(u * 5, v * 3);
-
-      const sunSide = Math.max(0, Math.cos(theta - 0.42) * 0.5 + 0.5);
-      if (v < 0.09) {
-        tmp.copy(cTop).lerp(cRockLight, v / 0.09);
-      } else if (v < 0.56) {
-        tmp.copy(cRockMid).lerp(cRockLight, sunSide * 0.76);
-        tmp.lerp(cRockDark, (v - 0.09) / 0.62);
+      const sun = Math.max(0, Math.cos(theta - 0.42) * 0.5 + 0.5);
+      if (v < 0.05) {
+        tmp.copy(cGrassA).lerp(cDirt, v / 0.05);
       } else {
-        tmp.copy(cRockMid).lerp(cRockDark, (v - 0.56) / 0.44);
+        const band = Math.sin(v * 22 + n * 4) > 0.55 ? 1 : 0;
+        tmp.copy(cRock).lerp(cSand, sun * 0.7 * (1 - v) + band * 0.4);
+        tmp.lerp(cRockDark, Math.min(1, v * 0.9));
+        if (v > 0.7) tmp.lerp(cDeep, (v - 0.7) / 0.3);
+        const mossStreak = vnoise3(theta * 5 + seed, 1.3, seed);
+        if (v < 0.45 && mossStreak > 0.58) tmp.lerp(cMoss, Math.min(0.8, (mossStreak - 0.58) * 3) * (1 - v / 0.45));
       }
-      if (flute < 0) tmp.multiplyScalar(1 - Math.min(0.28, -flute * 0.7) * (1 - hazeAmt * 0.6));
+      // Crevices between columns stay dark (baked AO)
+      tmp.multiplyScalar(0.55 + ridge * 0.45);
       colors.push(tmp.r, tmp.g, tmp.b);
     }
   }
-
   const stride = radial + 1;
   for (let iy = 0; iy < heightSegs; iy++) {
     for (let ix = 0; ix < radial; ix++) {
       const a = iy * stride + ix;
       const b = (iy + 1) * stride + ix;
-      const c = (iy + 1) * stride + (ix + 1);
-      const d = iy * stride + (ix + 1);
-      indices.push(a, b, d, b, c, d);
+      indices.push(a, b, a + 1, b, b + 1, a + 1);
     }
   }
-
   const body = new THREE.BufferGeometry();
   body.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
   body.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
   body.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
   body.setIndex(indices);
-  const nonIndexedBody = body.toNonIndexed();
-  nonIndexedBody.computeVertexNormals();
+  const bodyGeo = body.toNonIndexed();
+  bodyGeo.computeVertexNormals(); // all merged parts must share the same attributes
   body.dispose();
 
-  // Domed mossy top cap
-  const cap = new THREE.CylinderGeometry(radius * 0.98, radius * 1.03, 0.24, radial);
-  cap.translate(0, 0.07, 0);
-  const nonIndexedCap = ensureBoxCylinderUVsAndColors(cap, cTop, hazeCol, 0);
+  // ---- Turf cap: gently domed, follows the irregular rim and droops over the edge ----
+  const rings = 9;
+  const capPos: number[] = [0, 0.16, 0];
+  const capUv: number[] = [0, 0];
+  const capCol: number[] = [cGrassB.r, cGrassB.g, cGrassB.b];
+  const capIdx: number[] = [];
+  for (let ring = 1; ring <= rings; ring++) {
+    const t = ring / rings;
+    for (let ix = 0; ix <= radial; ix++) {
+      const theta = (ix / radial) * Math.PI * 2;
+      const rr = rimR(theta) * t * (t === 1 ? 1.04 : 1);
+      const x = Math.cos(theta) * rr;
+      const z = Math.sin(theta) * rr;
+      const bump = (vnoise3(x * 0.9 + seed, 0, z * 0.9) - 0.5) * 0.12;
+      const y = t === 1 ? -0.05 : 0.16 * (1 - t * t) + bump * (1 - t * 0.6);
+      capPos.push(x, y, z);
+      capUv.push(x * 0.8, z * 0.8);
+      const patch = vnoise3(x * 1.6 + seed, 2, z * 1.6);
+      tmp.copy(cGrassA).lerp(cGrassB, patch);
+      if (patch < 0.22) tmp.lerp(cDirt, 0.5);
+      capCol.push(tmp.r, tmp.g, tmp.b);
+    }
+  }
+  for (let ix = 0; ix < radial; ix++) capIdx.push(0, 1 + ix + 1, 1 + ix);
+  for (let ring = 1; ring < rings; ring++) {
+    const s0 = 1 + (ring - 1) * stride;
+    const s1 = 1 + ring * stride;
+    for (let ix = 0; ix < radial; ix++) {
+      capIdx.push(s0 + ix, s0 + ix + 1, s1 + ix, s0 + ix + 1, s1 + ix + 1, s1 + ix);
+    }
+  }
+  const cap = new THREE.BufferGeometry();
+  cap.setAttribute("position", new THREE.Float32BufferAttribute(capPos, 3));
+  cap.setAttribute("uv", new THREE.Float32BufferAttribute(capUv, 2));
+  cap.setAttribute("color", new THREE.Float32BufferAttribute(capCol, 3));
+  cap.setIndex(capIdx);
+  const capGeo = cap.toNonIndexed();
+  capGeo.computeVertexNormals();
   cap.dispose();
 
-  // 10 jagged peripheral stalactite rock crags underneath
-  const parts: THREE.BufferGeometry[] = [nonIndexedBody, nonIndexedCap];
-  for (let s = 0; s < 10; s++) {
-    const sa = (s / 10) * Math.PI * 2 + seed * 0.7;
-    const sr = radius * (0.42 + (s % 3) * 0.16);
-    const sh = depth * (0.46 + (s % 3) * 0.18);
-    const tooth = new THREE.ConeGeometry(radius * (0.18 + (s % 2) * 0.08), sh, 6, 3);
+  // ---- Extra hanging stalactite spires under the mass ----
+  const parts: THREE.BufferGeometry[] = [bodyGeo, capGeo];
+  for (let s = 0; s < 14; s++) {
+    const sa = (s / 14) * Math.PI * 2 + seed * 0.7 + hash3(s, seed, 1) * 0.4;
+    const sr = radius * (0.18 + hash3(s, seed, 2) * 0.5);
+    const sh = depth * (0.22 + hash3(s, seed, 3) * 0.4);
+    const tooth = new THREE.ConeGeometry(radius * (0.07 + hash3(s, seed, 4) * 0.1), sh, 7, 4);
     tooth.rotateX(Math.PI);
     const tPos = tooth.getAttribute("position");
     for (let k = 0; k < tPos.count; k++) {
       const px = tPos.getX(k);
       const py = tPos.getY(k);
       const pz = tPos.getZ(k);
-      const n = 0.85 + hash3(px * 3 + s, py * 3, pz * 3) * 0.32;
-      tPos.setXYZ(k, px * n, py, pz * n);
+      const nn = 0.75 + vnoise3(px * 6 + s, py * 3, pz * 6) * 0.5;
+      tPos.setXYZ(k, px * nn, py, pz * nn);
     }
-    tooth.translate(Math.cos(sa) * sr, -depth * (0.36 + (s % 2) * 0.12), Math.sin(sa) * sr);
-    const coloredTooth = ensureBoxCylinderUVsAndColors(tooth, cRockDark, hazeCol, 0);
+    // Hang from the depth where the tapering body is still wider than the tooth footprint
+    const toothR = radius * 0.17;
+    const fit = Math.min(0.95, (sr + toothR) / (0.8 * radius * 0.934));
+    const vAttach = 1 - 0.88 * Math.pow(fit, 1 / 0.95);
+    tooth.translate(Math.cos(sa) * sr, -vAttach * depth - sh * 0.5 + 0.12, Math.sin(sa) * sr);
+    parts.push(ensureBoxCylinderUVsAndColors(tooth, cRockDark, hazeCol, 0));
     tooth.dispose();
-    parts.push(coloredTooth);
   }
 
   const merged = mergeGeometries(parts, false)!;
-  parts.forEach((p) => p.dispose());
+  parts.forEach((g) => g.dispose());
   merged.computeVertexNormals();
   return merged;
+}
+
+/** Ring of merlons (crenellation) around a round tower top. */
+function towerCrenellation(
+  add: (g: THREE.BufferGeometry, c: THREE.Color) => void,
+  col: THREE.Color,
+  x: number,
+  y: number,
+  z: number,
+  r: number,
+) {
+  const n = Math.max(6, Math.round(r * 34));
+  for (let i = 0; i < n; i++) {
+    const a = (i / n) * Math.PI * 2;
+    const m = new THREE.BoxGeometry(r * 0.32, r * 0.34, r * 0.22);
+    m.rotateY(-a);
+    m.translate(x + Math.cos(a) * r, y + r * 0.17, z + Math.sin(a) * r);
+    add(m, col);
+  }
+}
+
+/** Arrow-slit / lancet windows in tiers around a round tower, a few lit warm from inside. */
+function towerWindows(
+  add: (g: THREE.BufferGeometry, c: THREE.Color) => void,
+  dark: THREE.Color,
+  lit: THREE.Color,
+  x: number,
+  z: number,
+  r: number,
+  y0: number,
+  h: number,
+  seed: number,
+) {
+  const tiers = Math.max(1, Math.floor(h / 0.55));
+  const per = r > 0.3 ? 6 : 4;
+  for (let t = 0; t < tiers; t++) {
+    const y = y0 + h * ((t + 0.6) / (tiers + 0.4));
+    for (let i = 0; i < per; i++) {
+      const a = (i / per) * Math.PI * 2 + t * 0.4 + seed;
+      const w = new THREE.BoxGeometry(r * 0.16, Math.min(0.22, h * 0.12), 0.03);
+      w.rotateY(-a + Math.PI / 2);
+      const rr = r * 0.93;
+      w.translate(x + Math.cos(a) * rr, y, z + Math.sin(a) * rr);
+      add(w, hash3(i, t, seed) > 0.78 ? lit : dark);
+    }
+  }
+}
+
+/** Projecting string-course band (horizontal moulding) around a round tower. */
+function towerStringCourse(
+  add: (g: THREE.BufferGeometry, c: THREE.Color) => void,
+  col: THREE.Color,
+  x: number,
+  y: number,
+  z: number,
+  r: number,
+) {
+  const band = new THREE.CylinderGeometry(r * 1.06, r * 1.06, 0.045, 16);
+  band.translate(x, y, z);
+  add(band, col);
 }
 
 /**
@@ -243,12 +421,12 @@ function buildCragMesh(
 function buildGothicCastleGeometry(hazeAmt = 0.14): THREE.BufferGeometry {
   const parts: THREE.BufferGeometry[] = [];
   const hazeCol = new THREE.Color("#ead4c2");
-  const cWall = new THREE.Color("#e8d2bc");
-  const cButtress = new THREE.Color("#cbb29b");
-  const cRoof = new THREE.Color("#4f4956");
-  const cArchFrame = new THREE.Color("#f5e3cf");
-  const cPortalShadow = new THREE.Color("#3a2f32");
-  const cWarmWindow = new THREE.Color("#d99b52");
+  const cWall = new THREE.Color("#ece2d6");
+  const cButtress = new THREE.Color("#d3c5b5");
+  const cRoof = new THREE.Color("#5a6070");
+  const cArchFrame = new THREE.Color("#f6eee4");
+  const cPortalShadow = new THREE.Color("#2f2b33");
+  const cWarmWindow = new THREE.Color("#e7a75a");
 
   function addPart(geo: THREE.BufferGeometry, col: THREE.Color) {
     const prepared = ensureBoxCylinderUVsAndColors(geo, col, hazeCol, hazeAmt);
@@ -264,6 +442,24 @@ function buildGothicCastleGeometry(hazeAmt = 0.14): THREE.BufferGeometry {
   const upperTerrace = new THREE.BoxGeometry(1.55, 0.35, 1.18);
   upperTerrace.translate(0, 0.58, 0.02);
   addPart(upperTerrace, cWall);
+
+  // Crenellated parapet along the bastion edge
+  for (let i = 0; i < 12; i++) {
+    const x = -0.92 + i * 0.167;
+    for (const z of [-0.68, 0.78]) {
+      const merlon = new THREE.BoxGeometry(0.09, 0.12, 0.08);
+      merlon.translate(x, 0.5, z);
+      addPart(merlon, cButtress);
+    }
+  }
+  for (let i = 0; i < 8; i++) {
+    const z = -0.62 + i * 0.19;
+    for (const x of [-0.97, 0.97]) {
+      const merlon = new THREE.BoxGeometry(0.08, 0.12, 0.09);
+      merlon.translate(x, 0.5, z);
+      addPart(merlon, cButtress);
+    }
+  }
 
   // 2. Main Cathedral Nave + Steep Gable Roof (prism roof)
   const nave = new THREE.BoxGeometry(0.92, 1.55, 0.92);
@@ -286,7 +482,25 @@ function buildGothicCastleGeometry(hazeAmt = 0.14): THREE.BufferGeometry {
     const pinnacle = new THREE.ConeGeometry(0.085, 0.42, 6);
     pinnacle.translate(bx, 2.31, 0.48);
     addPart(pinnacle, cRoof);
+
+    // Flying buttress: detached pier + inclined arm leaning onto the nave wall
+    const pier = new THREE.BoxGeometry(0.1, 1.05, 0.12);
+    pier.translate(bx, 1.05, 0.86);
+    addPart(pier, cButtress);
+    const arm = new THREE.BoxGeometry(0.07, 0.07, 0.46);
+    arm.rotateX(-0.62);
+    arm.translate(bx, 1.62, 0.66);
+    addPart(arm, cButtress);
   }
+
+  // Rose window above the portal
+  const rose = new THREE.CylinderGeometry(0.13, 0.13, 0.04, 16);
+  rose.rotateX(Math.PI / 2);
+  rose.translate(0.05, 1.98, 0.49);
+  addPart(rose, cWarmWindow);
+  const roseFrame = new THREE.TorusGeometry(0.14, 0.025, 6, 20);
+  roseFrame.translate(0.05, 1.98, 0.5);
+  addPart(roseFrame, cArchFrame);
 
   // 4. Pointed Gothic Lancet Arch Portal & Recessed Lancet Windows on front facade (like 0.0s & 2.4s)
   const archExtrudeSettings = { depth: 0.09, bevelEnabled: true, bevelSize: 0.015, bevelThickness: 0.015 };
@@ -334,21 +548,27 @@ function buildGothicCastleGeometry(hazeAmt = 0.14): THREE.BufferGeometry {
     { x: 0.48, z: 0.48, r: 0.15, h: 1.28, sh: 0.98 }, // Courtyard gate turret R
   ];
 
-  for (const t of towers) {
-    // Octagonal/dodecagonal stone tower shaft
-    const shaft = new THREE.CylinderGeometry(t.r * 0.86, t.r, t.h, 12);
+  towers.forEach((t, ti) => {
+    // Slightly tapered stone tower shaft
+    const shaft = new THREE.CylinderGeometry(t.r * 0.86, t.r, t.h, 16);
     shaft.translate(t.x, t.h * 0.5 + 0.2, t.z);
     addPart(shaft, cWall);
+    towerStringCourse(addPart, cButtress, t.x, 0.2 + t.h * 0.42, t.z, t.r * 0.93);
+    towerWindows(addPart, cPortalShadow, cWarmWindow, t.x, t.z, t.r * 0.9, 0.35, t.h * 0.85, ti);
 
-    // Corbelled stone parapet ring at top of shaft
-    const parapet = new THREE.CylinderGeometry(t.r * 0.98, t.r * 0.9, 0.12, 12);
+    // Corbelled parapet (wider than the shaft) with merlons
+    const parapet = new THREE.CylinderGeometry(t.r * 1.08, t.r * 0.9, 0.14, 16);
     parapet.translate(t.x, t.h + 0.2, t.z);
     addPart(parapet, cButtress);
+    towerCrenellation(addPart, cButtress, t.x, t.h + 0.27, t.z, t.r * 1.02);
 
-    // Steep Gothic slate needle spire
-    const spire = new THREE.ConeGeometry(t.r * 0.98, t.sh, 12);
-    spire.translate(t.x, t.h + 0.24 + t.sh * 0.5, t.z);
+    // Slender Gothic slate needle spire set back behind the battlements, with a finial
+    const spire = new THREE.ConeGeometry(t.r * 0.78, t.sh * 1.3, 16);
+    spire.translate(t.x, t.h + 0.27 + t.sh * 0.65, t.z);
     addPart(spire, cRoof);
+    const finial = new THREE.SphereGeometry(t.r * 0.09, 6, 4);
+    finial.translate(t.x, t.h + 0.27 + t.sh * 1.3 + t.r * 0.05, t.z);
+    addPart(finial, cArchFrame);
 
     // 4 corner spirelet pinnacles around the major towers
     if (t.r >= 0.22) {
@@ -356,12 +576,12 @@ function buildGothicCastleGeometry(hazeAmt = 0.14): THREE.BufferGeometry {
         const ca = (c / 4) * Math.PI * 2 + Math.PI * 0.25;
         const px = t.x + Math.cos(ca) * (t.r * 0.88);
         const pz = t.z + Math.sin(ca) * (t.r * 0.88);
-        const pin = new THREE.ConeGeometry(0.055, 0.36, 6);
-        pin.translate(px, t.h + 0.38, pz);
+        const pin = new THREE.ConeGeometry(0.05, 0.42, 6);
+        pin.translate(px, t.h + 0.48, pz);
         addPart(pin, cRoof);
       }
     }
-  }
+  });
 
   const merged = mergeGeometries(parts, false)!;
   parts.forEach((p) => p.dispose());
@@ -377,9 +597,11 @@ function buildGothicCastleGeometry(hazeAmt = 0.14): THREE.BufferGeometry {
 function buildDistantCitadelAndBridgeGeometry(hazeAmt = 0.48): THREE.BufferGeometry {
   const parts: THREE.BufferGeometry[] = [];
   const hazeCol = new THREE.Color("#f0d8c2");
-  const cCitadel = new THREE.Color("#e4ccb6");
-  const cShadowStone = new THREE.Color("#c4ab96");
-  const cSpire = new THREE.Color("#9e8b84");
+  const cCitadel = new THREE.Color("#ebe1d6");
+  const cShadowStone = new THREE.Color("#cfc2b5");
+  const cSpire = new THREE.Color("#7d8291");
+  const cWin = new THREE.Color("#4a4550");
+  const cWinLit = new THREE.Color("#e3ad6b");
 
   function addPart(geo: THREE.BufferGeometry, col: THREE.Color) {
     const prepared = ensureBoxCylinderUVsAndColors(geo, col, hazeCol, hazeAmt);
@@ -413,15 +635,18 @@ function buildDistantCitadelAndBridgeGeometry(hazeAmt = 0.48): THREE.BufferGeome
     { x: 2.35, z: 0.05, r: 0.22, h: 1.25, sh: 1.02 },
   ];
 
-  for (const t of towers) {
-    const body = new THREE.CylinderGeometry(t.r * 0.85, t.r, t.h, 10);
+  towers.forEach((t, ti) => {
+    const body = new THREE.CylinderGeometry(t.r * 0.85, t.r, t.h, 14);
     body.translate(t.x, t.h * 0.5 + 0.2, t.z);
     addPart(body, cCitadel);
+    towerStringCourse(addPart, cShadowStone, t.x, 0.2 + t.h * 0.55, t.z, t.r * 0.9);
+    towerWindows(addPart, cWin, cWinLit, t.x, t.z, t.r * 0.88, 0.5, t.h * 0.8, ti + 20);
+    towerCrenellation(addPart, cShadowStone, t.x, t.h + 0.2, t.z, t.r * 0.9);
 
-    const roof = new THREE.ConeGeometry(t.r * 0.96, t.sh, 10);
-    roof.translate(t.x, t.h + 0.2 + t.sh * 0.5, t.z);
+    const roof = new THREE.ConeGeometry(t.r * 0.74, t.sh * 1.3, 14);
+    roof.translate(t.x, t.h + 0.24 + t.sh * 0.65, t.z);
     addPart(roof, cSpire);
-  }
+  });
 
   // 3. True Multi-Span Semicircular Arched Stone Viaduct Bridge extending to the right (+x)
   // Built using ExtrudeGeometry with real semicircular arch cutouts (matching 0.0s & 2.4s!)
@@ -466,12 +691,12 @@ function buildDistantCitadelAndBridgeGeometry(hazeAmt = 0.48): THREE.BufferGeome
   viaductShape.closePath();
 
   const viaductGeo = new THREE.ExtrudeGeometry(viaductShape, {
-    depth: 0.52,
+    depth: 0.36,
     bevelEnabled: true,
     bevelSize: 0.025,
     bevelThickness: 0.025,
   });
-  viaductGeo.translate(0, 0, -0.26);
+  viaductGeo.translate(0, 0, -0.18);
   addPart(viaductGeo, cCitadel);
 
   // Bridge parapet walls & gatehouse watchtowers along the viaduct (matching 0.0s & 2.4s)
@@ -863,7 +1088,9 @@ export default function SecondaryIslands({ quality = "high" }: { quality?: "high
   const islandMeshes = useMemo(() => {
     return ISLAND_DEFS.map((def) => ({
       def,
-      cragGeo: buildCragMesh(def.radius, def.depth, def.seed, def.haze),
+      // Reference crags are ~1.4× deeper than wide-radius; the old ones read as flat platters
+      cragGeo: buildCragMesh(def.radius, def.depth * 1.4, def.seed, def.haze),
+      rimGeo: buildRimVegetation(def.radius, def.seed),
       waterfallUniforms: def.waterfalls.map((wf, wi) => ({
         uMap: { value: waterTex },
         uTime: { value: 0 },
@@ -917,7 +1144,7 @@ export default function SecondaryIslands({ quality = "high" }: { quality?: "high
 
   return (
     <group>
-      {activeIslands.map(({ def, cragGeo, waterfallUniforms }, idx) => (
+      {activeIslands.map(({ def, cragGeo, rimGeo, waterfallUniforms }, idx) => (
         <group
           key={def.id}
           position={def.position}
@@ -937,6 +1164,20 @@ export default function SecondaryIslands({ quality = "high" }: { quality?: "high
               emissiveIntensity={def.haze * 0.38}
               side={THREE.DoubleSide}
               vertexColors
+            />
+          </mesh>
+
+          {/* Shrubs on the turf edge + ivy spilling over the lip */}
+          <mesh geometry={rimGeo}>
+            <meshStandardMaterial
+              map={leafPBR.map}
+              normalMap={leafPBR.normalMap}
+              color={def.haze > 0.3 ? "#a9b07a" : "#7f9a45"}
+              emissive={def.haze > 0.3 ? "#d8c49e" : "#2f4214"}
+              emissiveIntensity={0.15 + def.haze * 0.3}
+              alphaTest={0.34}
+              side={THREE.DoubleSide}
+              roughness={0.75}
             />
           </mesh>
 

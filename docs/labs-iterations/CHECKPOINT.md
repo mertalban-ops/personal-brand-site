@@ -33,6 +33,13 @@ bu karelerde turlar arası fark kısmen kalibrasyondan gelir.
 | 13 | Bulut düzlemi güneş gradyanı yumuşatıldı (180° şeritler) | **0.276** | 0.309 | 0.210 | 0.230 | 0.497 | **final** |
 | 14 | Eski çapraz-quad bulut katmanını kaldırma denemesi | 0.270 | 0.298 | 0.209 | 0.230 | 0.518 | geri al |
 
+| 15 | Çevre adaları yeniden: düzensiz kenar, sarkan çim kapak, sütunlu bazalt alt yüzey, katmanlar, yosun izleri, 1.4× derinlik; kalelerde mazgal, pencere katları, kuşak silmesi, uçan payanda, gül pencere, ince arduvaz kuleler, soluk kireçtaşı | 0.278 | 0.307 | 0.209 | 0.230 | 0.491 | tut |
+| 16 | Ada kenarlarında çalı + sarkan sarmaşık; sarkıtlar gövdeye gömüldü; eski çapraz-quad takımada bulutları kaldırıldı (yakın planda düz üçgenler) | 0.283 | 0.299 | 0.208 | 0.229 | 0.520 | tut |
+| 17 | Ada altındaki kanyonu kümülüsle doldurma | 0.275 | 0.298 | 0.208 | 0.229 | 0.528 | geri al (düşüş karelerini bozdu) |
+| 18–20 | Kanyon yalnızca düşüşte açılıyor (dinlenmede koyu disk görünüyordu); kamera bulut düzlemi seviyesinden geçerken düzlem soluyor (sert bant) | **0.282** | 0.293 | 0.208 | 0.228 | 0.521 | **final** |
+
+Ayrıca: elma düşüşü 13.6 sn → **9.4 sn** (seçim 0.9, kopma 1.7, serbest düşüş 5.3, bulutlar 7.2, ışık 9.4).
+
 \* 9600 karesi düşüşün son ~0.3 sn'sine denk geldiği için zamanlama gürültüsüne duyarlı.
 
 Toplam: baseline 0.189 → final 0.276 (+%46). Açılış +%28, yakın plan +%96, elma yakın +%95, final +%59.

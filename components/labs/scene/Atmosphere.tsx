@@ -188,6 +188,7 @@ const CLOUD_SEA_FRAGMENT = /* glsl */ `
   varying vec3 vWorldPos;
   uniform float uTime;
   uniform float uInnerCutout;
+  uniform float uLift;
 
   float hash(vec2 p) {
     return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
@@ -245,14 +246,25 @@ const CLOUD_SEA_FRAGMENT = /* glsl */ `
     float innerMask = uInnerCutout > 0.5 ? smoothstep(5.2, 9.8, dist) : 1.0;
     col = mix(col, vec3(0.95, 0.80, 0.64), smoothstep(36.0, 88.0, dist) * 0.55);
 
-    float a = edgeAlpha * innerMask;
+    // Deep sheet is lifted toward the crest tone so it doesn't read as a dark disc through the canyon
+    col = mix(col, crestCol, uLift);
+    // Fade out as the camera passes through the sheet's level (seen edge-on it reads as a hard band)
+    float camFade = smoothstep(0.9, 3.2, abs(cameraPosition.y - vWorldPos.y));
+    float a = edgeAlpha * innerMask * camFade;
     // The upper sheet writes depth; never let its transparent canyon/edges occlude what lies below
     if (a < 0.35) discard;
     gl_FragColor = vec4(pow(col, vec3(2.2)), a);
   }
 `;
 
-export default function Atmosphere({ quality = "high" }: { quality?: "high" | "low" }) {
+export default function Atmosphere({
+  quality = "high",
+  falling = false,
+}: {
+  quality?: "high" | "low";
+  /** An apple is falling: open the canyon in the cloud sheet so it can sink into the abyss */
+  falling?: boolean;
+}) {
   const high = quality === "high";
   const { scene } = useThree();
   const moonTex = useMemo(() => getLunarTexture(), []);
@@ -290,7 +302,8 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
   const upperCloudSeaUniforms = useMemo(
     () => ({
       uTime: { value: 0 },
-      uInnerCutout: { value: 1.0 },
+      uInnerCutout: { value: 0.0 },
+      uLift: { value: 0 },
     }),
     [],
   );
@@ -299,6 +312,7 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
     () => ({
       uTime: { value: 0 },
       uInnerCutout: { value: 0.0 },
+      uLift: { value: 0.6 },
     }),
     [],
   );
@@ -413,6 +427,9 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
 
     mesh.instanceMatrix.needsUpdate = true;
     if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+    // Only the deep fall bed + canyon walls (first 155): the archipelago ring of crossed quads read as
+    // large flat triangles at close range and is now covered by <Cumulus />
+    mesh.count = 155;
     mesh.renderOrder = 2;
     return mesh;
   }, [high, cloudPuffTex]);
@@ -438,6 +455,8 @@ export default function Atmosphere({ quality = "high" }: { quality?: "high" | "l
     const t = state.clock.elapsedTime;
     skyUniforms.uTime.value = t;
     upperCloudSeaUniforms.uTime.value = t;
+    // Closed canyon at rest (an open one showed as a dark disc under the island)
+    upperCloudSeaUniforms.uInnerCutout.value = falling ? 1 : 0;
     deepCloudSeaUniforms.uTime.value = t;
     if (raysGroup.current) {
       raysGroup.current.rotation.z = -0.54 + Math.sin(t * 0.22) * 0.018;

@@ -22,11 +22,11 @@ import type { AppleAnchor } from "@/lib/labs/anchors";
  *  7. Pure Light Dissolution (4.25s - 4.55s): Dissolves into a transcendent golden solar bloom & anamorphic lens flare (9.6s)
  */
 // Timeline (seconds). One clock drives motion, light and particles so they stay in sync.
-const T_SELECT = 1.4; // glow up + tremble while the camera closes in
-const T_DETACH = 2.6; // stem releases, single pendulum swing
-const T_CLOUDS = 8.0; // long freefall past cliffs & waterfalls ends; apple enters the cloud layers
-const T_BURST = 10.8; // apple starts turning into light inside the clouds
-const T_DONE = 13.6; // fully dissolved → hand off to the page transition
+const T_SELECT = 0.9; // glow up + tremble while the camera closes in
+const T_DETACH = 1.7; // stem releases, single pendulum swing
+const T_CLOUDS = 5.3; // long freefall past cliffs & waterfalls ends; apple enters the cloud layers
+const T_BURST = 7.2; // apple starts turning into light inside the clouds
+const T_DONE = 9.4; // fully dissolved → hand off to the page transition
 
 /**
  * Fall progress → path progress: gravity ramp (0–20%), near-terminal velocity (20–85%),
@@ -392,7 +392,7 @@ export default function FallingApple({
     // - Zone C (2.55s..4.55s, 8.0s & 8.8s ref): Camera rises above the apple and pitches ~34° DOWNWARD into the open cloud sea abyss
     //   so the island rock disappears high above the frame and only billowing clouds & starburst sparks surround the apple!
     if (followCamera) {
-      const abyssPhase = Math.max(0, Math.min(1, (elapsed - T_CLOUDS + 0.6) / 2.6));
+      const abyssPhase = Math.max(0, Math.min(1, (elapsed - T_CLOUDS + 0.5) / 2.0));
       const smoothAbyss = abyssPhase * abyssPhase * (3 - 2 * abyssPhase);
 
       const camDist = THREE.MathUtils.lerp(3.55, 3.95, smoothAbyss);
@@ -424,7 +424,7 @@ export default function FallingApple({
 
       if (dissolveHaloRef.current) {
         // Pure light dissolution ramp in the final 0.45s (4.10s..4.55s -> 9.6s solar flare)
-        const dissolveT = Math.max(0, (elapsed - (T_DONE - 1.3)) / 1.3);
+        const dissolveT = Math.max(0, (elapsed - (T_DONE - 1.0)) / 1.0);
         // Final beat: the light swallows the frame (reference 9.6s is an almost white-gold screen)
         const haloScale = 1.6 + Math.pow(bNorm, 1.5) * 3.2 + Math.pow(dissolveT, 1.6) * 32.0;
         dissolveHaloRef.current.scale.setScalar(haloScale);

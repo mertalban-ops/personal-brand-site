@@ -38,11 +38,11 @@ export const SHOTS = [
   { id: "2400ms", label: "Orta mesafe ağaç", pose: [[0, 1.2, 19.5], [0, 1.05, 0], 40] },
   { id: "4800ms", label: "Yakın ağaç / elmalar", pose: [[0.2, 2.1, 8.4], [0, 4.0, 0], 50] },
   { id: "5600ms", label: "Elma yakın plan", pose: [[0.2, 2.6, 6.6], [0, 3.6, 0], 44] },
-  // Offsets on the FallingApple timeline (select 0–1.4s, detach –2.6s, fall –8s, clouds –10.8s, light –13.6s)
-  { id: "6400ms", label: "Düşüş başlangıcı", fall: 4300 },
-  { id: "7200ms", label: "Uzun boşluk düşüşü", fall: 8000 },
-  { id: "8800ms", label: "Parçacık dağılımı", fall: 11600 },
-  { id: "9600ms", label: "Parlama finali", fall: 13250 },
+  // Offsets on the FallingApple timeline (select 0–0.9s, detach –1.7s, fall –5.3s, clouds –7.2s, light –9.4s)
+  { id: "6400ms", label: "Düşüş başlangıcı", fall: 2900 },
+  { id: "7200ms", label: "Uzun boşluk düşüşü", fall: 5500 },
+  { id: "8800ms", label: "Parçacık dağılımı", fall: 8000 },
+  { id: "9600ms", label: "Parlama finali", fall: 9150 },
 ];
 
 // Regions (fractions of frame) used for the 0000ms / 2400ms establishing comparisons.
