@@ -21,6 +21,7 @@ export default function Navbar() {
   const links = [
     { href: "/cozumler", label: t.nav.solutions },
     { href: "/projeler", label: t.nav.cases },
+    { href: "/labs", label: "Labs" },
     { href: "/surec", label: language === "tr" ? "Süreç" : language === "de" ? "Prozess" : "Process" },
     { href: "/rehber", label: t.nav.rehber },
     { href: "/is-birligi", label: t.nav.cooperation },
@@ -196,6 +197,17 @@ export default function Navbar() {
             }`}
           >
             {t.nav.cases}
+          </Link>
+
+          {/* Labs — interactive project universe */}
+          <Link
+            href="/labs"
+            className={`relative text-sm transition-colors hover:text-accent ${
+              pathname.startsWith("/labs") ? "text-accent font-medium" : "text-muted"
+            }`}
+          >
+            Labs
+            <span className="ml-1 inline-block h-1 w-1 rounded-full bg-accent align-middle" />
           </Link>
 
           {/* Rehber */}

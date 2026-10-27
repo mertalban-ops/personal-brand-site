@@ -1,0 +1,36 @@
+"use client";
+
+import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
+
+// Controlled cinematic post-processing:
+// - Selective high-threshold Bloom ONLY on the emissive golden apple hearts & sunlit highlights
+//   so the apple silhouette, leaves, and tree branches stay razor-sharp (never washed out or blurry).
+// - No heavy screen-wide DepthOfField blur that would smear the island underside or distant castles.
+export default function Effects({ quality = "high" }: { quality?: "high" | "low" }) {
+  if (quality === "low") {
+    return (
+      <EffectComposer multisampling={0}>
+        <Bloom
+          intensity={0.55}
+          luminanceThreshold={0.92}
+          luminanceSmoothing={0.22}
+          mipmapBlur
+          radius={0.52}
+        />
+      </EffectComposer>
+    );
+  }
+
+  return (
+    <EffectComposer multisampling={4}>
+      <Bloom
+        intensity={0.68}
+        luminanceThreshold={0.9}
+        luminanceSmoothing={0.25}
+        mipmapBlur
+        radius={0.58}
+      />
+      <Vignette offset={0.36} darkness={0.32} />
+    </EffectComposer>
+  );
+}

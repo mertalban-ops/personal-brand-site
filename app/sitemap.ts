@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/data/config";
 import { ornekler } from "@/data/ornekler";
+import { getPublishedLabProjects } from "@/data/labs";
 
 // lastModified dates reflect actual content change dates, not build time.
 // Update a page's date when its content materially changes.
@@ -43,6 +44,7 @@ const PAGES: {
   { path: "/rehber/otomasyon-ile-verimliligi-artirma",            priority: 0.7, freq: "monthly", lastModified: "2026-07-31" },
   { path: "/rehber/web-uygulamasi-nedir-ne-ise-yarar",            priority: 0.8, freq: "monthly", lastModified: "2026-07-31" },
   { path: "/izmir-yazilim-gelistirme",                            priority: 0.9, freq: "monthly", lastModified: "2026-07-31" },
+  { path: "/labs",                                     priority: 0.7, freq: "monthly", lastModified: "2026-10-26" },
   { path: "/gizlilik",                                 priority: 0.3, freq: "yearly",  lastModified: "2025-01-01" },
   { path: "/kvkk-aydinlatma",                          priority: 0.4, freq: "yearly",  lastModified: "2025-01-01" },
   { path: "/kullanim-kosullari",                       priority: 0.3, freq: "yearly",  lastModified: "2025-01-01" },
@@ -65,5 +67,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticPages, ...ornekPages];
+  // Labs project detail pages
+  const labPages = getPublishedLabProjects().map((p) => ({
+    url: `${base}/labs/${p.slug}`,
+    lastModified: new Date(p.updatedAt ?? p.createdAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...ornekPages, ...labPages];
 }
