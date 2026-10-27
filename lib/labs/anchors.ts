@@ -39,11 +39,11 @@ const HERO_BOUGH_SLOTS: {
   // Slots 1–6 hang just below the front canopy skirt of the vase-form tree, spread so every
   // project apple is visible (none buried in foliage or hidden behind the trunk) from the hero view.
   // 1. Center-front, under the central fork
-  { position: [0.15, 3.45, 3.35], normal: [0.04, -0.15, 0.99], scale: 1.18 },
+  { position: [0.15, 3.25, 3.45], normal: [0.04, -0.15, 0.99], scale: 1.18 },
   // 2. Upper-left bough
-  { position: [-2.55, 3.85, 2.75], normal: [-0.68, 0.05, 0.73], scale: 1.12 },
+  { position: [-2.6, 3.4, 2.95], normal: [-0.68, 0.05, 0.73], scale: 1.12 },
   // 3. Upper-right bough
-  { position: [2.65, 3.7, 2.6], normal: [0.7, 0.02, 0.71], scale: 1.14 },
+  { position: [2.7, 3.35, 2.8], normal: [0.7, 0.02, 0.71], scale: 1.14 },
   // 4. Left flank, lower
   { position: [-3.75, 3.2, 0.9], normal: [-0.95, -0.12, 0.28], scale: 1.0 },
   // 5. Right flank, lower
