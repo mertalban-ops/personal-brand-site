@@ -17,6 +17,7 @@ import {
 const t = {
   backToTree: { tr: "Labs ağacına dön", en: "Back to the Labs tree", de: "Zurück zum Labs-Baum" },
   about: { tr: "Proje Hakkında", en: "About the Project", de: "Über das Projekt" },
+  aboutTraining: { tr: "Eğitim Hakkında", en: "About the Course", de: "Über den Kurs" },
   tech: { tr: "Teknolojiler", en: "Technologies", de: "Technologien" },
   tools: { tr: "Kullanılan Araçlar", en: "AI Tools Used", de: "Verwendete Tools" },
   prompts: { tr: "Kullanılan Promptlar", en: "Prompts Used", de: "Verwendete Prompts" },
@@ -25,6 +26,7 @@ const t = {
   related: { tr: "İlgili Projeler", en: "Related Projects", de: "Verwandte Projekte" },
   liveDemo: { tr: "Canlı Demo", en: "Live Demo", de: "Live-Demo" },
   caseStudy: { tr: "Vaka Çalışması", en: "Case Study", de: "Fallstudie" },
+  openTraining: { tr: "Eğitime Git", en: "Open the Course", de: "Zum Kurs" },
   copy: { tr: "Kopyala", en: "Copy", de: "Kopieren" },
   copied: { tr: "Kopyalandı", en: "Copied", de: "Kopiert" },
 };
@@ -122,8 +124,19 @@ export default function LabsProjectClient({ project }: { project: LabProject }) 
         </motion.header>
 
         {/* CTAs */}
-        {(project.demoUrl || project.caseUrl || project.repositoryUrl) && (
+        {(project.externalUrl || project.demoUrl || project.caseUrl || project.repositoryUrl) && (
           <div className="mt-6 flex flex-wrap gap-3">
+            {project.externalUrl && (
+              <a
+                href={project.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-shine inline-flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-colors hover:bg-accent/20"
+              >
+                <ExternalLink size={14} /> {t.openTraining[language]}
+                {project.provider && <span className="text-accent/70">· {project.provider}</span>}
+              </a>
+            )}
             {project.demoUrl && (
               <a
                 href={project.demoUrl}
@@ -163,7 +176,7 @@ export default function LabsProjectClient({ project }: { project: LabProject }) 
         )}
 
         {/* Description */}
-        <Section title={t.about[language]}>
+        <Section title={(project.category === "training" ? t.aboutTraining : t.about)[language]}>
           <p className="prose-albanexa">{pickText(project.description, language)}</p>
         </Section>
 

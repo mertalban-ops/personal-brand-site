@@ -25,7 +25,6 @@ const PAGES: {
   { path: "/projeler/stockapp",                        priority: 0.8, freq: "monthly", lastModified: "2025-07-01" },
   { path: "/projeler/hezer-auto-service",              priority: 0.8, freq: "monthly", lastModified: "2025-07-01" },
   { path: "/projeler/carpass",                         priority: 0.7, freq: "monthly", lastModified: "2025-07-01" },
-  { path: "/projeler/saas-operasyon-altyapisi",        priority: 0.7, freq: "monthly", lastModified: "2025-07-01" },
   { path: "/surec",                                    priority: 0.7, freq: "monthly", lastModified: "2025-07-01" },
   { path: "/studyo",                                   priority: 0.7, freq: "monthly", lastModified: "2025-07-01" },
   { path: "/is-birligi",                               priority: 0.6, freq: "monthly", lastModified: "2025-07-01" },

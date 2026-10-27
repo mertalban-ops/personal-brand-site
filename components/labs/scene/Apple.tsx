@@ -480,6 +480,11 @@ export default function Apple({
               {anchor.project.title}
             </div>
             <div style={{ fontSize: 11, color: "#b6c5d4", marginTop: 3, lineHeight: 1.35 }}>
+              {anchor.project.category === "training" && (
+                <span style={{ color: anchor.project.accentColor }}>
+                  {language === "en" ? "Learning" : language === "de" ? "Lernen" : "Eğitim"} ·{" "}
+                </span>
+              )}
               {pickText(anchor.project.summary, language)}
             </div>
           </div>

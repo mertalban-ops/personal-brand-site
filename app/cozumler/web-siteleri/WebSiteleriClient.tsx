@@ -56,15 +56,15 @@ export default function WebSiteleriClient() {
       { title: "AEO — Cevap Motoru Uyumlu İçerik Mimarisi", desc: "Açık soru-cevap blokları ve şema işaretlemeleriyle bilgi yapısının arama ve cevap sistemleri tarafından daha net işlenmesini destekliyoruz." },
       { title: "GEO — Üretken Sistemler İçin Anlaşılabilirlik", desc: "Varlık ilişkileri ve semantik etiketleme ile içeriğin yapay zekâ destekli aramalarda doğru ilişkilendirilmesini hedefliyoruz. (GEO/AEO çalışmaları kesin görünürlük garantisi vermez)." }
     ],
-    caseTitle: "Personal Brand Site Örneği",
+    caseTitle: "Hezer Otoşanzıman Web Sitesi",
     caseBadge: "Aktif Vaka",
-    caseDesc: "Şu an incelediğiniz Albanexa web sitesi, Next.js 16, Tailwind CSS 4 ve Framer Motion ile geliştirdiğimiz çok sayfalı premium kişisel marka sitesine canlı bir örnektir.",
+    caseDesc: "Hiç dijital varlığı olmayan Hezer Otoşanzıman için geliştirdiğimiz, yerel aramalarda öne çıkan, mobil öncelikli ve dönüşüm odaklı kurumsal web sitesi.",
     caseScoresLabel: "Performans Hedefi:",
     caseScoresVal: "Core Web Vitals Odaklı (LCP < 2.5s)",
     caseTechLabel: "Teknoloji Stack:",
-    caseTechVal: "Next.js App Router, TS, Tailwind v4",
+    caseTechVal: "Next.js, TypeScript, Tailwind CSS",
     caseFeaturesLabel: "Özellikler:",
-    caseFeaturesVal: "Çok dilli, interaktif, responsive",
+    caseFeaturesVal: "Yerel SEO, WhatsApp, mobil öncelikli",
     caseCta: "Vaka Çalışmasını İncele",
     processKicker: "Çalışma Şeklimiz",
     processTitle: "Web siteniz nasıl geliştirilecek?",
@@ -128,15 +128,15 @@ export default function WebSiteleriClient() {
       { title: "AEO — Answer Engine Compatible Architecture", desc: "Structured Q&A blocks and schema markup to assist search and answer systems in processing key information." },
       { title: "GEO — Generative Engine Interpretability", desc: "Semantic tags and entity relationships to support accurate attribution in AI overviews. (GEO/AEO efforts do not provide guaranteed placement)." }
     ],
-    caseTitle: "Personal Brand Site Example",
+    caseTitle: "Hezer Otoşanzıman Website",
     caseBadge: "Active Case",
-    caseDesc: "The Albanexa website you are currently exploring is a live example of a premium, multi-page personal brand site built with Next.js 16, Tailwind CSS 4, and Framer Motion.",
+    caseDesc: "A mobile-first, conversion-focused corporate website we built for Hezer Otoşanzıman, a business with no digital presence before, now visible in local search.",
     caseScoresLabel: "Performance Goal:",
     caseScoresVal: "Core Web Vitals Focused (LCP < 2.5s)",
     caseTechLabel: "Technology Stack:",
-    caseTechVal: "Next.js App Router, TS, Tailwind v4",
+    caseTechVal: "Next.js, TypeScript, Tailwind CSS",
     caseFeaturesLabel: "Features:",
-    caseFeaturesVal: "Multilingual, interactive, responsive",
+    caseFeaturesVal: "Local SEO, WhatsApp, mobile-first",
     caseCta: "Examine the Case Study",
     processKicker: "Our Method",
     processTitle: "How will your website be developed?",
@@ -200,15 +200,15 @@ export default function WebSiteleriClient() {
       { title: "AEO — Antwort-Engine-Kompatible Architektur", desc: "Strukturierte F&A-Blöcke und Schema-Markup zur Unterstützung von Such- und Antwortsystemen bei der Informationsverarbeitung." },
       { title: "GEO — Generative Engine Verständlichkeit", desc: "Semantische Tags und Entitätsbeziehungen zur Unterstützung korrekter Zuordnungen in KI-Übersichten. (GEO/AEO-Maßnahmen garantieren keine Platzierung)." }
     ],
-    caseTitle: "Beispiel für eine persönliche Marken-Website",
+    caseTitle: "Website von Hezer Otoşanzıman",
     caseBadge: "Aktiver Fall",
-    caseDesc: "Die Albanexa-Website, die Sie gerade erkunden, ist ein Live-Beispiel für eine erstklassige, mehrseitige persönliche Marken-Website, die mit Next.js 16, Tailwind CSS 4 und Framer Motion erstellt wurde.",
+    caseDesc: "Eine mobile-first, conversion-orientierte Unternehmenswebsite für Hezer Otoşanzıman, ein Betrieb ohne vorherige digitale Präsenz, jetzt in der lokalen Suche sichtbar.",
     caseScoresLabel: "Leistungsziel:",
     caseScoresVal: "Core Web Vitals Fokus (LCP < 2.5s)",
     caseTechLabel: "Technologie-Stack:",
-    caseTechVal: "Next.js App Router, TS, Tailwind v4",
+    caseTechVal: "Next.js, TypeScript, Tailwind CSS",
     caseFeaturesLabel: "Eigenschaften:",
-    caseFeaturesVal: "Mehrsprachig, interaktiv, responsive",
+    caseFeaturesVal: "Lokales SEO, WhatsApp, mobile-first",
     caseCta: "Fallstudie ansehen",
     processKicker: "Unsere Methode",
     processTitle: "Wie wird Ihre Website entwickelt?",
@@ -264,7 +264,7 @@ export default function WebSiteleriClient() {
               {c.primaryCta}
             </Link>
             <Link
-              href="/projeler/personal-brand-site"
+              href="/projeler/hezer-otosanziman-site"
               className="rounded-lg border border-line bg-surface/30 px-6 py-3 font-medium text-ink transition-colors hover:border-accent/40 hover:text-accent inline-block"
             >
               {c.secondaryCta}
@@ -447,7 +447,7 @@ export default function WebSiteleriClient() {
                   </div>
                 </div>
                 <Link
-                  href="/projeler/personal-brand-site"
+                  href="/projeler/hezer-otosanziman-site"
                   className="btn-shine glow-accent flex w-full items-center justify-center gap-2 rounded-lg bg-accent py-2.5 text-center text-xs font-semibold text-black"
                 >
                   {c.caseCta} <ArrowRight className="h-4 w-4" />

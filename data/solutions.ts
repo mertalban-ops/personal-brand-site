@@ -171,7 +171,7 @@ export const solutionsTr: Solution[] = [
         a: "Teslim sonrası aylık bakım anlaşması kapsamında otomasyon akışlarının çalışır durumda kalması, API değişikliklerine uyarlanması ve yeni otomasyon ihtiyaçlarının karşılanması Albanexa tarafından yönetilir.",
       },
     ],
-    relatedProjectSlug: "saas-operasyon-altyapisi",
+    relatedProjectSlug: "carpass",
     cta: "Otomasyon Sistemini Konuşalım",
   },
   {
@@ -209,7 +209,7 @@ export const solutionsTr: Solution[] = [
       { q: "MVP'den tam ürüne geçiş ne kadar sürer?", a: "Kapsam ve özelliklere göre değişmekle birlikte, temel abonelik ve multi-tenant altyapısı içeren bir MVP genellikle 6–10 hafta içinde tamamlanır. Tam ürüne geçiş; ödeme entegrasyonu, rol yönetimi ve ölçeklendirme testleri dahil 3–5 ay sürebilir." },
       { q: "Abonelik ve ödeme altyapısı nasıl kurulur?", a: "Abonelik yönetimi için Stripe veya iyzico entegrasyonu yapılır; plan oluşturma, yükseltme, düşürme ve otomatik yenileme akışları tasarlanır. Faturalandırma ve ödeme geçmişi paneli, müşteri self-servis portalıyla birlikte sunulur." },
     ],
-    relatedProjectSlug: "saas-operasyon-altyapisi",
+    relatedProjectSlug: "carpass",
     cta: "SaaS Ürünü Konuşalım",
   },
   {
@@ -248,7 +248,7 @@ export const solutionsTr: Solution[] = [
       { q: "Hazır şablon (WordPress, Wix) yerine özel site neden tercih edilmeli?", a: "Özel geliştirilen siteler rakiplerin şablonundan ayrışır, marka kimliğini tam yansıtır ve sayfa hızı açısından hazır şablonlardan belirgin biçimde üstün performans gösterir. Aynı zamanda içerik güncellemeleri daha esnek yönetilir ve SEO kontrolü tamamen sizin elinizde olur." },
       { q: "Site teslim sonrası güncelleme ve bakım nasıl sağlanıyor?", a: "Teslim sonrası destek paketi opsiyoneldir. Yönetici paneli veya kolay düzenlenebilir içerik alanları sayesinde metin ve görsel güncellemelerini kendiniz yapabilirsiniz. Teknik güncelleme ve hosting yönetimi için aylık bakım anlaşması seçeneği sunulmaktadır." },
     ],
-    relatedProjectSlug: "personal-brand-site",
+    relatedProjectSlug: "hezer-otosanziman-site",
     cta: "Web Sitesi Konuşalım",
   },
   {
@@ -382,7 +382,7 @@ export const solutionsEn: Solution[] = [
       "Timely and consistent client communication",
       "Automated reporting workflows",
     ],
-    relatedProjectSlug: "saas-operasyon-altyapisi",
+    relatedProjectSlug: "carpass",
     cta: "Let's Talk Automation",
   },
   {
@@ -413,7 +413,7 @@ export const solutionsEn: Solution[] = [
       "Scalable subscription and billing backbone",
       "Technical foundation that remains stable as you grow",
     ],
-    relatedProjectSlug: "saas-operasyon-altyapisi",
+    relatedProjectSlug: "carpass",
     cta: "Let's Talk SaaS Product",
   },
   {
@@ -445,7 +445,7 @@ export const solutionsEn: Solution[] = [
       "Services and value proposition clearly understood",
       "Increase in contact and proposal requests",
     ],
-    relatedProjectSlug: "personal-brand-site",
+    relatedProjectSlug: "hezer-otosanziman-site",
     cta: "Let's Talk Websites",
   },
   {
@@ -572,7 +572,7 @@ export const solutionsDe: Solution[] = [
       "Rechtzeitige und konsistente Kundenkommunikation",
       "Automatisierte Berichterstattung",
     ],
-    relatedProjectSlug: "saas-operasyon-altyapisi",
+    relatedProjectSlug: "carpass",
     cta: "Lass uns über Automatisierung sprechen",
   },
   {
@@ -603,7 +603,7 @@ export const solutionsDe: Solution[] = [
       "Skalierbares Abonnement- und Abrechnungs-Backbone",
       "Technische Basis, die auch bei Wachstum stabil bleibt",
     ],
-    relatedProjectSlug: "saas-operasyon-altyapisi",
+    relatedProjectSlug: "carpass",
     cta: "Lass uns über SaaS-Produkte sprechen",
   },
   {
@@ -635,7 +635,7 @@ export const solutionsDe: Solution[] = [
       "Dienstleistungen und Wertversprechen klar verstanden",
       "Anstieg von Kontakt- und Angebotsanfragen",
     ],
-    relatedProjectSlug: "personal-brand-site",
+    relatedProjectSlug: "hezer-otosanziman-site",
     cta: "Lass uns über Websites sprechen",
   },
   {

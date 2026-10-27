@@ -1,5 +1,5 @@
 // Albanexa Labs — dynamic project universe data model.
-// One published project == one apple on the Tree of Life.
+// One published project or learning link (category "training") == one apple on the Tree of Life.
 // `id` is STABLE and never changes: it drives deterministic apple placement,
 // so adding/removing projects never reshuffles existing apples.
 
@@ -11,7 +11,8 @@ export type LabCategory =
   | "customer-project"
   | "product-lab"
   | "internal-project"
-  | "concept-work";
+  | "concept-work"
+  | "training";
 
 export interface LabPrompt {
   title: LocalizedText;
@@ -53,6 +54,10 @@ export interface LabProject {
   downloads?: LabDownload[];
   /** Slugs of related lab projects. */
   related?: string[];
+  /** Learning links only: the external course/guide the apple points to. */
+  externalUrl?: string;
+  /** Learning links only: who publishes the resource. */
+  provider?: string;
 }
 
 export const labCategoryLabel: Record<LabCategory, LocalizedText> = {
@@ -60,7 +65,12 @@ export const labCategoryLabel: Record<LabCategory, LocalizedText> = {
   "product-lab": { tr: "Ürün Laboratuvarı", en: "Product Lab", de: "Produktlabor" },
   "internal-project": { tr: "İç Proje", en: "Internal Project", de: "Internes Projekt" },
   "concept-work": { tr: "Konsept Çalışma", en: "Concept Work", de: "Konzeptarbeit" },
+  training: { tr: "Eğitim", en: "Learning", de: "Lernen" },
 };
+
+export function isTraining(p: LabProject): boolean {
+  return p.category === "training";
+}
 
 export function pickText(text: LocalizedText, lang: LanguageCode): string {
   return text[lang] ?? text.tr;
@@ -91,7 +101,7 @@ export const labProjects: LabProject[] = [
     technologies: ["Next.js", "Supabase", "TypeScript", "Tailwind CSS"],
     tools: ["Cursor", "Claude Code", "Supabase Studio"],
     caseUrl: "/projeler/stockapp",
-    related: ["saas-operasyon-altyapisi", "hezer-auto-service"],
+    related: ["hezer-auto-service"],
   },
   {
     id: "lab-hezer-auto-service",
@@ -137,7 +147,7 @@ export const labProjects: LabProject[] = [
     technologies: ["Next.js", "Tailwind CSS", "TypeScript", "SEO"],
     tools: ["Claude Code", "Vercel"],
     caseUrl: "/projeler/hezer-otosanziman-site",
-    related: ["hezer-auto-service", "personal-brand-site"],
+    related: ["hezer-auto-service"],
   },
   {
     id: "lab-carpass",
@@ -161,55 +171,102 @@ export const labProjects: LabProject[] = [
     tools: ["Claude Code", "n8n", "Anthropic API"],
     caseUrl: "/projeler/carpass",
     featured: true,
-    related: ["saas-operasyon-altyapisi", "stockapp"],
+    related: ["stockapp"],
   },
+  // ---- Learning links (category "training") ----
+  // Curated free, official learning resources for the stack Albanexa builds with.
+  // They grow on the tree next to the projects; the detail page links out via externalUrl.
   {
-    id: "lab-saas-infra",
-    slug: "saas-operasyon-altyapisi",
-    title: "SaaS Infrastructures",
-    category: "concept-work",
-    accentColor: "#f472b6",
+    id: "lab-training-nextjs-learn",
+    slug: "egitim-nextjs-learn",
+    title: "Next.js Learn",
+    category: "training",
+    accentColor: "#7dd3fc",
     status: "published",
-    createdAt: "2025-07-12",
+    createdAt: "2026-10-27",
+    externalUrl: "https://nextjs.org/learn",
+    provider: "Vercel",
     summary: {
-      tr: "Aboneliğe hazır çok-kiracılı yazılım altyapısı",
-      en: "Subscription-ready multi-tenant software architecture",
-      de: "Abonnementfertige Multi-Tenant-Software-Architektur",
+      tr: "Next.js'in resmi, ücretsiz ve uygulamalı kursu",
+      en: "The official, free, hands-on Next.js course",
+      de: "Der offizielle, kostenlose Next.js-Praxiskurs",
     },
     description: {
-      tr: "Özel sistemleri çok-kiracılı ve abonelik modeline hazır SaaS ürünlerine dönüştüren mimari. Stripe faturalandırma, RBAC ve izole veri havuzları.",
-      en: "An architecture turning bespoke systems into multi-tenant, subscription-ready SaaS products. Stripe billing, RBAC and isolated data pools.",
-      de: "Eine Architektur, die Einzelsysteme in multi-tenant, abonnementfertige SaaS-Produkte verwandelt. Stripe-Abrechnung, RBAC und isolierte Datenpools.",
+      tr: "Vercel'in hazırladığı resmi kurs: App Router, veri çekme, sunucu bileşenleri ve dağıtım adımlarını gerçek bir uygulama üzerinden öğretir. Albanexa sitelerinin temelindeki teknolojiye en doğrudan giriş.",
+      en: "Vercel's official course: App Router, data fetching, server components and deployment, taught by building a real app. The most direct way into the technology behind Albanexa's sites.",
+      de: "Der offizielle Kurs von Vercel: App Router, Datenabruf, Server Components und Deployment anhand einer echten App. Der direkteste Einstieg in die Technologie hinter den Albanexa-Websites.",
     },
-    technologies: ["Next.js", "Supabase", "Stripe", "Multi-tenant"],
-    tools: ["Claude Code", "Stripe"],
-    related: ["carpass", "stockapp"],
+    technologies: ["Next.js", "React", "TypeScript"],
   },
   {
-    id: "lab-personal-brand",
-    slug: "personal-brand-site",
-    title: "Albanexa Brand Site",
-    category: "internal-project",
-    accentColor: "#34d399",
+    id: "lab-training-n8n-courses",
+    slug: "egitim-n8n-kurslari",
+    title: "n8n Courses",
+    category: "training",
+    accentColor: "#fda4af",
     status: "published",
-    createdAt: "2025-08-20",
+    createdAt: "2026-10-27",
+    externalUrl: "https://docs.n8n.io/courses/",
+    provider: "n8n",
     summary: {
-      tr: "Kişisel marka ve stüdyo konumlandırması için çok sayfalı web sitesi",
-      en: "Multi-page site for personal brand & studio positioning",
-      de: "Mehrseitige Website für persönliche Marke & Studio",
+      tr: "İş akışı otomasyonu için resmi n8n kursları",
+      en: "Official n8n courses for workflow automation",
+      de: "Offizielle n8n-Kurse für Workflow-Automatisierung",
     },
     description: {
-      tr: "Hizmetleri, vaka çalışmalarını ve çalışma sürecini anlatan; Spline 3D ve Framer Motion ile güçlendirilmiş çok sayfalı kişisel marka sitesi. Bu Labs deneyimi de burada yaşıyor.",
-      en: "A multi-page personal-brand site covering services, case studies and process, powered by Spline 3D and Framer Motion. This very Labs experience lives here.",
-      de: "Eine mehrseitige Personal-Brand-Website mit Diensten, Fallstudien und Prozess, angetrieben von Spline 3D und Framer Motion. Dieses Labs-Erlebnis lebt hier.",
+      tr: "n8n'in resmi başlangıç ve ileri seviye kursları: tetikleyiciler, veri dönüştürme, hata yönetimi ve gerçek iş akışları. Albanexa projelerindeki otomasyonlar bu araçla kuruluyor.",
+      en: "n8n's official beginner and advanced courses: triggers, data transformation, error handling and real-world workflows. The automations in Albanexa's projects are built with this tool.",
+      de: "Die offiziellen Einsteiger- und Fortgeschrittenenkurse von n8n: Trigger, Datentransformation, Fehlerbehandlung und echte Workflows. Die Automatisierungen in Albanexa-Projekten entstehen mit diesem Tool.",
     },
-    technologies: ["Next.js 16", "TypeScript", "Tailwind CSS 4", "Framer Motion", "Three.js"],
-    tools: ["Claude Code", "Spline", "Vercel"],
-    caseUrl: "/projeler/personal-brand-site",
-    related: ["hezer-otosanziman-site"],
+    technologies: ["n8n", "Otomasyon"],
+  },
+  {
+    id: "lab-training-supabase-docs",
+    slug: "egitim-supabase",
+    title: "Supabase Docs",
+    category: "training",
+    accentColor: "#5eead4",
+    status: "published",
+    createdAt: "2026-10-27",
+    externalUrl: "https://supabase.com/docs",
+    provider: "Supabase",
+    summary: {
+      tr: "Veritabanı, kimlik doğrulama ve RLS için resmi rehberler",
+      en: "Official guides for database, auth and RLS",
+      de: "Offizielle Leitfäden zu Datenbank, Auth und RLS",
+    },
+    description: {
+      tr: "Supabase'in resmi dokümantasyonu ve hızlı başlangıç rehberleri: Postgres veritabanı, kimlik doğrulama, satır düzeyinde güvenlik (RLS) ve depolama. StockApp ve CARPASS'ın arka ucu bu altyapı üzerinde.",
+      en: "Supabase's official docs and quick-start guides: Postgres database, authentication, row-level security (RLS) and storage. StockApp's and CARPASS's back ends run on it.",
+      de: "Die offizielle Supabase-Dokumentation mit Schnellstart-Leitfäden: Postgres, Authentifizierung, Row-Level-Security (RLS) und Storage. Das Backend von StockApp und CARPASS läuft darauf.",
+    },
+    technologies: ["Supabase", "PostgreSQL", "RLS"],
+  },
+  {
+    id: "lab-training-anthropic-courses",
+    slug: "egitim-anthropic-kurslari",
+    title: "Anthropic Courses",
+    category: "training",
+    accentColor: "#fcd34d",
+    status: "published",
+    createdAt: "2026-10-27",
+    externalUrl: "https://github.com/anthropics/courses",
+    provider: "Anthropic",
+    summary: {
+      tr: "Prompt mühendisliği ve Claude API için ücretsiz kurslar",
+      en: "Free courses on prompt engineering and the Claude API",
+      de: "Kostenlose Kurse zu Prompt Engineering und der Claude API",
+    },
+    description: {
+      tr: "Anthropic'in açık kaynak kurs serisi: API temelleri, prompt mühendisliği, gerçek dünya prompt'ları ve araç kullanımı. Albanexa'nın yapay zekâ destekli iş akışlarının temel tekniklerini kapsar.",
+      en: "Anthropic's open-source course series: API fundamentals, prompt engineering, real-world prompting and tool use. Covers the core techniques behind Albanexa's AI-assisted workflows.",
+      de: "Die Open-Source-Kursreihe von Anthropic: API-Grundlagen, Prompt Engineering, Prompts aus der Praxis und Tool Use. Deckt die Kerntechniken hinter Albanexas KI-gestützten Workflows ab.",
+    },
+    technologies: ["Claude API", "Prompt Engineering"],
   },
 ];
 
+/** Everything that grows on the tree: published projects AND learning links. */
 export function getPublishedLabProjects(): LabProject[] {
   return labProjects.filter((p) => p.status === "published");
 }

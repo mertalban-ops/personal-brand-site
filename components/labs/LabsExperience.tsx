@@ -24,6 +24,7 @@ import LabsScene from "./scene/LabsScene";
 import type { CameraPresetCommand } from "./scene/CameraRig";
 import {
   getPublishedLabProjects,
+  isTraining,
   labCategoryLabel,
   pickText,
   type LabProject,
@@ -54,9 +55,9 @@ const ui = {
     de: "Der Baum des Lebens",
   },
   hint: {
-    tr: "Altın elmalara dokunarak projeleri keşfet",
-    en: "Touch a golden apple to explore a project",
-    de: "Berühre einen goldenen Apfel, um ein Projekt zu entdecken",
+    tr: "Altın elmalara dokunarak projeleri ve eğitimleri keşfet",
+    en: "Touch a golden apple to explore projects and learning links",
+    de: "Berühre einen goldenen Apfel, um Projekte und Lernlinks zu entdecken",
   },
   dragDesktop: {
     tr: "Sürükle • 360° keşfet",
@@ -100,7 +101,10 @@ const ui = {
   },
   directory: { tr: "Tüm Projeler", en: "All Projects", de: "Alle Projekte" },
   backToSite: { tr: "Siteye dön", en: "Back to site", de: "Zurück zur Seite" },
-  search: { tr: "Proje ara…", en: "Search projects…", de: "Projekte suchen…" },
+  search: { tr: "Proje veya eğitim ara…", en: "Search projects or courses…", de: "Projekte oder Kurse suchen…" },
+  trainingsList: { tr: "Eğitim Linkleri", en: "Learning Links", de: "Lernlinks" },
+  projectsList: { tr: "Projeler", en: "Projects", de: "Projekte" },
+  noResults: { tr: "Sonuç bulunamadı.", en: "No results.", de: "Keine Ergebnisse." },
   emptyTitle: {
     tr: "Her büyük fikir bir tohumla başlar.",
     en: "Every great idea begins with a seed.",
@@ -269,6 +273,11 @@ export default function LabsExperience({ heroStart = false }: { heroStart?: bool
   }, [projects, query, language]);
 
   const isEmpty = projects.length === 0;
+  // Directory panel shows the tree's fruit as two separate lists
+  const directorySections = [
+    { key: "trainings", title: ui.trainingsList[language], items: filtered.filter(isTraining) },
+    { key: "projects", title: ui.projectsList[language], items: filtered.filter((p) => !isTraining(p)) },
+  ];
 
   return (
     <div className="relative h-[100svh] w-full overflow-hidden bg-[#ead5be]">
@@ -286,8 +295,8 @@ export default function LabsExperience({ heroStart = false }: { heroStart?: bool
       {/* Accessible screen-reader description of the 3D scene */}
       <p className="sr-only">
         {language === "tr"
-          ? "Bulutların üzerinde süzülen yüzen bir adada 360 derece döndürülebilen üç boyutlu Hayat Ağacı. Ağaçtaki her altın elma bir Albanexa projesini temsil eder."
-          : "Interactive 360-degree 3D Tree of Life on a floating island above the clouds. Each golden apple represents an Albanexa project."}
+          ? "Bulutların üzerinde süzülen yüzen bir adada 360 derece döndürülebilen üç boyutlu Hayat Ağacı. Ağaçtaki her altın elma bir Albanexa projesini ya da bir eğitim linkini temsil eder."
+          : "Interactive 360-degree 3D Tree of Life on a floating island above the clouds. Each golden apple represents an Albanexa project or a learning link."}
       </p>
 
       {/* 3D WebGL Canvas (or accessible screenshot + project list fallback) */}
@@ -517,28 +526,44 @@ export default function LabsExperience({ heroStart = false }: { heroStart?: bool
                 className="w-full rounded-lg border border-line bg-white/5 py-2 pl-9 pr-3 text-sm text-ink outline-none focus:border-accent/50"
               />
             </div>
-            <ul className="mt-4 flex-1 space-y-1.5 overflow-y-auto">
-              {filtered.map((p) => (
-                <li key={p.id}>
-                  <Link
-                    href={`/labs/${p.slug}`}
-                    className="block rounded-lg border border-line px-3 py-2.5 transition-colors hover:border-accent/40 hover:bg-white/5"
-                  >
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="h-2 w-2 flex-shrink-0 rounded-full"
-                        style={{ background: p.accentColor }}
-                      />
-                      <span className="text-sm font-semibold text-ink">{p.title}</span>
-                    </div>
-                    <span className="mt-0.5 block pl-4 text-xs text-muted">
-                      {pickText(labCategoryLabel[p.category], language)} ·{" "}
-                      {pickText(p.summary, language)}
-                    </span>
-                  </Link>
-                </li>
+            <div className="mt-4 flex-1 space-y-6 overflow-y-auto">
+              {directorySections.map((section) => (
+                <section key={section.key} aria-label={section.title}>
+                  <h3 className="mono-label mb-2 flex items-center justify-between text-[11px] text-faint">
+                    <span>{section.title}</span>
+                    <span>{section.items.length}</span>
+                  </h3>
+                  {section.items.length === 0 ? (
+                    <p className="px-1 text-xs text-muted">{ui.noResults[language]}</p>
+                  ) : (
+                    <ul className="space-y-1.5">
+                      {section.items.map((p) => (
+                        <li key={p.id}>
+                          <Link
+                            href={`/labs/${p.slug}`}
+                            className="block rounded-lg border border-line px-3 py-2.5 transition-colors hover:border-accent/40 hover:bg-white/5"
+                          >
+                            <div className="flex items-center gap-2">
+                              <span
+                                className="h-2 w-2 flex-shrink-0 rounded-full"
+                                style={{ background: p.accentColor }}
+                              />
+                              <span className="text-sm font-semibold text-ink">{p.title}</span>
+                            </div>
+                            <span className="mt-0.5 block pl-4 text-xs text-muted">
+                              {isTraining(p) && p.provider
+                                ? p.provider
+                                : pickText(labCategoryLabel[p.category], language)}{" "}
+                              · {pickText(p.summary, language)}
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
               ))}
-            </ul>
+            </div>
           </motion.aside>
         )}
       </AnimatePresence>

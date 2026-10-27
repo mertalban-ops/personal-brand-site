@@ -18,6 +18,8 @@ export interface AppleAnchor {
 }
 
 export const POOL_SIZE = 64;
+/** Hand-placed slots visible from the hero camera; filled first, in creation order. */
+const FRONT_SLOTS = 8;
 
 function fnv1a(str: string): number {
   let h = 0x811c9dc5;
@@ -50,6 +52,10 @@ const HERO_BOUGH_SLOTS: {
   { position: [3.8, 3.15, 0.75], normal: [0.96, -0.12, 0.25], scale: 1.0 },
   // 6. Mid-left inner bough, between 1 and 2
   { position: [-1.25, 3.05, 2.95], normal: [-0.4, -0.2, 0.89], scale: 1.04 },
+  // 7. Mid-right inner bough, between 1 and 3
+  { position: [1.35, 3.0, 3.0], normal: [0.4, -0.2, 0.89], scale: 1.02 },
+  // 8. Left flank, front, below slot 2
+  { position: [-3.15, 2.75, 1.95], normal: [-0.82, -0.2, 0.53], scale: 0.98 },
   // 7. Back-right bough (visible at 90°-180° orbit)
   { position: [2.42, 3.35, -2.38], normal: [0.69, -0.14, -0.71], scale: 1.05 },
   // 8. Back-left bough (visible at 180°-270° orbit)
@@ -125,7 +131,7 @@ export function assignAnchors(projects: LabProject[]): AppleAnchor[] {
 
   ordered.forEach((project, idx) => {
     let slot = -1;
-    if (idx < 6 && !taken[idx]) {
+    if (idx < FRONT_SLOTS && !taken[idx]) {
       slot = idx;
     } else {
       const primary = fnv1a(project.id) % ANCHOR_POOL.length;
