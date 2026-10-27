@@ -276,6 +276,8 @@ interface AppleProps {
   active: boolean;
   dimmed: boolean;
   highlighted?: boolean;
+  /** Touch devices: fixed-size readable label + "tap again to open" hint (no hover there). */
+  touch?: boolean;
   onSelect: (slug: string) => void;
 }
 
@@ -285,6 +287,7 @@ export default function Apple({
   active,
   dimmed,
   highlighted = false,
+  touch = false,
   onSelect,
 }: AppleProps) {
   const group = useRef<THREE.Group>(null);
@@ -314,6 +317,13 @@ export default function Apple({
   );
 
   const isFocused = hovered || highlighted;
+  const isTrainingItem = anchor.project.category === "training";
+  // Gold halo tinted toward the item's accent colour: the same colour marks its chip in the
+  // legend strip, so each apple can be matched to its project/course without labels everywhere.
+  const haloColor = useMemo(
+    () => new THREE.Color("#ffb238").lerp(new THREE.Color(anchor.project.accentColor), 0.5),
+    [anchor.project.accentColor],
+  );
 
   useFrame((state) => {
     const g = group.current;
@@ -440,26 +450,33 @@ export default function Apple({
       </mesh>
 
       {/* Soft warm golden halo around the crystal fruit */}
-      <sprite scale={isFocused ? 1.48 : 1.08}>
+      <sprite scale={isFocused ? 1.6 : 1.15}>
         <spriteMaterial
           map={glowTex}
-          color="#ffb238"
+          color={haloColor}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
           transparent
-          opacity={dimmed ? 0.08 : isFocused ? 0.42 : 0.22}
+          opacity={dimmed ? 0.08 : isFocused ? 0.5 : 0.3}
         />
       </sprite>
 
-      {/* Accessible project label on hover / keyboard highlight */}
+      {/* Label on hover / keyboard highlight / first tap (touch) */}
       {isFocused && !active && !dimmed && (
-        <Html center distanceFactor={11} position={[0, 0.64, 0]} style={{ pointerEvents: "none" }}>
+        <Html
+          center
+          distanceFactor={touch ? undefined : 11}
+          // Touch: card opens BELOW the apple (over the trunk) so it never covers the top buttons
+          position={touch ? [0, -0.42, 0] : [0, 0.64, 0]}
+          zIndexRange={[15, 0]}
+          style={{ pointerEvents: "none" }}
+        >
           <div
             style={{
-              transform: "translateY(-8px)",
-              minWidth: 168,
-              maxWidth: 220,
-              padding: "10px 14px",
+              transform: touch ? "translateY(calc(50% + 4px))" : "translateY(-8px)",
+              minWidth: touch ? 150 : 168,
+              maxWidth: touch ? 200 : 220,
+              padding: touch ? "8px 12px" : "10px 14px",
               borderRadius: 12,
               background: "rgba(12, 18, 28, 0.90)",
               border: `1px solid ${anchor.project.accentColor}77`,
@@ -471,22 +488,41 @@ export default function Apple({
           >
             <div
               style={{
+                fontSize: 9.5,
+                fontWeight: 600,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                color: "#c9d4df",
+                opacity: 0.8,
+              }}
+            >
+              {isTrainingItem
+                ? language === "en" ? "Learning" : language === "de" ? "Lernen" : "Eğitim"
+                : language === "en" ? "Project" : language === "de" ? "Projekt" : "Proje"}
+            </div>
+            <div
+              style={{
                 fontSize: 13,
                 fontWeight: 700,
                 color: anchor.project.accentColor,
                 letterSpacing: "0.02em",
+                marginTop: 2,
               }}
             >
               {anchor.project.title}
             </div>
             <div style={{ fontSize: 11, color: "#b6c5d4", marginTop: 3, lineHeight: 1.35 }}>
-              {anchor.project.category === "training" && (
-                <span style={{ color: anchor.project.accentColor }}>
-                  {language === "en" ? "Learning" : language === "de" ? "Lernen" : "Eğitim"} ·{" "}
-                </span>
-              )}
               {pickText(anchor.project.summary, language)}
             </div>
+            {touch && (
+              <div style={{ fontSize: 10.5, color: "#ffd88a", marginTop: 6, fontWeight: 600 }}>
+                {language === "en"
+                  ? "Tap again to open"
+                  : language === "de"
+                    ? "Zum Öffnen erneut tippen"
+                    : "Açmak için tekrar dokun"}
+              </div>
+            )}
           </div>
         </Html>
       )}

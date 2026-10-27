@@ -27,6 +27,7 @@ interface LabsSceneProps {
   autoTour: boolean;
   presetCommand: CameraPresetCommand | null;
   quality: "high" | "low";
+  touch?: boolean;
   onSelect: (slug: string) => void;
   onFallDone: () => void;
   onIntroDone: () => void;
@@ -44,6 +45,7 @@ export default function LabsScene({
   autoTour,
   presetCommand,
   quality,
+  touch = false,
   onSelect,
   onFallDone,
   onIntroDone,
@@ -102,6 +104,7 @@ export default function LabsScene({
           }
           dimmed={activeSlug !== null && activeSlug !== anchor.project.slug}
           highlighted={highlightedSlug === anchor.project.slug}
+          touch={touch}
           onSelect={onSelect}
         />
       ))}

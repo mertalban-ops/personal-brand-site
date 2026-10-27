@@ -17,6 +17,7 @@ import {
   Pause,
   ZoomIn,
   Sparkles as SparklesIcon,
+  GraduationCap,
 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
@@ -58,6 +59,11 @@ const ui = {
     tr: "Altın elmalara dokunarak projeleri ve eğitimleri keşfet",
     en: "Touch a golden apple to explore projects and learning links",
     de: "Berühre einen goldenen Apfel, um Projekte und Lernlinks zu entdecken",
+  },
+  hintTouch: {
+    tr: "Bir elmaya dokun, ne olduğunu gör · tekrar dokun, aç",
+    en: "Tap an apple to see what it is · tap again to open",
+    de: "Tippe auf einen Apfel, um ihn zu sehen · erneut tippen zum Öffnen",
   },
   dragDesktop: {
     tr: "Sürükle • 360° keşfet",
@@ -228,6 +234,21 @@ export default function LabsExperience({ heroStart = false }: { heroStart?: bool
     [activeSlug, reducedMotion, router, navigate],
   );
 
+  // Touch has no hover, so the first tap on an apple (or its chip) reveals what it is;
+  // tapping the same one again opens it.
+  const handleAppleTap = useCallback(
+    (slug: string) => {
+      if (isTouch && highlightedSlug !== slug) {
+        setAutoTour(false);
+        setHighlightedSlug(slug);
+        return;
+      }
+      setHighlightedSlug(null);
+      handleSelect(slug);
+    },
+    [isTouch, highlightedSlug, handleSelect],
+  );
+
   const triggerFallDemo = useCallback(() => {
     if (activeSlug) return;
     setAutoTour(false);
@@ -273,6 +294,9 @@ export default function LabsExperience({ heroStart = false }: { heroStart?: bool
   }, [projects, query, language]);
 
   const isEmpty = projects.length === 0;
+  // Legend order: projects first, then learning links (marked with a cap icon)
+  const legendItems = [...projects.filter((p) => !isTraining(p)), ...projects.filter(isTraining)];
+  const firstTrainingIndex = legendItems.findIndex(isTraining);
   // Directory panel shows the tree's fruit as two separate lists
   const directorySections = [
     { key: "trainings", title: ui.trainingsList[language], items: filtered.filter(isTraining) },
@@ -311,6 +335,9 @@ export default function LabsExperience({ heroStart = false }: { heroStart?: bool
             powerPreference: "high-performance",
             preserveDrawingBuffer: true,
           }}
+          onPointerMissed={() => {
+            if (isTouch) setHighlightedSlug(null);
+          }}
           onCreated={({ gl }) => {
             gl.toneMappingExposure = 0.9;
           }}
@@ -326,7 +353,8 @@ export default function LabsExperience({ heroStart = false }: { heroStart?: bool
             autoTour={autoTour}
             presetCommand={presetCommand}
             quality={quality}
-            onSelect={handleSelect}
+            touch={isTouch}
+            onSelect={handleAppleTap}
             onFallDone={handleFallDone}
             onIntroDone={() => setIntroDone(true)}
             onUserInteract={() => {
@@ -380,18 +408,51 @@ export default function LabsExperience({ heroStart = false }: { heroStart?: bool
                 >
                   {ui.eyebrow[language]}
                 </span>
-                <h1
-                  className="display text-2xl font-bold leading-tight text-white sm:text-3xl"
-                  style={{ textShadow: "0 2px 16px rgba(10,14,22,0.75)" }}
-                >
-                  {ui.heading[language]}
-                </h1>
+                <h1 className="sr-only">{ui.heading[language]}</h1>
                 {!isEmpty && (
-                  <p className="mt-0.5 text-xs text-white/80">
-                    {ui.hint[language]}
+                  <p
+                    className="mt-1 text-xs text-white/85"
+                    style={{ textShadow: "0 1px 10px rgba(10,14,22,0.7)" }}
+                  >
+                    {isTouch ? ui.hintTouch[language] : ui.hint[language]}
                   </p>
                 )}
               </div>
+
+              {/* Touch / narrow screens: scrollable colour-matched legend of every apple */}
+              {!isEmpty && (
+                <div
+                  className="pointer-events-auto -mx-4 w-[calc(100%+2rem)] overflow-x-auto px-4 lg:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                  aria-label={ui.directory[language]}
+                >
+                  <div className="mx-auto flex w-max items-center gap-1.5">
+                    {legendItems.map((p, i) => {
+                      const on = highlightedSlug === p.slug;
+                      return (
+                        <span key={p.id} className="flex items-center gap-1.5">
+                          {i === firstTrainingIndex && i > 0 && (
+                            <span className="mx-1 h-4 w-px bg-white/25" aria-hidden />
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => handleAppleTap(p.slug)}
+                            aria-pressed={on}
+                            className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-1 text-[11px] font-medium backdrop-blur-sm transition-colors ${
+                              on
+                                ? "border-[#ffd88a]/80 bg-[#0d1622]/90 text-white"
+                                : "border-white/15 bg-[#0d1622]/65 text-white/90"
+                            }`}
+                          >
+                            <span className="h-2 w-2 rounded-full" style={{ background: p.accentColor }} />
+                            {isTraining(p) && <GraduationCap size={11} className="text-white/70" />}
+                            <span>{p.title}</span>
+                          </button>
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
 
               {/* 360° Interactive Camera Control Pill Bar */}
               <div className="pointer-events-auto flex flex-wrap items-center justify-center gap-1.5 rounded-full border border-white/20 bg-[#0d1622]/80 px-2.5 py-1.5 text-xs text-white/90 shadow-lg backdrop-blur-md">
@@ -463,9 +524,12 @@ export default function LabsExperience({ heroStart = false }: { heroStart?: bool
                 aria-label={ui.directory[language]}
                 className="pointer-events-auto mx-auto mt-2 hidden max-w-6xl flex-wrap items-center justify-center gap-1.5 px-5 lg:flex"
               >
-                {projects.map((p) => (
+                {legendItems.map((p, i) => (
+                  <span key={p.id} className="flex items-center gap-1.5">
+                  {i === firstTrainingIndex && i > 0 && (
+                    <span className="mx-1 h-4 w-px bg-white/25" aria-hidden />
+                  )}
                   <Link
-                    key={p.id}
                     href={`/labs/${p.slug}`}
                     onMouseEnter={() => setHighlightedSlug(p.slug)}
                     onMouseLeave={() => setHighlightedSlug(null)}
@@ -477,8 +541,10 @@ export default function LabsExperience({ heroStart = false }: { heroStart?: bool
                       className="h-2 w-2 rounded-full"
                       style={{ background: p.accentColor }}
                     />
+                    {isTraining(p) && <GraduationCap size={11} className="text-white/70" />}
                     <span>{p.title}</span>
                   </Link>
+                  </span>
                 ))}
               </div>
             )}
