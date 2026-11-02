@@ -8,10 +8,8 @@ import AnimatedSection from "@/components/AnimatedSection";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import { siteConfig } from "@/data/config";
 import { ornekler, disclaimer, ornekLabels } from "@/data/ornekler";
-import { getOtoServis, events } from "@/data/oto-servis";
+import { getOtoServis } from "@/data/oto-servis";
 import { useLanguage } from "@/context/LanguageContext";
-import { track } from "@vercel/analytics";
-import { trackContact } from "@/lib/meta-events";
 
 export default function OrneklerClient() {
   const { language } = useLanguage();
@@ -116,7 +114,6 @@ export default function OrneklerClient() {
               href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(waGeneral)}`}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => { try { track(events.whatsapp); trackContact(); } catch {} }}
               className="inline-flex items-center gap-2 rounded-lg border border-line px-6 py-3.5 font-medium text-ink transition-colors hover:border-accent/50 hover:text-accent"
             >
               <MessageCircle className="h-4 w-4" /> {L.ctaWhatsapp}

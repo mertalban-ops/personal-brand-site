@@ -5,8 +5,6 @@ import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { siteConfig } from "@/data/config";
-import { track } from "@vercel/analytics";
-import { trackContact } from "@/lib/meta-events";
 
 const content = {
   tr: {
@@ -82,7 +80,6 @@ export default function FinalCTA() {
               href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(c.waMsg)}`}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => { try { track("whatsapp_click", { location: "home_final_cta" }); trackContact(); } catch {} }}
               className="inline-flex items-center gap-2 rounded-lg border border-line px-8 py-3.5 font-medium text-ink transition-colors hover:border-accent/50 hover:text-accent"
             >
               <MessageCircle className="h-4 w-4" /> {c.ctaWa}

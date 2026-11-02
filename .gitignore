@@ -44,3 +44,6 @@ next-env.d.ts
 # Labs reference-comparison raw renders (compare-*.jpg + metrics.json are kept)
 docs/labs-iterations/**/render-*.png
 docs/labs-iterations/**/tour-*.png
+
+# privacy test artefacts (SMTP sink, server logs)
+/.privacy-test/

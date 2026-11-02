@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Mail, MessageCircle, ArrowRight, Clock, Shield, Star } from "lucide-react";
 import { siteConfig } from "@/data/config";
 import { useLanguage } from "@/context/LanguageContext";
-import { track } from "@vercel/analytics";
 
 interface CtaStripProps {
   title?: string;
@@ -133,9 +132,6 @@ export default function CtaStrip({ title, desc }: CtaStripProps) {
         >
           <a
             href={`mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent(d.subject)}`}
-            onClick={() => {
-              try { track("email_click", { location: "cta_strip" }); } catch (err) {}
-            }}
             className="btn-shine glow-accent inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3.5 font-semibold text-black transition-transform hover:-translate-y-0.5"
           >
             <Mail className="h-4 w-4" />
@@ -146,9 +142,6 @@ export default function CtaStrip({ title, desc }: CtaStripProps) {
           {siteConfig.whatsappNumber && (
             <a
               href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(d.waMsg)}`}
-              onClick={() => {
-                try { track("whatsapp_click", { location: "cta_strip" }); } catch (err) {}
-              }}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border px-6 py-3.5 font-medium transition-colors hover:border-accent/50 hover:text-accent"

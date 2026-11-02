@@ -96,6 +96,9 @@ test.describe("Albanexa B2B Master Optimization E2E Tests", () => {
   });
 
   test("Contact form multi-stage wizard works", async ({ page }) => {
+    // The contact form was removed (KVKK minimal-data decision, 2026-11-02);
+    // contact happens by email/WhatsApp. Covered by tests/privacy/kvkk.spec.ts.
+    test.skip(true, "Contact form removed");
     await page.goto("/iletisim");
     await page.waitForSelector("#cf-needType", { state: "visible", timeout: 25000 });
     

@@ -4,8 +4,6 @@ import { MessageCircle } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/config";
 import { useLanguage } from "@/context/LanguageContext";
-import { track } from "@vercel/analytics";
-import { trackContact } from "@/lib/meta-events";
 
 export default function FloatingWhatsApp() {
   const { language } = useLanguage();
@@ -29,21 +27,12 @@ export default function FloatingWhatsApp() {
   const label = labels[language] || labels.tr;
   const href = `https://wa.me/${siteConfig.whatsappNumber}?text=${text}`;
 
-  const handleClick = () => {
-    try {
-      track("whatsapp_click", { location: "floating_widget", language });
-      trackContact();
-    } catch (err) {
-      // Ignore tracking error
-    }
-  };
 
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={handleClick}
       aria-label={label}
       title={label}
       className="fixed bottom-6 right-6 z-40 flex h-13 w-13 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/25 transition-all duration-300 hover:scale-105 hover:bg-[#22c35e] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 focus:ring-offset-bg"

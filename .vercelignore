@@ -12,3 +12,8 @@ scripts/
 .claude/
 *.md
 !README.md
+
+# Local secrets must never be uploaded with CLI deploys
+.env*
+!.env.example
+.privacy-test/

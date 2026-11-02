@@ -83,7 +83,7 @@ const tr: Bundle = {
     ctaWhatsapp: "WhatsApp'tan yaz",
   },
   social: {
-    badge: "Doğrulanmış Müşteri",
+    badge: "Müşteri geri bildirimi",
     sameSector: "Aynı sektör · Aynı şehir (İzmir)",
     quote:
       "Artık borç takibini rahatça yapabiliyorum, gelir-giderimi anlık görebiliyorum. İşimi gerçekten kolaylaştırdı, çok pratik oldu. Geçen gün bir aracı teslim ettikten hemen sonra servis raporunu müşteriye PDF olarak gönderdim — hem zamandan kazandım hem de dükkâna gerçek anlamda oturmuş bir sistemim oldu.",
@@ -178,7 +178,7 @@ const en: Bundle = {
     ctaWhatsapp: "Message on WhatsApp",
   },
   social: {
-    badge: "Verified Customer",
+    badge: "Customer feedback",
     sameSector: "Same industry · Same city (İzmir)",
     quote:
       "I can now easily track debts and see my income and expenses in real time. It really made my job easier and it's very practical. The other day, right after handing over a vehicle, I sent the customer the service report as a PDF — I saved time and now I truly have a proper system running in my shop.",
@@ -273,7 +273,7 @@ const de: Bundle = {
     ctaWhatsapp: "Per WhatsApp schreiben",
   },
   social: {
-    badge: "Verifizierter Kunde",
+    badge: "Kundenfeedback",
     sameSector: "Gleiche Branche · Gleiche Stadt (İzmir)",
     quote:
       "Ich kann jetzt mühelos Schulden verfolgen und meine Einnahmen und Ausgaben in Echtzeit einsehen. Es hat meinen Job wirklich erleichtert und ist sehr praktisch. Neulich, kurz nach der Fahrzeugübergabe, habe ich dem Kunden den Servicebericht direkt als PDF geschickt — ich habe Zeit gespart und habe jetzt ein echtes System in meinem Laden.",

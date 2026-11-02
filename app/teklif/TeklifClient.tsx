@@ -4,10 +4,8 @@ import Link from "next/link";
 import { Download, MessageCircle, ArrowRight, CheckCircle2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { siteConfig } from "@/data/config";
-import { getOtoServis, events, teklifPdfPath } from "@/data/oto-servis";
+import { getOtoServis, teklifPdfPath } from "@/data/oto-servis";
 import { useLanguage } from "@/context/LanguageContext";
-import { track } from "@vercel/analytics";
-import { trackLead, trackContact } from "@/lib/meta-events";
 
 const labels = {
   tr: {
@@ -62,7 +60,6 @@ export default function TeklifClient() {
             href={teklifPdfPath}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => { try { track(events.teklifIndir); trackLead(); } catch {} }}
             className="btn-shine glow-accent mt-8 inline-flex items-center gap-2 rounded-lg bg-accent px-7 py-3.5 font-semibold text-black transition-transform hover:-translate-y-0.5"
           >
             <Download className="h-4 w-4" /> {L.download}
@@ -101,7 +98,6 @@ export default function TeklifClient() {
               href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(c.waMessages.general)}`}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => { try { track(events.whatsapp); trackContact(); } catch {} }}
               className="inline-flex items-center gap-2 rounded-lg border border-line px-6 py-3 font-medium text-ink transition-colors hover:border-accent/50 hover:text-accent"
             >
               <MessageCircle className="h-4 w-4" /> {L.whatsapp}

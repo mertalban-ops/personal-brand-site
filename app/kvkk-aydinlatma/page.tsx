@@ -1,14 +1,66 @@
 import { buildPageMetadata } from "@/lib/metadata";
 import Navbar from "@/components/Navbar";
 import Breadcrumb from "@/components/layout/Breadcrumb";
-import { contact } from "@/data/contact";
+import ControllerInfo from "@/components/legal/ControllerInfo";
+import { dataController, LEGAL_LAST_UPDATED } from "@/data/legal";
 
 export const metadata = buildPageMetadata({
   title: "KVKK Aydınlatma Metni",
   description:
-    "6698 sayılı KVKK kapsamında Albanexa kişisel veri işleme aydınlatma metni — işlenen veriler, amaçlar, saklama süreleri ve ilgili kişi hakları.",
+    "6698 sayılı KVKK m.10 kapsamında albanexa.com aydınlatma metni — hangi verilerin, hangi amaçla, hangi hukuki sebeple işlendiği, kimlere aktarıldığı ve haklarınız.",
   path: "/kvkk-aydinlatma",
 });
+
+type Activity = {
+  title: string;
+  data: string;
+  purpose: string;
+  method: string;
+  basis: string;
+};
+
+const activities: Activity[] = [
+  {
+    title: "Siteyi ziyaret ettiğinizde",
+    data: "Tarayıcınızın her sayfa isteğinde otomatik olarak gönderdiği teknik bilgiler: IP adresi, tarayıcı/cihaz bilgisi, istenen sayfa, zaman.",
+    purpose: "Siteyi size göstermek, hata ve saldırıları tespit etmek.",
+    method: "Otomatik; barındırma sağlayıcısı Vercel tarafından.",
+    basis: "KVKK m.5/2-f: sitenin çalışması ve güvenliğine ilişkin meşru menfaat.",
+  },
+  {
+    title: "E-posta veya WhatsApp ile bize yazdığınızda",
+    data: "Size ait iletişim bilgileri (ad, e-posta adresi veya telefon numarası) ve mesajınızda paylaştığınız bilgiler.",
+    purpose: "Talebinizi değerlendirmek, size dönüş yapmak, istenirse teklif hazırlamak ve iş başlarsa hizmeti yürütmek.",
+    method: "Sizin başlattığınız e-posta veya WhatsApp yazışması.",
+    basis:
+      "Hizmet veya teklif talepleri için KVKK m.5/2-c (sözleşmenin kurulmasıyla doğrudan ilgili olması); bunun dışındaki sorular için m.5/2-f (sorunuza yanıt verilmesindeki meşru menfaat).",
+  },
+];
+
+type Recipient = { name: string; role: string; transfer: string };
+
+const recipients: Recipient[] = [
+  {
+    name: "Vercel Inc. (ABD)",
+    role: "Sitenin barındırılması ve teknik sunucu kayıtları",
+    transfer: "Sürekli yurt dışı aktarım. KVKK m.9 kapsamındaki güvence (standart sözleşme) süreci henüz tamamlanmamıştır.",
+  },
+  {
+    name: "Google (Google Workspace e-posta)",
+    role: "E-posta yazışmalarının tutulduğu iş e-posta kutusu",
+    transfer: "Sürekli yurt dışı aktarım. KVKK m.9 kapsamındaki güvence (standart sözleşme) süreci henüz tamamlanmamıştır.",
+  },
+  {
+    name: "WhatsApp (Meta)",
+    role: "Yalnızca WhatsApp üzerinden yazmayı seçerseniz mesajlaşma altyapısı",
+    transfer: "Yurt dışı altyapı. KVKK m.9 kapsamındaki güvence süreci henüz tamamlanmamıştır; dilerseniz e-posta kanalını tercih edebilirsiniz.",
+  },
+  {
+    name: "Yetkili kamu kurum ve kuruluşları",
+    role: "Yalnızca kanunen yetkili mercilerin usulüne uygun talebi hâlinde",
+    transfer: "—",
+  },
+];
 
 export default function KvkkAydinlatmaPage() {
   return (
@@ -21,310 +73,139 @@ export default function KvkkAydinlatmaPage() {
             { label: "KVKK Aydınlatma Metni" },
           ]}
         />
-        <h1 className="display text-3xl font-bold text-ink mb-2">
-          KVKK Aydınlatma Metni
-        </h1>
-        <p className="text-xs text-faint mb-6">Son güncelleme: Temmuz 2026</p>
+        <h1 className="display text-3xl font-bold text-ink mb-2">KVKK Aydınlatma Metni</h1>
+        <p className="text-xs text-faint mb-6">Son güncelleme: {LEGAL_LAST_UPDATED}</p>
 
-        {/* Legal Disclaimer */}
-        <div className="mb-10 rounded-xl border border-accent/30 bg-accent/5 p-4 text-xs text-muted leading-relaxed">
-          <span className="font-semibold text-accent block mb-1">Bilgilendirme Notu</span>
-          Bu metin, Albanexa&apos;nın gerçek teknik altyapısı ve veri işleme süreçleri esas alınarak
-          hazırlanmıştır. 6698 sayılı KVKK&apos;nın 10. maddesi kapsamında aydınlatma yükümlülüğünü
-          yerine getirmeye yönelik düzenlenmiş olup açık rıza beyanının alınması amacı taşımamaktadır.
-          Özel hukuki gereksinimleriniz için profesyonel hukuk danışmanlığı tavsiye edilir.
-        </div>
+        <p className="mb-10 text-sm text-muted leading-relaxed">
+          Bu metin, 6698 sayılı Kişisel Verilerin Korunması Kanunu&apos;nun (&ldquo;KVKK&rdquo;) 10.
+          maddesi ve Aydınlatma Yükümlülüğünün Yerine Getirilmesinde Uyulacak Usul ve Esaslar
+          Hakkında Tebliğ uyarınca sizi bilgilendirmek içindir. Bir onay metni değildir.
+        </p>
 
-        <div className="space-y-8 text-muted leading-relaxed text-sm">
-
-          {/* 1 */}
+        <div className="space-y-10 text-muted leading-relaxed text-sm">
           <section>
             <h2 className="text-ink text-base font-semibold mb-3">1. Veri Sorumlusu</h2>
-            <p>
-              6698 sayılı Kişisel Verilerin Korunması Kanunu (&ldquo;KVKK&rdquo;) uyarınca,
-              iletişim formunuzu doldurduğunuzda ve sitemizi ziyaret ettiğinizde kişisel verileriniz,
-              veri sorumlusu sıfatıyla <strong>Albanexa</strong> (Mert Alban yönetiminde bağımsız
-              dijital çözüm stüdyosu) tarafından aşağıda açıklanan kapsamda işlenmektedir.
+            <ControllerInfo />
+          </section>
+
+          <section>
+            <h2 className="text-ink text-base font-semibold mb-3">
+              2. Hangi Verileri, Hangi Amaçla ve Hangi Hukuki Sebeple İşliyoruz?
+            </h2>
+            <p className="text-xs mb-4">
+              Sitede iletişim formu, çerez, ziyaretçi istatistiği veya reklam ölçüm aracı
+              bulunmaz. Ziyaretçi profili çıkarılmaz; IP adresinden konum tespiti yapılmaz.
             </p>
-            <p className="mt-2 text-xs text-faint">
-              İletişim:{" "}
-              <a href={`mailto:${contact.email}`} className="text-accent hover:underline">
-                {contact.email}
-              </a>
-              {" "}&middot;{" "}{contact.location}
+            <div className="space-y-4">
+              {activities.map((a) => (
+                <div key={a.title} className="rounded-xl border border-line bg-surface/20 p-4 text-xs space-y-1.5">
+                  <p className="text-ink font-semibold text-sm">{a.title}</p>
+                  <p><strong className="text-ink">Veriler:</strong> {a.data}</p>
+                  <p><strong className="text-ink">Amaç:</strong> {a.purpose}</p>
+                  <p><strong className="text-ink">Toplama yöntemi:</strong> {a.method}</p>
+                  <p><strong className="text-ink">Hukuki sebep:</strong> {a.basis}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-xs">
+              Lütfen yazışmalarda sağlık, din, siyasi görüş, biyometri, sabıka kaydı gibi özel
+              nitelikli kişisel verilerinizi ya da başka kişilere ait bilgileri paylaşmayın.
             </p>
-            <p className="mt-2 text-xs text-faint border border-line/60 rounded-lg px-3 py-2 bg-surface/20">
-              <strong className="text-muted">Hukukçu kontrolü gereken alan:</strong> Veri sorumlusu
-              sıfatının gerçek hukuki kişiye (gerçek kişi veya tüzel kişilik) ait olması KVKK
-              gereğidir. Albanexa&apos;nın tüzel kişilik kazanması durumunda bu bölümün şirket
-              bilgileriyle güncellenmesi gerekir.
+            <p className="mt-2 text-xs">
+              Size bülten veya kampanya iletisi (ticari elektronik ileti) gönderilmez. Bize yazmanız
+              veya teklif istemeniz, bu tür iletilere izin verdiğiniz anlamına gelmez.
             </p>
           </section>
 
-          {/* 2 */}
           <section>
-            <h2 className="text-ink text-base font-semibold mb-3">2. İşlenen Kişisel Veriler</h2>
-            <p className="mb-3">
-              İletişim formu aracılığıyla ve site ziyaretiniz sırasında aşağıdaki veriler işlenmektedir:
+            <h2 className="text-ink text-base font-semibold mb-3">
+              3. Kişisel Veriler Kimlere ve Hangi Amaçla Aktarılır?
+            </h2>
+            <p className="text-xs mb-4">
+              Verileriniz satılmaz. Aşağıdaki hizmet sağlayıcılar, yukarıdaki amaçlar için ve
+              hizmetin gerektirdiği ölçüde verilere erişir. Sunucuları Türkiye dışında olduğundan
+              verileriniz yurt dışına aktarılmaktadır (KVKK m.9).
             </p>
+            <div className="space-y-3">
+              {recipients.map((r) => (
+                <div key={r.name} className="rounded-xl border border-line bg-surface/20 p-4 text-xs space-y-1">
+                  <p className="text-ink font-semibold">{r.name}</p>
+                  <p><strong className="text-ink">Rolü:</strong> {r.role}</p>
+                  <p><strong className="text-ink">Yurt dışı aktarım durumu:</strong> {r.transfer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-ink text-base font-semibold mb-3">4. Saklama Süreleri</h2>
             <ul className="list-disc pl-5 space-y-2 text-xs">
               <li>
-                <strong>Kimlik ve İletişim:</strong> Ad soyad, firma/proje adı, e-posta adresi,
-                telefon numarası (isteğe bağlı).
+                <strong>Yazışmalar:</strong> Talep işe dönüşürse, iş ve ilgili ticari kayıtlar için
+                kanunlarda öngörülen süreler boyunca saklanır. İşe dönüşmeyen yazışmalar, amaç sona
+                erdiğinde silinir veya anonim hâle getirilir.
               </li>
               <li>
-                <strong>Proje Talebi İçeriği:</strong> Seçilen çözüm türü, operasyonel darboğaz
-                tanımı, mevcut iş takip yöntemi, sistem kullanıcı sayısı tahmini, zamanlama ve
-                bütçe tercihleri, ek mesaj notları.
-              </li>
-              <li>
-                <strong>Teknik ve Güvenlik Kayıtları:</strong> IP adresi, tahmini coğrafi konum
-                (şehir, ülke), İnternet Servis Sağlayıcısı (İSS), saat dilimi, tarayıcı türü,
-                işletim sistemi, cihaz türü, başvuru kaynağı, form gönderim zamanı.
-              </li>
-              <li>
-                <strong>Analitik Veriler:</strong> Vercel Analytics aracılığıyla toplanan çerezsiz,
-                kişisel kimlik barındırmayan anonim sayfa görüntüleme istatistikleri.
+                <strong>Sunucu kayıtları:</strong> Barındırma sağlayıcısının (Vercel) kayıt saklama
+                ayarlarına tabidir.
               </li>
             </ul>
           </section>
 
-          {/* 3 */}
           <section>
-            <h2 className="text-ink text-base font-semibold mb-3">
-              3. Kişisel Verilerin Toplanma Yöntemi
-            </h2>
+            <h2 className="text-ink text-base font-semibold mb-3">5. Haklarınız (KVKK m.11)</h2>
+            <ul className="list-disc pl-5 space-y-1.5 text-xs">
+              <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme,</li>
+              <li>İşlenmişse buna ilişkin bilgi talep etme,</li>
+              <li>İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme,</li>
+              <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme,</li>
+              <li>Eksik veya yanlış işlenmişse düzeltilmesini isteme,</li>
+              <li>KVKK m.7 çerçevesinde silinmesini veya yok edilmesini isteme,</li>
+              <li>Düzeltme ve silme işlemlerinin, verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme,</li>
+              <li>Münhasıran otomatik sistemlerle analiz edilmesi sonucu aleyhinize bir sonuç çıkmasına itiraz etme,</li>
+              <li>Kanuna aykırı işleme nedeniyle zarara uğramanız hâlinde zararın giderilmesini talep etme.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-ink text-base font-semibold mb-3">6. Başvuru Yöntemi ve Süre</h2>
+            <ul className="list-disc pl-5 space-y-1.5 text-xs">
+              <li>
+                Bize daha önce yazdığınız e-posta adresinizden{" "}
+                <a href={`mailto:${dataController.email}`} className="text-accent hover:underline">
+                  {dataController.email}
+                </a>{" "}
+                adresine e-posta ile,
+              </li>
+              <li>
+                Yazılı olarak posta yoluyla
+                {dataController.address ? ` (${dataController.address})` : " (adres e-posta ile talep edilmesi hâlinde bildirilir)"},
+              </li>
+              {dataController.kepAddress && <li>KEP ile {dataController.kepAddress} adresine.</li>}
+            </ul>
+            <p className="mt-2 text-xs">
+              Başvurunuzda Veri Sorumlusuna Başvuru Usul ve Esasları Hakkında Tebliğ&apos;in aradığı
+              bilgileri (ad soyad, Türk vatandaşları için T.C. kimlik numarası / yabancılar için uyruk
+              ve pasaport numarası, tebligata esas adres veya e-posta, talep konusu) belirtmeniz
+              gerekir. Kimlik belgesi fotokopisi istemiyoruz.
+            </p>
+            <p className="mt-2 text-xs">
+              Başvurunuz en geç <strong>30 gün</strong> içinde ücretsiz olarak sonuçlandırılır (KVKK
+              m.13). İşlemin ayrıca bir maliyet gerektirmesi hâlinde Kurul&apos;ca belirlenen tarifedeki
+              ücret alınabilir. Başvurunuz reddedilir, yanıtı yetersiz bulunur veya süresinde
+              yanıtlanmazsa, yanıtı öğrendiğiniz tarihten itibaren 30 gün ve her hâlde başvuru
+              tarihinden itibaren 60 gün içinde Kişisel Verileri Koruma Kurulu&apos;na şikâyette
+              bulunabilirsiniz (KVKK m.14).
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-ink text-base font-semibold mb-3">7. Güncellemeler</h2>
             <p className="text-xs">
-              Veriler; web sitesi iletişim formu, teknik sunucu logları ve analitik ölçümleme
-              araçları aracılığıyla elektronik ortamda toplanmaktadır. Form gönderimi zorunlu
-              değildir; yalnızca siteyi ziyaret etmeniz hâlinde teknik güvenlik logları ve anonim
-              analitik veriler işlenir.
+              Teknik altyapı veya mevzuat değiştiğinde bu metin güncellenir; güncelleme tarihi sayfanın
+              başında yer alır.
             </p>
           </section>
-
-          {/* 4 */}
-          <section>
-            <h2 className="text-ink text-base font-semibold mb-3">
-              4. İşleme Amaçları ve Hukuki Dayanakları
-            </h2>
-            <ul className="list-disc pl-5 space-y-2 text-xs">
-              <li>
-                İletişim talebinin değerlendirilmesi ve proje görüşmesinin yürütülmesi
-                <span className="text-faint"> — Sözleşmenin kurulması/ifası ve meşru menfaat</span>
-              </li>
-              <li>
-                Talebinize uygun proje kapsamı ve teknik teklif hazırlanması
-                <span className="text-faint"> — Meşru menfaat</span>
-              </li>
-              <li>
-                Web sitesi güvenliğinin sağlanması, spam ve bot gönderimlerin önlenmesi
-                <span className="text-faint"> — Hukuki yükümlülük ve meşru menfaat</span>
-              </li>
-              <li>
-                Teknik hataların tespiti ve sistem güvenilirliğinin izlenmesi
-                <span className="text-faint"> — Meşru menfaat</span>
-              </li>
-              <li>
-                Anonim sayfa görüntüleme istatistiklerinin izlenmesi (kişisel kimlik içermez)
-                <span className="text-faint"> — Meşru menfaat</span>
-              </li>
-              <li>
-                Gelecekteki bilgilendirme ve rehber içeriklerin iletilmesi{" "}
-                <span className="text-faint">
-                  — Yalnızca formda ayrıca işaretlenen isteğe bağlı onay (açık rıza) ile; bu onay
-                  verilmeksizin form gönderilebilir
-                </span>
-              </li>
-            </ul>
-            <p className="mt-3 text-xs text-faint border border-line/60 rounded-lg px-3 py-2 bg-surface/20">
-              <strong className="text-muted">Hukukçu kontrolü gereken alan:</strong> Belirtilen
-              hukuki dayanaklar KVKK madde 5 kapsamında değerlendirilmiştir. Nihai hukuki
-              değerlendirme için profesyonel hukuk danışmanlığı tavsiye edilir.
-            </p>
-          </section>
-
-          {/* 5 */}
-          <section>
-            <h2 className="text-ink text-base font-semibold mb-3">
-              5. Kullanılan Teknik Altyapı ve Veri Aktarımı
-            </h2>
-            <p className="mb-2 text-xs">
-              Kişisel verileriniz kesinlikle üçüncü taraflara satılmaz veya pazarlama amacıyla
-              aktarılmaz. Hizmetin yürütülmesi için kullanılan teknik altyapı sağlayıcıları:
-            </p>
-            <ul className="list-disc pl-5 space-y-3 text-xs">
-              <li>
-                <strong>Barındırma ve CDN:</strong> Vercel Inc. — Web sitesinin çalıştırıldığı
-                altyapı. ABD merkezli olup global edge lokasyonlarında hizmet vermektedir.
-              </li>
-              <li>
-                <strong>Form Bildirimi:</strong> Telegram Bot API — İletişim formu gönderimlerinde
-                anlık bildirim amacıyla kullanılmaktadır. Form içeriği (ad, e-posta, proje talebi)
-                ve teknik bilgiler (tahmini konum, cihaz, tarayıcı, başvuru kaynağı) bu bildirime
-                dahil edilmektedir. Telegram ABD merkezli bir servistir.
-              </li>
-              <li>
-                <strong>İş Akışı Otomasyonu:</strong> n8n — Form verilerini işlemek ve yönlendirmek
-                üzere webhook entegrasyonu ile kullanılmaktadır.
-              </li>
-              <li>
-                <strong>Coğrafi Konum Tespiti:</strong> ip-api.com — Form gönderiminde IP adresine
-                dayalı yaklaşık konum bilgisi (şehir, ülke, İSS) elde etmek için kullanılmaktadır.
-                Almanya merkezlidir.
-              </li>
-              <li>
-                <strong>Anonim Analitik:</strong> Vercel Analytics — Kişisel kimlik veya çerez
-                içermeyen sayfa görüntüleme ölçümlemesi.
-              </li>
-              <li>
-                <strong>Yasal Zorunluluklar:</strong> Yetkili kamu kurum ve kuruluşlarının usulüne
-                uygun talebi hâlinde yasal yükümlülükler çerçevesinde aktarım yapılabilir.
-              </li>
-            </ul>
-          </section>
-
-          {/* 6 */}
-          <section>
-            <h2 className="text-ink text-base font-semibold mb-3">6. Yurt Dışı Veri Aktarımı</h2>
-            <p className="text-xs mb-2">
-              Yukarıda belirtilen teknik altyapı sağlayıcılarının (Vercel, Telegram, ip-api.com)
-              yurt dışında konuşlanmış sunucu altyapısını kullanması nedeniyle form verileriniz
-              yurt dışına aktarılmaktadır.
-            </p>
-            <p className="text-xs">
-              Bu aktarımda ilgili sağlayıcıların güncel veri işleme sözleşmeleri (DPA) ve
-              uluslararası aktarım mekanizmaları esas alınmaktadır. SSL/TLS şifreleme, teknik
-              bir güvenlik unsurudur; ancak tek başına KVKK kapsamındaki yurt dışı aktarım
-              hukuki dayanağını oluşturmaz.
-            </p>
-            <p className="mt-2 text-xs text-faint border border-line/60 rounded-lg px-3 py-2 bg-surface/20">
-              <strong className="text-muted">Hukukçu kontrolü gereken alan:</strong> KVKK madde 9
-              kapsamında yurt dışı aktarımın hukuki dayanağı (yeterli koruma, ilgili kişi rızası
-              veya standart sözleşme klozu) profesyonel hukuk danışmanlığı ile değerlendirilmelidir.
-            </p>
-          </section>
-
-          {/* 7 */}
-          <section>
-            <h2 className="text-ink text-base font-semibold mb-3">7. Saklama Süreleri</h2>
-            <ul className="list-disc pl-5 space-y-1 text-xs">
-              <li>
-                <strong>İletişim Talepleri ve Proje Yazışmaları:</strong> Proje görüşmesi süresince
-                ve tamamlanmasından itibaren en fazla 2 yıl; talep üzerine daha erken silinir.
-              </li>
-              <li>
-                <strong>Telegram Bildirimleri:</strong> Telegram platformunun kendi saklama
-                politikasına tabidir.
-              </li>
-              <li>
-                <strong>Teknik Güvenlik Logları (IP, zaman damgası):</strong> En fazla 12 ay.
-              </li>
-              <li>
-                <strong>Anonim Analitik Veriler:</strong> Kişisel kimlik içermediğinden istatistiksel
-                analiz amacıyla muhafaza edilebilir.
-              </li>
-            </ul>
-          </section>
-
-          {/* 8 — ALL KVKK Art. 11 rights */}
-          <section>
-            <h2 className="text-ink text-base font-semibold mb-3">
-              8. İlgili Kişinin Hakları (KVKK Madde 11)
-            </h2>
-            <p className="mb-2 text-xs">
-              KVKK&apos;nın 11. maddesi uyarınca kişisel veri sahibi olarak aşağıdaki haklara
-              sahipsiniz:
-            </p>
-            <ul className="list-disc pl-5 space-y-2 text-xs">
-              <li>
-                <strong>a)</strong> Kişisel verilerinizin işlenip işlenmediğini öğrenme,
-              </li>
-              <li>
-                <strong>b)</strong> Kişisel verileriniz işlenmişse buna ilişkin bilgi talep etme,
-              </li>
-              <li>
-                <strong>c)</strong> Kişisel verilerin işlenme amacını ve bunların amacına uygun
-                kullanılıp kullanılmadığını öğrenme,
-              </li>
-              <li>
-                <strong>d)</strong> Yurt içinde veya yurt dışında kişisel verilerinizin aktarıldığı
-                üçüncü kişileri bilme,
-              </li>
-              <li>
-                <strong>e)</strong> Kişisel verilerinizin eksik veya yanlış işlenmiş olması hâlinde
-                bunların düzeltilmesini isteme,
-              </li>
-              <li>
-                <strong>f)</strong> KVKK&apos;nın 7. maddesinde öngörülen şartlar çerçevesinde
-                kişisel verilerinizin silinmesini veya yok edilmesini isteme,
-              </li>
-              <li>
-                <strong>g)</strong> (e) ve (f) bentleri uyarınca yapılan işlemlerin kişisel
-                verilerinizin aktarıldığı üçüncü kişilere bildirilmesini isteme,
-              </li>
-              <li>
-                <strong>h)</strong> İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla
-                analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme,
-              </li>
-              <li>
-                <strong>i)</strong> Kişisel verilerin kanuna aykırı olarak işlenmesi sebebiyle
-                zarara uğramanız hâlinde zararın giderilmesini talep etme.
-              </li>
-            </ul>
-          </section>
-
-          {/* 9 */}
-          <section>
-            <h2 className="text-ink text-base font-semibold mb-3">
-              9. Başvuru Yöntemi
-            </h2>
-            <p className="text-xs mb-2">
-              Yukarıdaki haklarınızı kullanmak için{" "}
-              <a
-                href={`mailto:${contact.email}`}
-                className="text-accent hover:underline font-medium"
-              >
-                {contact.email}
-              </a>{" "}
-              adresine e-posta ile başvurabilirsiniz.
-            </p>
-            <p className="text-xs mb-2">
-              Başvurunuzda bulunması faydalı bilgiler:
-            </p>
-            <ul className="list-disc pl-5 space-y-1 text-xs">
-              <li>Ad soyad ve iletişim bilginiz</li>
-              <li>Form gönderim tarihi veya e-posta adresiniz (verinin tespiti için)</li>
-              <li>Kullanmak istediğiniz hak ve talebinizin açıklaması</li>
-            </ul>
-            <p className="mt-3 text-xs">
-              Başvurunuz en geç <strong>30 gün</strong> içinde değerlendirilecek ve yanıt
-              verilecektir. Talebinizin yerine getirilmesi için kimlik doğrulama istenebilir.
-            </p>
-            <p className="mt-2 text-xs text-faint">
-              Başvurunuzun yanıtsız kalması veya yetersiz bulunması hâlinde Kişisel Verileri
-              Koruma Kurumu&apos;na (KVKK) şikâyette bulunma hakkınız saklıdır.
-            </p>
-          </section>
-
-          {/* 10 */}
-          <section>
-            <h2 className="text-ink text-base font-semibold mb-3">
-              10. Metnin Güncellenmesi
-            </h2>
-            <p className="text-xs">
-              Bu metin, teknik altyapıdaki veya hukuki gerekliliklerdeki değişikliklere bağlı
-              olarak güncellenebilir. Son güncelleme tarihi sayfanın üst kısmında belirtilmektedir.
-            </p>
-          </section>
-
-        </div>
-
-        <div className="mt-12 rounded-xl border border-line bg-surface/20 p-4 text-xs text-muted">
-          Site kullanımı, çerez politikası ve genel gizlilik uygulamalarımız için{" "}
-          <a href="/gizlilik" className="text-accent hover:underline font-medium">
-            Gizlilik Politikası
-          </a>{" "}
-          sayfasını inceleyebilirsiniz.
         </div>
       </div>
     </main>

@@ -11,26 +11,16 @@ import {
   Star,
   MapPin,
 } from "lucide-react";
-import { track } from "@vercel/analytics";
 import Navbar from "@/components/Navbar";
 import AnimatedSection from "@/components/AnimatedSection";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import { siteConfig } from "@/data/config";
 import { useLanguage } from "@/context/LanguageContext";
-import { trackContact, trackLead } from "@/lib/meta-events";
-import { getOtoServis, events, teklifPdfPath } from "@/data/oto-servis";
+import { getOtoServis, teklifPdfPath } from "@/data/oto-servis";
 
 const wa = (msg: string) =>
   `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(msg)}`;
 
-const fire = (event: string) => {
-  try {
-    track(event);
-    trackContact();
-  } catch {
-    // yoksay
-  }
-};
 
 export default function OtoServisClient() {
   const { language } = useLanguage();
@@ -66,9 +56,6 @@ export default function OtoServisClient() {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a
               href="#paketler"
-              onClick={() => {
-                try { track(events.paketleriGor); } catch {}
-              }}
               className="btn-shine glow-accent inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3.5 font-semibold text-black transition-transform hover:-translate-y-0.5"
             >
               {c.hero.ctaPackages} <ArrowRight className="h-4 w-4" />
@@ -77,7 +64,6 @@ export default function OtoServisClient() {
               href={wa(c.waMessages.general)}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => fire(events.whatsapp)}
               className="inline-flex items-center gap-2 rounded-lg border border-line bg-surface/30 px-6 py-3.5 font-medium text-ink transition-colors hover:border-accent/50 hover:text-accent"
             >
               <MessageCircle className="h-4 w-4" /> {c.hero.ctaWhatsapp}
@@ -194,7 +180,6 @@ export default function OtoServisClient() {
                   href={wa(c.waMessages.pkg(p.name))}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => fire(events.whatsapp)}
                   className={`btn-shine mt-6 inline-flex items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
                     p.highlight
                       ? "glow-accent bg-accent text-black"
@@ -291,7 +276,6 @@ export default function OtoServisClient() {
               href={wa(c.waMessages.general)}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => fire(events.whatsapp)}
               className="btn-shine glow-accent inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3.5 font-semibold text-black transition-transform hover:-translate-y-0.5"
             >
               <MessageCircle className="h-4 w-4" /> {c.closing.ctaWhatsapp}
@@ -300,9 +284,6 @@ export default function OtoServisClient() {
               href={teklifPdfPath}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => {
-                try { track(events.teklifIndir); trackLead(); } catch {}
-              }}
               className="inline-flex items-center gap-2 rounded-lg border border-line px-6 py-3.5 font-medium text-ink transition-colors hover:border-accent/50 hover:text-accent"
             >
               <Download className="h-4 w-4" /> {c.closing.ctaPdf}
@@ -314,9 +295,6 @@ export default function OtoServisClient() {
             {c.closing.analysisPre}
             <Link
               href="/iletisim"
-              onClick={() => {
-                try { track(events.ihtiyacAnalizi); } catch {}
-              }}
               className="font-semibold text-accent underline underline-offset-2"
             >
               {c.closing.analysisLink}

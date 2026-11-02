@@ -339,7 +339,7 @@ export default function IzmirYazilimGelistirmePage() {
                 },
                 {
                   q: "Proje için ne zaman uygunluk var?",
-                  a: "Mevcut kapasite ve takvim için 30 dakikalık ücretsiz ihtiyaç analizi görüşmesinde bilgi paylaşılmaktadır. İletişim formu üzerinden tarih önerisi iletilebilir.",
+                  a: "Mevcut kapasite ve takvim için 30 dakikalık ücretsiz ihtiyaç analizi görüşmesinde bilgi paylaşılmaktadır. E-posta veya WhatsApp üzerinden tarih önerisi iletilebilir.",
                 },
               ].map((item) => (
                 <div key={item.q} className="border-b border-line pb-6 last:border-0 last:pb-0">

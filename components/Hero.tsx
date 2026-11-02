@@ -210,7 +210,7 @@ export default function Hero() {
             </div>
           ) : (
             <SplineScene
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              scene="/spline/hero-robot.splinecode"
               className="h-full w-full"
             />
           )}

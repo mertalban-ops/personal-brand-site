@@ -2,6 +2,8 @@ import { buildPageMetadata } from "@/lib/metadata";
 import Navbar from "@/components/Navbar";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import { contact } from "@/data/contact";
+import ControllerInfo from "@/components/legal/ControllerInfo";
+import { LEGAL_LAST_UPDATED } from "@/data/legal";
 
 export const metadata = buildPageMetadata({
   title: "Kullanım Koşulları",
@@ -23,7 +25,7 @@ export default function KullanimKosullariPage() {
         <h1 className="display text-3xl font-bold text-ink mb-2">
           Kullanım Koşulları
         </h1>
-        <p className="text-xs text-faint mb-10">Yürürlük tarihi: {new Date().getFullYear()}</p>
+        <p className="text-xs text-faint mb-10">Son güncelleme: {LEGAL_LAST_UPDATED}</p>
 
         <div className="space-y-8 text-muted leading-relaxed">
           <section>
@@ -54,8 +56,8 @@ export default function KullanimKosullariPage() {
               3. Fikri Mülkiyet
             </h2>
             <p>
-              Sitedeki tüm içerik (metin, görsel, kod örnekleri, marka adı)
-              Albanexa&apos;ya aittir. İzin alınmaksızın kopyalanamaz,
+              Sitedeki içerik (metin, görsel, kod örnekleri, marka adı) aşağıda
+              belirtilen site sahibine veya ilgili hak sahiplerine aittir. İzin alınmaksızın kopyalanamaz,
               çoğaltılamaz veya ticari amaçla kullanılamaz.
             </p>
           </section>
@@ -95,7 +97,14 @@ export default function KullanimKosullariPage() {
 
           <section>
             <h2 className="text-ink text-lg font-semibold mb-3">
-              7. İletişim
+              7. Site Sahibi (Hizmet Sağlayıcı) Bilgileri
+            </h2>
+            <ControllerInfo />
+          </section>
+
+          <section>
+            <h2 className="text-ink text-lg font-semibold mb-3">
+              8. İletişim
             </h2>
             <p>
               Bu koşullarla ilgili sorularınız için:

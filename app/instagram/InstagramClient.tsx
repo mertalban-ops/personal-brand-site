@@ -5,8 +5,6 @@ import { Globe, Boxes, Workflow, Wrench, MessageCircle, ArrowRight } from "lucid
 import Navbar from "@/components/Navbar";
 import { siteConfig } from "@/data/config";
 import { useLanguage } from "@/context/LanguageContext";
-import { track } from "@vercel/analytics";
-import { trackContact } from "@/lib/meta-events";
 
 // Reels/carousel'lerdeki yorum anahtar kelimeleriyle birebir aynı (SITE, STOK, OTOMASYON, DEMO).
 // WhatsApp mesajı anahtar kelimeyi taşır → DM akışında hangi içerikten gelindiği bilinir.
@@ -93,7 +91,6 @@ export default function InstagramClient() {
                         href={wa(key)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        onClick={() => { try { track("cta_instagram_whatsapp", { keyword: key }); trackContact(); } catch {} }}
                         className="btn-shine inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5"
                       >
                         <MessageCircle className="h-4 w-4" /> {L.wa}
@@ -116,7 +113,6 @@ export default function InstagramClient() {
               href={wa("TEKLIF")}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => { try { track("cta_instagram_whatsapp", { keyword: "TEKLIF" }); trackContact(); } catch {} }}
               className="mt-4 inline-flex items-center gap-2 rounded-lg border border-line px-6 py-3 font-medium text-ink transition-colors hover:border-accent/50 hover:text-accent"
             >
               {L.analysisCta} <ArrowRight className="h-4 w-4" />

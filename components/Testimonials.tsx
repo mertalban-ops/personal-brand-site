@@ -33,7 +33,7 @@ const content: Record<"tr" | "en" | "de", TestimonialsContent> = {
         author: "Serdar Hezer",
         business: "Sahibi, Hezer Otoşanzıman · İzmir",
         initials: "SH",
-        tag: "Doğrulanmış Müşteri",
+        tag: "Müşteri geri bildirimi",
       },
       {
         quote:
@@ -41,7 +41,7 @@ const content: Record<"tr" | "en" | "de", TestimonialsContent> = {
         author: "Sedat İpek",
         business: "Aden Ticaret Sahibi",
         initials: "Sİ",
-        tag: "Doğrulanmış Müşteri",
+        tag: "Müşteri geri bildirimi",
         project: { label: "StockApp kullanıcısı", href: "/projeler/stockapp" },
       },
     ],
@@ -57,7 +57,7 @@ const content: Record<"tr" | "en" | "de", TestimonialsContent> = {
         author: "Serdar Hezer",
         business: "Owner, Hezer Otoşanzıman · İzmir, Turkey",
         initials: "SH",
-        tag: "Verified Customer",
+        tag: "Customer feedback",
       },
       {
         quote:
@@ -65,7 +65,7 @@ const content: Record<"tr" | "en" | "de", TestimonialsContent> = {
         author: "Sedat İpek",
         business: "Owner, Aden Ticaret",
         initials: "Sİ",
-        tag: "Verified Customer",
+        tag: "Customer feedback",
         project: { label: "StockApp user", href: "/projeler/stockapp" },
       },
     ],
@@ -81,7 +81,7 @@ const content: Record<"tr" | "en" | "de", TestimonialsContent> = {
         author: "Serdar Hezer",
         business: "Inhaber, Hezer Otoşanzıman · İzmir, Türkei",
         initials: "SH",
-        tag: "Verifizierter Kunde",
+        tag: "Kundenfeedback",
       },
       {
         quote:
@@ -89,7 +89,7 @@ const content: Record<"tr" | "en" | "de", TestimonialsContent> = {
         author: "Sedat İpek",
         business: "Inhaber, Aden Ticaret",
         initials: "Sİ",
-        tag: "Verifizierter Kunde",
+        tag: "Kundenfeedback",
         project: { label: "StockApp-Nutzer", href: "/projeler/stockapp" },
       },
     ],

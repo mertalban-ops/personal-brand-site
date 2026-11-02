@@ -24,12 +24,8 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import { ActiveProjectProvider } from "@/context/ActiveProjectContext";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import { Analytics } from "@vercel/analytics/react";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { siteConfig } from "@/data/config";
 import ClientSceneBackground from "@/components/ClientSceneBackground";
-import CookieConsent from "@/components/CookieConsent";
-import MetaPixel from "@/components/MetaPixel";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
@@ -196,13 +192,9 @@ export default function RootLayout({
             </div>
             <Footer />
             <FloatingWhatsApp />
-            <CookieConsent />
-            <MetaPixel />
-            <Analytics />
           </ActiveProjectProvider>
         </LanguageProvider>
       </body>
-      <GoogleAnalytics gaId="G-EBXG0KWWV0" />
     </html>
   );
 }
