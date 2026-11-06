@@ -30,6 +30,7 @@ const PAGES: {
   { path: "/is-birligi",                               priority: 0.6, freq: "monthly", lastModified: "2025-07-01" },
   { path: "/iletisim",                                 priority: 0.8, freq: "monthly", lastModified: "2025-07-01" },
   { path: "/rehber",                                   priority: 0.7, freq: "weekly",  lastModified: "2025-07-01" },
+  { path: "/egitimler",                                priority: 0.7, freq: "monthly", lastModified: "2026-11-07" },
   { path: "/rehber/stok-takip-programi-kobiler-icin",        priority: 0.8, freq: "monthly", lastModified: "2025-07-01" },
   { path: "/rehber/cari-hesap-takip-sistemi-nedir",          priority: 0.8, freq: "monthly", lastModified: "2025-07-01" },
   { path: "/rehber/is-takip-sistemi-nedir-kobiler-icin",     priority: 0.8, freq: "monthly", lastModified: "2026-07-31" },
